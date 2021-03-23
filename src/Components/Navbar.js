@@ -7,10 +7,22 @@ import {
   CssBaseline,
   useScrollTrigger,
   Box,
+  Button,makeStyles
 } from "@material-ui/core";
+import {useHistory} from 'react-router-dom';
+
+const useStyles = makeStyles((theme) => ({
+  button:{
+    '&:hover': {
+            backgroundColor: '#fff',
+            color:'#3b362a'
+      }
+  }
+}));
 
 function ElevationScroll(props) {
   const { children, window } = props;
+
   // Note that you normally won't need to set the window ref as useScrollTrigger
   // will default to window.
   // This is only being set here because the demo is in an iframe.
@@ -24,26 +36,31 @@ function ElevationScroll(props) {
     elevation: trigger ? 4 : 0,
   });
 }
-
-ElevationScroll.propTypes = {
-  children: PropTypes.element.isRequired,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
-
 export default function ElevateAppBar(props) {
+  const history = useHistory();
+  const classes = useStyles();
+
+  const homeHandler=()=>{
+    history.push('/home');
+  }
+
+  const collabHandler = ()=>{
+    history.push('/editor')
+  }
   return (
     <React.Fragment>
       <CssBaseline />
       <ElevationScroll {...props}>
-        <AppBar>
+        <AppBar style={{backgroundColor:'#f2f2f2',boxShadow: "0 5px 15px 0px rgba(0,0,0,0.7)",borderBottom:'2px solid black',}}>
           <Toolbar>
-            <Typography component='div' variant='h4'>
-                <Box fontStyle="italic" fontWeight="fontWeightBold" >COLLAB</Box>
+            <Typography component='div' variant='h4' style={{color:'#3b362a'}}>
+                <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',fontFamily: ['Fredoka One', 'cursive'].join()}} onClick={homeHandler}>COLLAB</Box>
             </Typography>
+                <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',marginLeft:'5vh',color:'white',padding:'.5vh',borderRadius:'5px',backgroundColor:'#3b362a',}} onClick={collabHandler} >
+                <Typography component='div' variant='body1' style={{fontSize:'15px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',minHeight:'4vh',padding:'1vh'}} className={classes.button}>
+                    Collaborate
+                </Typography>
+               </Box>
           </Toolbar>
         </AppBar>
       </ElevationScroll>

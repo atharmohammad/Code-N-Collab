@@ -26,7 +26,7 @@ export default function Home() {
         justify="center"
         alignItems="center"
         style={{
-          backgroundColor: "#fff",
+          backgroundColor: "#f2f2f2",
           minHeight: "30vh",
           width: "50vh",
           border: "5px solid black",
@@ -38,7 +38,7 @@ export default function Home() {
           label="Username"
           variant="outlined"
           style={{
-            backgroundColor: "#fff",
+            backgroundColor: "#f2f2f2",
             boxShadow: "0 5px 15px 0px rgba(0,0,0,0.7)",
           }}
         />
@@ -47,7 +47,7 @@ export default function Home() {
           label="Room Name"
           variant="outlined"
           style={{
-            backgroundColor: "#fff",
+            backgroundColor: "#f2f2f2",
             boxShadow: "0 5px 15px 0px rgba(0,0,0,0.7)",
             marginTop: "2vh",
           }}
@@ -67,4 +67,3 @@ export default function Home() {
     </Grid>
   );
 }
-
