@@ -17,7 +17,7 @@ const EditorPage = () => {
         style={{ backgroundColor: "#7b298f", height: "650px" }}
         container
         justify="center"
-      ></Grid>
+      >BUTTONS[lang, compile,change_theme,change_fontSize]</Grid>
       <Grid
         lg={9}
         style={{ backgroundColor: "#262629", height: "650px" }}
@@ -26,8 +26,8 @@ const EditorPage = () => {
       >
         <Editor />
         <Grid direction="row" container justify="center" alignItems="flex-end">
-          <Grid lg={6} style={{ backgroundColor: "#298f3f",height:'120px' }} />
-          <Grid lg={6} style={{ backgroundColor: "#a31f23",height:'120px' }} />
+          <Grid lg={6} style={{ backgroundColor: "#298f3f",height:'120px' }} >INPUT</Grid>
+          <Grid lg={6} style={{ backgroundColor: "#a31f23",height:'120px' }} >OUTPUT</Grid>
         </Grid>
       </Grid>
       <Grid
