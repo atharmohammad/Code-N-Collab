@@ -51,7 +51,7 @@ export default function ElevateAppBar(props) {
     <React.Fragment>
       <CssBaseline />
       <ElevationScroll {...props}>
-        <AppBar style={{backgroundColor:'#f2f2f2',boxShadow: "0 5px 15px 0px rgba(0,0,0,0.7)",borderBottom:'2px solid black',}}>
+        <AppBar style={{backgroundColor:'#f2f2f2',borderBottom:'2px solid black',}}>
           <Toolbar>
             <Typography component='div' variant='h4' style={{color:'#3b362a'}}>
                 <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',fontFamily: ['Fredoka One', 'cursive'].join()}} onClick={homeHandler}>COLLAB</Box>
