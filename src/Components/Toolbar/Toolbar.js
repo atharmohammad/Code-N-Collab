@@ -1,4 +1,7 @@
 import React from "react";
+import LanguagePicker from './BarItem/LanguagePicker'
+import ThemePicker from './BarItem/ThemePicker'
+
 import {
   Typography,
   CssBaseline,
@@ -21,7 +24,9 @@ export default function Toolbar(props) {
   const classes = useStyles();
 
   return (
-        <Grid style={{backgroundColor:'#f2f2f2',height:'4vh',display:'flex',width:'100%',borderBottom:'2px solid black'}}>
+        <Grid style={{backgroundColor:'#f2f2f2',height:'6vh',display:'flex',width:'100%',borderBottom:'2px solid black'}}>
+          <LanguagePicker/>
+          <ThemePicker/>
         </Grid>
   );
 }

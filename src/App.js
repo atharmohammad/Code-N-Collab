@@ -4,7 +4,7 @@ import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import EditorPage from "./Pages/EditorPage";
 import Playground from "./Pages/Playground";
-import Toolbar from "./Components/Toolbar";
+import Toolbar from "./Components/Toolbar/Toolbar";
 import "./App.css";
 
 export default function App() {
@@ -13,11 +13,12 @@ export default function App() {
     <Navbar />
       <Switch>
       <Route path="/home" exact component={Home} />
+      <Redirect to='/home'/>
     </Switch>
     </>
   )
 
-  if(true){
+  if(true){ //Put false if you want to access Home page else true if you want to acces other routes
     routes = (<>
       <Navbar />
       <Toolbar/>
