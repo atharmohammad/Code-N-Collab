@@ -4,18 +4,35 @@ import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import EditorPage from "./Pages/EditorPage";
 import Playground from "./Pages/Playground";
+import Toolbar from "./Components/Toolbar";
 import "./App.css";
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Navbar />
+  let routes = (
+    <>
+    <Navbar />
       <Switch>
-        <Route path="/" exact component={Home} />
+      <Route path="/home" exact component={Home} />
+    </Switch>
+    </>
+  )
+
+  if(true){
+    routes = (<>
+      <Navbar />
+      <Toolbar/>
+      <Switch>
         <Route path="/editor" exact component={EditorPage} />
         <Route path="/playground" exact component={Playground} />
-        <Redirect to="/" />
+        <Redirect to="/editor" />
       </Switch>
+      </>)
+  }
+
+
+  return (
+    <BrowserRouter>
+      {routes}
     </BrowserRouter>
   );
 }

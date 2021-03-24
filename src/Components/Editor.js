@@ -17,7 +17,7 @@ import {
   FormControl,
   InputLabel,
   Select,
-  MenuItem,
+  MenuItem,Grid
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,20 +39,19 @@ const Editor = (props) => {
   const classes = useStyles();
 
   return (
-
-      <AceEditor 
-        style={{ marginTop: "5px" }}
-        mode="python"
-        theme="tomorrow"
-        fontSize={16}
-        height="80%"
-        width="100%"
-        onChange={changeHandler}
-        enableLiveAutocompletion={true}
-        name="UNIQUE_ID_OF_DIV"
-        editorProps={{ $blockScrolling: true }}
-      />
-
+    <Grid style={{minHeight:'70vh'}}>
+        <AceEditor
+          mode="c_cpp"
+          theme="kuroir"
+          fontSize={16}
+          height="100%"
+          width="100%"
+          onChange={changeHandler}
+          enableLiveAutocompletion={true}
+          name="UNIQUE_ID_OF_DIV"
+          editorProps={{ $blockScrolling: true }}
+        />
+      </Grid>
   );
 };
 

@@ -3,14 +3,13 @@ import { Paper, Typography, Box, Grid } from "@material-ui/core";
 
 const Chat = () => {
   return (
-    <>
-      <Box textAlign='center' style = {{width:'100%', height:'10%', background:'lime'}} >CHAT</Box>
-      
-      <Box textAlign='center' style = {{width:'100%',height:'80%' ,background:'cyan'}} >CONTENT...</Box>
-      
-      <Box textAlign='center' style = {{width:'100%',height:'10%', background:'yellow'}} >TYPING</Box>
-      
-    </>
+    <Grid style={{display:'flex',flexFlow:'column',minHeight:'80vh',width:'30vh',overflow:'hidden'}}>
+        <Box textAlign='center' style = {{height:'10vh', background:'lime'}} >CHAT</Box>
+
+        <Box textAlign='center' style = {{height:'70vh' ,background:'cyan'}} >CONTENT...</Box>
+
+        <Box textAlign='center' style = {{height:'10vh', background:'yellow'}} >TYPING</Box>
+      </Grid>
   );
 };
 
