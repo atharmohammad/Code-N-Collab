@@ -42,7 +42,7 @@ const Editor = (props) => {
     <Grid style={{minHeight:'70vh'}}>
         <AceEditor
           mode="c_cpp"
-          theme="kuroir"
+          theme="monokai"
           fontSize={16}
           height="100%"
           width="100%"
