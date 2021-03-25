@@ -10,15 +10,14 @@ import {
 
 export default function App() {
   return (
-    <Grid style={{display:'flex',minHeight:'40vh',backgroundColor:'black'}}>
-      <Grid lg={6} style={{ backgroundColor: "#fff",height:'20vh',border:'2px solid black',borderRadius:'5px' }} >
-       <Typography variant="h4" style={{fontSize:'15px',fontWeight:'bold',display:'flex',justifyContent:'center'}}>INPUT</Typography>
-        <textarea rows="5" cols="67" style={{border:'none',margin:'0.1vh 0 0 0.5vh'}}/>
+    <Grid style={{display:'flex',minHeight:'30vh',backgroundColor:'black',marginTop:'1vh'}}>
+      <Grid lg={6} style={{ backgroundColor: "#fff",height:'15vh',border:'2px solid black',borderRadius:'5px' }} >
+      <textarea placeholder="Input" rows="3" cols="48" style={{border:'none',resize:'none',overflowY:'scroll'
+      ,fontSize:'18px',padding:'1vh'}}/>
        </Grid>
-      <Grid lg={6} style={{ backgroundColor: "#fff",height:'20vh',border:'2px solid black',borderRadius:'5px'}} >
-       <Typography variant="h4" style={{fontSize:'15px',fontWeight:'bold',
-       display:'flex',justifyContent:'center'}}>OUTPUT</Typography>
-
+      <Grid lg={6} style={{ backgroundColor: "#fff",height:'15vh',border:'2px solid black',borderRadius:'5px'}} >
+      <textarea placeholder="Output" rows="3" cols="48" style={{border:'none',resize:'none',overflowY:'scroll'
+      ,fontSize:'18px',padding:'1vh'}}/>
       </Grid>
     </Grid>
   );

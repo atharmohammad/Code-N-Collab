@@ -2,6 +2,8 @@ import React from "react";
 import LanguagePicker from './BarItem/LanguagePicker'
 import ThemePicker from './BarItem/ThemePicker'
 import CollaborateTools from './BarItem/CollaborateTools'
+import Compile from './BarItem/Compile'
+import FontSize from './BarItem/FontSize'
 
 
 import {
@@ -30,7 +32,9 @@ export default function Toolbar(props) {
           <Grid style={{display:'flex'}}>
           <LanguagePicker/>
           <ThemePicker/>
+          <FontSize/>
           </Grid>
+          <Compile/>
           <CollaborateTools/>
         </Grid>
   );
