@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     fontSize: 12,
     border: '1px solid black',
-    height:'4vh'
+    height:'4vh',
+    cursor:'pointer'
   },
 }));
 

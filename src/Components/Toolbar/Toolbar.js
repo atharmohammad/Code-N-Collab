@@ -1,6 +1,8 @@
 import React from "react";
 import LanguagePicker from './BarItem/LanguagePicker'
 import ThemePicker from './BarItem/ThemePicker'
+import CollaborateTools from './BarItem/CollaborateTools'
+
 
 import {
   Typography,
@@ -24,9 +26,12 @@ export default function Toolbar(props) {
   const classes = useStyles();
 
   return (
-        <Grid style={{backgroundColor:'#f2f2f2',height:'6vh',display:'flex',width:'100%',borderBottom:'2px solid black'}}>
+        <Grid style={{backgroundColor:'#f7f7f7',height:'6vh',display:'flex',width:'100%'}}>
+          <Grid style={{display:'flex'}}>
           <LanguagePicker/>
           <ThemePicker/>
+          </Grid>
+          <CollaborateTools/>
         </Grid>
   );
 }

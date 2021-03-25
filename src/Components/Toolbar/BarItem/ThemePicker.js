@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     fontSize: 12,
     border: '1px solid black',
-    height:'4vh'
+    height:'4vh',
+    cursor:'pointer'
   },
 }));
 
@@ -26,7 +27,7 @@ export default function CustomizedSelects() {
         <select className={classes.select} onChange={handleChange} value={theme}>
             <option value='monokai' selected>monokai</option>
             <option value='tomorrow'>tomorrow</option>
-            <option value='kuroir'>kuroir</option>
+            <option value='kuroir' >kuroir</option>
         </select>
     </Grid>
   );
