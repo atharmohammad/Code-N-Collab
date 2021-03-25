@@ -16,7 +16,7 @@ const EditorPage = () => {
   return (
    <Grid style={{display:'flex',minHeight:'100vh',overflow:'hidden'}}>
         <Problem/>
-        <Grid style={{display:'flex' , flexFlow:'column-reverse',width:'100%',overflow:'hidden'}}>
+        <Grid style={{display:'flex' , flexFlow:'column-reverse',width:'100%',overflow:'hidden',backgroundColor:'#fad87a'}}>
           <IO/>
           <Editor />
         </Grid>

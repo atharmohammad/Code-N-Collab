@@ -25,7 +25,7 @@ export default function Toolbar(props) {
     <Grid style={{display:'flex',margin:'1vh 0 0 25vh'}}>
 
       <Typography component='div' variant='body1' style={{fontSize:'15px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',minHeight:'2vh',padding:'.6vh'}} className={classes.button}>
-          Username
+          User
       </Typography>
 
 
@@ -33,8 +33,8 @@ export default function Toolbar(props) {
          Room Name
      </Typography>
 
-    <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',marginLeft:'5vh',color:'white',height:'4vh'
-    ,padding:'.5vh',borderRadius:'5px',backgroundColor:'#d14343',margin:'0 0 2vh 5vh'}}>
+    <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',color:'white',height:'4vh'
+    ,padding:'.5vh',borderRadius:'5px',backgroundColor:'#d14343',margin:'.4vh 0 1vh 5vh'}}>
     <Typography component='div' variant='body1' style={{fontSize:'10px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',padding:'.4vh'}} className={classes.button}>
         Leave Room
     </Typography>

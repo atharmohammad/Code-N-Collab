@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles((theme) => ({
   select: {
     borderRadius: 4,
-    background:'transparent',
+    background:'#fff',
     position: 'relative',
     fontSize: 12,
     border: '1px solid black',

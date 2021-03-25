@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles((theme) => ({
   select: {
     borderRadius: 4,
-    background:'transparent',
+    background:'#fff',
     position: 'relative',
     fontSize: 12,
     border: '1px solid black',
@@ -23,7 +23,7 @@ export default function CustomizedSelects() {
     // console.log(event.target.value)
   };
   return (
-    <Grid style={{display:'flex',margin:'.8vh 0 0 30vh'}}>
+    <Grid style={{display:'flex',margin:'.8vh 0 0 40vh'}}>
         <select className={classes.select} onChange={handleChange} value={language}>
             <option value='c_cpp' selected>C++</option>
             <option value='java'>Java</option>

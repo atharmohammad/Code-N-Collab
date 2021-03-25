@@ -28,7 +28,7 @@ export default function Toolbar(props) {
   const classes = useStyles();
 
   return (
-        <Grid style={{backgroundColor:'#f7f7f7',height:'6vh',display:'flex',width:'100%'}}>
+        <Grid style={{backgroundColor:'#fad87a',height:'6vh',display:'flex',width:'100%',paddingTop:'.5vh'}}>
           <Grid style={{display:'flex'}}>
           <LanguagePicker/>
           <ThemePicker/>
