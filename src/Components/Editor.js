@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import AceEditor from "react-ace";
 
 import "ace-builds/src-noconflict/mode-c_cpp";

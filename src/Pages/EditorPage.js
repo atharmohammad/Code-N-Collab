@@ -1,8 +1,8 @@
 import React from "react";
 import Chat from "../Components/Chat";
 import Editor from "../Components/Editor";
-import IO from "../Components/IO";
-import Problem from '../Components/Problem';
+import IO from "../Components/IO/IO";
+import Problem from '../Components/Problem/Problem';
 
 import {
   Grid,

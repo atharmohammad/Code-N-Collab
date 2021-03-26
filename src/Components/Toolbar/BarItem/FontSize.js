@@ -5,13 +5,14 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
   select: {
-    borderRadius: 4,
-    background:'#fff',
+    borderRadius: '7px',
+    background:'#3b362a',
     position: 'relative',
     fontSize: 12,
-    border: '1px solid black',
     height:'4vh',
-    cursor:'pointer'
+    cursor:'pointer',
+    color:'#fff',
+
   },
 }));
 
