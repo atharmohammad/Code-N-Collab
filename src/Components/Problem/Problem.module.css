@@ -1,0 +1,19 @@
+.left{
+  position:absolute;
+  height:4px;
+  width:15px;
+  background:black;
+  -webkit-transform:rotate(-140deg);
+  margin:1.5vh 0 0 1.5vh;
+  border-radius: 5px;
+}
+
+.right{
+  position:absolute;
+  height:4px;
+  width:15px;
+  background:black;
+  -webkit-transform:rotate(-30deg);
+  margin:2.5vh 0 0 1.5vh;
+  border-radius: 5px;
+}

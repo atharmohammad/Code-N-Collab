@@ -1,0 +1,32 @@
+.left{
+  position:absolute;
+  height:4px;
+  width:15px;
+  background:#fff;
+  -webkit-transform:rotate(240deg);
+  margin:2vh 0 0 .7vh;
+  border-radius: 5px;
+}
+
+.right{
+  position:absolute;
+  height:4px;
+  width:15px;
+  background:#fff;
+  -webkit-transform:rotate(-60deg);
+  margin:2vh 0 0 1.7vh;
+  border-radius: 5px;
+}
+
+.bounce {
+  animation: bounce 1s ease infinite;
+	animation-play-state: paused;
+}
+.bounce:hover{
+	animation-play-state: running;
+}
+@keyframes bounce {
+	0%, 20%, 50%, 80%, 100% {transform: translateY(-10px);}
+	40% {transform: translateY(-30px);}
+	60% {transform: translateY(-25px);}
+}

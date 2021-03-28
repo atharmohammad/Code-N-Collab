@@ -1,35 +1,52 @@
 import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import {SET_LANGUAGE } from '../../../store/Action/action'
+import {connect} from 'react-redux'
 import Grid from '@material-ui/core/Grid';
 
 
 const useStyles = makeStyles((theme) => ({
   select: {
-    borderRadius: 4,
-    background:'#fff',
+    borderRadius: '7px',
+    background:'#3b362a',
     position: 'relative',
     fontSize: 12,
-    border: '1px solid black',
     height:'4vh',
-    cursor:'pointer'
+    cursor:'pointer',
+    color:'#fff',
   },
 }));
 
-export default function CustomizedSelects() {
+const LanguagePicker = (props) => {
   const classes = useStyles();
-  const [language, setLanguage] = React.useState('c_cpp');
+
   const handleChange = (event) => {
-    setLanguage(event.target.value);
+    props.setLanguage(event.target.value);
     // console.log(event.target.value)
   };
+
   return (
     <Grid style={{display:'flex',margin:'.8vh 0 0 40vh'}}>
-        <select className={classes.select} onChange={handleChange} value={language}>
-            <option value='c_cpp' selected>C++</option>
+        <select className={classes.select} onChange={handleChange} value={props.language}>
+            <option value='c_cpp' selected>C/C++(14)</option>
             <option value='java'>Java</option>
-            <option value='python'>Python</option>
-            <option value='javascript'>Javascript</option>
+            <option value='python'>Python3</option>
+            <option value='kotlin'>Kotlin</option>
         </select>
     </Grid>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    language: state.tools.language
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLanguage: (value) => dispatch({ type:SET_LANGUAGE, value})
+  };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(LanguagePicker);
