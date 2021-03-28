@@ -1,11 +1,41 @@
-import React from 'react';
-import Box from '@material-ui/core/Grid';
+import React from "react";
+import { Button } from "@material-ui/core";
+import { connect } from "react-redux";
+import {SET_COMPILE_ON } from '../../../store/Action/action'
 
+import { connectAdvanced } from "react-redux";
 
-export default function Compile() {
-
+const Compile = (props) => {
   return (
-    <Box style={{height:'4vh',backgroundColor:'#872e2e',color:'#fff',
-    width:'13vh',padding:'.5vh 1vh 0 2vh',borderRadius:'5px',margin:'1vh 0 0 24vh',cursor:'pointer'}}>Compile</Box>
+    <Button
+      disabled={props.isCompiling}
+      onClick={props.onClickCompile}
+      style={{
+        height: "4vh",
+        backgroundColor: "#872e2e",
+        color: "#fff",
+        width: "13vh",
+        padding: ".5vh 1vh 0 2vh",
+        borderRadius: "5px",
+        margin: "1vh 0 0 24vh",
+        cursor: "pointer",
+      }}
+    >
+      Compile
+    </Button>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isCompiling: state.nowCompile,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClickCompile: () => dispatch({ type:SET_COMPILE_ON}),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Compile);

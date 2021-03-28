@@ -2,17 +2,21 @@
   "name": "codencollab",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://api.jdoodle.com/v1",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
     "ace-builds": "^1.4.12",
+    "axios": "^0.21.1",
     "react": "^17.0.1",
     "react-ace": "^9.3.0",
     "react-dom": "^17.0.1",
+    "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "redux": "^4.0.5",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
