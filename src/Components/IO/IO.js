@@ -42,7 +42,7 @@ const Io = (props) => {
           placeholder="Input"
           onChange={changeHandler}
           rows="3"
-          cols="44"
+          cols="56"
           style={{
             border: "none",
             resize: "none",
@@ -57,7 +57,7 @@ const Io = (props) => {
           height: "5vh",
           width: "5vh",
           borderRadius: "50%",
-          backgroundColor: "#872e2e",
+          backgroundColor: "#495969",
           zIndex: "200",
           transform: "translateY(-25px)",
           cursor: "pointer",
@@ -83,14 +83,14 @@ const Io = (props) => {
           disabled
           value = {props.output}
           placeholder="Output"
-          rows="3"
-          cols="44"
+          rows="4"
+          cols="56"
           style={{
             border: "none",
             resize: "none",
             overflowY: "scroll",
             fontSize: "15px",
-            padding: "1vh",
+            paddingLeft:'1vh'
           }}
         />
       </Grid>
