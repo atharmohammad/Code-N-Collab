@@ -39,7 +39,7 @@ const LanguagePicker = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    language: state.language
+    language: state.tools.language
   };
 };
 
@@ -50,4 +50,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(LanguagePicker);
-

@@ -100,7 +100,7 @@ const Io = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    output: state.output,
+    output: state.tools.output,
   };
 };
 

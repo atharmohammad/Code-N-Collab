@@ -16,7 +16,7 @@ export default function App() {
         <input placeholder="Code" style={{width:'10vh'}}/>
         <input placeholder="Problem Name" style={{width:'15vh',marginLeft:'2vh'}} />
       </Grid>
-      <Box style={{height:'5vh',backgroundColor:'#872e2e',color:'#fff',
+      <Box style={{height:'4.5vh',backgroundColor:'#872e2e',color:'#fff',
       width:'8vh',padding:'1vh',borderRadius:'5px',margin:'1.5vh 0 0 9vh',cursor:'pointer'}}>Fetch</Box>
       <Grid style={{height:'5vh',width:'5vh',borderRadius:'50%',backgroundColor:'#ededeb',
       zIndex:'200',transform:'translateX(25px)', cursor:'pointer',margin:'10vh 0 0 28vh'}} className={styles.bounce} >

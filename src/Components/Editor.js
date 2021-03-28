@@ -37,7 +37,7 @@ const languageMapper=(lang_mode) => {
    case 'kotlin': return {language:'kotlin',versionIndex:'2'}
 
   }
-  return {language:'cpp14',versionIndex:'3'} 
+  return {language:'cpp14',versionIndex:'3'}
 }
 
 //main
@@ -46,27 +46,27 @@ const Editor = (props) => {
 
     useEffect( async() => {
 
-    if(props.nowCompile === true && props.isLoading === false){
+    if(props.tools.nowCompile === true && props.tools.isLoading === false){
         props.setOutPut('')
-        props.setLoading() 
+        props.setLoading()
         console.log("Compiling", editorRef.current.editor.getValue());
         const url = "/execute";
-        
+
         const {language,versionIndex} = languageMapper(props.language)
-        
+
         const sendData = {
           clientId: "d4b7771b3992895017e5ac5f42ec46e6",
           clientSecret:
             "37f00b6e1c5f23675ff6bd195a0e6d6631b9f8384dd9c25d1a82a5d274256db3",
           script: editorRef.current.editor.getValue(),
-          stdin: props.input,
+          stdin: props.tools.input,
           language,
           versionIndex
         };
-        
+
         let response;
         try {
-           
+
           response = await axios({
             method: "post", //you can set what request you want to be
             url,
@@ -83,28 +83,28 @@ const Editor = (props) => {
           props.setOutPut("404")
         }
         props.resetCompile();
-        
+
         try{
            props.setOutPut(response.data.output)
            console.log(response.data.output)
         }catch(e){
           props.setOutPut("Oops something went wrong")
         }
-        
+
         props.resetLoading();
       };
-     
-  },[props.nowCompile]);
 
-  
+  },[props.tools.nowCompile]);
+
+
   return (
     <Grid style={{ minHeight: "70vh" }}>
-      
+
       <AceEditor
         ref={editorRef}
-        mode={props.language}
-        theme={props.theme}
-        fontSize={props.fontSize}
+        mode={props.tools.language}
+        theme={props.tools.theme}
+        fontSize={props.tools.fontSize}
         height="100%"
         width="100%"
         enableLiveAutocompletion={true}

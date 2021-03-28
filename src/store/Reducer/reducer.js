@@ -8,6 +8,7 @@ const initialState = {
   fontSize: 20,
   input: "",
   output: "",
+  room:false
 };
 
 const reducer = (state = initialState, action) => {
@@ -40,6 +41,12 @@ const reducer = (state = initialState, action) => {
 
     case TYPE.SET_OUTPUT:
       return { ...state, output: action.value };
+
+    case TYPE.CREATE_ROOM:
+      return {...state,room:true}
+
+    case TYPE.LEAVE_ROOM:
+      return {...state,room:false}
   }
   return state;
 };

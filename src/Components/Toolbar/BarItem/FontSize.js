@@ -18,14 +18,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CustomizeFont = (props) => {
-  
+
   const classes = useStyles();
- 
+
   const handleChange = (event) => {
     props.setFontSize(parseInt(event.target.value));
     // console.log(event.target.value)
   };
-  
+
   return (
     <Grid style={{display:'flex',margin:'.8vh 0 0 5vh'}}>
         <select className={classes.select} onChange={handleChange} value={props.font}>
@@ -39,7 +39,7 @@ const CustomizeFont = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    font: state.fontSize
+    font: state.tools.fontSize
   };
 };
 
@@ -50,6 +50,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(CustomizeFont);
-
-
-

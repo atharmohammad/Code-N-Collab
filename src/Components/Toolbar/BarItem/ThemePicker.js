@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ThemePicker = (props) => {
   const classes = useStyles();
-  
+
   const handleChange = (event) => {
     props.setTheme(event.target.value);
   };
@@ -42,7 +42,7 @@ const ThemePicker = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    theme: state.theme
+    theme: state.tools.theme
   };
 };
 
@@ -53,6 +53,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(ThemePicker);
-
-
-
