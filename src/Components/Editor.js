@@ -28,7 +28,9 @@ import {
   Grid,
 } from "@material-ui/core";
 import Modal from './Modal/Modal'
-const languageMapper=(lang_mode) => {
+
+
+const languageMapper = (lang_mode) => {
 
   switch(lang_mode){
    case 'c_cpp': return {language:'cpp14',versionIndex:'3'}
@@ -37,7 +39,8 @@ const languageMapper=(lang_mode) => {
    case 'kotlin': return {language:'kotlin',versionIndex:'2'}
 
   }
-  return {language:'cpp14',versionIndex:'3'}
+  console.log("Error laguage not defined")
+  return {};
 }
 
 //main
@@ -52,7 +55,7 @@ const Editor = (props) => {
         console.log("Compiling", editorRef.current.editor.getValue());
         const url = "/execute";
 
-        const {language,versionIndex} = languageMapper(props.language)
+        const {language,versionIndex} = languageMapper(props.tools.language)
 
         const sendData = {
           clientId: "d4b7771b3992895017e5ac5f42ec46e6",
@@ -90,14 +93,14 @@ const Editor = (props) => {
         }catch(e){
           props.setOutPut("Oops something went wrong")
         }
-
         props.resetLoading();
       };
 
   },[props.tools.nowCompile]);
-  let editor ;
-  if(props.tools.nowCompile){
-    editor = (<Grid style={{ minHeight: "70vh" }}>
+  
+  return (
+    <>
+      <Grid style={{ minHeight: "70vh" }}>
       <AceEditor
           ref={editorRef}
           mode={props.tools.language}
@@ -109,29 +112,8 @@ const Editor = (props) => {
           name="UNIQUE_ID_OF_DIV"
           editorProps={{ $blockScrolling: true }}
         />
-      <Modal/>
-    </Grid>)
-
-  }
-  else{
-  editor =(<Grid style={{ minHeight: "70vh" }}>
-        <AceEditor
-            ref={editorRef}
-            mode={props.tools.language}
-            theme={props.tools.theme}
-            fontSize={props.tools.fontSize}
-            height="100%"
-            width="100%"
-            enableLiveAutocompletion={true}
-            name="UNIQUE_ID_OF_DIV"
-            editorProps={{ $blockScrolling: true }}
-          />
-      </Grid>)
-  }
-
-  return (
-    <>
-      {editor}
+      {props.tools.isLoading === true?<Modal/> : null}
+    </Grid>
     </>
   );
 };
