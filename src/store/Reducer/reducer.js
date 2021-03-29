@@ -22,10 +22,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, nowCompile: false };
 
     case TYPE.SET_LOADING:
-      return { ...state, islLoading: true };
+      return { ...state, isLoading: true };
 
     case TYPE.RESET_LOADING:
-      return { ...state, islLoading: false };
+      return { ...state, isLoading: false };
 
     case TYPE.SET_LANGUAGE:
       return { ...state, language: action.value };
