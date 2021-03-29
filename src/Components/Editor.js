@@ -27,7 +27,7 @@ import {
   MenuItem,
   Grid,
 } from "@material-ui/core";
-
+import Modal from './Modal/Modal'
 const languageMapper=(lang_mode) => {
 
   switch(lang_mode){
@@ -95,23 +95,44 @@ const Editor = (props) => {
       };
 
   },[props.tools.nowCompile]);
+  let editor ;
+  if(props.tools.nowCompile){
+    editor = (<Grid style={{ minHeight: "70vh" }}>
+      <AceEditor
+          ref={editorRef}
+          mode={props.tools.language}
+          theme={props.tools.theme}
+          fontSize={props.tools.fontSize}
+          height="100%"
+          width="100%"
+          enableLiveAutocompletion={true}
+          name="UNIQUE_ID_OF_DIV"
+          editorProps={{ $blockScrolling: true }}
+        />
+      <Modal/>
+    </Grid>)
 
+  }
+  else{
+  editor =(<Grid style={{ minHeight: "70vh" }}>
+        <AceEditor
+            ref={editorRef}
+            mode={props.tools.language}
+            theme={props.tools.theme}
+            fontSize={props.tools.fontSize}
+            height="100%"
+            width="100%"
+            enableLiveAutocompletion={true}
+            name="UNIQUE_ID_OF_DIV"
+            editorProps={{ $blockScrolling: true }}
+          />
+      </Grid>)
+  }
 
   return (
-    <Grid style={{ minHeight: "70vh" }}>
-
-      <AceEditor
-        ref={editorRef}
-        mode={props.tools.language}
-        theme={props.tools.theme}
-        fontSize={props.tools.fontSize}
-        height="100%"
-        width="100%"
-        enableLiveAutocompletion={true}
-        name="UNIQUE_ID_OF_DIV"
-        editorProps={{ $blockScrolling: true }}
-      />
-    </Grid>
+    <>
+      {editor}
+    </>
   );
 };
 

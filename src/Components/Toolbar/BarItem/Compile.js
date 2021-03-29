@@ -15,7 +15,7 @@ const Compile = (props) => {
         backgroundColor: "#872e2e",
         color: "#fff",
         width: "13vh",
-        padding: ".5vh 1vh 0 1.5vh",
+        padding: ".5vh 1vh 0 1.3vh",
         borderRadius: "5px",
         margin: "1vh 0 0 24vh",
         cursor: "pointer",
