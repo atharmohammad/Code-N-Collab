@@ -11,13 +11,13 @@ const Compile = (props) => {
       disabled={props.isCompiling}
       onClick={props.onClickCompile}
       style={{
-        height: "4vh",
+        height: "3.7vh",
         backgroundColor: "#872e2e",
         color: "#fff",
-        width: "13vh",
+        width: "12vh",
         padding: ".5vh 1vh 0 1.3vh",
         borderRadius: "5px",
-        margin: "1vh 0 0 24vh",
+        margin: "0.5vh 0 0 24vh",
         cursor: "pointer",
       }}
     >
