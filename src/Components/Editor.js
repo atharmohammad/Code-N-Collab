@@ -18,7 +18,6 @@ import "ace-builds/src-noconflict/theme-dracula";
 import "ace-builds/src-noconflict/theme-clouds";
 
 import "ace-builds/src-noconflict/ext-language_tools";
-
 import {
   makeStyles,
   FormControl,
@@ -102,14 +101,14 @@ const Editor = (props) => {
       <Grid style={{ minHeight: "71.8vh" ,borderRadius:'5px'}}>
       <AceEditor
           ref={editorRef}
+          width='100%'
+          height='71.8vh'
           mode={props.tools.language}
           theme={props.tools.theme}
           fontSize={props.tools.fontSize}
-          height="100%"
-          width="100%"
           enableLiveAutocompletion={true}
           name="UNIQUE_ID_OF_DIV"
-          editorProps={{ $blockScrolling: true }}
+          editorProps={{ $blockScrolling: false }}
         />
       {props.tools.isLoading === true?<Modal/> : null}
     </Grid>
