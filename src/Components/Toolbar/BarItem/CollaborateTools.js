@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   }
 
   return (
-    <Grid style={{display:'flex',margin:'1vh 0 0 25vh'}}>
+    <Grid style={{display:'flex',margin:'0.2vh 0 0 25vh'}}>
 
       <Typography component='div' variant='body1' style={{fontSize:'15px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',minHeight:'2vh',padding:'.6vh'}} className={classes.button}>
           User
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
          Room Name
      </Typography>
 
-    <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',color:'white',height:'4vh'
+    <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',color:'white',height:'3.5vh'
     ,padding:'.5vh',borderRadius:'5px',backgroundColor:'#872e2e',margin:'.4vh 0 1vh 5vh'}} onClick={leaveRoomHandler}>
     <Typography component='div' variant='body1' style={{fontSize:'10px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',padding:'.4vh'}} className={classes.button}>
         Leave Room

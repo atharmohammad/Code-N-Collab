@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     background:'#3b362a',
     position: 'relative',
     fontSize: 12,
-    height:'4vh',
+    height:'3.5vh',
     cursor:'pointer',
     color:'#fff',
   },

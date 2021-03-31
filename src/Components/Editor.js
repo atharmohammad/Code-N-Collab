@@ -97,10 +97,9 @@ const Editor = (props) => {
       };
 
   },[props.tools.nowCompile]);
-  
+
   return (
-    <>
-      <Grid style={{ minHeight: "70vh" }}>
+      <Grid style={{ minHeight: "71.8vh" ,borderRadius:'5px'}}>
       <AceEditor
           ref={editorRef}
           mode={props.tools.language}
@@ -114,7 +113,6 @@ const Editor = (props) => {
         />
       {props.tools.isLoading === true?<Modal/> : null}
     </Grid>
-    </>
   );
 };
 
