@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, makeStyles, TextField, Button} from "@material-ui/core";
+import { Grid, makeStyles, TextField, Button ,InputLabel } from "@material-ui/core";
 import {connect} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import * as TYPE from '../store/Action/action'
@@ -31,53 +31,60 @@ function Home(props) {
       direction="column"
       justify="center"
       alignItems="center"
-      style={{ minHeight: "100vh", backgroundColor: "#3b362a" }}
+      style={{ minHeight: "100vh", backgroundColor: "#1f273d" }}
     >
       <Grid
         container
         direction="column"
-        justify="center"
+        justify="space-around"
         alignItems="center"
         style={{
           backgroundColor: "#f2f2f2",
-          minHeight: "30vh",
-          width: "50vh",
-          border: "5px solid black",
+          minHeight: "65vh",
+          width: "60vh",
           borderRadius: "20px",
+          padding:'10vh'
         }}
       >
-        <TextField
-          id="outlined-basic"
-          label="Username"
-          variant="outlined"
-          style={{
-            backgroundColor: "#f2f2f2",
-            boxShadow: "0 5px 15px 0px rgba(0,0,0,0.7)",
-          }}
-        />
+      <Grid>
+        <InputLabel style={{marginBottom:'2vh',color:'black',fontWeight:'bold'}}>Username</InputLabel>
+          <TextField
+            id="outlined-basic"
+            label="Username"
+            variant="outlined"
+            style={{
+              backgroundColor: "#f2f2f2",
+            }}
+          />
+      </Grid>
+      <Grid>
+      <InputLabel style={{margin:'2vh 0 0 0',color:'black',fontWeight:'bold'}}>Room</InputLabel>
         <TextField
           id="outlined-basic"
           label="Room Name"
           variant="outlined"
           style={{
             backgroundColor: "#f2f2f2",
-            boxShadow: "0 5px 15px 0px rgba(0,0,0,0.7)",
             marginTop: "2vh",
           }}
         />
       </Grid>
-      <Button
-        variant="contained"
-        style={{
-          backgroundColor: "white",
-          color: "#3b362a",
-          boxShadow: "0 5px 15px 0px rgba(0,0,0,0.7)",
-          marginTop: "2vh",
-        }}
-        onClick={createRoomHandler}
-      >
-        Create Room
-      </Button>
+
+        <Button
+          variant="contained"
+          style={{
+            backgroundColor: "#1f273d",
+            color: "#fff",
+            marginTop: "2vh",
+            padding:'2vh',
+            width:'30vh'
+          }}
+          onClick={createRoomHandler}
+        >
+          Join / Create
+        </Button>
+      </Grid>
+
     </Grid>
   );
 }
