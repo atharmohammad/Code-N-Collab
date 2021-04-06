@@ -14,6 +14,7 @@ function App(props) {
     <Navbar />
       <Switch>
       <Route path="/home" exact component={Home} />
+      <Route path="/play" exact component={Playground} />
       <Redirect to='/home'/>
     </Switch>
     </>
