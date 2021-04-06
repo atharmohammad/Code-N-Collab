@@ -3,7 +3,7 @@ import AceEditor from "react-ace";
 import axios from "axios";
 import { connect } from "react-redux";
 import { SET_LOADING, RESET_LOADING, SET_OUTPUT,SET_COMPILE_OFF } from "../store/Action/action";
-
+import {languageMapper} from './Functions/index';
 
 import "ace-builds/src-noconflict/mode-c_cpp";
 import "ace-builds/src-noconflict/mode-python";
@@ -13,7 +13,6 @@ import "ace-builds/src-noconflict/mode-kotlin";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/theme-ambiance";
-import "ace-builds/src-noconflict/theme-nord_dark";
 import "ace-builds/src-noconflict/theme-dracula";
 import "ace-builds/src-noconflict/theme-clouds";
 
@@ -27,20 +26,6 @@ import {
   Grid,
 } from "@material-ui/core";
 import Modal from './Modal/Modal'
-
-
-const languageMapper = (lang_mode) => {
-
-  switch(lang_mode){
-   case 'c_cpp': return {language:'cpp14',versionIndex:'3'}
-   case 'python': return {language:'python3',versionIndex:'3'}
-   case 'java': return {language:'java',versionIndex:'3'}
-   case 'kotlin': return {language:'kotlin',versionIndex:'2'}
-
-  }
-  console.log("Error laguage not defined")
-  return {};
-}
 
 //main
 const Editor = (props) => {

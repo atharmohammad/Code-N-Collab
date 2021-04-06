@@ -51,11 +51,11 @@ export default function ElevateAppBar(props) {
     <React.Fragment>
       <CssBaseline />
         <Grid style={{backgroundColor:'#fff',borderBottom:'2px solid black',minHeight:'8vh',display:'flex'}}>
-            <Typography component='div' variant='h4' style={{color:'#3b362a',fontSize:'25px',margin:'2vh 2vh 2vh 3vh'}}>
-                <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',fontFamily: ['Fredoka One', 'cursive'].join()}} onClick={homeHandler}>COLLAB</Box>
+            <Typography component='div' variant='h4' style={{color:'black',fontSize:'25px',margin:'1vh 1vh 1vh 3vh',border:'2px solid black',padding:'1vh',borderRadius:'5px'}}>
+                <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',fontFamily: ['Fredoka One', 'cursive'].join()}} onClick={homeHandler}>Code - N - Collab</Box>
             </Typography>
-                <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',color:'white',padding:'.5vh',borderRadius:'5px',backgroundColor:'#3b362a',margin:'2vh 0 2.4vh 5vh'}} onClick={collabHandler} >
-                <Typography component='div' variant='body1' style={{fontSize:'10px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',minHeight:'2vh',padding:'.6vh'}} className={classes.button}>
+                <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',color:'white',padding:'.5vh',borderRadius:'5px',backgroundColor:'black',margin:'2vh 0 2.4vh 5vh'}} onClick={collabHandler} >
+                <Typography component='div' variant='body1' style={{fontSize:'10px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',minHeight:'2vh',padding:'1vh'}} className={classes.button}>
                     Collaborate
                 </Typography>
                </Box>

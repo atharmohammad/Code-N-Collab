@@ -26,15 +26,15 @@ const Io = (props) => {
 
   return (
     <Grid
-      style={{ display: "flex", minHeight: "28vh", backgroundColor: "#fad87a" }}
+      style={{ display: "flex", minHeight: "28vh", backgroundColor: "#1f273d" }}
     >
       <Grid
         lg={6}
         style={{
-          backgroundColor: "#FAFAFA",
+          backgroundColor: "#272822",
           height: "15vh",
           zIndex: "100",
-          border: "2px solid black",
+          border: "2px solid #fff",
           borderRadius: "5px",
         }}
       >
@@ -49,6 +49,8 @@ const Io = (props) => {
             overflowY: "scroll",
             fontSize: "15px",
             padding: "1vh",
+            backgroundColor:'#272822',
+            color:'#fff'
           }}
         />
       </Grid>
@@ -72,10 +74,10 @@ const Io = (props) => {
       <Grid
         lg={6}
         style={{
-          backgroundColor: "#FAFAFA",
+          backgroundColor: "#272822",
           height: "15vh",
           zIndex: "200",
-          border: "2px solid black",
+          border: "2px solid #fff",
           borderRadius: "5px",
         }}
       >
@@ -90,7 +92,9 @@ const Io = (props) => {
             resize: "none",
             overflowY: "scroll",
             fontSize: "15px",
-            paddingLeft:'1vh'
+            paddingLeft:'1vh',
+            backgroundColor:'#272822',
+            color:'#fff'
           }}
         />
       </Grid>
