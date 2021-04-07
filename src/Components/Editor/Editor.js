@@ -32,10 +32,6 @@ const MonacoEditor = () => {
     };
   }, []);
 
-  useEffect(() => {
-    MonacoEditorRef.current?.setValue("");
-  }, []);
-
   // try{
   //   console.log(MonacoEditorRef.StandaloneCodeEditor.getValue());
   // }catch(e){
