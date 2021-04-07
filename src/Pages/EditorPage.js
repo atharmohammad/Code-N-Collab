@@ -1,6 +1,6 @@
 import React from "react";
 import Chat from "../Components/Chat";
-import Editor from "../Components/Editor";
+import Editor from "../Components/Editor/Editor";
 import IO from "../Components/IO/IO";
 import Problem from '../Components/Problem/Problem';
 
