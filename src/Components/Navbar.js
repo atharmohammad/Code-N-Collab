@@ -47,6 +47,9 @@ export default function ElevateAppBar(props) {
   const collabHandler = ()=>{
     history.push('/editor')
   }
+  const testHandler = ()=>{
+    history.push('/test')
+  }
   return (
     <React.Fragment>
       <CssBaseline />
@@ -59,6 +62,12 @@ export default function ElevateAppBar(props) {
                     Collaborate
                 </Typography>
                </Box>
+
+               <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',color:'white',padding:'.5vh',borderRadius:'5px',backgroundColor:'black',margin:'2vh 0 2.4vh 5vh'}} onClick={testHandler} >
+               <Typography component='div' variant='body1' style={{fontSize:'10px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',minHeight:'2vh',padding:'1vh'}} className={classes.button}>
+                   Test
+               </Typography>
+              </Box>
         </Grid>
     </React.Fragment>
   );
