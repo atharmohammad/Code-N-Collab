@@ -127,8 +127,12 @@ class MonacoConvergenceAdapter {
   _setLocalSelection() {
     const selection = this._monacoEditor.getSelection();
     if (!selection.isEmpty()) {
-      const start = this._monacoEditor.getModel().getOffsetAt(selection.getStartPosition());
-      const end = this._monacoEditor.getModel().getOffsetAt(selection.getEndPosition());
+      const start = this._monacoEditor
+        .getModel()
+        .getOffsetAt(selection.getStartPosition());
+      const end = this._monacoEditor
+        .getModel()
+        .getOffsetAt(selection.getEndPosition());
       this._selectionReference.set({ start, end });
     } else if (this._selectionReference.isSet()) {
       this._selectionReference.clear();
@@ -138,7 +142,10 @@ class MonacoConvergenceAdapter {
   _addRemoteSelection(reference) {
     const color = this._colorAssigner[this._randomNumber];
 
-    const remoteSelection = this._remoteSelectionManager.addSelection(reference.sessionId(), color);
+    const remoteSelection = this._remoteSelectionManager.addSelection(
+      reference.sessionId(),
+      color
+    );
 
     if (reference.isSet()) {
       const selection = reference.value();
