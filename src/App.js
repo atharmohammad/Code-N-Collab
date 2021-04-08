@@ -39,7 +39,7 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return {
-    room: state.tools.room,
+    room: state.credentials.room,
   };
 };
 

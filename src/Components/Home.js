@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as TYPE from "../store/Action/action";
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -33,7 +34,7 @@ function Home(props) {
 
   const createRoomHandler = async (e) => {
     try {
-      await props.createRoom();
+      await props.createRoom(room,name);
       history.push("/editor?room=" + room + "&name=" + name);
     } catch (err) {
       console.log(err);
@@ -113,9 +114,10 @@ function Home(props) {
   );
 }
 
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    createRoom: () => dispatch({ type: TYPE.CREATE_ROOM }),
+    createRoom: (roomName,userName) => dispatch({ type: TYPE.CREATE_ROOM, data:{roomName:roomName,userName:userName}}),
   };
 };
 

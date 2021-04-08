@@ -33,7 +33,7 @@ const ThemePicker = (props) => {
         value={props.theme}
       >
         <option value="light">light</option>
-        <option value="vs-dark" selected>
+        <option value="dark" selected>
           vs-dark
         </option>
         <option value="hc-black">hc-black</option>

@@ -47,20 +47,20 @@ const MonacoEditor = (props) => {
     }
   }, [props.tools.nowCompile]);
 
-  
-  
+
+
   useEffect(async () => {
     const credentials = { username: "testuser", password: "changeme" };
     try {
       const domain = await Convergence.connectAnonymously(
         CONVERGENCE_URL,
-        "Athar"
+        props.credentials.userName
       );
       const modelService = domain.models();
 
       const model = await modelService.openAutoCreate({
         collection: "Code-n-Collab`",
-        id: "2",
+        id: props.credentials.roomName,
         ephemeral: false,
         data: { text: code },
       });
@@ -75,7 +75,7 @@ const MonacoEditor = (props) => {
     }
   }, []);
 
-  
+
   return (
     <Grid style={{ flexGrow: 1, overflow: "hidden", fontSize: "30px" }}>
       <Editor
