@@ -4,9 +4,10 @@ import { Convergence } from "@convergence/convergence";
 import { CONVERGENCE_URL } from "./config";
 import MonacoConvergenceAdapter from "./EditorAdaptor";
 import "@convergencelabs/monaco-collab-ext/css/monaco-collab-ext.min.css";
+import {Grid} from '@material-ui/core'
+import {connect} from 'react-redux';
 
-
-const MonacoEditor = () => {
+const MonacoEditor = (props) => {
   const MonacoEditorRef = useRef();
   const [code,setCode] = useState("");
   const handleEditorDidMount = (editor) => {
@@ -14,6 +15,7 @@ const MonacoEditor = () => {
   };
 
   useEffect(async() => {
+     const credentials = { username: "testuser", password: "changeme" };
     try{
       const domain = await Convergence.connectAnonymously(CONVERGENCE_URL, 'Athar');
       const modelService = domain.models();
@@ -39,18 +41,25 @@ const MonacoEditor = () => {
   // }
 
   return (
-    <div style={{ flexGrow: 1, overflow: "hidden" }}>
+    <Grid style={{ flexGrow: 1, overflow: "hidden",fontSize:'30px' }}>
       <Editor
         ref={MonacoEditorRef}
+        fontSize='40'
         onMount={(editor) => handleEditorDidMount(editor)}
         theme='vs-dark'
         defaultValue=""
-        language='javascript'
+        language={props.language}
         onChange={(value) => setCode(value || "")}
         options={{ wordWrap: "on", autoIndent: "advanced" }}
       />
-    </div>
+    </Grid>
   );
 };
 
-export default MonacoEditor;
+const mapStateToProps = state=>{
+  return{
+    language:state.tools.language
+  }
+}
+
+export default connect(mapStateToProps,null)(MonacoEditor);

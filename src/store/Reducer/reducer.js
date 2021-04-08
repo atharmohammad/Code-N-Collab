@@ -1,7 +1,7 @@
 import * as TYPE from "../Action/action";
 
 const initialState = {
-  language: "c_cpp",
+  language: "cpp",
   theme: "monokai",
   nowCompile: false,
   isLoading: false,

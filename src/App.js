@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Switch,Redirect} from "react-router-dom";
 import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import EditorPage from "./Pages/EditorPage";
-import Playground from "./Pages/Playground";
 import Toolbar from "./Components/Toolbar/Toolbar";
+import Test from './Pages/Test';
 import {connect} from 'react-redux'
 import "./App.css";
 
@@ -25,7 +25,7 @@ function App(props) {
       <Toolbar/>
       <Switch>
         <Route path="/editor" exact component={EditorPage} />
-        <Route path="/playground" exact component={Playground} />
+        <Route path="/test" exact component={Test} />
         <Redirect to="/editor" />
       </Switch>
       </>)
