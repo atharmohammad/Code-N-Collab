@@ -49,8 +49,8 @@ const Io = (props) => {
             overflowY: "scroll",
             fontSize: "15px",
             padding: "1vh",
-            backgroundColor:'#272822',
-            color:'#fff'
+            backgroundColor: "#272822",
+            color: "#fff",
           }}
         />
       </Grid>
@@ -83,7 +83,7 @@ const Io = (props) => {
       >
         <textarea
           disabled
-          value = {props.output}
+          value={props.output}
           placeholder="Output"
           rows="4"
           cols="56"
@@ -92,9 +92,9 @@ const Io = (props) => {
             resize: "none",
             overflowY: "scroll",
             fontSize: "15px",
-            paddingLeft:'1vh',
-            backgroundColor:'#272822',
-            color:'#fff'
+            paddingLeft: "1vh",
+            backgroundColor: "#272822",
+            color: "#fff",
           }}
         />
       </Grid>

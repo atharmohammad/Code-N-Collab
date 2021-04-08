@@ -30,12 +30,12 @@ const useStyles = makeStyles((theme) => ({
     <Grid style={{display:'flex',margin:'0.2vh 0 0 25vh'}}>
 
       <Typography component='div' variant='body1' style={{fontSize:'15px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',minHeight:'2vh',padding:'.6vh',color:'#fff'}} className={classes.button}>
-          User
+          {props.userName}
       </Typography>
 
 
      <Typography component='div' variant='body1' style={{fontSize:'15px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',minHeight:'2vh',padding:'.6vh',marginLeft:'5vh',color:'#fff'}} className={classes.button}>
-         Room Name
+         {props.roomName}
      </Typography>
 
     <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',color:'white',height:'3.5vh',borderRadius:'5px',backgroundColor:'#872e2e',margin:'.4vh 0 1vh 5vh'}} onClick={leaveRoomHandler}>
@@ -47,10 +47,17 @@ const useStyles = makeStyles((theme) => ({
   );
 }
 
+const mapStateToProps = state=>{
+  return{
+    userName:state.credentials.userName,
+    roomName:state.credentials.roomName
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     leaveRoom: () => dispatch({ type:TYPE.LEAVE_ROOM}),
   };
 };
 
-export default connect(null, mapDispatchToProps)(CollabToolbar);
+export default connect(mapStateToProps, mapDispatchToProps)(CollabToolbar);

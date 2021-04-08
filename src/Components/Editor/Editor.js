@@ -1,65 +1,114 @@
-import React, { useEffect, useContext, useRef,useState } from "react";
+import React, { useEffect, useContext, useRef, useState } from "react";
+import { connect } from "react-redux";
+
 import Editor from "@monaco-editor/react";
 import { Convergence } from "@convergence/convergence";
-import { CONVERGENCE_URL } from "./config";
-import MonacoConvergenceAdapter from "./EditorAdaptor";
 import "@convergencelabs/monaco-collab-ext/css/monaco-collab-ext.min.css";
-import {Grid} from '@material-ui/core'
-import {connect} from 'react-redux';
+import { Grid } from "@material-ui/core";
+
+import { CONVERGENCE_URL } from "./config";
+import compilerFunc from "../Functions/compilerFunc";
+import MonacoConvergenceAdapter from "./EditorAdaptor";
+import Modal from "../Modal/Modal";
+
+import {
+  SET_LOADING,
+  RESET_LOADING,
+  SET_OUTPUT,
+  SET_COMPILE_OFF,
+} from "../../store/Action/action";
 
 const MonacoEditor = (props) => {
   const MonacoEditorRef = useRef();
-  const [code,setCode] = useState("");
+  const [code, setCode] = useState("");
   const handleEditorDidMount = (editor) => {
     MonacoEditorRef.current = editor;
   };
 
-  useEffect(async() => {
-     const credentials = { username: "testuser", password: "changeme" };
-    try{
-      const domain = await Convergence.connectAnonymously(CONVERGENCE_URL, 'Athar');
+  useEffect(async () => {
+    if (props.tools.nowCompile === true && props.tools.isLoading === false) {
+      props.setOutPut("");
+      props.setLoading();
+
+      let response = await compilerFunc(
+        props.tools.language,
+        code,
+        props.tools.input
+      );
+      props.resetCompile();
+
+      try {
+        props.setOutPut(response.data.output);
+        console.log(response.data.output);
+      } catch (e) {
+        props.setOutPut("Oops something went wrong");
+      }
+      props.resetLoading();
+    }
+  }, [props.tools.nowCompile]);
+
+
+
+  useEffect(async () => {
+    const credentials = { username: "testuser", password: "changeme" };
+    try {
+      const domain = await Convergence.connectAnonymously(
+        CONVERGENCE_URL,
+        props.credentials.userName
+      );
       const modelService = domain.models();
 
       const model = await modelService.openAutoCreate({
         collection: "Code-n-Collab`",
-        id: '2',
+        id: props.credentials.roomName,
         ephemeral: false,
         data: { text: code },
       });
 
-      const adapter = new MonacoConvergenceAdapter(MonacoEditorRef.current, model.elementAt("text"));
+      const adapter = new MonacoConvergenceAdapter(
+        MonacoEditorRef.current,
+        model.elementAt("text")
+      );
       adapter.bind();
-    }catch(error){
+    } catch (error) {
       console.error("Could not open model ", error);
-    };
+    }
   }, []);
 
-  // try{
-  //   console.log(MonacoEditorRef.StandaloneCodeEditor.getValue());
-  // }catch(e){
-  //   console.log(e);
-  // }
 
   return (
-    <Grid style={{ flexGrow: 1, overflow: "hidden",fontSize:'30px' }}>
+    <Grid style={{ flexGrow: 1, overflow: "hidden", fontSize: "30px" }}>
       <Editor
         ref={MonacoEditorRef}
-        fontSize='40'
         onMount={(editor) => handleEditorDidMount(editor)}
-        theme='vs-dark'
+        theme={props.tools.theme}
         defaultValue=""
-        language={props.language}
+        language={props.tools.language}
         onChange={(value) => setCode(value || "")}
-        options={{ wordWrap: "on", autoIndent: "advanced" }}
+        options={{
+          wordWrap: "on",
+          autoIndent: "advanced",
+          fontSize: props.tools.fontSize,
+        }}
       />
+      {props.tools.isLoading === true ? <Modal /> : null}
     </Grid>
   );
 };
 
-const mapStateToProps = state=>{
-  return{
-    language:state.tools.language
-  }
-}
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
 
-export default connect(mapStateToProps,null)(MonacoEditor);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setOutPut: (value) => dispatch({ type: SET_OUTPUT, value }),
+    setLoading: () => dispatch({ type: SET_LOADING }),
+    resetLoading: () => dispatch({ type: RESET_LOADING }),
+    resetCompile: () => dispatch({ type: SET_COMPILE_OFF }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MonacoEditor);

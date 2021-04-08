@@ -2,17 +2,15 @@ import * as TYPE from "../Action/action";
 
 const initialState = {
   language: "cpp",
-  theme: "monokai",
+  theme: "vs-dark",
   nowCompile: false,
   isLoading: false,
   fontSize: 20,
   input: "",
   output: "",
-  room:false
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action);
 
   switch (action.type) {
     case TYPE.SET_COMPILE_ON:
@@ -42,13 +40,8 @@ const reducer = (state = initialState, action) => {
     case TYPE.SET_OUTPUT:
       return { ...state, output: action.value };
 
-    case TYPE.CREATE_ROOM:
-      return {...state,room:true}
-
-    case TYPE.LEAVE_ROOM:
-      return {...state,room:false}
+    default:return state
   }
-  return state;
 };
 
 export default reducer;
