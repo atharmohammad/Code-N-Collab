@@ -4,7 +4,7 @@ import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import EditorPage from "./Pages/EditorPage";
 import Toolbar from "./Components/Toolbar/Toolbar";
-import Test from "./Pages/Test";
+import Test from "./Pages/EditorPageT.js";
 import { connect } from "react-redux";
 import "./App.css";
 

@@ -77,7 +77,7 @@ const MonacoEditor = (props) => {
 
 
   return (
-    <Grid style={{ flexGrow: 1, overflow: "hidden", fontSize: "30px" }}>
+    <>
       <Editor
         ref={MonacoEditorRef}
         onMount={(editor) => handleEditorDidMount(editor)}
@@ -92,7 +92,7 @@ const MonacoEditor = (props) => {
         }}
       />
       {props.tools.isLoading === true ? <Modal /> : null}
-    </Grid>
+    </>
   );
 };
 

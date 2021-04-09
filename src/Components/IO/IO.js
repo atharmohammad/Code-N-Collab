@@ -54,23 +54,7 @@ const Io = (props) => {
           }}
         />
       </Grid>
-      <Grid
-        style={{
-          height: "5vh",
-          width: "5vh",
-          borderRadius: "50%",
-          backgroundColor: "#495969",
-          zIndex: "200",
-          transform: "translateY(-25px)",
-          cursor: "pointer",
-        }}
-        className={styles.bounce}
-      >
-        <Grid style={{ alignItem: "center" }}>
-          <Grid className={styles.left}></Grid>
-          <Grid className={styles.right}></Grid>
-        </Grid>
-      </Grid>
+      
       <Grid
         lg={6}
         style={{
