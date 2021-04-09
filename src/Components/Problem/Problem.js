@@ -11,6 +11,7 @@ import styles from "./Problem.module.css";
 
 export default function App() {
   return (
+    <>
     <Grid
       style={{
         height: "90vh",
@@ -32,9 +33,10 @@ export default function App() {
           fontSize: "12px",
           color: "gray",
           opacity: "0.7",
+
         }}
       >
-        * Currently we only fetch problems from codeforces
+        * Currently we only fetch problems<br/> from codeforces
       </Typography>
       <Grid style={{ display: "flex", height: "4vh", margin: "2vh 0 0 2vh" }}>
         <input placeholder="Code" style={{ width: "10vh" }} />
@@ -57,24 +59,8 @@ export default function App() {
       >
         Fetch
       </Box>
-      <Grid
-        style={{
-          height: "5vh",
-          width: "5vh",
-          borderRadius: "50%",
-          backgroundColor: "#ededeb",
-          zIndex: "200",
-          transform: "translateX(25px)",
-          cursor: "pointer",
-          margin: "10vh 0 0 28vh",
-        }}
-        className={styles.bounce}
-      >
-        <Grid style={{ alignItem: "center" }}>
-          <Grid className={styles.left}></Grid>
-          <Grid className={styles.right}></Grid>
-        </Grid>
-      </Grid>
+
     </Grid>
+    </>
   );
 }
