@@ -7,7 +7,7 @@ import "@convergencelabs/monaco-collab-ext/css/monaco-collab-ext.min.css";
 import { Grid } from "@material-ui/core";
 
 import { CONVERGENCE_URL } from "./config";
-import compilerFunc from "../Functions/compilerFunc";
+import {compilerFunc} from "../Functions/index";
 import MonacoConvergenceAdapter from "./EditorAdaptor";
 import Modal from "../Modal/Modal";
 
@@ -21,6 +21,8 @@ import {
   RESET_LOADING,
   SET_OUTPUT,
   SET_COMPILE_OFF,
+  NOTIFY_OUTPUT_SUCCESS,
+  NOTIFY_OUTPUT_ERROR
 } from "../../store/Action/action";
 
 const MonacoEditor = (props) => {
@@ -53,10 +55,13 @@ const MonacoEditor = (props) => {
       props.resetCompile();
 
       try {
+        // throw new Error();
         props.setOutPut(response.data.output);
+        props.notify_output_on()
         console.log(response.data.output);
       } catch (e) {
         props.setOutPut("Oops something went wrong");
+        props.notify_output_error_on()
       }
       props.resetLoading();
     }
@@ -121,6 +126,8 @@ const mapDispatchToProps = (dispatch) => {
     setLoading: () => dispatch({ type: SET_LOADING }),
     resetLoading: () => dispatch({ type: RESET_LOADING }),
     resetCompile: () => dispatch({ type: SET_COMPILE_OFF }),
+    notify_output_on:()=>dispatch({type:NOTIFY_OUTPUT_SUCCESS}),
+    notify_output_error_on:()=>dispatch({type:NOTIFY_OUTPUT_ERROR})
   };
 };
 

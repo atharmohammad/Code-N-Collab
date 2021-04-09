@@ -11,17 +11,17 @@ const languageMapper = (lang_mode) => {
     case "kotlin":
       return { language: "kotlin", versionIndex: "2" };
     case "sql":
-      return { language: "sql", versionIndex: "3" };  
+      return { language: "sql", versionIndex: "3" };
     case "go":
-      return { language: "go", versionIndex: "3" };  
+      return { language: "go", versionIndex: "3" };
     case "scala":
-      return { language: "scala", versionIndex: "3" };  
+      return { language: "scala", versionIndex: "3" };
     case "shell":
       return { language: "bash", versionIndex: "3" };
     case "pascal":
-      return { language: "pascal", versionIndex: "2" };     
+      return { language: "pascal", versionIndex: "2" };
     case "csharp":
-      return { language: "csharp", versionIndex: "3" };     
+      return { language: "csharp", versionIndex: "3" };
     case "php":
       return { language: "php", versionIndex: "3" };
     case "perl":
@@ -29,22 +29,22 @@ const languageMapper = (lang_mode) => {
     case "ruby":
       return { language: "ruby", versionIndex: "3" };
     case "swift":
-      return { language: "swift", versionIndex: "3" };   
+      return { language: "swift", versionIndex: "3" };
     case "lua":
-      return { language: "lua", versionIndex: "2" };  
+      return { language: "lua", versionIndex: "2" };
     case "rust":
-      return { language: "rust", versionIndex: "3" };   
+      return { language: "rust", versionIndex: "3" };
     case "r":
-      return { language: "r", versionIndex: "3" }; 
+      return { language: "r", versionIndex: "3" };
     case "nodejs":
-      return { language: "nodejs", versionIndex: "3" };  
-   
+      return { language: "nodejs", versionIndex: "3" };
+
   }
   console.log("Error laguage not defined");
   return {};
 };
 
-const compilerFunc = async (lang, code, input) => {
+export const compilerFunc = async (lang, code, input) => {
   const { language, versionIndex } = languageMapper(lang);
   const url = "/execute";
   const sendData = {
@@ -56,7 +56,7 @@ const compilerFunc = async (lang, code, input) => {
     language,
     versionIndex,
   };
-  
+
   console.log('check this', sendData)
   let response = {};
   try {
@@ -74,5 +74,3 @@ const compilerFunc = async (lang, code, input) => {
 
   return response;
 };
-
-export default compilerFunc;

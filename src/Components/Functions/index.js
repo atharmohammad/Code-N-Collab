@@ -1,1 +1,1 @@
-export {languageMapper} from './languageMapper'
+export {compilerFunc} from './compilerFunc'
