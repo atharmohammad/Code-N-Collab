@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
-import EditorPage from "./Pages/EditorPage";
+import CollabPage from "./Pages/CollabPage";
 import Toolbar from "./Components/Toolbar/Toolbar";
-import Test from "./Pages/EditorPageT.js";
+import Test from "./Pages/Test.js";
 import { connect } from "react-redux";
 import "./App.css";
 
@@ -26,9 +26,9 @@ function App(props) {
         <Navbar />
         <Toolbar />
         <Switch>
-          <Route path="/editor" exact component={EditorPage} />
+          <Route path="/collaborate" exact component={CollabPage} />
           <Route path="/test" exact component={Test} />
-          <Redirect to="/editor" />
+          <Redirect to="/collaborate" />
         </Switch>
       </>
     );

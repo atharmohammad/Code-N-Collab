@@ -35,7 +35,7 @@ function Home(props) {
   const createRoomHandler = async (e) => {
     try {
       await props.createRoom(room,name);
-      history.push("/editor?room=" + room + "&name=" + name);
+      history.push("/collaborate?room=" + room + "&name=" + name);
     } catch (err) {
       console.log(err);
     }
