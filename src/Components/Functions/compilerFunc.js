@@ -10,6 +10,35 @@ const languageMapper = (lang_mode) => {
       return { language: "java", versionIndex: "3" };
     case "kotlin":
       return { language: "kotlin", versionIndex: "2" };
+    case "sql":
+      return { language: "sql", versionIndex: "3" };  
+    case "go":
+      return { language: "go", versionIndex: "3" };  
+    case "scala":
+      return { language: "scala", versionIndex: "3" };  
+    case "shell":
+      return { language: "bash", versionIndex: "3" };
+    case "pascal":
+      return { language: "pascal", versionIndex: "2" };     
+    case "csharp":
+      return { language: "csharp", versionIndex: "3" };     
+    case "php":
+      return { language: "php", versionIndex: "3" };
+    case "perl":
+      return { language: "perl", versionIndex: "3" };
+    case "ruby":
+      return { language: "ruby", versionIndex: "3" };
+    case "swift":
+      return { language: "swift", versionIndex: "3" };   
+    case "lua":
+      return { language: "lua", versionIndex: "2" };  
+    case "rust":
+      return { language: "rust", versionIndex: "3" };   
+    case "r":
+      return { language: "r", versionIndex: "3" }; 
+    case "nodejs":
+      return { language: "nodejs", versionIndex: "3" };  
+   
   }
   console.log("Error laguage not defined");
   return {};
@@ -40,7 +69,7 @@ const compilerFunc = async (lang, code, input) => {
   } catch (e) {
     response = e;
     console.log(e);
-    return {data:{output:"404"}}
+    return {data:{output:"Error:404\nOops Something went wrong\n:-("}}
   }
 
   return response;

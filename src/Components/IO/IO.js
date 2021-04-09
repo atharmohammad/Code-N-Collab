@@ -32,7 +32,7 @@ const Io = (props) => {
         lg={6}
         style={{
           backgroundColor: "#272822",
-          height: "15vh",
+          height: "27vh",
           zIndex: "100",
           border: "2px solid #fff",
           borderRadius: "5px",
@@ -54,28 +54,12 @@ const Io = (props) => {
           }}
         />
       </Grid>
-      <Grid
-        style={{
-          height: "5vh",
-          width: "5vh",
-          borderRadius: "50%",
-          backgroundColor: "#495969",
-          zIndex: "200",
-          transform: "translateY(-25px)",
-          cursor: "pointer",
-        }}
-        className={styles.bounce}
-      >
-        <Grid style={{ alignItem: "center" }}>
-          <Grid className={styles.left}></Grid>
-          <Grid className={styles.right}></Grid>
-        </Grid>
-      </Grid>
+
       <Grid
         lg={6}
         style={{
           backgroundColor: "#272822",
-          height: "15vh",
+          height: "27vh",
           zIndex: "200",
           border: "2px solid #fff",
           borderRadius: "5px",
