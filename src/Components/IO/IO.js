@@ -20,7 +20,7 @@ const Io = (props) => {
   const classes = useStyles();
 
   const changeHandler = (event) => {
-    props.setInput(event.target.value);
+    props.setInput(event.currentTarget.textContent);
     // console.log(event.target.value)
   };
 
@@ -38,17 +38,15 @@ const Io = (props) => {
           borderRadius: "5px",
         }}
       >
-        <textarea
-          placeholder="Input"
-          onChange={changeHandler}
-          rows="3"
-          cols="56"
+        <div
+          onInput={changeHandler}
+          contentEditable="true"
           style={{
-            border: "none",
-            resize: "none",
-            overflowY: "scroll",
-            fontSize: "15px",
-            padding: "1vh",
+            width: "auto",
+            height: "192px",
+            overflowY: "auto",
+            fontSize: "20px",
+            paddingLeft: "1vh",
             backgroundColor: "#272822",
             color: "#fff",
           }}
@@ -65,22 +63,20 @@ const Io = (props) => {
           borderRadius: "5px",
         }}
       >
-        <textarea
-          disabled
-          value={props.output}
-          placeholder="Output"
-          rows="4"
-          cols="56"
+        <div
+          onInput={changeHandler}
           style={{
-            border: "none",
-            resize: "none",
-            overflowY: "scroll",
-            fontSize: "15px",
+            width: "auto",
+            height: "192px",
+            overflowY: "auto",
+            fontSize: "20px",
             paddingLeft: "1vh",
             backgroundColor: "#272822",
             color: "#fff",
           }}
-        />
+        >
+          <pre>{props.output}</pre>
+        </div>
       </Grid>
     </Grid>
   );
