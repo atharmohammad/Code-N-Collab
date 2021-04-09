@@ -32,7 +32,8 @@ export default class ReflexBasicSplitterDemo
 
           <ReflexElement
           minSize="10"
-          maxSize="250">
+          maxSize="350"
+          size="250">
               <Problem />
           </ReflexElement>
 
@@ -40,18 +41,6 @@ export default class ReflexBasicSplitterDemo
 
           <ReflexElement orientation="horizontol" maxSize="1500" minSize="400">
                 <ReflexContainer >
-                  <ReflexElement
-                      minSize="10"
-                      maxSize="300">
-                      <div className="pane-content">
-                        <label>
-                          GRAPH-VISUALIZER
-                        </label>
-                      </div>
-                    </ReflexElement>
-
-                    <ReflexSplitter className="reflex-thin" />
-
                     <ReflexElement
                       minSize="100"
                       maxSize="4000">
@@ -60,7 +49,8 @@ export default class ReflexBasicSplitterDemo
                     <ReflexSplitter className="reflex-thin" />
                     <ReflexElement
                         minSize="10"
-                        maxSize="100">
+                        maxSize="200"
+                        size="100">
                         <IO />
                       </ReflexElement>
                 </ReflexContainer>
@@ -70,7 +60,8 @@ export default class ReflexBasicSplitterDemo
 
           <ReflexElement
             minSize="10"
-            maxSize="200">
+            maxSize="270"
+            size="200">
             <Chat />
           </ReflexElement>
 

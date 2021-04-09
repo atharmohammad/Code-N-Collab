@@ -32,7 +32,7 @@ const Io = (props) => {
         lg={6}
         style={{
           backgroundColor: "#272822",
-          height: "15vh",
+          height: "27vh",
           zIndex: "100",
           border: "2px solid #fff",
           borderRadius: "5px",
@@ -54,12 +54,12 @@ const Io = (props) => {
           }}
         />
       </Grid>
-      
+
       <Grid
         lg={6}
         style={{
           backgroundColor: "#272822",
-          height: "15vh",
+          height: "27vh",
           zIndex: "200",
           border: "2px solid #fff",
           borderRadius: "5px",
