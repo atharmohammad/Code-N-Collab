@@ -11,11 +11,10 @@ import compilerFunc from "../Functions/compilerFunc";
 import MonacoConvergenceAdapter from "./EditorAdaptor";
 import Modal from "../Modal/Modal";
 
-import blackBoardJSON from './manaco-Themes/blackBoard'
-import cobaltJSON from './manaco-Themes/cobalt'
-import merbivoreJSON from './manaco-Themes/merbivore'
-import githubJSON from './manaco-Themes/github'
-
+import blackBoardJSON from "./manaco-Themes/blackBoard";
+import cobaltJSON from "./manaco-Themes/cobalt";
+import merbivoreJSON from "./manaco-Themes/merbivore";
+import githubJSON from "./manaco-Themes/github";
 
 import {
   SET_LOADING,
@@ -25,23 +24,22 @@ import {
 } from "../../store/Action/action";
 
 const MonacoEditor = (props) => {
- 
   const MonacoEditorRef = useRef();
   const [code, setCode] = useState("");
- 
-  const handleEditorWillMount=(monaco) => {
+
+  const handleEditorWillMount = (monaco) => {
     // here is the monaco instance
     // do something before editor is mounted
-    monaco.editor.defineTheme('blackBoard', blackBoardJSON)
-    monaco.editor.defineTheme('cobalt', cobaltJSON)
-    monaco.editor.defineTheme('merbivore', merbivoreJSON)
-    monaco.editor.defineTheme('github', githubJSON)
-  }
+    monaco.editor.defineTheme("blackBoard", blackBoardJSON);
+    monaco.editor.defineTheme("cobalt", cobaltJSON);
+    monaco.editor.defineTheme("merbivore", merbivoreJSON);
+    monaco.editor.defineTheme("github", githubJSON);
+  };
 
   const handleEditorDidMount = (editor) => {
     MonacoEditorRef.current = editor;
   };
- 
+
   useEffect(async () => {
     if (props.tools.nowCompile === true && props.tools.isLoading === false) {
       props.setOutPut("");
@@ -63,8 +61,6 @@ const MonacoEditor = (props) => {
       props.resetLoading();
     }
   }, [props.tools.nowCompile]);
-
-
 
   useEffect(async () => {
     const credentials = { username: "testuser", password: "changeme" };
@@ -91,7 +87,6 @@ const MonacoEditor = (props) => {
       console.error("Could not open model ", error);
     }
   }, []);
-
 
   return (
     <Grid style={{ flexGrow: 1, overflow: "hidden", fontSize: "30px" }}>
