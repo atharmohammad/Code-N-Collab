@@ -32,6 +32,21 @@ const LanguagePicker = (props) => {
             <option value='java'>Java</option>
             <option value='python'>Python3</option>
             <option value='kotlin'>Kotlin</option>
+            <option value='sql'>SQL</option>
+            <option value='go'>Go</option>
+            <option value='scala'>Scala</option>
+            <option value='shell'>Shell</option>
+            <option value='pascal'>Pascal</option>
+            <option value='csharp'>C#</option>
+            <option value='php'>Php</option>
+            <option value='perl'>Perl</option>
+            <option value='ruby'>Ruby</option>
+            <option value='haskell'>Haskell</option>
+            <option value='swift'>Swift</option>
+            <option value='lua'>Lua</option>
+            <option value='rust'>Rust</option>
+            <option value='r'>R</option>
+            <option value='nodejs'>NodeJs</option>
         </select>
     </Grid>
   );
