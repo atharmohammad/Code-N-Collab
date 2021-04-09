@@ -28,8 +28,6 @@ const languageMapper = (lang_mode) => {
       return { language: "perl", versionIndex: "3" };
     case "ruby":
       return { language: "ruby", versionIndex: "3" };
-    case "haskell":
-      return { language: "haskell", versionIndex: "3" };   
     case "swift":
       return { language: "swift", versionIndex: "3" };   
     case "lua":
@@ -71,7 +69,7 @@ const compilerFunc = async (lang, code, input) => {
   } catch (e) {
     response = e;
     console.log(e);
-    return {data:{output:"404"}}
+    return {data:{output:"Error:404\nOops Something went wrong\n:-("}}
   }
 
   return response;
