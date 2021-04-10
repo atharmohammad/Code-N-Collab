@@ -20,7 +20,7 @@ const Io = (props) => {
   const classes = useStyles();
 
   const changeHandler = (event) => {
-    props.setInput(event.target.value);
+    props.setInput(event.currentTarget.textContent);
     // console.log(event.target.value)
   };
 
@@ -32,71 +32,51 @@ const Io = (props) => {
         lg={6}
         style={{
           backgroundColor: "#272822",
-          height: "15vh",
+          height: "27vh",
           zIndex: "100",
           border: "2px solid #fff",
           borderRadius: "5px",
         }}
       >
-        <textarea
-          placeholder="Input"
-          onChange={changeHandler}
-          rows="3"
-          cols="56"
+        <div
+          onInput={changeHandler}
+          contentEditable="true"
           style={{
-            border: "none",
-            resize: "none",
-            overflowY: "scroll",
-            fontSize: "15px",
-            padding: "1vh",
-            backgroundColor: "#272822",
-            color: "#fff",
-          }}
-        />
-      </Grid>
-      <Grid
-        style={{
-          height: "5vh",
-          width: "5vh",
-          borderRadius: "50%",
-          backgroundColor: "#495969",
-          zIndex: "200",
-          transform: "translateY(-25px)",
-          cursor: "pointer",
-        }}
-        className={styles.bounce}
-      >
-        <Grid style={{ alignItem: "center" }}>
-          <Grid className={styles.left}></Grid>
-          <Grid className={styles.right}></Grid>
-        </Grid>
-      </Grid>
-      <Grid
-        lg={6}
-        style={{
-          backgroundColor: "#272822",
-          height: "15vh",
-          zIndex: "200",
-          border: "2px solid #fff",
-          borderRadius: "5px",
-        }}
-      >
-        <textarea
-          disabled
-          value={props.output}
-          placeholder="Output"
-          rows="4"
-          cols="56"
-          style={{
-            border: "none",
-            resize: "none",
-            overflowY: "scroll",
-            fontSize: "15px",
+            width: "auto",
+            height: "192px",
+            overflowY: "auto",
+            fontSize: "17px",
             paddingLeft: "1vh",
             backgroundColor: "#272822",
             color: "#fff",
           }}
         />
+      </Grid>
+
+      <Grid
+        lg={6}
+        style={{
+          backgroundColor: "#272822",
+          height: "27vh",
+          zIndex: "200",
+          border: "2px solid #fff",
+          borderRadius: "5px",
+        }}
+      >
+        <div
+          onInput={changeHandler}
+          style={{
+            width: "auto",
+            height: "192px",
+            overflowY: "auto",
+            fontSize: "17px",
+            paddingLeft: "1vh",
+            backgroundColor: "#272822",
+            color: "#fff",
+          }}
+        >
+          <pre>{props.output}</pre>
+        </div>
       </Grid>
     </Grid>
   );

@@ -27,11 +27,26 @@ const LanguagePicker = (props) => {
 
   return (
     <Grid style={{display:'flex',margin:'.8vh 0 0 40vh'}}>
-        <select className={classes.select} onChange={handleChange} value={props.language}>
+        <select className={classes.select} onChange={handleChange} value={props.language}>          
             <option value='cpp' selected>C/C++(14)</option>
+            <option value='csharp'>C#</option>
+            <option value='go'>Go</option>
             <option value='java'>Java</option>
-            <option value='python'>Python3</option>
             <option value='kotlin'>Kotlin</option>
+            <option value='lua'>Lua</option>
+            <option value='nodejs'>NodeJs</option>
+            <option value='pascal'>Pascal</option>
+            <option value='perl'>Perl</option>
+            <option value='php'>Php</option>
+            <option value='python'>Python3</option>
+            <option value='r'>R</option>
+            <option value='ruby'>Ruby</option>
+            <option value='rust'>Rust</option>
+            <option value='scala'>Scala</option>
+            <option value='shell'>Shell</option>
+            <option value='sql'>SQL</option>
+            <option value='swift'>Swift</option>
+            <option value=''>Text</option>
         </select>
     </Grid>
   );

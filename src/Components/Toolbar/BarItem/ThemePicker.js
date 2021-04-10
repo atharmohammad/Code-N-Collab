@@ -33,10 +33,11 @@ const ThemePicker = (props) => {
         value={props.theme}
       >
         <option value="light">light</option>
-        <option value="dark" selected>
-          vs-dark
-        </option>
-        <option value="hc-black">hc-black</option>
+        <option value="vs-dark" selected>vs-dark</option>
+        <option value="blackBoard">blackBoard</option>
+        <option value="cobalt">cobalt</option>
+        <option value="merbivore">merbivore</option>
+        <option value="github">github</option>
       </select>
     </Grid>
   );

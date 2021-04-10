@@ -8,6 +8,8 @@ const initialState = {
   fontSize: 20,
   input: "",
   output: "",
+  output_success:false,
+  output_error:false
 };
 
 const reducer = (state = initialState, action) => {
@@ -39,6 +41,12 @@ const reducer = (state = initialState, action) => {
 
     case TYPE.SET_OUTPUT:
       return { ...state, output: action.value };
+
+    case TYPE.NOTIFY_OUTPUT_SUCCESS:
+      return { ...state, output_success: (state.output_success ? false : true) };
+
+      case TYPE.NOTIFY_OUTPUT_ERROR:
+        return { ...state, output_error: (state.output_error ? false : true) };
 
     default:return state
   }
