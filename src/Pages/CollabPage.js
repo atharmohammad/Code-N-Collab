@@ -22,7 +22,6 @@ import {
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
-import classes from './CollabPage.module.css'
 import 'react-reflex/styles.css';
 
 import * as TYPES from '../store/Action/action'
