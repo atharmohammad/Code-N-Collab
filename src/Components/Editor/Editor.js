@@ -6,7 +6,7 @@ import { Convergence } from "@convergence/convergence";
 import "@convergencelabs/monaco-collab-ext/css/monaco-collab-ext.min.css";
 import { Grid } from "@material-ui/core";
 
-import { CONVERGENCE_URL } from "./config";
+import { CodeEditorConfig } from "./config";
 import {compilerFunc} from "../Functions/index";
 import MonacoConvergenceAdapter from "./EditorAdaptor";
 import Modal from "../Modal/Modal";
@@ -71,7 +71,7 @@ const MonacoEditor = (props) => {
     const credentials = { username: "testuser", password: "changeme" };
     try {
       const domain = await Convergence.connectAnonymously(
-        CONVERGENCE_URL,
+        CodeEditorConfig.CONVERGENCE_URL,
         props.credentials.userName
       );
       const modelService = domain.models();
