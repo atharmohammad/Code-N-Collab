@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     try{
       props.leaveRoom();
       history.push('/home')
+      window.location.reload()
     }catch(err){
       console.log(err);
     }
