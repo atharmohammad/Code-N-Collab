@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   const leaveRoomHandler = ()=>{
     try{
       props.leaveRoom();
-      history.push('/home')
+      history.push('/rooms')
       window.location.reload()
     }catch(err){
       console.log(err);
