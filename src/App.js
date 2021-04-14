@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import Rooms from "./Components/Rooms";
+import Rooms from "./Components/Rooms/Rooms";
 import Navbar from "./Components/Navbar";
 import CollabPage from "./Pages/CollabPage";
 import Toolbar from "./Components/Toolbar/Toolbar";

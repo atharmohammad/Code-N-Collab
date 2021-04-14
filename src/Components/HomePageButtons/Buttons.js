@@ -1,4 +1,5 @@
 import {Box} from '@material-ui/core'
+import classes from './Buttons.module.css'
 
 export default function Button(props){
   return(
@@ -14,8 +15,9 @@ export default function Button(props){
     cursor:'pointer',
     borderStyle:'double',
     borderWidth:'10px',
-    fontFamily: ["edgwick Ave Display", "cursive"].join()
+    fontFamily: ["edgwick Ave Display", "cursive"].join(),
   }}
+    className={classes.scale}
     onClick={props.clicked}>
       {props.name}
     </Box>

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import HomePageImg from '../Assets/images/HomePageImg.png'
 import {useHistory} from 'react-router-dom'
 import classes from '../Assets/css/style.module.css'
-import Button from '../Components/Buttons'
+import Button from '../Components/HomePageButtons/Buttons'
 import {
   Grid,
   makeStyles,

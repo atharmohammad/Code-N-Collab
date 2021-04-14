@@ -23,10 +23,10 @@
 
 @keyframes animStar {
     from {
-        transform: translateY(-1400px);
+        transform: translateY(-1300px);
     }
 
     to {
-        transform: translateY(-0px);
+        transform: translateY(-200px);
     }
 }
