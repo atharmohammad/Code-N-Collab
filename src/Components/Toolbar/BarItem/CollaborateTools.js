@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   }
 
   return (
-    <Grid style={{display:'flex',margin:'0.2vh 0 0 25vh'}}>
+    <Grid style={{display:'flex',margin:'2vh 0 0 20vh'}}>
 
       <Typography component='div' variant='body1' style={{fontSize:'15px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',minHeight:'2vh',padding:'.6vh',color:'#fff'}} className={classes.button}>
           {props.userName}
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
          {props.roomName}
      </Typography>
 
-    <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',color:'white',height:'3.5vh',borderRadius:'5px',backgroundColor:'#872e2e',margin:'.4vh 0 1vh 5vh'}} onClick={leaveRoomHandler}>
+    <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',color:'white',height:'3.5vh',width:'10vh',borderRadius:'5px',backgroundColor:'#872e2e',margin:'.4vh 0 1vh 5vh'}} onClick={leaveRoomHandler}>
     <Typography component='div' variant='body1' style={{fontSize:'10px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',padding:'1vh'}} className={classes.button}>
         Leave Room
     </Typography>

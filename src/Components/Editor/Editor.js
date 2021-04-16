@@ -16,7 +16,8 @@ import blackBoardJSON from "./manaco-Themes/blackBoard";
 import cobaltJSON from "./manaco-Themes/cobalt";
 import merbivoreJSON from "./manaco-Themes/merbivore";
 import githubJSON from "./manaco-Themes/github";
-
+import useSound from 'use-sound';
+import roundStart from '../../Assets/sound-effects/RoundStart.mp3'
 
 import { v4 as uuidV4 } from 'uuid';
 import socketIOClient from "socket.io-client";
@@ -36,6 +37,7 @@ const MonacoEditor = (props) => {
   const [code, setCode] = useState("");
   const [service,setService] = useState(null);
   const [codeValue,setCodeValue] = useState("");
+  const [play] = useSound(roundStart);
 
   const handleEditorWillMount = (monaco) => {
     // here is the monaco instance
@@ -78,7 +80,7 @@ const MonacoEditor = (props) => {
   useEffect(async () => {
     const socket = socketIOClient(ENDPOINT);
     socket.emit("join",{room:props.credentials.roomName,user:uuidV4()});
-
+    
     socket.on('initialCode',data=>{
       console.log(data)
       setCodeValue(data)

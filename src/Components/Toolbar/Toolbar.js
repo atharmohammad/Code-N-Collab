@@ -4,8 +4,8 @@ import ThemePicker from './BarItem/ThemePicker'
 import CollaborateTools from './BarItem/CollaborateTools'
 import Compile from './BarItem/Compile'
 import FontSize from './BarItem/FontSize'
-
-
+import RoomTitle from '../../Assets/images/roomTitle.png'
+import Link from '../Link/Link'
 import {
   Typography,
   CssBaseline,
@@ -28,14 +28,23 @@ export default function Toolbar(props) {
   const classes = useStyles();
 
   return (
-        <Grid style={{backgroundColor:'#1f273d',height:'6vh',display:'flex',width:'100%',paddingTop:'.5vh'}}>
-          <Grid style={{display:'flex'}}>
-          <LanguagePicker/>
-          <ThemePicker/>
-          <FontSize/>
+        <Grid container direction='row' style={{backgroundColor:'#1f273d',height:'15vh',}}>
+          <Grid style={{height:'15vh',margin:'4vh 0 0 2.5vh'}}>
+            <img src={RoomTitle} alt='code-n-collab'/>
           </Grid>
-          <Compile/>
-          <CollaborateTools/>
+          <Grid container direction='column' justify="center"
+          alignItems="center" style={{width:'50%'}}>
+            <Link/>
+            <Grid direction='row' style={{display:'flex',width:'100%',paddingTop:'.5vh'}}>
+              <Grid style={{display:'flex'}}>
+                <LanguagePicker/>
+                <ThemePicker/>
+                <FontSize/>
+              </Grid>
+              <Compile/>
+              <CollaborateTools/>
+            </Grid>
+          </Grid>
         </Grid>
   );
 }

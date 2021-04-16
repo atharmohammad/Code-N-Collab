@@ -23,6 +23,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "socket.io-client": "^4.0.1",
+    "use-sound": "^2.0.1",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.1"
   },
