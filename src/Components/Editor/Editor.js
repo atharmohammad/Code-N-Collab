@@ -1,14 +1,15 @@
 import React, { useEffect, useContext, useRef, useState } from "react";
 import { connect } from "react-redux";
-import axios from 'axios';
+import { v4 as uuidV4 } from "uuid";
+import socketIOClient from "socket.io-client";
+import { useLocation } from "react-router-dom"
 
 import Editor from "@monaco-editor/react";
 import { Convergence } from "@convergence/convergence";
 import "@convergencelabs/monaco-collab-ext/css/monaco-collab-ext.min.css";
-import { Grid } from "@material-ui/core";
 
 import { CodeEditorConfig } from "./config";
-import {compilerFunc} from "../Functions/index";
+import { compilerFunc } from "../Functions/index";
 import MonacoConvergenceAdapter from "./EditorAdaptor";
 import Modal from "../Modal/Modal";
 
@@ -16,11 +17,9 @@ import blackBoardJSON from "./manaco-Themes/blackBoard";
 import cobaltJSON from "./manaco-Themes/cobalt";
 import merbivoreJSON from "./manaco-Themes/merbivore";
 import githubJSON from "./manaco-Themes/github";
-import useSound from 'use-sound';
-import roundStart from '../../Assets/sound-effects/RoundStart.mp3'
+import useSound from "use-sound";
+import roundStart from "../../Assets/sound-effects/RoundStart.mp3";
 
-import { v4 as uuidV4 } from 'uuid';
-import socketIOClient from "socket.io-client";
 
 import {
   SET_LOADING,
@@ -28,17 +27,20 @@ import {
   SET_OUTPUT,
   SET_COMPILE_OFF,
   NOTIFY_OUTPUT_SUCCESS,
-  NOTIFY_OUTPUT_ERROR
+  NOTIFY_OUTPUT_ERROR,
 } from "../../store/Action/action";
 
 const ENDPOINT = "http://127.0.0.1:8080";
+
+
 const MonacoEditor = (props) => {
   const MonacoEditorRef = useRef();
   const [code, setCode] = useState("");
-  const [service,setService] = useState(null);
-  const [codeValue,setCodeValue] = useState("");
+  const [service, setService] = useState(null);
+  const [codeValue, setCodeValue] = useState("");
   const [play] = useSound(roundStart);
-
+  const location = useLocation();
+  
   const handleEditorWillMount = (monaco) => {
     // here is the monaco instance
     // do something before editor is mounted
@@ -51,7 +53,8 @@ const MonacoEditor = (props) => {
   const handleEditorDidMount = (editor) => {
     MonacoEditorRef.current = editor;
   };
-
+  
+  //compiling the code
   useEffect(async () => {
     if (props.tools.nowCompile === true && props.tools.isLoading === false) {
       props.setOutPut("");
@@ -65,27 +68,31 @@ const MonacoEditor = (props) => {
       props.resetCompile();
 
       try {
-        // throw new Error();
         props.setOutPut(response.data.output);
-        props.notify_output_on()
-        console.log(response.data.output);
+        props.notify_output_on();
       } catch (e) {
         props.setOutPut("Oops something went wrong");
-        props.notify_output_error_on()
+        props.notify_output_error_on();
       }
       props.resetLoading();
     }
   }, [props.tools.nowCompile]);
 
+  //socket and convergence
   useEffect(async () => {
-    const socket = socketIOClient(ENDPOINT);
-    socket.emit("join",{room:props.credentials.roomName,user:uuidV4()});
-    
-    socket.on('initialCode',data=>{
-      console.log(data)
-      setCodeValue(data)
-    })
+    //get query string
+    const currentPath = location.pathname;
+    const searchParams = new URLSearchParams(location.search);
 
+    const socket = socketIOClient(ENDPOINT);
+    
+    socket.emit("join", { room: searchParams.get('room'), user:searchParams.get('name') });
+
+    socket.on("initialCode", (data) => {
+      console.log(data);
+      setCodeValue(data);
+    });
+   
     const credentials = { username: "testuser", password: "changeme" };
     let modelService;
     try {
@@ -102,9 +109,6 @@ const MonacoEditor = (props) => {
         data: { text: code },
       });
 
-
-      // setService(modelService);
-
       const adapter = new MonacoConvergenceAdapter(
         MonacoEditorRef.current,
         model.elementAt("text")
@@ -114,10 +118,9 @@ const MonacoEditor = (props) => {
       console.error("Could not open model ", error);
     }
 
-    return function cleanup(){
+    return function cleanup() {
       console.log("Removed :(");
-    }
-
+    };
   }, []);
 
   return (
@@ -153,8 +156,8 @@ const mapDispatchToProps = (dispatch) => {
     setLoading: () => dispatch({ type: SET_LOADING }),
     resetLoading: () => dispatch({ type: RESET_LOADING }),
     resetCompile: () => dispatch({ type: SET_COMPILE_OFF }),
-    notify_output_on:()=>dispatch({type:NOTIFY_OUTPUT_SUCCESS}),
-    notify_output_error_on:()=>dispatch({type:NOTIFY_OUTPUT_ERROR})
+    notify_output_on: () => dispatch({ type: NOTIFY_OUTPUT_SUCCESS }),
+    notify_output_error_on: () => dispatch({ type: NOTIFY_OUTPUT_ERROR }),
   };
 };
 
