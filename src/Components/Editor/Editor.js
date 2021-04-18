@@ -86,7 +86,7 @@ const MonacoEditor = (props) => {
 
     const socket = socketIOClient(ENDPOINT);
     
-    socket.emit("join", { room: searchParams.get('room'), user:searchParams.get('name') });
+    socket.emit("join", { room: searchParams.get('room'), username:searchParams.get('name') },()=>{});
 
     socket.on("initialCode", (data) => {
       console.log(data);
@@ -117,10 +117,10 @@ const MonacoEditor = (props) => {
     } catch (error) {
       console.error("Could not open model ", error);
     }
-
-    return function cleanup() {
-      console.log("Removed :(");
-    };
+    
+    //disconnect
+    return socket.disconnect();
+ 
   }, []);
 
   return (
