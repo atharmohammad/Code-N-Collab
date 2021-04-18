@@ -47,11 +47,11 @@ export default function App() {
       </Grid>
       <Box
         style={{
-          height: "4.5vh",
+          height: "3vh",
           backgroundColor: "#872e2e",
           color: "#fff",
           width: "8vh",
-          padding: "1vh",
+          padding: "1vh 1vh 1vh 2vh",
           borderRadius: "5px",
           margin: "1.5vh 0 0 9vh",
           cursor: "pointer",

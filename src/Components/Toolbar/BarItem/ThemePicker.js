@@ -26,7 +26,7 @@ const ThemePicker = (props) => {
   };
 
   return (
-    <Grid style={{ display: "flex", margin: ".8vh 0 0 4vh" }}>
+    <Grid style={{ display: "flex", margin: "2vh 0 0 4vh" }}>
       <select
         className={classes.select}
         onChange={handleChange}

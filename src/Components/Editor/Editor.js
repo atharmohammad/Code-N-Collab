@@ -1,12 +1,13 @@
 import React, { useEffect, useContext, useRef, useState } from "react";
 import { connect } from "react-redux";
+import axios from 'axios';
 
 import Editor from "@monaco-editor/react";
 import { Convergence } from "@convergence/convergence";
 import "@convergencelabs/monaco-collab-ext/css/monaco-collab-ext.min.css";
 import { Grid } from "@material-ui/core";
 
-import { CONVERGENCE_URL } from "./config";
+import { CodeEditorConfig } from "./config";
 import {compilerFunc} from "../Functions/index";
 import MonacoConvergenceAdapter from "./EditorAdaptor";
 import Modal from "../Modal/Modal";
@@ -15,6 +16,11 @@ import blackBoardJSON from "./manaco-Themes/blackBoard";
 import cobaltJSON from "./manaco-Themes/cobalt";
 import merbivoreJSON from "./manaco-Themes/merbivore";
 import githubJSON from "./manaco-Themes/github";
+import useSound from 'use-sound';
+import roundStart from '../../Assets/sound-effects/RoundStart.mp3'
+
+import { v4 as uuidV4 } from 'uuid';
+import socketIOClient from "socket.io-client";
 
 import {
   SET_LOADING,
@@ -25,9 +31,13 @@ import {
   NOTIFY_OUTPUT_ERROR
 } from "../../store/Action/action";
 
+const ENDPOINT = "http://127.0.0.1:8080";
 const MonacoEditor = (props) => {
   const MonacoEditorRef = useRef();
   const [code, setCode] = useState("");
+  const [service,setService] = useState(null);
+  const [codeValue,setCodeValue] = useState("");
+  const [play] = useSound(roundStart);
 
   const handleEditorWillMount = (monaco) => {
     // here is the monaco instance
@@ -68,13 +78,22 @@ const MonacoEditor = (props) => {
   }, [props.tools.nowCompile]);
 
   useEffect(async () => {
+    const socket = socketIOClient(ENDPOINT);
+    socket.emit("join",{room:props.credentials.roomName,user:uuidV4()});
+    
+    socket.on('initialCode',data=>{
+      console.log(data)
+      setCodeValue(data)
+    })
+
     const credentials = { username: "testuser", password: "changeme" };
+    let modelService;
     try {
       const domain = await Convergence.connectAnonymously(
-        CONVERGENCE_URL,
+        CodeEditorConfig.CONVERGENCE_URL,
         props.credentials.userName
       );
-      const modelService = domain.models();
+      modelService = domain.models();
 
       const model = await modelService.openAutoCreate({
         collection: "Code-n-Collab`",
@@ -82,6 +101,9 @@ const MonacoEditor = (props) => {
         ephemeral: false,
         data: { text: code },
       });
+
+
+      // setService(modelService);
 
       const adapter = new MonacoConvergenceAdapter(
         MonacoEditorRef.current,
@@ -91,6 +113,11 @@ const MonacoEditor = (props) => {
     } catch (error) {
       console.error("Could not open model ", error);
     }
+
+    return function cleanup(){
+      console.log("Removed :(");
+    }
+
   }, []);
 
   return (
@@ -100,7 +127,7 @@ const MonacoEditor = (props) => {
         beforeMount={handleEditorWillMount}
         onMount={(editor) => handleEditorDidMount(editor)}
         theme={props.tools.theme}
-        defaultValue=""
+        value={codeValue}
         language={props.tools.language}
         onChange={(value) => setCode(value || "")}
         options={{

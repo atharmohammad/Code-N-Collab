@@ -21,7 +21,7 @@ import {
 
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-
+import Toolbar from '../Components/Toolbar/Toolbar'
 import 'react-reflex/styles.css';
 
 import * as TYPES from '../store/Action/action'
@@ -35,6 +35,8 @@ class CollabPage
 
   render() {
     return (
+      <>
+      <Toolbar />
       <div style={{height:'85vh'}}>
 
         <ReflexContainer orientation="vertical">
@@ -90,6 +92,7 @@ class CollabPage
            <Alert onClose={this.props.notify_output_error} severity="error">Something Went Wrong!</Alert>
           </Snackbar>
       </div>
+    </>
     )
   }
 }

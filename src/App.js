@@ -1,38 +1,28 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import Home from "./Components/Home";
+import Rooms from "./Components/Rooms/Rooms";
 import Navbar from "./Components/Navbar";
 import CollabPage from "./Pages/CollabPage";
 import Toolbar from "./Components/Toolbar/Toolbar";
-import Test from "./Pages/Test.js";
+import GetStarted from "./Pages/GetStarted";
+import HomePage from "./Pages/HomePage";
+
 import { connect } from "react-redux";
 import "./App.css";
 
 function App(props) {
-  let routes = (
-    <>
-      <Navbar />
-      <Switch>
-        <Route path="/home" exact component={Home} />
-        <Redirect to="/home" />
-      </Switch>
-    </>
-  );
-
-  if (props.room) {
-    //Put false if you want to access Home page else true if you want to acces other routes
-    routes = (
+    let routes = (
       <>
-        <Navbar />
-        <Toolbar />
+
         <Switch>
+          <Route path='/' exact component={GetStarted} />
+          <Route path="/homepage" exact component={HomePage} />
+          <Route path="/rooms" exact component={Rooms} />
           <Route path="/collaborate" exact component={CollabPage} />
-          <Route path="/test" exact component={Test} />
-          <Redirect to="/collaborate" />
+          <Redirect to="/homepage" />
         </Switch>
       </>
-    );
-  }
+    )
 
   return <BrowserRouter>{routes}</BrowserRouter>;
 }

@@ -1,0 +1,16 @@
+.input{
+  width: 40vh;
+  height: 5vh;
+  overflow-y:auto;
+  font-size: 20px;
+  padding: 1vh 0 0 1vh;
+  background: transparent;
+  color: #fff;
+  border:5px double #fff;
+  border-radius: 10px;
+  margin-top: 2vh
+}
+
+.input:focus {
+    outline:none!important
+}
