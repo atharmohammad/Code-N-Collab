@@ -1,8 +1,7 @@
 import React, { useEffect, useContext, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { v4 as uuidV4 } from "uuid";
-import socketIOClient from "socket.io-client";
-import { useLocation, useHistory } from "react-router-dom";
+import { SocketContext } from "../../context/socket";
 
 import Editor from "@monaco-editor/react";
 import { Convergence } from "@convergence/convergence";
@@ -29,11 +28,11 @@ import {
   NOTIFY_OUTPUT_SUCCESS,
   NOTIFY_OUTPUT_ERROR,
   SET_SOME_ONE_SEND_IO,
+  RESET_SOME_ONE_SEND_IO,
 } from "../../store/Action/action";
 
-const ENDPOINT = "http://127.0.0.1:8080";
-
 const MonacoEditor = (props) => {
+  const socket = useContext(SocketContext);
   const MonacoEditorRef = useRef();
   const inputRef = useRef();
   const outputRef = useRef();
@@ -41,10 +40,7 @@ const MonacoEditor = (props) => {
   const [service, setService] = useState(null);
   const [codeValue, setCodeValue] = useState("");
   const [play] = useSound(roundStart);
-  const location = useLocation();
-  const history = useHistory();
-  let socket;
-  
+
   const handleEditorWillMount = (monaco) => {
     // here is the monaco instance
     // do something before editor is mounted
@@ -79,58 +75,40 @@ const MonacoEditor = (props) => {
         props.notify_output_error_on();
       }
       props.resetLoading();
+      props.resetReceivedIO();
     }
   }, [props.tools.nowCompile]);
-  
+
   //socket and convergence
   useEffect(async () => {
-    //get query string
-    const currentPath = location.pathname;
-    const searchParams = new URLSearchParams(location.search);
-
-   socket = socketIOClient(ENDPOINT);
-
-    socket.emit(
-      "join",
-      { room: searchParams.get("room"), username: searchParams.get("name") },
-      ({ error, user }) => {
-        if (error) {
-          console.log("username is already taken");
-          return history.push("/home?" + searchParams.get("room"));
-        }
-
-        console.log("joined");
-      }
-    );
-    
     socket.on("initialCode", (data) => {
       console.log(data);
       setCodeValue(data);
     });
 
     socket.on("initialIO", ({ inputText, outputText }) => {
-      console.log("initialIO",inputText, outputText);
+      console.log("initialIO", inputText, outputText);
       props.setInput(inputText);
       props.setOutput(outputText);
       props.recievedIO();
     });
-    
+
     socket.on("sendInitialIO", ({ id }) => {
-      console.log('asking for intialIO');
-     
+      console.log("asking for intialIO");
+
       const creator = () => {
-        const inputText = inputRef.current.value
-        const outputText = outputRef.current.value
-        
+        const inputText = inputRef.current.value;
+        const outputText = outputRef.current.value;
+
         const data = {
           id,
           inputText,
           outputText,
-        }
+        };
         console.log(inputRef.current.value);
-        console.log(outputRef.current.value); 
-        socket.emit('takeInitialIO',data);
-      }
+        console.log(outputRef.current.value);
+        socket.emit("takeInitialIO", data);
+      };
       creator();
     });
 
@@ -159,19 +137,19 @@ const MonacoEditor = (props) => {
       console.error("Could not open model ", error);
     }
   }, []);
-  
-   
-  useEffect(()=>{
-    return ()=>{
-      console.log("back button");
-      socket.disconnect()
-    }
-  },[])
-  
+
+  useEffect(() => {
+    if (props.tools.someOneSendIO === false)
+      socket.emit("changeIO", {
+        inputText: props.tools.input,
+        outputText: props.tools.output,
+      });
+  }, [props.tools.input, props.tools.output, props.tools.someOneSendIO]);
+
   return (
     <>
-     <textarea hidden ref={inputRef} value={props.tools.input}/>
-     <textarea hidden ref={outputRef} value={props.tools.output}/> 
+      <textarea hidden ref={inputRef} value={props.tools.input} />
+      <textarea hidden ref={outputRef} value={props.tools.output} />
       <Editor
         ref={MonacoEditorRef}
         beforeMount={handleEditorWillMount}
@@ -204,7 +182,8 @@ const mapDispatchToProps = (dispatch) => {
     setLoading: () => dispatch({ type: SET_LOADING }),
     resetLoading: () => dispatch({ type: RESET_LOADING }),
     resetCompile: () => dispatch({ type: SET_COMPILE_OFF }),
-    recievedIO:() => dispatch({ type: SET_SOME_ONE_SEND_IO }),
+    resetReceivedIO: () => dispatch({ type: RESET_SOME_ONE_SEND_IO }),
+    recievedIO: () => dispatch({ type: SET_SOME_ONE_SEND_IO }),
     notify_output_on: () => dispatch({ type: NOTIFY_OUTPUT_SUCCESS }),
     notify_output_error_on: () => dispatch({ type: NOTIFY_OUTPUT_ERROR }),
   };
