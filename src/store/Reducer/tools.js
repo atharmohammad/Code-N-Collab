@@ -10,7 +10,7 @@ const initialState = {
   output: "",
   output_success:false,
   output_error:false,
-  someOneSendIO:false,
+  someOneSendIO:true,
 };
 
 const reducer = (state = initialState, action) => {
