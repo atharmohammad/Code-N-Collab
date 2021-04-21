@@ -6,7 +6,7 @@ import {
   InputLabel
 } from "@material-ui/core";
 
-import { useHistory,useLocation } from "react-router-dom";
+import { useHistory,useLocation} from "react-router-dom";
 import classes from '../../Assets/css/style.module.css'
 import styles from './RoomsInput.module.css'
 import useSound from 'use-sound';
@@ -16,20 +16,19 @@ import CreateRoom from '../../Assets/images/create_room.png'
 function Rooms(props) {
 
   const history = useHistory();
-  const location = useLocation();
   const [play] = useSound(roundStart);
   const [room, setRoom] = useState("");
   const [name, setName] = useState("");
-  
+  const location = useLocation();
+
   useEffect(()=>{
     const currentPath = location.pathname;
     const searchParams = new URLSearchParams(location.search);
     if(searchParams.has("room") && searchParams.get("room")){
       setRoom(searchParams.get("room"));
-    }  
-  
+    }
   },[location])
-  
+
   const changeHandler = (type, event) => {
     if (type == "room") setRoom(event.target.value);
     if (type == "name") setName(event.target.value);

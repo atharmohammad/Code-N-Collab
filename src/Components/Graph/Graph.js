@@ -3,14 +3,14 @@ import Graph from "react-graph-vis";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import { HIDE_GRAPH } from "../../store/Action/action";
-import { Grid, makeStyles, Button, InputLabel } from "@material-ui/core";
+import { Grid, makeStyles, Button, InputLabel,Box } from "@material-ui/core";
 
 const options = {
   layout: {
     hierarchical: false,
   },
   edges: {
-    color: "#000000",
+    color: "#fff",
   },
 };
 
@@ -34,7 +34,7 @@ const GraphVis = (props) => {
     }
 
     const nodes = [...new Set(text)].map((num, key) => {
-      return { id: parseInt(num), key: key, label: num, color: "#e09c41" };
+      return { id: parseInt(num), key: key, label: num, color: "yellow" };
     });
 
     const edges = [];
@@ -53,32 +53,44 @@ const GraphVis = (props) => {
   return (
     <Grid
     direction="column"
+    justify="center"
+    alignItems="center"
     style={{
       position: "fixed",
       zIndex: "400",
       backgroundColor: "black",
       height: "60vh",
-      width: "100vh",
-      //border: "1px solid #ccc",
+      width: "110vh",
       boxShadow: "1px 1px 1px black",
       background: "rgb(39, 41, 43,0.8)",
-      padding: "2vh",
-      left: "28%",
-      top: "20%",
-      //display: "flex",
-      //justifyContent: "center",
-      //boxSizing: "border-box",
+      padding: "1vh 2vh 2vh 10vh",
+      left: "23%",
+      top: "18%",
       transition: "all 0.3s ease-out",
+      borderRadius:'20px'
     }}
   >
-      <button onClick={props.onClickGraph}>X</button>
-      <Grid container direction="rows" style={{ border: "4px solid green" }}>
+      <Button onClick={props.onClickGraph} style={{
+        backgroundColor:'#872e2e',
+        color:'#fff',
+        width:'5vh',
+        height:'3vh',
+        fontSize:'10px'
+      }}>close</Button>
+
+      <Grid container direction="rows" style={{ border: "4px solid #fff",
+      width:'100vh'
+     }}>
         <Grid xs={3}>
           <textarea
             placeHolder="Graph Input..."
             rows={17}
             onChange={changeHandler}
-            style={{ width: "95%", resize: "none", fontSize: 20 }}
+            style={{ width: "100%",
+            height:'55.2vh',
+            resize: "none",
+            fontSize: 20 ,
+            }}
           ></textarea>
         </Grid>
         <Grid xs={9}>
@@ -87,10 +99,10 @@ const GraphVis = (props) => {
             options={options}
             key={graphKey}
             style={{
-              height: "55vh",
+              height: "56vh",
               width: "100%",
-              backgroundColor: "lightblue",
-              border: "green",
+              backgroundColor: "#34214a",
+              border: "#34214a",
             }}
           />
         </Grid>

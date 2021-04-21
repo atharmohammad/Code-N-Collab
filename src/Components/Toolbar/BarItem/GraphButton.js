@@ -5,22 +5,22 @@ import { SHOW_GRAPH } from "../../../store/Action/action";
 
 const GraphButton = (props) => {
   return (
-      <Button
+      <Box
         disabled={props.showGraph}
         onClick={() => props.onClickGraph()}
         style={{
-          height: "5vh",
+          height: "4.5vh",
           backgroundColor: "#872e2e",
           color: "#fff",
           width: "20vh",
           padding: "1.2vh 1vh 0 1.3vh",
           borderRadius: "5px",
-          margin: "0.5vh 0 0 20vh",
+          margin: "1vh 0 0 20vh",
           cursor: "pointer",
         }}
       >
         Graph
-      </Button>
+      </Box>
   );
 };
 

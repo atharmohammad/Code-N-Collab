@@ -38,11 +38,11 @@ const CollabPage = (props) => {
     //get query string
     const currentPath = location.pathname;
     const searchParams = new URLSearchParams(location.search);
-    
+
     if(!searchParams.get("name") || !searchParams.get("room")){
       return history.push("/rooms?" + (searchParams.has("room") ? "room=" + searchParams.get("room"):''))
     }
-    
+
     socket.emit(
       "join",
       { room: searchParams.get("room"), username: searchParams.get("name") },
@@ -89,7 +89,7 @@ const CollabPage = (props) => {
             <ReflexContainer>
               <ReflexElement
                 minSize="100"
-                maxSize="800"
+                maxSize="1500"
                 style={{ overflow: "hidden" }}
               >
                 <Editor />
