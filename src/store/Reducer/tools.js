@@ -11,6 +11,7 @@ const initialState = {
   output_success:false,
   output_error:false,
   someOneSendIO:true,
+  showGraph:false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -54,7 +55,14 @@ const reducer = (state = initialState, action) => {
     
     case TYPE.RESET_SOME_ONE_SEND_IO:
       return { ...state,someOneSendIO:false};
+    
+    case TYPE.SHOW_GRAPH:
+      return { ...state,showGraph:true};
+    
+    case TYPE.HIDE_GRAPH:
+      return { ...state,showGraph:false};
     default:return state
+
   }
 };
 

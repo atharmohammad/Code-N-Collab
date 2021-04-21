@@ -14,6 +14,9 @@ export const SET_COMPILE_OFF = "SET_COMPILE_OFF"
 export const CREATE_ROOM = "CREATE_ROOM"
 export const LEAVE_ROOM = "LEAVE_ROOM"
 
+export const SHOW_GRAPH = "SHOW_GRAPH"
+export const HIDE_GRAPH = "HIDE_GRAPH"
+
 export const NOTIFY_OUTPUT_SUCCESS = "NOTIFY_OUTPUT_SUCCESS";
 export const NOTIFY_OUTPUT_ERROR = "NOTIFY_OUTPUT_ERROR";
 

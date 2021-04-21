@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@material-ui/core";
+import { Box,Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import {SET_COMPILE_ON } from '../../../store/Action/action'
 
@@ -7,7 +7,7 @@ import { connectAdvanced } from "react-redux";
 
 const Compile = (props) => {
   return (
-    <Box
+    <Button
       disabled={props.isCompiling}
       onClick={props.onClickCompile}
       style={{
@@ -22,7 +22,7 @@ const Compile = (props) => {
       }}
     >
       Compile
-    </Box>
+    </Button>
   );
 };
 
