@@ -3,6 +3,7 @@ import LanguagePicker from './BarItem/LanguagePicker'
 import ThemePicker from './BarItem/ThemePicker'
 import CollaborateTools from './BarItem/CollaborateTools'
 import Compile from './BarItem/Compile'
+import GraphButton from './BarItem/GraphButton'
 import FontSize from './BarItem/FontSize'
 import RoomTitle from '../../Assets/images/roomTitle.png'
 import Link from '../Link/Link'
@@ -42,6 +43,7 @@ export default function Toolbar(props) {
                 <FontSize/>
               </Grid>
               <Compile/>
+              <GraphButton/>
               <CollaborateTools/>
             </Grid>
           </Grid>

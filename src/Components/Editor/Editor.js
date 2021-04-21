@@ -11,6 +11,7 @@ import { CodeEditorConfig } from "./config";
 import { compilerFunc } from "../Functions/index";
 import MonacoConvergenceAdapter from "./EditorAdaptor";
 import Modal from "../Modal/Modal";
+import Graph from "../Graph/Graph";
 
 import blackBoardJSON from "./manaco-Themes/blackBoard";
 import cobaltJSON from "./manaco-Themes/cobalt";
@@ -165,6 +166,7 @@ const MonacoEditor = (props) => {
         }}
       />
       {props.tools.isLoading === true ? <Modal /> : null}
+      {props.tools.showGraph === true ? <Graph /> : null}
     </>
   );
 };
