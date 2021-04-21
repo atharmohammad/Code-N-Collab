@@ -3,7 +3,7 @@ import Graph from "react-graph-vis";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import { HIDE_GRAPH } from "../../store/Action/action";
-import { Grid, makeStyles, Button, InputLabel, Box } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 
 const options = {
   layout: {
