@@ -40,7 +40,7 @@ const CollabPage = (props) => {
     const searchParams = new URLSearchParams(location.search);
     
     if(!searchParams.get("name") || !searchParams.get("room")){
-      return history.push("/rooms")
+      return history.push("/rooms?" + (searchParams.has("room") ? "room=" + searchParams.get("room"):''))
     }
     
     socket.emit(

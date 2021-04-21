@@ -24,8 +24,7 @@ function Rooms(props) {
   useEffect(()=>{
     const currentPath = location.pathname;
     const searchParams = new URLSearchParams(location.search);
-    
-    if(searchParams.has("room") && !searchParams.get("room")){
+    if(searchParams.has("room") && searchParams.get("room")){
       setRoom(searchParams.get("room"));
     }  
   
