@@ -1,24 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   makeStyles,
   Button,
   InputLabel
 } from "@material-ui/core";
-import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
-import * as TYPE from "../../store/Action/action";
+
+import { useHistory,useLocation } from "react-router-dom";
 import classes from '../../Assets/css/style.module.css'
 import styles from './RoomsInput.module.css'
 import useSound from 'use-sound';
 import roundStart from '../../Assets/sound-effects/RoundStart.mp3'
 import CreateRoom from '../../Assets/images/create_room.png'
+
 function Rooms(props) {
+
   const history = useHistory();
+  const location = useLocation();
   const [play] = useSound(roundStart);
   const [room, setRoom] = useState("");
   const [name, setName] = useState("");
-
+  
+  useEffect(()=>{
+    const currentPath = location.pathname;
+    const searchParams = new URLSearchParams(location.search);
+    
+    if(searchParams.has("room") && !searchParams.get("room")){
+      setRoom(searchParams.get("room"));
+    }  
+  
+  },[location])
+  
   const changeHandler = (type, event) => {
     if (type == "room") setRoom(event.target.value);
     if (type == "name") setName(event.target.value);
@@ -26,7 +38,6 @@ function Rooms(props) {
 
   const createRoomHandler = async (e) => {
     try {
-      await props.createRoom(room,name);
       play();
       history.push("/collaborate?room=" + room + "&name=" + name);
     } catch (err) {
@@ -89,6 +100,7 @@ function Rooms(props) {
             Room
           </InputLabel>
           <input
+            value = {room}
             onChange={(event) =>changeHandler('room',event)}
             className={styles.input}
           />
@@ -130,11 +142,4 @@ function Rooms(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createRoom: (roomName, userName) =>
-      dispatch({ type: TYPE.CREATE_ROOM, data: { roomName, userName } }),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(Rooms);
+export default Rooms;

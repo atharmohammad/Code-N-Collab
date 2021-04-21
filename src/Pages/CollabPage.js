@@ -38,14 +38,18 @@ const CollabPage = (props) => {
     //get query string
     const currentPath = location.pathname;
     const searchParams = new URLSearchParams(location.search);
-
+    
+    if(!searchParams.get("name") || !searchParams.get("room")){
+      return history.push("/rooms")
+    }
+    
     socket.emit(
       "join",
       { room: searchParams.get("room"), username: searchParams.get("name") },
       ({ error, user }) => {
         if (error) {
           console.log("username is already taken");
-          return history.push("/home?" + searchParams.get("room"));
+          return history.push("/rooms?" + (searchParams.has("room") ? "room=" + searchParams.get("room"):'') );
         }
 
         console.log("joined");

@@ -14,7 +14,7 @@ import {
 
 function HomePage(){
   const history = useHistory();
-
+  
   const roomHandler = ()=>{
     history.push('/rooms')
   }
