@@ -5,25 +5,31 @@ import { connect } from "react-redux";
 import { HIDE_GRAPH } from "../../store/Action/action";
 import { Grid, Button } from "@material-ui/core";
 
-const options = {
-  layout: {
-    hierarchical: false,
-  },
-  edges: {
-    color: "#fff",
-  },
-};
+;
 
 const GraphVis = (props) => {
   const [inputText, setInputText] = useState("");
   const [graphKey, setGraphKey] = useState(uuidv4());
-
+  const [directed,setDirected] = useState(false)
   const [graph, setGraph] = useState({ nodes: [], edges: [] });
+  
+  const options = {
+    layout: {
+      hierarchical: false,
+    },
+    edges: {
+      color: "#fff",
+      arrows: {
+        to:{enabled: directed},
+      }
+    } 
+  }
 
   const changeHandler = async (e) => {
     setInputText(e.target.value);
-  };
+  }; 
 
+  
   useEffect(() => {
     setGraphKey(uuidv4());
     let text = inputText.replace(/\D/g, " ").split(" ");
@@ -54,7 +60,12 @@ const GraphVis = (props) => {
       edges,
     });
   }, [inputText]);
+  
+  useEffect(()=>{
+    setGraphKey(uuidv4());
 
+  },[directed])
+  
   return (
     <Grid
       direction="column"
@@ -87,6 +98,39 @@ const GraphVis = (props) => {
       >
         close
       </Button>
+      
+      <Button
+        onClick={()=>setDirected(false)}
+        disabled={!directed}
+        style={{
+          borderRight:'5px solid rgb(37 39 40)',
+          backgroundColor: "green",
+          color: "#fff",
+          width: "12vh",
+          height: "3vh",
+          left:"50vh",
+          fontSize: "10px",
+        }}
+      >
+        Undirected
+      </Button> 
+
+      
+      <Button
+        onClick={()=>setDirected(true)}
+        disabled={directed}
+        style={{
+          borderLeft:'5px solid rgb(37 39 40)',
+          backgroundColor: "green",
+          color: "#fff",
+          width: "12vh",
+          height: "3vh",
+          left:"50vh",
+          fontSize: "10px",
+        }}
+      >
+        Directed
+      </Button>  
 
       <Grid
         container
@@ -111,6 +155,7 @@ const GraphVis = (props) => {
             graph={graph}
             options={options}
             key={graphKey}
+            
             style={{
               height: "56vh",
               width: "100%",
