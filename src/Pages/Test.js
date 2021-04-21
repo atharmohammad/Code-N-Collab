@@ -1,5 +1,6 @@
-export default function Test(){
-  return(
-    <div>This is test page</div>
-  )
+import Graph from '../Components/Graph/Graph'
+
+const Test = ()=>{
+  return <Graph/>
 }
+export default Graph

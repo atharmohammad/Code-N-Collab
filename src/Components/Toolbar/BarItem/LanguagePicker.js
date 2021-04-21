@@ -26,8 +26,8 @@ const LanguagePicker = (props) => {
   };
 
   return (
-    <Grid style={{display:'flex',margin:'.8vh 0 0 40vh'}}>
-        <select className={classes.select} onChange={handleChange} value={props.language}>          
+    <Grid style={{display:'flex',margin:'2vh 0 0 15vh',height:'5vh'}}>
+        <select className={classes.select} onChange={handleChange} value={props.language}>
             <option value='cpp' selected>C/C++(14)</option>
             <option value='csharp'>C#</option>
             <option value='go'>Go</option>

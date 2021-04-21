@@ -1,1 +1,0 @@
-export {languageMapper} from './languageMapper'

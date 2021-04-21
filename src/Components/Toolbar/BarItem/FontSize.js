@@ -27,7 +27,7 @@ const CustomizeFont = (props) => {
   };
 
   return (
-    <Grid style={{display:'flex',margin:'.8vh 0 0 5vh'}}>
+    <Grid style={{display:'flex',margin:'2vh 0 0 5vh'}}>
         <select className={classes.select} onChange={handleChange} value={props.font}>
             <option value={20} selected>small</option>
             <option value={25}>Medium</option>
