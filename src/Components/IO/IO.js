@@ -1,29 +1,18 @@
 import React, { useEffect, useRef } from "react";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { SET_INPUT, RESET_SOME_ONE_SEND_IO } from "../../store/Action/action";
 
 import { connect } from "react-redux";
-import styles from "./IO.module.css";
 
-import {
-  Typography,
-  CssBaseline,
-  Box,
-  Button,
-  makeStyles,
-  Grid,
-} from "@material-ui/core";
+import { makeStyles, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({}));
 
 const Io = (props) => {
-  const classes = useStyles();
   const contentEditableDivRef = useRef();
 
   const changeHandler = (event) => {
     props.setInput(event.currentTarget.innerText);
     props.recievedIO();
-    console.log("changeHandler");
   };
 
   useEffect(() => {

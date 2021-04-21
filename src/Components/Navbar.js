@@ -1,13 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {
-  AppBar,
-  Toolbar,
   Typography,
   CssBaseline,
   useScrollTrigger,
   Box,
-  Button,
   makeStyles,
   Grid,
 } from "@material-ui/core";
@@ -53,7 +49,7 @@ export default function ElevateAppBar(props) {
     history.push("/test");
   };
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <Grid
         style={{
@@ -145,6 +141,6 @@ export default function ElevateAppBar(props) {
           </Typography>
         </Box>
       </Grid>
-    </React.Fragment>
+    </>
   );
 }

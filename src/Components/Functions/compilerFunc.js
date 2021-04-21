@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios";
 
 const languageMapper = (lang_mode) => {
   switch (lang_mode) {
@@ -38,7 +38,6 @@ const languageMapper = (lang_mode) => {
       return { language: "r", versionIndex: "3" };
     case "nodejs":
       return { language: "nodejs", versionIndex: "3" };
-
   }
   console.log("Error laguage not defined");
   return {};
@@ -57,7 +56,6 @@ export const compilerFunc = async (lang, code, input) => {
     versionIndex,
   };
 
-  console.log('check this', sendData)
   let response = {};
   try {
     response = await axios({
@@ -65,11 +63,9 @@ export const compilerFunc = async (lang, code, input) => {
       url,
       data: sendData,
     });
-    console.log("sucessfull", response.data);
   } catch (e) {
     response = e;
-    console.log(e);
-    return {data:{output:"Error:404\nOops Something went wrong\n:-("}}
+    return { data: { output: "Error:404\nOops Something went wrong\n:-(" } };
   }
 
   return response;

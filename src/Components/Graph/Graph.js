@@ -3,7 +3,7 @@ import Graph from "react-graph-vis";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import { HIDE_GRAPH } from "../../store/Action/action";
-import { Grid, makeStyles, Button, InputLabel,Box } from "@material-ui/core";
+import { Grid, makeStyles, Button, InputLabel, Box } from "@material-ui/core";
 
 const options = {
   layout: {
@@ -18,7 +18,7 @@ const GraphVis = (props) => {
   const [inputText, setInputText] = useState("");
   const [graphKey, setGraphKey] = useState(uuidv4());
 
-  const [graph, setGraph] = useState({nodes:[],edges:[]});
+  const [graph, setGraph] = useState({ nodes: [], edges: [] });
 
   const changeHandler = async (e) => {
     setInputText(e.target.value);
@@ -28,19 +28,24 @@ const GraphVis = (props) => {
     setGraphKey(uuidv4());
     let text = inputText.replace(/\D/g, " ").split(" ");
 
-    const index = text.indexOf("");
-    if (index > -1) {
-      text.splice(index, 1);
+    const SanitizedText = [];
+    for (let i = 0; i < text.length; i++) {
+      if (text[i] != "") {
+        SanitizedText.push(text[i]);
+      }
     }
 
-    const nodes = [...new Set(text)].map((num, key) => {
+    const nodes = [...new Set(SanitizedText)].map((num, key) => {
       return { id: parseInt(num), key: key, label: num, color: "yellow" };
     });
 
     const edges = [];
-    for (let i = 0; i < text.length; i += 2) {
-      if (i + 1 < text.length) {
-        edges.push({ from: parseInt(text[i]), to: parseInt(text[i + 1]) });
+    for (let i = 0; i < SanitizedText.length; i += 2) {
+      if (i + 1 < SanitizedText.length) {
+        edges.push({
+          from: parseInt(SanitizedText[i]),
+          to: parseInt(SanitizedText[i + 1]),
+        });
       }
     }
 
@@ -52,44 +57,52 @@ const GraphVis = (props) => {
 
   return (
     <Grid
-    direction="column"
-    justify="center"
-    alignItems="center"
-    style={{
-      position: "fixed",
-      zIndex: "400",
-      backgroundColor: "black",
-      height: "60vh",
-      width: "110vh",
-      boxShadow: "1px 1px 1px black",
-      background: "rgb(39, 41, 43,0.8)",
-      padding: "1vh 2vh 2vh 10vh",
-      left: "23%",
-      top: "18%",
-      transition: "all 0.3s ease-out",
-      borderRadius:'20px'
-    }}
-  >
-      <Button onClick={props.onClickGraph} style={{
-        backgroundColor:'#872e2e',
-        color:'#fff',
-        width:'5vh',
-        height:'3vh',
-        fontSize:'10px'
-      }}>close</Button>
+      direction="column"
+      justify="center"
+      alignItems="center"
+      style={{
+        position: "fixed",
+        zIndex: "400",
+        backgroundColor: "black",
+        height: "60vh",
+        width: "110vh",
+        boxShadow: "1px 1px 1px black",
+        background: "rgb(39, 41, 43,0.8)",
+        padding: "1vh 2vh 2vh 10vh",
+        left: "23%",
+        top: "18%",
+        transition: "all 0.3s ease-out",
+        borderRadius: "20px",
+      }}
+    >
+      <Button
+        onClick={props.onClickGraph}
+        style={{
+          backgroundColor: "#872e2e",
+          color: "#fff",
+          width: "5vh",
+          height: "3vh",
+          fontSize: "10px",
+        }}
+      >
+        close
+      </Button>
 
-      <Grid container direction="rows" style={{ border: "4px solid #fff",
-      width:'100vh'
-     }}>
+      <Grid
+        container
+        direction="rows"
+        style={{ border: "4px solid #fff", width: "100vh" }}
+      >
         <Grid xs={3}>
           <textarea
             placeHolder="Graph Input..."
             rows={17}
             onChange={changeHandler}
-            style={{ width: "100%",
-            height:'55.2vh',
-            resize: "none",
-            fontSize: 20 ,
+            style={{
+              width: "100%",
+              height: "55vh",
+              resize: "none",
+              fontSize: 20,
             }}
           ></textarea>
         </Grid>
@@ -107,7 +120,7 @@ const GraphVis = (props) => {
           />
         </Grid>
       </Grid>
-      </Grid>
+    </Grid>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Typography, Box, Grid } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 
 const Chat = () => {
   return (
