@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@material-ui/core";
+import { Box,Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import {SET_COMPILE_ON } from '../../../store/Action/action'
 
@@ -11,10 +11,10 @@ const Compile = (props) => {
       disabled={props.isCompiling}
       onClick={props.onClickCompile}
       style={{
-        height: "5vh",
+        height: "4.5vh",
         backgroundColor: "#872e2e",
         color: "#fff",
-        width: "20vh",
+        width: "25vh",
         padding: "1.2vh 1vh 0 1.3vh",
         borderRadius: "5px",
         margin: "0.5vh 0 0 20vh",

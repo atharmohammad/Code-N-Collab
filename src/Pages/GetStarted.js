@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux'
 import Title from '../Assets/images/Title.png'
 import GetStartedImg from '../Assets/images/GetStarted.png'
 import {useHistory} from 'react-router-dom'
@@ -7,11 +6,7 @@ import classes from '../Assets/css/style.module.css'
 
 import {
   Grid,
-  makeStyles,
-  TextField,
-  Button,
-  Divider,
-  Typography,Box
+  Box
 } from "@material-ui/core";
 
 function GetStarted(){
@@ -48,16 +43,5 @@ function GetStarted(){
     )
 }
 
-const mapStateToProps = state=>{
-  return{
 
-  }
-}
-
-const mapDispatchToProps = dispatch=>{
-  return{
-
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(GetStarted)
+export default GetStarted

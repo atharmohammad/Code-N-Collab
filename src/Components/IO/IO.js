@@ -1,28 +1,25 @@
-import React from "react";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import { SET_INPUT } from "../../store/Action/action";
+import React, { useEffect, useRef } from "react";
+import { SET_INPUT, RESET_SOME_ONE_SEND_IO } from "../../store/Action/action";
 
 import { connect } from "react-redux";
-import styles from "./IO.module.css";
 
-import {
-  Typography,
-  CssBaseline,
-  Box,
-  Button,
-  makeStyles,
-  Grid,
-} from "@material-ui/core";
+import { makeStyles, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({}));
 
 const Io = (props) => {
-  const classes = useStyles();
+  const contentEditableDivRef = useRef();
 
   const changeHandler = (event) => {
-    props.setInput(event.currentTarget.textContent);
-    // console.log(event.target.value)
+    props.setInput(event.currentTarget.innerText);
+    props.recievedIO();
   };
+
+  useEffect(() => {
+    if (props.someOneSendIO === true) {
+      contentEditableDivRef.current.innerText = props.input;
+    }
+  }, [props.input, props.someOneSendIO]);
 
   return (
     <Grid
@@ -39,6 +36,7 @@ const Io = (props) => {
         }}
       >
         <div
+          ref={contentEditableDivRef}
           onInput={changeHandler}
           contentEditable="true"
           style={{
@@ -85,12 +83,15 @@ const Io = (props) => {
 const mapStateToProps = (state) => {
   return {
     output: state.tools.output,
+    input: state.tools.input,
+    someOneSendIO: state.tools.someOneSendIO,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setInput: (value) => dispatch({ type: SET_INPUT, value }),
+    recievedIO: () => dispatch({ type: RESET_SOME_ONE_SEND_IO }),
   };
 };
 

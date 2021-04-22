@@ -9,7 +9,9 @@ const initialState = {
   input: "",
   output: "",
   output_success:false,
-  output_error:false
+  output_error:false,
+  someOneSendIO:true,
+  showGraph:false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -45,10 +47,22 @@ const reducer = (state = initialState, action) => {
     case TYPE.NOTIFY_OUTPUT_SUCCESS:
       return { ...state, output_success: (state.output_success ? false : true) };
 
-      case TYPE.NOTIFY_OUTPUT_ERROR:
-        return { ...state, output_error: (state.output_error ? false : true) };
-
+    case TYPE.NOTIFY_OUTPUT_ERROR:
+      return { ...state, output_error: (state.output_error ? false : true) };
+    
+    case TYPE.SET_SOME_ONE_SEND_IO:
+      return { ...state,someOneSendIO:true};  
+    
+    case TYPE.RESET_SOME_ONE_SEND_IO:
+      return { ...state,someOneSendIO:false};
+    
+    case TYPE.SHOW_GRAPH:
+      return { ...state,showGraph:true};
+    
+    case TYPE.HIDE_GRAPH:
+      return { ...state,showGraph:false};
     default:return state
+
   }
 };
 

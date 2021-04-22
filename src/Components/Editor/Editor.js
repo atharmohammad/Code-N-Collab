@@ -1,43 +1,43 @@
 import React, { useEffect, useContext, useRef, useState } from "react";
 import { connect } from "react-redux";
-import axios from 'axios';
+import { useLocation } from "react-router-dom";
+import { SocketContext } from "../../context/socket";
 
 import Editor from "@monaco-editor/react";
 import { Convergence } from "@convergence/convergence";
 import "@convergencelabs/monaco-collab-ext/css/monaco-collab-ext.min.css";
-import { Grid } from "@material-ui/core";
 
 import { CodeEditorConfig } from "./config";
-import {compilerFunc} from "../Functions/index";
+import { compilerFunc } from "../Functions/compilerFunc";
 import MonacoConvergenceAdapter from "./EditorAdaptor";
 import Modal from "../Modal/Modal";
+import Graph from "../Graph/Graph";
 
 import blackBoardJSON from "./manaco-Themes/blackBoard";
 import cobaltJSON from "./manaco-Themes/cobalt";
 import merbivoreJSON from "./manaco-Themes/merbivore";
 import githubJSON from "./manaco-Themes/github";
-import useSound from 'use-sound';
-import roundStart from '../../Assets/sound-effects/RoundStart.mp3'
-
-import { v4 as uuidV4 } from 'uuid';
-import socketIOClient from "socket.io-client";
 
 import {
   SET_LOADING,
   RESET_LOADING,
   SET_OUTPUT,
+  SET_INPUT,
   SET_COMPILE_OFF,
   NOTIFY_OUTPUT_SUCCESS,
-  NOTIFY_OUTPUT_ERROR
+  NOTIFY_OUTPUT_ERROR,
+  SET_SOME_ONE_SEND_IO,
+  RESET_SOME_ONE_SEND_IO,
 } from "../../store/Action/action";
 
-const ENDPOINT = "http://127.0.0.1:8080";
 const MonacoEditor = (props) => {
+  const socket = useContext(SocketContext);
   const MonacoEditorRef = useRef();
+  const inputRef = useRef();
+  const outputRef = useRef();
   const [code, setCode] = useState("");
-  const [service,setService] = useState(null);
-  const [codeValue,setCodeValue] = useState("");
-  const [play] = useSound(roundStart);
+  const [codeValue, setCodeValue] = useState("");
+  const location = useLocation();
 
   const handleEditorWillMount = (monaco) => {
     // here is the monaco instance
@@ -52,9 +52,10 @@ const MonacoEditor = (props) => {
     MonacoEditorRef.current = editor;
   };
 
+  //compiling the code
   useEffect(async () => {
     if (props.tools.nowCompile === true && props.tools.isLoading === false) {
-      props.setOutPut("");
+      props.setOutput("");
       props.setLoading();
 
       let response = await compilerFunc(
@@ -65,33 +66,53 @@ const MonacoEditor = (props) => {
       props.resetCompile();
 
       try {
-        // throw new Error();
-        props.setOutPut(response.data.output);
-        props.notify_output_on()
-        console.log(response.data.output);
+        props.setOutput(response.data.output);
+        props.notify_output_on();
       } catch (e) {
         props.setOutPut("Oops something went wrong");
-        props.notify_output_error_on()
+        props.notify_output_error_on();
       }
       props.resetLoading();
+      props.resetReceivedIO();
     }
   }, [props.tools.nowCompile]);
 
+  //socket and convergence
   useEffect(async () => {
-    const socket = socketIOClient(ENDPOINT);
-    socket.emit("join",{room:props.credentials.roomName,user:uuidV4()});
-    
-    socket.on('initialCode',data=>{
-      console.log(data)
-      setCodeValue(data)
-    })
+    socket.on("initialCode", (data) => {
+      setCodeValue(data);
+    });
+
+    socket.on("initialIO", ({ inputText, outputText }) => {
+      props.setInput(inputText);
+      props.setOutput(outputText);
+      props.recievedIO();
+    });
+
+    socket.on("sendInitialIO", ({ id }) => {
+      const creator = () => {
+        const inputText = inputRef.current.value;
+        const outputText = outputRef.current.value;
+
+        const data = {
+          id,
+          inputText,
+          outputText,
+        };
+        socket.emit("takeInitialIO", data);
+      };
+      creator();
+    });
 
     const credentials = { username: "testuser", password: "changeme" };
     let modelService;
+    const currentPath = location.pathname;
+    const searchParams = new URLSearchParams(location.search);
+    
     try {
       const domain = await Convergence.connectAnonymously(
         CodeEditorConfig.CONVERGENCE_URL,
-        props.credentials.userName
+        searchParams.get("room").trim().toLowerCase()
       );
       modelService = domain.models();
 
@@ -102,9 +123,6 @@ const MonacoEditor = (props) => {
         data: { text: code },
       });
 
-
-      // setService(modelService);
-
       const adapter = new MonacoConvergenceAdapter(
         MonacoEditorRef.current,
         model.elementAt("text")
@@ -113,15 +131,20 @@ const MonacoEditor = (props) => {
     } catch (error) {
       console.error("Could not open model ", error);
     }
-
-    return function cleanup(){
-      console.log("Removed :(");
-    }
-
   }, []);
+
+  useEffect(() => {
+    if (props.tools.someOneSendIO === false)
+      socket.emit("changeIO", {
+        inputText: props.tools.input,
+        outputText: props.tools.output,
+      });
+  }, [props.tools.input, props.tools.output, props.tools.someOneSendIO]);
 
   return (
     <>
+      <textarea hidden ref={inputRef} value={props.tools.input} />
+      <textarea hidden ref={outputRef} value={props.tools.output} />
       <Editor
         ref={MonacoEditorRef}
         beforeMount={handleEditorWillMount}
@@ -137,6 +160,7 @@ const MonacoEditor = (props) => {
         }}
       />
       {props.tools.isLoading === true ? <Modal /> : null}
+      {props.tools.showGraph === true ? <Graph /> : null}
     </>
   );
 };
@@ -149,12 +173,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setOutPut: (value) => dispatch({ type: SET_OUTPUT, value }),
+    setOutput: (value) => dispatch({ type: SET_OUTPUT, value }),
+    setInput: (value) => dispatch({ type: SET_INPUT, value }),
     setLoading: () => dispatch({ type: SET_LOADING }),
     resetLoading: () => dispatch({ type: RESET_LOADING }),
     resetCompile: () => dispatch({ type: SET_COMPILE_OFF }),
-    notify_output_on:()=>dispatch({type:NOTIFY_OUTPUT_SUCCESS}),
-    notify_output_error_on:()=>dispatch({type:NOTIFY_OUTPUT_ERROR})
+    resetReceivedIO: () => dispatch({ type: RESET_SOME_ONE_SEND_IO }),
+    recievedIO: () => dispatch({ type: SET_SOME_ONE_SEND_IO }),
+    notify_output_on: () => dispatch({ type: NOTIFY_OUTPUT_SUCCESS }),
+    notify_output_error_on: () => dispatch({ type: NOTIFY_OUTPUT_ERROR }),
   };
 };
 
