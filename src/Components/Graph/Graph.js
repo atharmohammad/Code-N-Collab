@@ -12,7 +12,7 @@ const GraphVis = (props) => {
   const [graphKey, setGraphKey] = useState(uuidv4());
   const [directed,setDirected] = useState(false)
   const [graph, setGraph] = useState({ nodes: [], edges: [] });
-  
+
   const options = {
     layout: {
       hierarchical: false,
@@ -22,14 +22,19 @@ const GraphVis = (props) => {
       arrows: {
         to:{enabled: directed},
       }
-    } 
+    },
+    interaction: {
+         multiselect: true,
+         dragView: true
+    }
   }
+
 
   const changeHandler = async (e) => {
     setInputText(e.target.value);
-  }; 
+  };
 
-  
+
   useEffect(() => {
     setGraphKey(uuidv4());
     let text = inputText.replace(/\D/g, " ").split(" ");
@@ -42,7 +47,7 @@ const GraphVis = (props) => {
     }
 
     const nodes = [...new Set(SanitizedText)].map((num, key) => {
-      return { id: parseInt(num), key: key, label: num, color: "yellow" };
+      return { id: parseInt(num), key: key, label: num, color: "yellow"};
     });
 
     const edges = [];
@@ -60,12 +65,13 @@ const GraphVis = (props) => {
       edges,
     });
   }, [inputText]);
-  
+
   useEffect(()=>{
     setGraphKey(uuidv4());
 
   },[directed])
-  
+
+
   return (
     <Grid
       direction="column"
@@ -98,7 +104,7 @@ const GraphVis = (props) => {
       >
         close
       </Button>
-      
+
       <Button
         onClick={()=>setDirected(false)}
         disabled={!directed}
@@ -113,9 +119,9 @@ const GraphVis = (props) => {
         }}
       >
         Undirected
-      </Button> 
+      </Button>
 
-      
+
       <Button
         onClick={()=>setDirected(true)}
         disabled={directed}
@@ -130,7 +136,7 @@ const GraphVis = (props) => {
         }}
       >
         Directed
-      </Button>  
+      </Button>
 
       <Grid
         container
@@ -155,7 +161,7 @@ const GraphVis = (props) => {
             graph={graph}
             options={options}
             key={graphKey}
-            
+
             style={{
               height: "56vh",
               width: "100%",
