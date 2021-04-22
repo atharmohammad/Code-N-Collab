@@ -1,6 +1,20 @@
+import React ,{useState,useEffect} from 'react';
 import { Grid, Typography } from "@material-ui/core";
+import {useLocation} from 'react-router-dom'
 
 export default function Link(props) {
+  const location = useLocation();
+  const [path,setPath] = useState();
+
+  useEffect(()=>{
+      const current = window.location.href;
+      const searchParams = new URLSearchParams(location.search);
+      if(searchParams.has("room")){
+        const place = current.split('?')[0] + '?room=' + searchParams.get("room");
+        setPath(place);
+      }
+  })
+
   return (
     <Grid
       container
@@ -29,7 +43,7 @@ export default function Link(props) {
           padding: ".5vh 0 0 1vh",
         }}
       >
-        {window.location.href}
+        {path}
       </div>
     </Grid>
   );

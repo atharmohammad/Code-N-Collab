@@ -84,11 +84,11 @@ const CollabPage = (props) => {
             }}
           />
 
-          <ReflexElement orientation="horizontol" maxSize="1500" minSize="400">
+          <ReflexElement orientation="horizontol" maxSize="1900" minSize="400">
             <ReflexContainer>
               <ReflexElement
                 minSize="100"
-                maxSize="1500"
+                maxSize="1600"
                 style={{ overflow: "hidden" }}
               >
                 <Editor />
