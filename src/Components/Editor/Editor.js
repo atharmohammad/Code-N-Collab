@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useRef, useState } from "react";
 import { connect } from "react-redux";
-import { v4 as uuidV4 } from "uuid";
+import { useLocation } from "react-router-dom";
 import { SocketContext } from "../../context/socket";
 
 import Editor from "@monaco-editor/react";
@@ -8,7 +8,7 @@ import { Convergence } from "@convergence/convergence";
 import "@convergencelabs/monaco-collab-ext/css/monaco-collab-ext.min.css";
 
 import { CodeEditorConfig } from "./config";
-import { compilerFunc } from "../Functions/index";
+import { compilerFunc } from "../Functions/compilerFunc";
 import MonacoConvergenceAdapter from "./EditorAdaptor";
 import Modal from "../Modal/Modal";
 import Graph from "../Graph/Graph";
@@ -17,8 +17,6 @@ import blackBoardJSON from "./manaco-Themes/blackBoard";
 import cobaltJSON from "./manaco-Themes/cobalt";
 import merbivoreJSON from "./manaco-Themes/merbivore";
 import githubJSON from "./manaco-Themes/github";
-import useSound from "use-sound";
-import roundStart from "../../Assets/sound-effects/RoundStart.mp3";
 
 import {
   SET_LOADING,
@@ -38,9 +36,8 @@ const MonacoEditor = (props) => {
   const inputRef = useRef();
   const outputRef = useRef();
   const [code, setCode] = useState("");
-  const [service, setService] = useState(null);
   const [codeValue, setCodeValue] = useState("");
-  const [play] = useSound(roundStart);
+  const location = useLocation();
 
   const handleEditorWillMount = (monaco) => {
     // here is the monaco instance
@@ -83,20 +80,16 @@ const MonacoEditor = (props) => {
   //socket and convergence
   useEffect(async () => {
     socket.on("initialCode", (data) => {
-      console.log(data);
       setCodeValue(data);
     });
 
     socket.on("initialIO", ({ inputText, outputText }) => {
-      console.log("initialIO", inputText, outputText);
       props.setInput(inputText);
       props.setOutput(outputText);
       props.recievedIO();
     });
 
     socket.on("sendInitialIO", ({ id }) => {
-      console.log("asking for intialIO");
-
       const creator = () => {
         const inputText = inputRef.current.value;
         const outputText = outputRef.current.value;
@@ -106,8 +99,6 @@ const MonacoEditor = (props) => {
           inputText,
           outputText,
         };
-        console.log(inputRef.current.value);
-        console.log(outputRef.current.value);
         socket.emit("takeInitialIO", data);
       };
       creator();
@@ -115,10 +106,13 @@ const MonacoEditor = (props) => {
 
     const credentials = { username: "testuser", password: "changeme" };
     let modelService;
+    const currentPath = location.pathname;
+    const searchParams = new URLSearchParams(location.search);
+    
     try {
       const domain = await Convergence.connectAnonymously(
         CodeEditorConfig.CONVERGENCE_URL,
-        props.credentials.userName
+        searchParams.get("room").trim().toLowerCase()
       );
       modelService = domain.models();
 

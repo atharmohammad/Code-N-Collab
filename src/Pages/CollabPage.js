@@ -9,14 +9,6 @@ import IO from "../Components/IO/IO";
 import Problem from "../Components/Problem/Problem";
 import { connect } from "react-redux";
 
-import {
-  Grid,
-  makeStyles,
-  TextField,
-  Button,
-  Divider,
-} from "@material-ui/core";
-
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Toolbar from "../Components/Toolbar/Toolbar";
@@ -35,12 +27,14 @@ const CollabPage = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    //get query string
     const currentPath = location.pathname;
     const searchParams = new URLSearchParams(location.search);
 
-    if(!searchParams.get("name") || !searchParams.get("room")){
-      return history.push("/rooms?" + (searchParams.has("room") ? "room=" + searchParams.get("room"):''))
+    if (!searchParams.get("name") || !searchParams.get("room")) {
+      return history.push(
+        "/rooms?" +
+          (searchParams.has("room") ? "room=" + searchParams.get("room") : "")
+      );
     }
 
     socket.emit(
@@ -49,7 +43,12 @@ const CollabPage = (props) => {
       ({ error, user }) => {
         if (error) {
           console.log("username is already taken");
-          return history.push("/rooms?" + (searchParams.has("room") ? "room=" + searchParams.get("room"):'') );
+          return history.push(
+            "/rooms?" +
+              (searchParams.has("room")
+                ? "room=" + searchParams.get("room")
+                : "")
+          );
         }
 
         console.log("joined");
@@ -57,7 +56,7 @@ const CollabPage = (props) => {
     );
 
     return () => {
-      console.log("back button");
+      console.log("socket dissconnect");
       socket.disconnect();
     };
   }, []);
