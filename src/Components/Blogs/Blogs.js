@@ -1,0 +1,54 @@
+import {useState,useEffect} from 'react';
+import {Grid,Box,Button,Typography,Avatar} from '@material-ui/core';
+import axios from '../../Axios/axios';
+import BlogBar from './BlogBar'
+import BlogSpinner from '../Spinner/BlogSpinner'
+
+function Blogs(props){
+  const [blogs,setBlogs] = useState([]);
+
+  useEffect(()=>{
+    axios.get('blogs/Allblogs')
+      .then(res=>{
+        console.log(res.data);
+        setBlogs(res.data);
+      })
+      .catch(e=>{
+        console.log(e);
+      })
+  },[])
+  let allBlogs = <BlogSpinner/>
+
+  if(blogs.length >= 1){
+    allBlogs = blogs.map((item)=>{
+      return(
+        <Grid key={item._id} style={{border:'2px solid #e2e2e2',
+          padding:'1vh',
+          minHeight:'16vh',
+          width:'80vh',
+          marginTop:'3vh',
+        backgroundColor:'#fff',
+      borderRadius:'20px'}}>
+        <Grid container direction='row'>
+          <Avatar style={{margin:'1vh 0 0 0'}}>A</Avatar>
+          <Grid style={{margin:'1vh 0 0 3vh'}}>
+            <Typography >User</Typography>
+            <Typography style={{fontStyle:'italic',fontSize:'14px'}}>Software Engineer</Typography>
+          </Grid>
+        </Grid>
+        <Grid style={{marginTop:'1vh'}}>
+          <Typography>{item.Body}</Typography>
+        </Grid>
+        <BlogBar/>
+        </Grid>
+      )
+    })
+  }
+  return(
+    <div>
+      {allBlogs}
+    </div>
+  )
+}
+
+export default Blogs
