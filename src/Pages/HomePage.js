@@ -18,6 +18,10 @@ function HomePage() {
     history.push("/");
   };
 
+  const blogHandler = ()=>{
+    history.push('/blogs');
+  }
+
   return (
     <div className={classes.wrap}>
       <div className={classes.stars} />
@@ -40,7 +44,7 @@ function HomePage() {
         />
         <Button name="Code - Editor" clicked={roomHandler} />
         <Button name="LockOut - Championship" />
-        <Button name="Blogs" />
+        <Button name="Blogs" clicked={blogHandler} />
         <Button name="Profile" />
       </Grid>
     </div>

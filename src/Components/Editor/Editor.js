@@ -108,17 +108,17 @@ const MonacoEditor = (props) => {
     let modelService;
     const currentPath = location.pathname;
     const searchParams = new URLSearchParams(location.search);
-    
+
     try {
       const domain = await Convergence.connectAnonymously(
         CodeEditorConfig.CONVERGENCE_URL,
-        searchParams.get("room").trim().toLowerCase()
+        searchParams.get("name").trim()
       );
       modelService = domain.models();
 
       const model = await modelService.openAutoCreate({
         collection: "Code-n-Collab`",
-        id: props.credentials.roomName,
+        id: searchParams.get("room").trim(),
         ephemeral: false,
         data: { text: code },
       });

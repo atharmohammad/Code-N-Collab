@@ -5,6 +5,7 @@ import CollabPage from "./Pages/CollabPage";
 import GetStarted from "./Pages/GetStarted";
 import HomePage from "./Pages/HomePage";
 import Test from "./Pages/Test";
+import BlogPage from './Pages/BlogPage';
 import { SocketContext, socket } from "./context/socket";
 
 import "./App.css";
@@ -17,6 +18,7 @@ function App(props) {
         <Route path="/homepage" exact component={HomePage} />
         <Route path="/rooms" exact component={Rooms} />
         <Route path="/collaborate" exact component={CollabPage} />
+        <Route path="/blogs" exact component={BlogPage} />
         <Route path="/test" exact component={Test} />
         <Redirect to="/homepage" />
       </Switch>

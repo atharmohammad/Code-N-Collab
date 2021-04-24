@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   }
 
   return (
-    <Grid style={{display:'flex',margin:'2vh 0 0 20vh'}}>
+    <Grid style={{display:'flex',margin:'2vh 0 0 10vh'}}>
 
       <Typography component='div' variant='body1' style={{fontSize:'15px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',minHeight:'2vh',padding:'.6vh',color:'#fff'}} className={classes.button}>
           {name}
@@ -53,23 +53,16 @@ const useStyles = makeStyles((theme) => ({
 
 
      <Typography component='div' variant='body1' style={{fontSize:'15px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',minHeight:'2vh',padding:'.6vh',marginLeft:'5vh',color:'#fff'}} className={classes.button}>
-         {room}
+         {room[0]}
      </Typography>
 
-    <Box fontStyle="italic" fontWeight="fontWeightBold" style={{cursor:'pointer',color:'white',height:'3.5vh',width:'10vh',borderRadius:'5px',backgroundColor:'#872e2e',margin:'.4vh 0 1vh 5vh'}} onClick={leaveRoomHandler}>
-    <Typography component='div' variant='body1' style={{fontSize:'10px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',padding:'1vh'}} className={classes.button}>
+    <Box style={{cursor:'pointer',color:'white',height:'4vh',width:'13vh',borderRadius:'5px',backgroundColor:'#872e2e',
+    margin:'.4vh 0 1vh 5vh',fontSize:'14px',
+  padding:'0.5vh 0 0 0.4vh'}} onClick={leaveRoomHandler}>
         Leave Room
-    </Typography>
    </Box>
     </Grid>
   );
-}
-
-const mapStateToProps = state=>{
-  return{
-    userName:state.credentials.userName,
-    roomName:state.credentials.roomName
-  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -78,4 +71,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CollabToolbar);
+export default connect(null, mapDispatchToProps)(CollabToolbar);

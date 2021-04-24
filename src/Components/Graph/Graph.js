@@ -8,11 +8,11 @@ import { Grid, Button } from "@material-ui/core";
 ;
 
 const GraphVis = (props) => {
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState("1 5 2 1 1 4 3 1 6 1");
   const [graphKey, setGraphKey] = useState(uuidv4());
   const [directed,setDirected] = useState(false)
   const [graph, setGraph] = useState({ nodes: [], edges: [] });
-  
+
   const options = {
     layout: {
       hierarchical: false,
@@ -22,14 +22,19 @@ const GraphVis = (props) => {
       arrows: {
         to:{enabled: directed},
       }
-    } 
+    },
+    interaction: {
+         multiselect: true,
+         dragView: true
+    }
   }
 
-  const changeHandler = async (e) => {
-    setInputText(e.target.value);
-  }; 
 
-  
+  const changeHandler = async (e) => {
+    setInputText(e.currentTarget.innerText);
+  };
+
+
   useEffect(() => {
     setGraphKey(uuidv4());
     let text = inputText.replace(/\D/g, " ").split(" ");
@@ -42,7 +47,7 @@ const GraphVis = (props) => {
     }
 
     const nodes = [...new Set(SanitizedText)].map((num, key) => {
-      return { id: parseInt(num), key: key, label: num, color: "yellow" };
+      return { id: parseInt(num), key: key, label: num, color: "yellow"};
     });
 
     const edges = [];
@@ -60,12 +65,13 @@ const GraphVis = (props) => {
       edges,
     });
   }, [inputText]);
-  
+
   useEffect(()=>{
     setGraphKey(uuidv4());
 
   },[directed])
-  
+
+
   return (
     <Grid
       direction="column"
@@ -98,39 +104,39 @@ const GraphVis = (props) => {
       >
         close
       </Button>
-      
-      <Button
-        onClick={()=>setDirected(false)}
-        disabled={!directed}
-        style={{
-          borderRight:'5px solid rgb(37 39 40)',
-          backgroundColor: "green",
-          color: "#fff",
-          width: "12vh",
-          height: "3vh",
-          left:"50vh",
-          fontSize: "10px",
-        }}
-      >
-        Undirected
-      </Button> 
 
-      
-      <Button
-        onClick={()=>setDirected(true)}
-        disabled={directed}
-        style={{
-          borderLeft:'5px solid rgb(37 39 40)',
-          backgroundColor: "green",
-          color: "#fff",
-          width: "12vh",
-          height: "3vh",
-          left:"50vh",
-          fontSize: "10px",
-        }}
-      >
-        Directed
-      </Button>  
+        <Button
+          onClick={()=>setDirected(false)}
+          disabled={!directed}
+          style={{
+            borderRight:'5px solid rgb(37 39 40)',
+            backgroundColor: "green",
+            color: "#fff",
+            width: "12vh",
+            height: "3vh",
+            left:"50vh",
+            fontSize: "10px",
+          }}
+        >
+          Undirected
+        </Button>
+
+
+        <Button
+          onClick={()=>setDirected(true)}
+          disabled={directed}
+          style={{
+            borderLeft:'5px solid rgb(37 39 40)',
+            backgroundColor: "green",
+            color: "#fff",
+            width: "12vh",
+            height: "3vh",
+            left:"50vh",
+            fontSize: "10px",
+          }}
+        >
+          Directed
+        </Button>
 
       <Grid
         container
@@ -138,24 +144,30 @@ const GraphVis = (props) => {
         style={{ border: "4px solid #fff", width: "100vh" }}
       >
         <Grid xs={3}>
-          <textarea
-            placeHolder="Graph Input..."
-            rows={17}
-            onChange={changeHandler}
+          <div
+           contentEditable="true"
+            onInput={changeHandler}
             style={{
               width: "100%",
-              height: "55vh",
+              height: "56vh",
               resize: "none",
               fontSize: 20,
+              backgroundColor:'#fff'
             }}
-          ></textarea>
+          >
+          1 5<br/>
+          2 1<br/>
+          1 4<br/>
+          3 1<br/>
+          6 1<br/>
+          </div>
         </Grid>
         <Grid xs={9}>
           <Graph
             graph={graph}
             options={options}
             key={graphKey}
-            
+
             style={{
               height: "56vh",
               width: "100%",
