@@ -2,12 +2,19 @@ import React,{useEffect,useState} from 'react';
 import Editor from '@uiw/react-md-editor'
 import {Grid,Box} from '@material-ui/core'
 import axios from '../../Axios/axios'
+import {connect} from 'react-redux'
+import * as TYPES from '../../store/Action/action'
 
-export default function TextEditor(props){
+function TextEditor(props){
   const [value,setValue] = useState("");
-  const postHandler = ()=>{
+  const postHandler = async()=>{
     axios.post('blogs/write',{Body:value}).then(res=>{
-      window.location.reload()
+      try{
+         props.blogPosted();
+         setValue("");
+      }catch(err){
+        console.log(err);
+      }
     }).catch(e=>console.log(e))
   }
   return(
@@ -26,3 +33,11 @@ export default function TextEditor(props){
     </Grid>
   )
 }
+
+const mapDispatchToProps = dispatch=>{
+  return{
+    blogPosted : ()=>{dispatch({type:TYPES.BLOGPOSTED})}
+  }
+}
+
+export default connect(null,mapDispatchToProps)(TextEditor)

@@ -4,7 +4,6 @@ import Blogs from '../Components/Blogs/Blogs';
 import TextEditor from '../Components/TextEditor/TextEditor'
 import stars from '../Assets/css/style.module.css'
 import BlogHead from '../Components/Blogs/BlogHead'
-import BlogBackground from '../Assets/images/BlogsBackground.jpg'
 
 const BlogPage = (props)=>{
 

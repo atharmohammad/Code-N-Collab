@@ -3,6 +3,8 @@ import {Grid,Box,Button,Typography,Avatar} from '@material-ui/core';
 import axios from '../../Axios/axios';
 import BlogBar from './BlogBar'
 import BlogSpinner from '../Spinner/BlogSpinner'
+import ReactMarkdown from 'react-markdown'
+import {connect} from 'react-redux'
 
 function Blogs(props){
   const [blogs,setBlogs] = useState([]);
@@ -16,7 +18,7 @@ function Blogs(props){
       .catch(e=>{
         console.log(e);
       })
-  },[])
+  },[props.blogPosted])
   let allBlogs = <BlogSpinner/>
 
   if(blogs.length >= 1){
@@ -37,9 +39,9 @@ function Blogs(props){
           </Grid>
         </Grid>
         <Grid style={{marginTop:'1vh'}}>
-          <Typography>{item.Body}</Typography>
+          <Typography><ReactMarkdown>{item.Body}</ReactMarkdown></Typography>
         </Grid>
-        <BlogBar/>
+        <BlogBar _id={item._id}/>
         </Grid>
       )
     })
@@ -51,4 +53,10 @@ function Blogs(props){
   )
 }
 
-export default Blogs
+const mapStateToProps = state=>{
+  return{
+    blogPosted : state.tools.blogPosted
+  }
+}
+
+export default connect(mapStateToProps,null)(Blogs)

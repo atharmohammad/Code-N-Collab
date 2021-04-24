@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 
      <Typography component='div' variant='body1' style={{fontSize:'15px',fontFamily: ['Syne Mono', 'monospace'].join(),fontWeight:'bold',minHeight:'2vh',padding:'.6vh',marginLeft:'5vh',color:'#fff'}} className={classes.button}>
-         {room}
+         {room[0]}
      </Typography>
 
     <Box style={{cursor:'pointer',color:'white',height:'4vh',width:'13vh',borderRadius:'5px',backgroundColor:'#872e2e',

@@ -7,6 +7,7 @@ import styles from "./RoomsInput.module.css";
 import useSound from "use-sound";
 import roundStart from "../../Assets/sound-effects/RoundStart.mp3";
 import CreateRoom from "../../Assets/images/create_room.png";
+import { v4 as uuidv4 } from "uuid";
 
 function Rooms(props) {
   const history = useHistory();
@@ -19,9 +20,14 @@ function Rooms(props) {
     const currentPath = location.pathname;
     const searchParams = new URLSearchParams(location.search);
     if (searchParams.has("room") && searchParams.get("room")) {
-      setRoom(searchParams.get("room").trim().toLowerCase());
+      setRoom(searchParams.get("room").trim());
+    }else{
+        const roomId = uuidv4();
+        setRoom(roomId)
+
     }
   }, [location]);
+
 
   const changeHandler = (type, event) => {
     if (type == "room") setRoom(event.target.value);
@@ -92,13 +98,9 @@ function Rooms(props) {
           </Grid>
 
           <Grid>
-            <InputLabel
-              style={{ margin: "2vh 0 0 0", color: "#fff", fontWeight: "bold" }}
-            >
-              Room
-            </InputLabel>
             <input
               value={room}
+              type='hidden'
               onChange={(event) => changeHandler("room", event)}
               className={styles.input}
             />
@@ -106,7 +108,7 @@ function Rooms(props) {
 
           <Grid>
             <InputLabel
-              style={{ margin: "2vh 0 0 0", color: "#fff", fontWeight: "bold" }}
+              style={{ color: "#fff", fontWeight: "bold" }}
             >
               Password
             </InputLabel>
