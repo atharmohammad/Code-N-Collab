@@ -1,5 +1,4 @@
 import React, {useEffect } from "react";
-import socketio from "socket.io-client";
 
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 
@@ -22,7 +21,7 @@ function Alert(props) {
 }
 
 const CollabPage = (props) => {
-  const socket = socketio.connect("http://127.0.0.1:8080");
+  const socket  =  props.socket; 
   const location = useLocation();
   const history = useHistory();
 
@@ -55,10 +54,7 @@ const CollabPage = (props) => {
       }
     );
 
-    return () => {
-      console.log("socket dissconnect");
-      socket.disconnect();
-    };
+   
   }, []);
 
   return (
