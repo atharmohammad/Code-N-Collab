@@ -6,13 +6,13 @@ import GetStarted from "./Pages/GetStarted";
 import HomePage from "./Pages/HomePage";
 import Test from "./Pages/Test";
 import BlogPage from './Pages/BlogPage';
-import { SocketContext, socket } from "./context/socket";
+
 
 import "./App.css";
 
 function App(props) {
   let routes = (
-    <SocketContext.Provider value={socket}>
+    
       <Switch>
         <Route path="/" exact component={GetStarted} />
         <Route path="/homepage" exact component={HomePage} />
@@ -22,7 +22,7 @@ function App(props) {
         <Route path="/test" exact component={Test} />
         <Redirect to="/homepage" />
       </Switch>
-    </SocketContext.Provider>
+    
   );
 
   return <BrowserRouter>{routes}</BrowserRouter>;

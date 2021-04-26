@@ -1,7 +1,6 @@
-import React, { useEffect, useContext, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { SocketContext } from "../../context/socket";
 
 import Editor from "@monaco-editor/react";
 import { Convergence } from "@convergence/convergence";
@@ -31,7 +30,7 @@ import {
 } from "../../store/Action/action";
 
 const MonacoEditor = (props) => {
-  const socket = useContext(SocketContext);
+  const socket = props.socket;
   const MonacoEditorRef = useRef();
   const inputRef = useRef();
   const outputRef = useRef();

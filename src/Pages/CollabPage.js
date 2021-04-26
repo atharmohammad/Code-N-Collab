@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { SocketContext } from "../context/socket";
+import React, {useEffect } from "react";
+import socketio from "socket.io-client";
 
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 
@@ -22,7 +22,7 @@ function Alert(props) {
 }
 
 const CollabPage = (props) => {
-  const socket = useContext(SocketContext);
+  const socket = socketio.connect("http://127.0.0.1:8080");
   const location = useLocation();
   const history = useHistory();
 
@@ -91,7 +91,7 @@ const CollabPage = (props) => {
                 maxSize="1600"
                 style={{ overflow: "hidden" }}
               >
-                <Editor />
+                <Editor socket={socket}/>
               </ReflexElement>
               <ReflexSplitter
                 className="reflex-thin"
