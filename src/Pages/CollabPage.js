@@ -3,7 +3,7 @@ import socketio from "socket.io-client";
 
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 
-import Chat from "../Components/Chat";
+import Chat from "../Components/Chat/ChatTabs";
 import Editor from "../Components/Editor/Editor";
 import IO from "../Components/IO/IO";
 import Problem from "../Components/Problem/Problem";
@@ -102,7 +102,7 @@ const CollabPage = (props) => {
                 }}
               />
               <ReflexElement
-                minSize="10"
+                minSize="8"
                 maxSize="200"
                 size="100"
                 style={{ overflow: "hidden" }}
@@ -122,12 +122,12 @@ const CollabPage = (props) => {
           />
 
           <ReflexElement
-            minSize="10"
-            maxSize="270"
-            size="200"
+            minSize="8"
+            maxSize="250"
+            size="250"
             style={{ overflow: "hidden" }}
           >
-            <Chat />
+            <Chat socket={socket}/>
           </ReflexElement>
         </ReflexContainer>
 
