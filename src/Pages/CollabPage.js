@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 
@@ -21,44 +21,59 @@ function Alert(props) {
 }
 
 const CollabPage = (props) => {
-  const socket  =  props.socket; 
+  const socket = props.socket;
   const location = useLocation();
   const history = useHistory();
+  const [joined, setJoined] = useState(false);
 
   useEffect(() => {
-    
     const searchParams = new URLSearchParams(location.search);
-    
-    if (!searchParams.get("name") || !searchParams.get("room") || !location.state) {
-      return history.push(
-        "/rooms?" +
-        (searchParams.has("room") ? "room=" + searchParams.get("room") : "")
-        );
-      }
+
+    if (
+      !searchParams.get("name") ||
+      !searchParams.get("room") ||
+      !location.state
+    ) {
+      return history.push({
+        pathname: "/rooms",
+        search:
+          "?" +
+          (searchParams.has("room") ? "room=" + searchParams.get("room") : ""),
+        state: {
+          error:
+            "Either Password is not set or name and password can't be empty",
+        },
+      });
+    }
     const password = location.state.password;
 
     socket.emit(
       "join",
-      { room: searchParams.get("room"), username: searchParams.get("name"), password},
+      {
+        room: searchParams.get("room"),
+        username: searchParams.get("name"),
+        password,
+      },
       ({ error, user }) => {
         if (error) {
           console.log(error);
-          return history.push(
-            "/rooms?" +
+          return history.push({
+            pathname: "/rooms",
+            search:
+              "?" +
               (searchParams.has("room")
                 ? "room=" + searchParams.get("room")
-                : "")
-          );
+                : ""),
+            state: { error },
+          });
         }
-
+        setJoined(true);  
         console.log("joined");
       }
     );
-
-   
   }, []);
 
-  return (
+  return joined ? (
     <>
       <Toolbar />
       <div style={{ height: "85vh" }}>
@@ -88,7 +103,7 @@ const CollabPage = (props) => {
                 maxSize="1600"
                 style={{ overflow: "hidden" }}
               >
-                <Editor socket={socket}/>
+                <Editor socket={socket} />
               </ReflexElement>
               <ReflexSplitter
                 className="reflex-thin"
@@ -124,7 +139,7 @@ const CollabPage = (props) => {
             size="250"
             style={{ overflow: "hidden" }}
           >
-            <Chat socket={socket}/>
+            <Chat socket={socket} />
           </ReflexElement>
         </ReflexContainer>
 
@@ -150,6 +165,8 @@ const CollabPage = (props) => {
         </Snackbar>
       </div>
     </>
+  ) : (
+    <></>
   );
 };
 
