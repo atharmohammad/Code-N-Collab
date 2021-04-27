@@ -1,0 +1,51 @@
+import React, { useEffect, useState, useRef } from "react";
+import { Typography, Grid } from "@material-ui/core";
+import ScrollToBottom from "react-scroll-to-bottom";
+import Message from './Message';
+import { useLocation } from "react-router-dom";
+import classes from'./Message.module.css';
+
+
+const People = (props) => {
+ console.log(props.persons);
+ 
+ const classJoin = (...args)=>{
+    let s = ''
+    for(let i=0;i<args.length;i++)
+       s += args[i]+" ";
+    return s;   
+  }
+  
+  return (
+    <Grid
+      style={{
+        display: "flex",
+        flexFlow: "column",
+        height: "75vh",
+        width: "31vh",
+        overflow: "hidden",
+        backgroundColor: "#ededeb",
+        border: "2px solid black",
+      }}
+    >
+      <Typography
+        style={{ fontSize: "15px", fontWeight: "bold", margin: "1vh 0 0 7vh" }}
+      >
+        People 
+      </Typography>
+      <Grid style={{ height: "70vh", display: "flex", flexFlow: "row" }}>
+        <ScrollToBottom>
+          <div style={{width:'30vh',overflowX: 'hidden'}}>    
+         {props.persons.map((person,i) =>{ return ( <div className={classJoin(classes.messageContainer,classes.justifyStart)}>
+            <div className={classJoin(classes.messageBox,classes.backgroundUser)}>
+              <p className={classJoin(classes.messageText,classes.colorLight)}>{person.username}</p>
+            </div>
+          </div>) })}
+          </div>
+        </ScrollToBottom>
+      </Grid>
+    </Grid>
+  );
+};
+
+export default People;
