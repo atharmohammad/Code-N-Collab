@@ -26,22 +26,23 @@ const CollabPage = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    const currentPath = location.pathname;
+    
     const searchParams = new URLSearchParams(location.search);
-
-    if (!searchParams.get("name") || !searchParams.get("room")) {
+    
+    if (!searchParams.get("name") || !searchParams.get("room") || !location.state) {
       return history.push(
         "/rooms?" +
-          (searchParams.has("room") ? "room=" + searchParams.get("room") : "")
-      );
-    }
+        (searchParams.has("room") ? "room=" + searchParams.get("room") : "")
+        );
+      }
+    const password = location.state.password;
 
     socket.emit(
       "join",
-      { room: searchParams.get("room"), username: searchParams.get("name") },
+      { room: searchParams.get("room"), username: searchParams.get("name"), password},
       ({ error, user }) => {
         if (error) {
-          console.log("username is already taken");
+          console.log(error);
           return history.push(
             "/rooms?" +
               (searchParams.has("room")
