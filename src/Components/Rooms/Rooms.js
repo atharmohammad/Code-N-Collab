@@ -21,7 +21,7 @@ function Rooms(props) {
     if(location.state && location.state.error){
       alert(location.state.error);
     }
-      
+
     const searchParams = new URLSearchParams(location.search);
     if (searchParams.has("room") && searchParams.get("room")) {
       setRoom(searchParams.get("room").trim());
@@ -57,8 +57,9 @@ function Rooms(props) {
     <Grid
       container
       style={{
-        minHeight: "100vh",
+        height: "100vh",
         background: "radial-gradient(ellipse, #1B2735 0%, #090A0F 100%)",
+        overflow:'hidden'
       }}
     >
       <div className={classes.stars}></div>

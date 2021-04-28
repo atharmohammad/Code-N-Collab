@@ -34,11 +34,11 @@ export default function ChatPanel(props) {
   const [name, setName] = useState("");
   const [value, setValue] = React.useState(0);
   const [messages, setMessages] = useState([]);
-  const [persons,setPersons] = useState([]) 
+  const [persons,setPersons] = useState([])
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const socket = props.socket
- 
+
   useEffect(()=>{
     if (searchParams.get("name")) {
         setName(searchParams.get("name").trim().toLowerCase());
@@ -87,7 +87,7 @@ export default function ChatPanel(props) {
         <Chat socket={props.socket} messages={messages}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <People persons={persons}/>
+        <People persons={persons} you={socket.id}/>
       </TabPanel>
     </div>
   );

@@ -4,18 +4,11 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import Message from './Message';
 import { useLocation } from "react-router-dom";
 import classes from'./Message.module.css';
-
+import {Avatar} from '@material-ui/core'
 
 const People = (props) => {
  console.log(props.persons);
- 
- const classJoin = (...args)=>{
-    let s = ''
-    for(let i=0;i<args.length;i++)
-       s += args[i]+" ";
-    return s;   
-  }
-  
+
   return (
     <Grid
       style={{
@@ -31,15 +24,17 @@ const People = (props) => {
       <Typography
         style={{ fontSize: "15px", fontWeight: "bold", margin: "1vh 0 0 7vh" }}
       >
-        People 
+        People
       </Typography>
       <Grid style={{ height: "70vh", display: "flex", flexFlow: "row" }}>
         <ScrollToBottom>
-          <div style={{width:'30vh',overflowX: 'hidden'}}>    
-         {props.persons.map((person,i) =>{ return ( <div className={classJoin(classes.messageContainer,classes.justifyStart)}>
-            <div className={classJoin(classes.messageBox,classes.backgroundUser)}>
-              <p className={classJoin(classes.messageText,classes.colorLight)}>{person.username}</p>
+          <div style={{width:'30vh',overflowX: 'hidden'}}>
+         {props.persons.map((person,i) =>{ return ( <div className={`${classes.messageContainer} ${classes.justifyStart}`}>
+            <div className={`${classes.messageBox} ${classes.backgroundUser}`}>
+              <Avatar style={{margin:'1.2vh 1vh 0 0'}}>{person.username[0]}</Avatar>
+              <p className={`${classes.messageText} ${classes.colorLight}`}>{person.username}</p>
             </div>
+            {props.you == person.id ? <div className={classes.you}>you</div> : <div className={classes.online} />}
           </div>) })}
           </div>
         </ScrollToBottom>
