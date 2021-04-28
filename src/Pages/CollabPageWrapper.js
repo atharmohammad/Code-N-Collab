@@ -3,7 +3,7 @@ import socketio from "socket.io-client";
 import CollabPage from './CollabPage'
 
 const CollabPageWrapper = ()=>{
-    const socket = socketio.connect("http://127.0.0.1:8080");
+    const socket = socketio.connect("http://192.168.0.106:8080/");
     useEffect(()=>{
         return () => {
             console.log("socket dissconnect");

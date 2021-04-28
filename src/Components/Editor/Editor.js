@@ -56,6 +56,7 @@ const MonacoEditor = (props) => {
     if (props.tools.nowCompile === true && props.tools.isLoading === false) {
       props.setOutput("");
       props.setLoading();
+      socket.emit('Compile_ON');
 
       let response = await compilerFunc(
         props.tools.language,
@@ -71,6 +72,7 @@ const MonacoEditor = (props) => {
         props.setOutPut("Oops something went wrong");
         props.notify_output_error_on();
       }
+      socket.emit("Compile_OFF")
       props.resetLoading();
       props.resetReceivedIO();
     }
@@ -102,6 +104,14 @@ const MonacoEditor = (props) => {
       };
       creator();
     });
+
+      socket.on("Compile_ON",()=>{
+        props.setLoading();
+      })
+
+      socket.on('Compile_OFF',()=>{
+        props.resetLoading();
+      })
 
     const credentials = { username: "testuser", password: "changeme" };
     let modelService;

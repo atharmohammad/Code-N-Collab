@@ -10,13 +10,6 @@ const Message = ({ message: { text, user }, name }) => {
 
   const trimmedName = name.trim().toLowerCase();
 
-  const classJoin = (...args)=>{
-    let s = ''
-    for(let i=0;i<args.length;i++)
-       s += args[i]+" ";
-    return s;
-  }
-
 
   if(user === trimmedName) {
     isSentByCurrentUser = true;
