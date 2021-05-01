@@ -35,12 +35,10 @@ export default function App(props) {
   }
 
   const problemFetchHandler = ()=>{
-    if(link.trim().length > 5){
       setLoader(true);
       socket.emit('codeforces-problem',link);
       setLink("");
       ProblemRef.current.innerHTML = "";
-    }
   }
 
   return (
@@ -53,7 +51,7 @@ export default function App(props) {
         </div>
       <Grid
         style={{
-          minHeight: "80vh",
+          minHeight: "75vh",
           maxWidth: "120vh",
           display: "flex",
           flexFlow: "column",
@@ -73,12 +71,13 @@ export default function App(props) {
             minHeight: "4vh",
             backgroundColor: "#872e2e",
             color: "#fff",
-            maxWidth: "8vh",
+            width: "8vh",
             borderRadius: "5px",
             margin: "2.5vh 0 0 1vh",
             padding:'1vh 1vh 0 1vh',
             cursor: "pointer",
-            textAlign:'center'
+            textAlign:'center',
+            minWidth:'5vh',
           }}
           onClick={problemFetchHandler}>
           Fetch

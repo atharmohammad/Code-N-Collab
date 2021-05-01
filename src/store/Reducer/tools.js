@@ -10,13 +10,12 @@ const initialState = {
   output: "",
   output_success:false,
   output_error:false,
-  someOneSendIO:true,
   showGraph:false,
   blogPosted:false
 };
 
 const reducer = (state = initialState, action) => {
-
+  console.log(action.type)
   switch (action.type) {
     case TYPE.SET_COMPILE_ON:
       return { ...state, nowCompile: true };
@@ -35,7 +34,7 @@ const reducer = (state = initialState, action) => {
 
     case TYPE.SET_THEME:
       return { ...state, theme: action.value };
- 
+
     case TYPE.SET_FONT_SIZE:
       return { ...state, fontSize: action.value };
 
@@ -50,12 +49,6 @@ const reducer = (state = initialState, action) => {
 
     case TYPE.NOTIFY_OUTPUT_ERROR:
       return { ...state, output_error: (state.output_error ? false : true) };
-
-    case TYPE.SET_SOME_ONE_SEND_IO:
-      return { ...state,someOneSendIO:true};
-
-    case TYPE.RESET_SOME_ONE_SEND_IO:
-      return { ...state,someOneSendIO:false};
 
     case TYPE.SHOW_GRAPH:
       return { ...state,showGraph:true};

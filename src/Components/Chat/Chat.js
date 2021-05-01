@@ -37,14 +37,14 @@ const Chat = (props) => {
       >
         CHAT
       </Typography>
-      <Grid style={{ height: "66vh", display: "flex", flexFlow: "row" }}>
+      <Grid style={{ height: "63.5vh", display: "flex", flexFlow: "row" }}>
         <ScrollToBottom className="messages">
         <div style={{width:'30vh',overflowX: 'hidden'}}>
         {props.messages.map((message, i) => <div key={i}><Message message={message} name={searchParams.get('name')}/></div>)}
         </div>
         </ScrollToBottom>
       </Grid>
-      <form onSubmit={submitHandler} style={{ margin: "2px" }}>
+      <form onSubmit={submitHandler} style={{ margin: "0 2px 1px 2px" }}>
         <input
           ref={inputRef}
           onChange={(e) => {}}

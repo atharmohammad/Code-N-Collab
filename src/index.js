@@ -6,13 +6,11 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 
 import toolsReducer from "./store/Reducer/tools";
-import credentialsReducer from "./store/Reducer/credentials"
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 
 const rootReducer = combineReducers({
   tools: toolsReducer,
-  credentials:credentialsReducer
 });
 
 const composeEnhancers =
