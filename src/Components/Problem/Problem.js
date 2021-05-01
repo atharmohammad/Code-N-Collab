@@ -44,34 +44,29 @@ export default function App(props) {
   }
 
   return (
-    <>
-    <div className={stars.stars}></div>
-
+    <div style={{backgroundColor:"#ededeb",minHeight:"85vh",display:'flex',flexDirection:'column'}}>
+        <div style={{height:'6vh',fontSize:'20px',padding:'0 0 0 2vh',
+        textAlign:'center',background:'#3F51B5'}}>
+          <p  style={{ fontSize: "18px",color:"#fff",margin:'1vh 0 0 0'}}>
+            Problems
+          </p>
+        </div>
       <Grid
         style={{
-          minHeight: "90vh",
+          minHeight: "80vh",
           maxWidth: "120vh",
           display: "flex",
           flexFlow: "column",
           padding: "1vh",
           border: "2px solid black",
-          backgroundColor: "#2b2b2a",
+          backgroundColor: "#ededeb",
+          margin:"1vh"
         }}
       >
-      <div style={{backgroundColor:'#3F51B5',paddingLeft:'2vh'
-      ,borderRadius:'5px',fontSize:'20px',
-    textAlign:'center'}}>
-        <p  style={{ fontSize: "18px",color:"#fff"}}>
-          Problems
-        </p>
-      </div>
       <Grid style={{ display: "flex", minHeight: "4vh",
       margin: "1vh 0 0 0",flexDirection:'row',maxWidth:'110vh' }}>
-          <input placeholder="Problem Link" style={{ width: "110vh"
-          ,margin:'2vh 0 0 0',
-          borderRadius:'10px',
-        outline:'none',
-      border:'2px solid blue'}}
+          <input placeholder="Problem Link"
+          className='place'
           onChange={changeHandler} value={link}/>
           <div
           style={{
@@ -90,11 +85,9 @@ export default function App(props) {
           </div>
         </Grid>
         {loader ? <Spinner/> : null}
-        <ScrollToBottom>
         <Grid style={{color:'black'}} ref={ProblemRef}>
         </Grid>
-        </ScrollToBottom>
       </Grid>
-    </>
+    </div>
   );
 }

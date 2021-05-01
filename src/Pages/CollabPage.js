@@ -7,7 +7,7 @@ import Editor from "../Components/Editor/Editor";
 import IO from "../Components/IO/IO";
 import Problem from "../Components/Problem/Problem";
 import { connect } from "react-redux";
-
+import stars from '../Assets/css/style.module.css'
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Toolbar from "../Components/Toolbar/Toolbar";
@@ -75,6 +75,7 @@ const CollabPage = (props) => {
 
   return joined ? (
     <>
+    <div className={stars.stars}/>
       <Toolbar />
       <div style={{ height: "85vh" }}>
         <ReflexContainer orientation="vertical">
@@ -90,7 +91,7 @@ const CollabPage = (props) => {
           <ReflexSplitter
             className="reflex-thin"
             style={{
-              backgroundColor: "#1f273d",
+              background: "#1f273d",
               opacity: "1",
               border: "0.3px",
             }}
