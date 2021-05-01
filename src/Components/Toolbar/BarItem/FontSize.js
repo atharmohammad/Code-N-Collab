@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
     height:'3.5vh',
     cursor:'pointer',
     color:'#1f273d',
+    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+    outline:'none'
   },
 }));
 

@@ -59,7 +59,6 @@
     ]
   },
   "devDependencies": {
-    "@convergence/ace-collab-ext": "^0.4.0",
     "@convergencelabs/monaco-collab-ext": "^0.3.1"
   }
 }

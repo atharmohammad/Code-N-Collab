@@ -37,9 +37,9 @@ const Chat = (props) => {
       >
         CHAT
       </Typography>
-      <Grid style={{ height: "61vh", display: "flex", flexFlow: "row" }}>
+      <Grid style={{ height: "66vh", display: "flex", flexFlow: "row" }}>
         <ScrollToBottom className="messages">
-        <div style={{width:'45vh',overflowX: 'hidden'}}>
+        <div style={{width:'30vh',overflowX: 'hidden'}}>
         {props.messages.map((message, i) => <div key={i}><Message message={message} name={searchParams.get('name')}/></div>)}
         </div>
         </ScrollToBottom>
@@ -50,7 +50,11 @@ const Chat = (props) => {
           onChange={(e) => {}}
           type="text"
           placeholder="Send a Message!"
-          style={{ height: "10vh", width: "95%" }}
+          style={{ height: "6vh",
+           width: "95%",
+          borderRadius:'15px',
+          outline:'none',
+        border:'2px double blue'}}
         />
       </form>
     </Grid>

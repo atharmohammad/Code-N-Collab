@@ -67,7 +67,7 @@ const CollabPage = (props) => {
             state: { error },
           });
         }
-        setJoined(true);  
+        setJoined(true);
         console.log("joined");
       }
     );
@@ -80,11 +80,11 @@ const CollabPage = (props) => {
         <ReflexContainer orientation="vertical">
           <ReflexElement
             minSize="10"
-            maxSize="350"
-            size="250"
-            style={{ overflow: "hidden" }}
+            maxSize="900"
+            size="350"
+            style={{overflowX:'hidden'}}
           >
-            <Problem />
+            <Problem socket={socket} />
           </ReflexElement>
 
           <ReflexSplitter

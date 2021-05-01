@@ -26,9 +26,9 @@
 
   @keyframes animStar {
     from {
-      transform: translateY(0px);
+      transform: translateY(-4000px);
     }
     to {
-      transform: translateY(-4000px);
+      transform: translateY(0px);
     }
   }

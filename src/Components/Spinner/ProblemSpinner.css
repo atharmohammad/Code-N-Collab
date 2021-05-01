@@ -1,0 +1,34 @@
+.load{
+  border: 1px solid #ECF0F1;
+  padding: 5px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform-origin: center center;
+  transform:translate(-50%, -50%) rotate(135deg);
+  /*change these sizes to fit into your project*/
+  width:50px;
+  height:50px;
+
+}
+.load hr{
+  border:0;
+  margin:0;
+  width:40%;
+  height:40%;
+  position:absolute;
+  border-radius:50%;
+  animation:spin 2s ease infinite;
+}
+
+.load :first-child{background:#19A68C;animation-delay:-1.5s}
+.load :nth-child(2){background:#F63D3A;animation-delay:-1s}
+.load :nth-child(3){background:#FDA543;animation-delay:-0.5s}
+.load :last-child{background:#193B48}
+
+@keyframes spin{
+  0%,100%{transform:translateX(200%)}
+  25%{transform:translateY(200%)}
+  50%{transform:translateX(0)}
+  75%{transform:translateY(0)}
+}

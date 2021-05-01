@@ -8,12 +8,14 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles((theme) => ({
   select: {
     borderRadius: '7px',
-    background:'#fff',
+    background:'#f9f9f9',
     position: 'relative',
     fontSize: 12,
     height:'3.5vh',
     cursor:'pointer',
     color:'#1f273d',
+    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+    outline:'none'
   },
 }));
 
