@@ -1,7 +1,6 @@
-import React, { useEffect, useContext, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { SocketContext } from "../../context/socket";
 
 import Editor from "@monaco-editor/react";
 import { Convergence } from "@convergence/convergence";
@@ -31,7 +30,7 @@ import {
 } from "../../store/Action/action";
 
 const MonacoEditor = (props) => {
-  const socket = useContext(SocketContext);
+  const socket = props.socket;
   const MonacoEditorRef = useRef();
   const inputRef = useRef();
   const outputRef = useRef();
@@ -57,6 +56,7 @@ const MonacoEditor = (props) => {
     if (props.tools.nowCompile === true && props.tools.isLoading === false) {
       props.setOutput("");
       props.setLoading();
+      socket.emit('Compile_ON');
 
       let response = await compilerFunc(
         props.tools.language,
@@ -72,6 +72,7 @@ const MonacoEditor = (props) => {
         props.setOutPut("Oops something went wrong");
         props.notify_output_error_on();
       }
+      socket.emit("Compile_OFF")
       props.resetLoading();
       props.resetReceivedIO();
     }
@@ -103,6 +104,14 @@ const MonacoEditor = (props) => {
       };
       creator();
     });
+
+      socket.on("Compile_ON",()=>{
+        props.setLoading();
+      })
+
+      socket.on('Compile_OFF',()=>{
+        props.resetLoading();
+      })
 
     const credentials = { username: "testuser", password: "changeme" };
     let modelService;

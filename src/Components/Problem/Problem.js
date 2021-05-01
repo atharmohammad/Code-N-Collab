@@ -1,4 +1,8 @@
-import React from "react";
+import React,{useState,useEffect,useRef} from "react";
+import ScrollToBottom from "react-scroll-to-bottom";
+import './Problem.css';
+import Spinner from '../Spinner/ProblemSpinner';
+
 import {
   Typography,
   CssBaseline,
@@ -8,58 +12,82 @@ import {
   Grid,
 } from "@material-ui/core";
 import styles from "./Problem.module.css";
+import stars from '../../Assets/css/style.module.css'
 
-export default function App() {
+
+export default function App(props) {
+  const socket = props.socket;
+  const [link,setLink] = useState(null);
+  const [problem,setProblem] = useState(null);
+  const[loader,setLoader] = useState(false);
+  const ProblemRef = useRef();
+
+  useEffect(()=>{
+    socket.on('problem',problem=>{
+      ProblemRef.current.innerHTML = problem;
+      setLoader(false);
+      console.log(problem)
+    })
+  },[])
+
+  const changeHandler = (e)=>{
+    setLink(e.target.value);
+  }
+
+  const problemFetchHandler = ()=>{
+    if(link.trim().length > 5){
+      setLoader(true);
+      socket.emit('codeforces-problem',link);
+      setLink("");
+      ProblemRef.current.innerHTML = "";
+    }
+  }
+
   return (
-    <>
+    <div style={{backgroundColor:"#ededeb",minHeight:"85vh",display:'flex',flexDirection:'column'}}>
+        <div style={{height:'6vh',fontSize:'20px',padding:'0 0 0 2vh',
+        textAlign:'center',background:'#3F51B5'}}>
+          <p  style={{ fontSize: "18px",color:"#fff",margin:'1vh 0 0 0'}}>
+            Problems
+          </p>
+        </div>
       <Grid
         style={{
-          height: "90vh",
-          width: "50vh",
+          minHeight: "80vh",
+          maxWidth: "120vh",
           display: "flex",
           flexFlow: "column",
-          padding: "1vh .2vh .3vh .5vh",
+          padding: "1vh",
           border: "2px solid black",
           backgroundColor: "#ededeb",
+          margin:"1vh"
         }}
       >
-        <Typography variant="body" component="h4" style={{ fontSize: "18px" }}>
-          Problems
-        </Typography>
-        <Typography
-          variant="p"
+      <Grid style={{ display: "flex", minHeight: "4vh",
+      margin: "1vh 0 0 0",flexDirection:'row',maxWidth:'110vh' }}>
+          <input placeholder="Problem Link"
+          className='place'
+          onChange={changeHandler} value={link}/>
+          <div
           style={{
-            margin: "1vh 0 0 0",
-            fontSize: "12px",
-            color: "gray",
-            opacity: "0.7",
-          }}
-        >
-          * Currently we only fetch problems
-          <br /> from codeforces
-        </Typography>
-        <Grid style={{ display: "flex", height: "4vh", margin: "2vh 0 0 2vh" }}>
-          <input placeholder="Code" style={{ width: "10vh" }} />
-          <input
-            placeholder="Problem Name"
-            style={{ width: "15vh", marginLeft: "2vh" }}
-          />
-        </Grid>
-        <Box
-          style={{
-            height: "3vh",
+            minHeight: "4vh",
             backgroundColor: "#872e2e",
             color: "#fff",
-            width: "8vh",
-            padding: "1vh 1vh 1vh 2vh",
+            maxWidth: "8vh",
             borderRadius: "5px",
-            margin: "1.5vh 0 0 9vh",
+            margin: "2.5vh 0 0 1vh",
+            padding:'1vh 1vh 0 1vh',
             cursor: "pointer",
+            textAlign:'center'
           }}
-        >
+          onClick={problemFetchHandler}>
           Fetch
-        </Box>
+          </div>
+        </Grid>
+        {loader ? <Spinner/> : null}
+        <Grid style={{color:'black'}} ref={ProblemRef}>
+        </Grid>
       </Grid>
-    </>
+    </div>
   );
 }

@@ -35,7 +35,7 @@ const reducer = (state = initialState, action) => {
 
     case TYPE.SET_THEME:
       return { ...state, theme: action.value };
-
+ 
     case TYPE.SET_FONT_SIZE:
       return { ...state, fontSize: action.value };
 
