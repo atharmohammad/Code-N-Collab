@@ -26,6 +26,12 @@ const Io = (props) => {
   const socket = props.socket;
   const [recieved,setRecieved] = useState(1);
 
+  /* recieved { 1 = true for initial load , 2 = true forever ,
+    3 = false forever}
+    1 is true for changeHandler only so that a
+    person can change on initial reload but his initial
+    input output dont emit changeIO */
+
   const changeHandler = (event) => {
     props.setInput(event.target.value);
     inputRef.current.value = event.target.value
