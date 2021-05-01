@@ -29,7 +29,7 @@ const Io = (props) => {
   const changeHandler = (event) => {
     props.setInput(event.target.value);
     inputRef.current.value = event.target.value
-    if(recieved == 2){
+    if(recieved == 1 || recieved == 2){
       setRecieved(2);
       socket.emit('changeIO',{inputText:event.target.value,
         outputText:props.output});
@@ -46,11 +46,11 @@ const Io = (props) => {
         props.setOutput(data.outputText);
         setRecieved(2);
     })
-
     socket.on("sendInitialIO",(obj)=>{
+      console.log("sendInitialIO",inputRef.current.value)
       socket.emit("takeInitialIO",{id:obj.id,
-      inputText:props.input,
-      outputText:props.output});
+      inputText:inputRef.current.value,
+      outputText:outputRef.current.value});
     })
 
   },[]);
@@ -99,7 +99,7 @@ const Io = (props) => {
           padding:'1vh',
         }}
       >
-        <textarea rows='7'
+        <textarea rows='7' readOnly={true}
         cols='100' className={classes.textarea} ref={outputRef}>
         </textarea>
       </Grid>
