@@ -1,14 +1,12 @@
-import React, { useContext, useEffect } from "react";
-import { SocketContext } from "../context/socket";
+import React, { useEffect, useState } from "react";
 
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 
-import Chat from "../Components/Chat";
+import Chat from "../Components/Chat/ChatTabs";
 import Editor from "../Components/Editor/Editor";
 import IO from "../Components/IO/IO";
 import Problem from "../Components/Problem/Problem";
 import { connect } from "react-redux";
-
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Toolbar from "../Components/Toolbar/Toolbar";
@@ -22,76 +20,89 @@ function Alert(props) {
 }
 
 const CollabPage = (props) => {
-  const socket = useContext(SocketContext);
+  const socket = props.socket;
   const location = useLocation();
   const history = useHistory();
+  const [joined, setJoined] = useState(false);
 
   useEffect(() => {
-    const currentPath = location.pathname;
     const searchParams = new URLSearchParams(location.search);
 
-    if (!searchParams.get("name") || !searchParams.get("room")) {
-      return history.push(
-        "/rooms?" +
-          (searchParams.has("room") ? "room=" + searchParams.get("room") : "")
-      );
+    if (
+      !searchParams.get("name") ||
+      !searchParams.get("room") ||
+      !location.state
+    ) {
+      return history.push({
+        pathname: "/rooms",
+        search:
+          "?" +
+          (searchParams.has("room") ? "room=" + searchParams.get("room") : ""),
+        state: {
+          error:
+            "Either Password is not set or name and password can't be empty",
+        },
+      });
     }
+    const password = location.state.password;
 
     socket.emit(
       "join",
-      { room: searchParams.get("room"), username: searchParams.get("name") },
+      {
+        room: searchParams.get("room"),
+        username: searchParams.get("name"),
+        password,
+      },
       ({ error, user }) => {
         if (error) {
-          console.log("username is already taken");
-          return history.push(
-            "/rooms?" +
+          console.log(error);
+          return history.push({
+            pathname: "/rooms",
+            search:
+              "?" +
               (searchParams.has("room")
                 ? "room=" + searchParams.get("room")
-                : "")
-          );
+                : ""),
+            state: { error },
+          });
         }
-
+        setJoined(true);
         console.log("joined");
       }
     );
-
-    return () => {
-      console.log("socket dissconnect");
-      socket.disconnect();
-    };
   }, []);
 
-  return (
+  return joined ? (
     <>
       <Toolbar />
-      <div style={{ height: "85vh" }}>
+      <div style={{ height: "85vh" ,overflowY:'hidden'}}>
         <ReflexContainer orientation="vertical">
           <ReflexElement
             minSize="10"
-            maxSize="350"
-            size="250"
-            style={{ overflow: "hidden" }}
+            maxSize="900"
+            size="350"
+            style={{overflowX:'hidden'}}
           >
-            <Problem />
+            <Problem socket={socket} />
           </ReflexElement>
 
           <ReflexSplitter
             className="reflex-thin"
             style={{
-              backgroundColor: "#1f273d",
+              background: "#1f273d",
               opacity: "1",
               border: "0.3px",
             }}
           />
 
-          <ReflexElement orientation="horizontol" maxSize="1500" minSize="400">
+          <ReflexElement orientation="horizontol" maxSize="1900" minSize="400">
             <ReflexContainer>
               <ReflexElement
                 minSize="100"
-                maxSize="1500"
+                maxSize="1600"
                 style={{ overflow: "hidden" }}
               >
-                <Editor />
+                <Editor socket={socket} />
               </ReflexElement>
               <ReflexSplitter
                 className="reflex-thin"
@@ -102,12 +113,12 @@ const CollabPage = (props) => {
                 }}
               />
               <ReflexElement
-                minSize="10"
+                minSize="8"
                 maxSize="200"
                 size="100"
                 style={{ overflow: "hidden" }}
               >
-                <IO />
+                <IO socket={socket} />
               </ReflexElement>
             </ReflexContainer>
           </ReflexElement>
@@ -122,12 +133,12 @@ const CollabPage = (props) => {
           />
 
           <ReflexElement
-            minSize="10"
-            maxSize="270"
-            size="200"
+            minSize="8"
+            maxSize="250"
+            size="250"
             style={{ overflow: "hidden" }}
           >
-            <Chat />
+            <Chat socket={socket} />
           </ReflexElement>
         </ReflexContainer>
 
@@ -153,6 +164,8 @@ const CollabPage = (props) => {
         </Snackbar>
       </div>
     </>
+  ) : (
+    <></>
   );
 };
 

@@ -6,7 +6,6 @@ import Compile from './BarItem/Compile'
 import GraphButton from './BarItem/GraphButton'
 import FontSize from './BarItem/FontSize'
 import RoomTitle from '../../Assets/images/roomTitle.png'
-import Link from '../Link/Link'
 import {
   Typography,
   CssBaseline,
@@ -35,7 +34,6 @@ export default function Toolbar(props) {
           </Grid>
           <Grid container direction='column' justify="center"
           alignItems="center" style={{width:'50%'}}>
-            <Link/>
             <Grid direction='row' style={{display:'flex',width:'100%',paddingTop:'.5vh'}}>
               <Grid style={{display:'flex'}}>
                 <LanguagePicker/>
