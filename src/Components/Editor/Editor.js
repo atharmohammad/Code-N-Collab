@@ -32,8 +32,6 @@ import {
 const MonacoEditor = (props) => {
   const socket = props.socket;
   const MonacoEditorRef = useRef();
-  const inputRef = useRef();
-  const outputRef = useRef();
   const [code, setCode] = useState("");
   const [codeValue, setCodeValue] = useState("");
   const location = useLocation();
@@ -74,7 +72,6 @@ const MonacoEditor = (props) => {
       }
       socket.emit("Compile_OFF")
       props.resetLoading();
-      props.resetReceivedIO();
     }
   }, [props.tools.nowCompile]);
 
@@ -84,34 +81,13 @@ const MonacoEditor = (props) => {
       setCodeValue(data);
     });
 
-    socket.on("initialIO", ({ inputText, outputText }) => {
-      props.setInput(inputText);
-      props.setOutput(outputText);
-      props.recievedIO();
-    });
+    socket.on("Compile_ON",()=>{
+      props.setLoading();
+    })
 
-    socket.on("sendInitialIO", ({ id }) => {
-      const creator = () => {
-        const inputText = inputRef.current.value;
-        const outputText = outputRef.current.value;
-
-        const data = {
-          id,
-          inputText,
-          outputText,
-        };
-        socket.emit("takeInitialIO", data);
-      };
-      creator();
-    });
-
-      socket.on("Compile_ON",()=>{
-        props.setLoading();
-      })
-
-      socket.on('Compile_OFF',()=>{
-        props.resetLoading();
-      })
+    socket.on('Compile_OFF',()=>{
+      props.resetLoading();
+    })
 
     const credentials = { username: "testuser", password: "changeme" };
     let modelService;
@@ -142,18 +118,8 @@ const MonacoEditor = (props) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (props.tools.someOneSendIO === false)
-      socket.emit("changeIO", {
-        inputText: props.tools.input,
-        outputText: props.tools.output,
-      });
-  }, [props.tools.input, props.tools.output, props.tools.someOneSendIO]);
-
   return (
     <>
-      <textarea hidden ref={inputRef} value={props.tools.input} />
-      <textarea hidden ref={outputRef} value={props.tools.output} />
       <Editor
         ref={MonacoEditorRef}
         beforeMount={handleEditorWillMount}
@@ -187,8 +153,6 @@ const mapDispatchToProps = (dispatch) => {
     setLoading: () => dispatch({ type: SET_LOADING }),
     resetLoading: () => dispatch({ type: RESET_LOADING }),
     resetCompile: () => dispatch({ type: SET_COMPILE_OFF }),
-    resetReceivedIO: () => dispatch({ type: RESET_SOME_ONE_SEND_IO }),
-    recievedIO: () => dispatch({ type: SET_SOME_ONE_SEND_IO }),
     notify_output_on: () => dispatch({ type: NOTIFY_OUTPUT_SUCCESS }),
     notify_output_error_on: () => dispatch({ type: NOTIFY_OUTPUT_ERROR }),
   };

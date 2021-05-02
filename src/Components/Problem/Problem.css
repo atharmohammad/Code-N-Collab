@@ -4,6 +4,7 @@ div.ttypography textarea,div.ttypography pre,div.ttypography code,div.ttypograph
 
 .place{
   width: 110vh;
+  min-width: 0vh;
   margin:2vh 0 0 0;
   border-radius:10px;
   outline:none;

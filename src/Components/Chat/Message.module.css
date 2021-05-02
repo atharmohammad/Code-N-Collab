@@ -5,6 +5,7 @@
     color: white;
     display: inline-block;
     max-width: 45%;
+    min-width: 0vh;
     display: flex;
     flex-direction: row;
   }
@@ -25,11 +26,12 @@
   }
 
   .messageText {
-    width: 100%;
     letter-spacing: 0;
     float: left;
     font-size: 1.1em;
     word-wrap: break-word;
+    width: 100%;
+    min-width: 0vh;
   }
 
   .messageText img {
