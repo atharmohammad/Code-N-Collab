@@ -1,28 +1,30 @@
 .messageBox {
-    background: #F3F3F3;
     border-radius: 20px;
     padding: 0px 12px;
     color: white;
     display: inline-block;
-    max-width: 45%;
-    min-width: 0vh;
+    max-width: 50%;
+    min-width: 1vw;
     display: flex;
     flex-direction: row;
   }
 
   .you{
     color:red;
+    width:20%;
     font-weight: bold;
     text-align:right;
-    margin : 2vh 0 0 6vh
+    margin : 2vh 0 0 3vh;
+    box-sizing:border-box;
   }
 
   .online{
     height: 2vh;
-    width:2vh;
+    width:10%;
     border-radius: 50%;
     background-color: green;
-    margin : 3vh 0 0 6vh
+    margin : 3vh 0 0 6vh;
+    box-sizing:border-box;
   }
 
   .messageText {
@@ -40,9 +42,9 @@
 
   .messageContainer {
     display:flex;
-    width:28vh;
+    width:100%;
     padding: 0 5%;
-    display: 'inline-block';
+    box-sizing: border-box;
     margin-top: 5px;
   }
 
@@ -80,12 +82,26 @@
 
   .backgroundBlue {
     background: #2979FF;
+    border-top-right-radius: 0px;
   }
 
   .backgroundLight {
     background: #0fdf88;
+    border-top-left-radius: 0px;
   }
 
   .backgroundUser {
-    background:rgb(54, 70, 112);;
+    background:rgb(54, 70, 112);
+    width:20vh;
   }
+  .messages{
+    width:100%;
+    box-sizing: border-box;
+  }
+.scroll_messages{
+  width:100%;
+  padding:0px;
+  overflow-x: hidden;
+  padding:2vh 0px;
+  box-sizing: border-box;
+}

@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import ScrollToBottom from "react-scroll-to-bottom";
 import Message from './Message';
 import { useLocation } from "react-router-dom";
+import classes from'./Message.module.css';
 
 
 const Chat = (props) => {
@@ -13,33 +14,34 @@ const Chat = (props) => {
   const searchParams = new URLSearchParams(location.search);
 
   const submitHandler = (e) => {
-    console.log();
     e.preventDefault();
     const finalValue = inputRef.current.value.trim();
     if (finalValue) socket.emit("clientMsg", { message: finalValue });
     inputRef.current.value = "";
   };
-
+  
   return (
     <Grid
       style={{
         display: "flex",
         flexFlow: "column",
-        height: "75vh",
-        width: "31vh",
+        height: "75.5vh",
+        width: '100%',
         overflow: "hidden",
         backgroundColor: "#ededeb",
         border: "2px solid black",
+        borderRadius:'10px'
       }}
     >
       <Typography
-        style={{ fontSize: "15px", fontWeight: "bold", margin: "1vh 0 0 7vh" }}
+        style={{ fontSize: "15px", fontWeight: "bold", textAlign:'center',color:'#3f51b5' }}
       >
         CHAT
       </Typography>
-      <Grid style={{ height: "63.5vh", display: "flex", flexFlow: "row" }}>
-        <ScrollToBottom className="messages">
-        <div style={{width:'30vh',overflowX: 'hidden'}}>
+      <Grid style={{ height: "63.5vh", display: "flex", flexFlow: "row"}}>
+        
+        <ScrollToBottom  className={classes.scroll_messages} >
+        <div className={classes.messages}>
         {props.messages.map((message, i) => <div key={i}><Message message={message} name={searchParams.get('name')}/></div>)}
         </div>
         </ScrollToBottom>
