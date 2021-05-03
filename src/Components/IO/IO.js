@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     boxSizing: "content-box",
     padding: "10px 10px 0 10px",
     fontSize: "18px",
+    '&::placeholder':{
+      color:'#fff'
+    }
   },
 }));
 

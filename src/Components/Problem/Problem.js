@@ -42,7 +42,7 @@ export default function App(props) {
   }
 
   return (
-    <div style={{backgroundColor:"#ededeb",minHeight:"85vh",display:'flex',flexDirection:'column' }}>
+    <div style={{backgroundColor:"#fff",minHeight:"85vh",display:'flex',flexDirection:'column' }}>
         <div style={{height:'6vh',fontSize:'20px',padding:'0 0 0 2vh',
         textAlign:'center',background:'#3F51B5', boxSizing:'border-box'}}>
           <p  style={{ fontSize: "18px",color:"#fff",margin:'1vh 0 0 0'}}>
@@ -51,17 +51,21 @@ export default function App(props) {
         </div>
       <Grid
         style={{
-          minHeight: "75vh",
+          height: "75vh",
           maxWidth: "120vh",
           display: "flex",
           flexFlow: "column",
           padding: "1vh",
           border: "2px solid black",
-          backgroundColor: "#ededeb",
-          margin:"1vh",
+          margin:"1.5vh",
+          borderRadius:'10px',
+          backgroundColor: "#313332",
+          boxShadow: '0 5px 15px 0px rgba(0,0,0,0.6)',
         }}
       >
-      <Grid style={{ display: "flex", minHeight: "4vh",
+      <Grid ref={ProblemRef} style={{overflowY:'scroll',color:'#fff'}}>
+      </Grid>
+      <Grid style={{ display: "flex", minHeight: "8vh",
       margin: "1vh 0 0 0",flexDirection:'row',maxWidth:'110vh' ,boxSizing:'border-box'}}>
           <input placeholder="Problem Link"
           className='place'
@@ -69,8 +73,8 @@ export default function App(props) {
           <div
           style={{
             minHeight: "4vh",
-            backgroundColor: "#872e2e",
-            color: "#fff",
+            backgroundColor: "#fff",
+            color: "black",
             width: "8vh",
             borderRadius: "5px",
             margin: "2.5vh 0 0 1vh",
@@ -78,14 +82,13 @@ export default function App(props) {
             cursor: "pointer",
             textAlign:'center',
             minWidth:'5vh',
+            fontWeight:'bold'
           }}
           onClick={problemFetchHandler}>
           Fetch
           </div>
         </Grid>
         {loader ? <Spinner/> : null}
-        <Grid style={{color:'black'}} ref={ProblemRef}>
-        </Grid>
       </Grid>
     </div>
   );

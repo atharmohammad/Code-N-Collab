@@ -6,7 +6,6 @@ import Message from './Message';
 import { useLocation } from "react-router-dom";
 import classes from'./Message.module.css';
 
-
 const Chat = (props) => {
   const socket = props.socket;
   const inputRef = useRef();
@@ -19,7 +18,7 @@ const Chat = (props) => {
     if (finalValue) socket.emit("clientMsg", { message: finalValue });
     inputRef.current.value = "";
   };
-  
+
   return (
     <Grid
       style={{
@@ -28,35 +27,33 @@ const Chat = (props) => {
         height: "75.5vh",
         width: '100%',
         overflow: "hidden",
-        backgroundColor: "#ededeb",
+        background:'#313332',
         border: "2px solid black",
-        borderRadius:'10px'
+        borderRadius:'10px',
+        boxShadow: '0 5px 15px 0px rgba(0,0,0,0.6)',
       }}
     >
       <Typography
-        style={{ fontSize: "15px", fontWeight: "bold", textAlign:'center',color:'#3f51b5' }}
+        style={{ fontSize: "15px", fontWeight: "bold", textAlign:'center',color:'#fff' }}
       >
         CHAT
       </Typography>
-      <Grid style={{ height: "63.5vh", display: "flex", flexFlow: "row"}}>
-        
+      <Grid style={{ height: "63.5vh", display: "flex", flexFlow: "row",background:'#313332',}}>
+
         <ScrollToBottom  className={classes.scroll_messages} >
         <div className={classes.messages}>
         {props.messages.map((message, i) => <div key={i}><Message message={message} name={searchParams.get('name')}/></div>)}
         </div>
         </ScrollToBottom>
       </Grid>
-      <form onSubmit={submitHandler} style={{ margin: "0 2px 1px 2px" }}>
+      <form onSubmit={submitHandler} style={{ padding: "0 2px 1px 2px",
+      background:'#313332'}}>
         <input
           ref={inputRef}
           onChange={(e) => {}}
           type="text"
           placeholder="Send a Message!"
-          style={{ height: "6vh",
-           width: "95%",
-          borderRadius:'15px',
-          outline:'none',
-        border:'2px double blue'}}
+          className={classes.input}
         />
       </form>
     </Grid>

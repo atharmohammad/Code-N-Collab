@@ -10,7 +10,7 @@
   }
 
   .you{
-    color:red;
+    color:white;
     width:20%;
     font-weight: bold;
     text-align:right;
@@ -52,7 +52,7 @@
     display: flex;
     align-items: center;
     font-family: Helvetica;
-    color: #828282;
+    color: white;
     letter-spacing: 0.3px;
   }
 
@@ -77,7 +77,7 @@
   }
 
   .colorDark {
-    color: #353535;
+    color: #fff;
   }
 
   .backgroundBlue {
@@ -86,7 +86,7 @@
   }
 
   .backgroundLight {
-    background: #0fdf88;
+    background: #32a852;
     border-top-left-radius: 0px;
   }
 
@@ -104,4 +104,17 @@
   overflow-x: hidden;
   padding:2vh 0px;
   box-sizing: border-box;
+}
+
+.input{
+    height:6vh;
+    width: 95%;
+    border-radius:15px;
+    outline:none;
+    border:2px double black;
+    padding-left: 1vh;
+}
+
+.input::placeholder{
+  color:black
 }
