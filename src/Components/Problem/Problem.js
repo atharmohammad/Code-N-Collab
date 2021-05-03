@@ -42,12 +42,14 @@ export default function App(props) {
   }
 
   return (
+    <>
     <div style={{backgroundColor:"#fff",minHeight:"85vh",display:'flex',flexDirection:'column' }}>
         <div style={{height:'6vh',fontSize:'20px',padding:'0 0 0 2vh',
         textAlign:'center',background:'#3F51B5', boxSizing:'border-box'}}>
           <p  style={{ fontSize: "18px",color:"#fff",margin:'1vh 0 0 0'}}>
             Problems
           </p>
+          
         </div>
       <Grid
         style={{
@@ -91,5 +93,6 @@ export default function App(props) {
         {loader ? <Spinner/> : null}
       </Grid>
     </div>
+    </>
   );
 }
