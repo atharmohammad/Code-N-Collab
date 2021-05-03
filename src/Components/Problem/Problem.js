@@ -42,9 +42,9 @@ export default function App(props) {
   }
 
   return (
-    <div style={{backgroundColor:"#ededeb",minHeight:"85vh",display:'flex',flexDirection:'column'}}>
+    <div style={{backgroundColor:"#ededeb",minHeight:"85vh",display:'flex',flexDirection:'column' }}>
         <div style={{height:'6vh',fontSize:'20px',padding:'0 0 0 2vh',
-        textAlign:'center',background:'#3F51B5'}}>
+        textAlign:'center',background:'#3F51B5', boxSizing:'border-box'}}>
           <p  style={{ fontSize: "18px",color:"#fff",margin:'1vh 0 0 0'}}>
             Problems
           </p>
@@ -58,11 +58,11 @@ export default function App(props) {
           padding: "1vh",
           border: "2px solid black",
           backgroundColor: "#ededeb",
-          margin:"1vh"
+          margin:"1vh",
         }}
       >
       <Grid style={{ display: "flex", minHeight: "4vh",
-      margin: "1vh 0 0 0",flexDirection:'row',maxWidth:'110vh' }}>
+      margin: "1vh 0 0 0",flexDirection:'row',maxWidth:'110vh' ,boxSizing:'border-box'}}>
           <input placeholder="Problem Link"
           className='place'
           onChange={changeHandler} value={link}/>
