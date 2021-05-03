@@ -11,17 +11,20 @@
 
   .you{
     color:red;
+    width:20%;
     font-weight: bold;
     text-align:right;
-    margin : 2vh 0 0 6vh
+    margin : 2vh 0 0 3vh;
+    box-sizing:border-box;
   }
 
   .online{
     height: 2vh;
-    width:2vh;
+    width:10%;
     border-radius: 50%;
     background-color: green;
-    margin : 3vh 0 0 6vh
+    margin : 3vh 0 0 6vh;
+    box-sizing:border-box;
   }
 
   .messageText {
@@ -88,7 +91,8 @@
   }
 
   .backgroundUser {
-    background:rgb(54, 70, 112);;
+    background:rgb(54, 70, 112);
+    width:20vh;
   }
   .messages{
     width:100%;

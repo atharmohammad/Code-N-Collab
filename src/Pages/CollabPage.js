@@ -33,15 +33,20 @@ const CollabPage = (props) => {
       !searchParams.get("room") ||
       !location.state
     ) {
+      let err = {};
+
+      if (!searchParams.get("name") || !searchParams.get("room")) {
+        err = {
+          error: "Username or RoomName can't be empty",
+        };
+      }
+
       return history.push({
         pathname: "/rooms",
         search:
           "?" +
           (searchParams.has("room") ? "room=" + searchParams.get("room") : ""),
-        state: {
-          error:
-            "Either Password is not set or name and password can't be empty",
-        },
+        state: err,
       });
     }
     const password = location.state.password;
@@ -75,13 +80,13 @@ const CollabPage = (props) => {
   return joined ? (
     <>
       <Toolbar />
-      <div style={{ height: "85vh" ,overflowY:'hidden'}}>
+      <div style={{ height: "85vh", overflowY: "hidden" }}>
         <ReflexContainer orientation="vertical">
           <ReflexElement
             minSize="10"
             maxSize="900"
             size="350"
-            style={{overflowX:'hidden'}}
+            style={{ overflowX: "hidden" }}
           >
             <Problem socket={socket} />
           </ReflexElement>

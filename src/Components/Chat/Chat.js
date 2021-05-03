@@ -25,7 +25,7 @@ const Chat = (props) => {
       style={{
         display: "flex",
         flexFlow: "column",
-        height: "75vh",
+        height: "75.5vh",
         width: '100%',
         overflow: "hidden",
         backgroundColor: "#ededeb",
