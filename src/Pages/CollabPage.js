@@ -83,7 +83,7 @@ const CollabPage = (props) => {
       <div style={{ height: "85vh", overflowY: "hidden" }}>
         <ReflexContainer orientation="vertical">
           <ReflexElement
-            minSize="10"
+            minSize="0"
             maxSize="900"
             size="350"
             style={{ overflowX: "hidden" }}
@@ -118,9 +118,9 @@ const CollabPage = (props) => {
                 }}
               />
               <ReflexElement
-                minSize="8"
-                maxSize="200"
-                size="100"
+                minSize="0"
+                maxSize="300"
+                size="200"
                 style={{ overflow: "hidden" }}
               >
                 <IO socket={socket} />
