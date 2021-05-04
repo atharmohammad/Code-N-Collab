@@ -77,9 +77,6 @@ const MonacoEditor = (props) => {
 
   //socket and convergence
   useEffect(async () => {
-    socket.on("initialCode", (data) => {
-      setCodeValue(data);
-    });
 
     socket.on("Compile_ON",()=>{
       props.setLoading();
