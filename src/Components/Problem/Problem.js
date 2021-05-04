@@ -43,13 +43,13 @@ export default function App(props) {
 
   return (
     <>
-    <div style={{backgroundColor:"#fff",minHeight:"85vh",display:'flex',flexDirection:'column' }}>
+    <div style={{backgroundColor:"#fff",minHeight:"85vh",display:'flex',flexDirection:'column'}}>
         <div style={{height:'6vh',fontSize:'20px',padding:'0 0 0 2vh',
         textAlign:'center',background:'#3F51B5', boxSizing:'border-box'}}>
           <p  style={{ fontSize: "18px",color:"#fff",margin:'1vh 0 0 0'}}>
             Problems
           </p>
-          
+
         </div>
       <Grid
         style={{
@@ -65,7 +65,9 @@ export default function App(props) {
           boxShadow: '0 5px 15px 0px rgba(0,0,0,0.6)',
         }}
       >
-      <Grid ref={ProblemRef} style={{overflowY:'scroll',color:'#fff'}}>
+      <Grid ref={ProblemRef} style={{overflowY:'auto',
+      color:'tomato',fontSize:'18px',
+      fontWeight:'bold',}}>
       </Grid>
       <Grid style={{ display: "flex", minHeight: "8vh",
       margin: "1vh 0 0 0",flexDirection:'row',maxWidth:'110vh' ,boxSizing:'border-box'}}>
@@ -90,7 +92,9 @@ export default function App(props) {
           Fetch
           </div>
         </Grid>
-        {loader ? <Spinner/> : null}
+        {loader ?
+          <Spinner/>
+         : null}
       </Grid>
     </div>
     </>

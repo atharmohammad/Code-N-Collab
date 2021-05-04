@@ -35,7 +35,7 @@ div.ttypography h5,
 div.ttypography h6 {
   font-family: helvetica neue, Helvetica, Arial, sans-serif;
   font-weight: 400;
-  color: #161e21;
+  color: #fff;
   margin: 0;
 }
 div.ttypography h1 {
@@ -651,4 +651,3 @@ div .problem-statement-overlay {
 .place::placeholder {
   color: #fff;
 }
-

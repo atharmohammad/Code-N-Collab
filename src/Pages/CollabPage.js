@@ -85,7 +85,7 @@ const CollabPage = (props) => {
           <ReflexElement
             minSize="0"
             maxSize="900"
-            size="350"
+            size="400"
             style={{ overflowX: "hidden" }}
           >
             <Problem socket={socket} />

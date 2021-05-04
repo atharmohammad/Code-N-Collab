@@ -171,8 +171,8 @@ const GraphVis = (props) => {
             style={{
               height: "56vh",
               width: "100%",
-              backgroundColor: "#34214a",
-              border: "#34214a",
+              backgroundColor: "#6e7053",
+              border: "#fff",
             }}
           />
         </Grid>
