@@ -94,7 +94,7 @@ const MonacoEditor = (props) => {
       const model = await modelService.openAutoCreate({
         collection: "Code-n-Collab`",
         id: searchParams.get("room").trim(),
-        ephemeral: false,
+        ephemeral: true, //Deletes model when everyone left
         data: { text: code },
       });
 
