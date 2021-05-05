@@ -14,7 +14,7 @@ const People = (props) => {
       style={{
         display: "flex",
         flexFlow: "column",
-        height: "75.5vh",
+        height: "74vh",
         width: "100%",
         overflow: "hidden",
         background:'#313332',
@@ -35,7 +35,7 @@ const People = (props) => {
         People
       </Typography>
       <Grid style={{ height: "70vh", display: "flex", flexFlow: "row",background:'#313332', }}>
-        <ScrollToBottom>
+        <ScrollToBottom className={classes.scroll_messages}>
           <div style={{ width: "100%", overflowX: "hidden",background:'#313332', }}>
             {props.persons.map((person, i) => {
               return (
@@ -45,8 +45,8 @@ const People = (props) => {
                   <div
                     className={`${classes.messageBox} ${classes.backgroundUser}`}
                   >
-                    <Avatar style={{ margin: "1.2vh 1vh 0 0" }}>
-                      {person.username[0]}
+                    <Avatar className={classes.Avatar}>
+                      {person.username[0].toUpperCase()}
                     </Avatar>
                     <p
                       className={`${classes.messageText} ${classes.colorLight}`}

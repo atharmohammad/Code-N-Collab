@@ -51,7 +51,7 @@ class MonacoConvergenceAdapter {
           this.contentManager.replace(e.index,e.value.length,e.value);
           break;
         }
-        default:console.log("error event",e);
+        default:console.log("default event",e);
       }
     });
 

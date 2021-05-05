@@ -20,7 +20,7 @@
 
   .online{
     height: 2vh;
-    width:10%;
+    width:2vh;
     border-radius: 50%;
     background-color: green;
     margin : 3vh 0 0 6vh;
@@ -91,7 +91,7 @@
   }
 
   .backgroundUser {
-    background:rgb(54, 70, 112);
+    background:#367ec9;
     width:20vh;
   }
   .messages{
@@ -111,10 +111,22 @@
     width: 95%;
     border-radius:15px;
     outline:none;
-    border:2px double black;
     padding-left: 1vh;
+    border: 2px solid white;
+    background: black;
+    color:#fff
 }
 
 .input::placeholder{
-  color:black
+  color:#fff
+}
+.input:focus{
+  box-shadow: 0 0 3pt 2pt #36279c;
+}
+
+.Avatar{
+  margin: 1.2vh 1vh 0 0;
+  border:2px solid black;
+  color:black;
+  font-weight:bold;
 }

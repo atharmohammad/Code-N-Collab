@@ -53,7 +53,7 @@ export default function App(props) {
         </div>
       <Grid
         style={{
-          height: "75vh",
+          height: "74vh",
           maxWidth: "120vh",
           display: "flex",
           flexFlow: "column",

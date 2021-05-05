@@ -3,6 +3,7 @@ import { Convergence } from "@convergence/convergence";
 import { CodeEditorConfig } from "./config";
 import Editor from './Editor';
 import { useLocation,useHistory } from "react-router-dom";
+import Spinner from '../Spinner/EditorSpinner/EditorSpinner';
 
 const Wrapper = (props)=>{
     const socket = props.socket;
@@ -33,7 +34,7 @@ const Wrapper = (props)=>{
 
     return(
       <>
-      {domain ? <Editor socket = {socket} domain={domain}/> : <p>Loading..!</p>}
+      {domain ? <Editor socket = {socket} domain={domain}/> : <Spinner/>}
       </>
     )
 }
