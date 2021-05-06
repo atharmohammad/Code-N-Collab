@@ -71,7 +71,7 @@ export default function ChatPanel(props) {
   };
 
   return (
-    <div>
+    <div stlye={{backgroundColor:'#313332'}}>
       <AppBar position="static">
         <Tabs
           value={value}
