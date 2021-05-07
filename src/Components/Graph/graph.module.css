@@ -1,0 +1,50 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  z-index: 400;
+  background: black;
+  height: 60vh;
+  width: 40%;
+  box-shadow: 1px 1px 1px black;
+  background: rgb(39, 41, 43, 0.8);
+  padding: 1vh 2vh 2vh 10vh;
+  left: 30%;
+  top: 150px;
+  transition: all 0.3s ease-out;
+  border-radius: 20px;
+}
+.btnContainer{
+   display:flex;
+   flex-direction: row;
+   align-items:center;
+   width:100%;
+   justify-content: flex-end;
+}
+.closeBtn:hover{
+    background:red;
+}
+.graphContainer {
+  display: flex;
+  flex-direction: row;
+  background:red;
+  border: 4px solid #fff;
+  box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left:-30px;
+}
+.inputEdge {
+  width: 100%;
+  height: 56vh;
+  font-size: 20px;
+  background: #fff;
+}
+.graph {
+  width: 100%;
+  height: 56vh;
+  resize: none;
+  font-size: 20px;
+  background: #fff;
+}
