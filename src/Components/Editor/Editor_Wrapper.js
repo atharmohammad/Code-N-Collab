@@ -33,7 +33,8 @@ const Wrapper = (props) => {
     };
   }, [domain]);
 
-  return <>{domain ? <Editor socket={socket} domain={domain} /> : <Spinner />}</>;
+  return <>{domain ? <Editor socket={socket} domain={domain} /> :
+   <div style={{background:'black',height:'100%',width:'100%'}}><Spinner /></div>}</>;
 };
 
 export default Wrapper;

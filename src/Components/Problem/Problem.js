@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import "./Problem.css";
-import Spinner from "../Spinner/ProblemSpinner";
+import Spinner from "../Spinner/BlogSpinner";
 
 import {
   Typography,

@@ -4,6 +4,11 @@ import { SET_LANGUAGE } from "../../../store/Action/action";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import classes from "./tools.module.css";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const LanguagePicker = (props) => {
   const handleChange = (event) => {
@@ -12,33 +17,42 @@ const LanguagePicker = (props) => {
 
   return (
     <Grid style={{ display: "flex", margin: "2vh 0 0 5vh" }}>
-      <select
-        className={classes.navSelect}
-        onChange={handleChange}
-        value={props.language}
-      >
-        <option value="cpp" selected>
-          C/C++(14)
-        </option>
-        <option value="csharp">C#</option>
-        <option value="go">Go</option>
-        <option value="java">Java</option>
-        <option value="kotlin">Kotlin</option>
-        <option value="lua">Lua</option>
-        <option value="nodejs">NodeJs</option>
-        <option value="pascal">Pascal</option>
-        <option value="perl">Perl</option>
-        <option value="php">Php</option>
-        <option value="python">Python3</option>
-        <option value="r">R</option>
-        <option value="ruby">Ruby</option>
-        <option value="rust">Rust</option>
-        <option value="scala">Scala</option>
-        <option value="shell">Shell</option>
-        <option value="sql">SQL</option>
-        <option value="swift">Swift</option>
-        <option value="">Text</option>
-      </select>
+    <FormControl className={classes.formControl}>
+        <InputLabel style={{color:'#fff'}}
+        shrink id="demo-simple-select-placeholder-label-label">
+          Language
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-placeholder-label-label"
+          id="demo-simple-select-placeholder-label"
+          displayEmpty
+          className={`${classes.selectEmpty} ${classes.navSelect}`}
+          onChange={handleChange}
+          value={props.language}
+        >
+          <MenuItem value="cpp" selected>
+            <em>C/C++(14)</em>
+          </MenuItem>
+          <MenuItem value="csharp">C#</MenuItem>
+          <MenuItem value="go">Go</MenuItem>
+          <MenuItem value="java">Java</MenuItem>
+          <MenuItem value="kotlin">Kotlin</MenuItem>
+          <MenuItem value="lua">Lua</MenuItem>
+          <MenuItem value="nodejs">NodeJs</MenuItem>
+          <MenuItem value="pascal">Pascal</MenuItem>
+          <MenuItem value="perl">Perl</MenuItem>
+          <MenuItem value="php">Php</MenuItem>
+          <MenuItem value="python">Python3</MenuItem>
+          <MenuItem value="r">R</MenuItem>
+          <MenuItem value="ruby">Ruby</MenuItem>
+          <MenuItem value="rust">Rust</MenuItem>
+          <MenuItem value="scala">Scala</MenuItem>
+          <MenuItem value="shell">Shell</MenuItem>
+          <MenuItem value="sql">SQL</MenuItem>
+          <MenuItem value="swift">Swift</MenuItem>
+          <MenuItem value="">Text</MenuItem>
+        </Select>
+      </FormControl>
     </Grid>
   );
 };

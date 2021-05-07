@@ -6,6 +6,11 @@ import { connect } from "react-redux";
 
 import Grid from "@material-ui/core/Grid";
 import classes from "./tools.module.css";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const ThemePicker = (props) => {
   const handleChange = (event) => {
@@ -14,20 +19,29 @@ const ThemePicker = (props) => {
 
   return (
     <Grid style={{ display: "flex", margin: "2vh 0 0 4vh" }}>
-      <select
-        className={classes.navSelect}
-        onChange={handleChange}
-        value={props.theme}
-      >
-        <option value="light">light</option>
-        <option value="vs-dark" selected>
-          vs-dark
-        </option>
-        <option value="blackBoard">blackBoard</option>
-        <option value="cobalt">cobalt</option>
-        <option value="merbivore">merbivore</option>
-        <option value="github">github</option>
-      </select>
+    <FormControl className={classes.formControl}>
+        <InputLabel style={{color:'#fff'}}
+        shrink id="demo-simple-select-placeholder-label-label">
+          Theme
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-placeholder-label-label"
+          id="demo-simple-select-placeholder-label"
+          onChange={handleChange}
+          displayEmpty
+          className={`${classes.selectEmpty} ${classes.navSelect}`}
+          value={props.theme}
+        >
+          <MenuItem value="vs-dark" selected>
+            <em>vs-dark</em>
+          </MenuItem>
+          <MenuItem value="light">light</MenuItem>
+          <MenuItem value="blackBoard">blackBoard</MenuItem>
+          <MenuItem value="cobalt">cobalt</MenuItem>
+          <MenuItem value="merbivore">merbivore</MenuItem>
+          <MenuItem value="github">github</MenuItem>
+        </Select>
+      </FormControl>
     </Grid>
   );
 };
