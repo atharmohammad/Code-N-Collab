@@ -3,25 +3,9 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {SET_FONT_SIZE } from '../../../store/Action/action'
 import {connect} from 'react-redux'
 import Grid from '@material-ui/core/Grid';
-
-
-const useStyles = makeStyles((theme) => ({
-  select: {
-    borderRadius: '7px',
-    background:'#fff',
-    position: 'relative',
-    fontSize: 14,
-    height:'3.5vh',
-    cursor:'pointer',
-    color:'#1f273d',
-    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
-    outline:'none'
-  },
-}));
+import classes from './tools.module.css'
 
 const CustomizeFont = (props) => {
-
-  const classes = useStyles();
 
   const handleChange = (event) => {
     props.setFontSize(parseInt(event.target.value));
@@ -30,7 +14,7 @@ const CustomizeFont = (props) => {
 
   return (
     <Grid style={{display:'flex',margin:'2vh 0 0 5vh'}}>
-        <select className={classes.select} onChange={handleChange} value={props.font}>
+        <select className={classes.navSelect} onChange={handleChange} value={props.font}>
             <option value={20} selected>small</option>
             <option value={25}>Medium</option>
             <option value={30}>Large</option>

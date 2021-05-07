@@ -3,33 +3,17 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {SET_LANGUAGE } from '../../../store/Action/action'
 import {connect} from 'react-redux'
 import Grid from '@material-ui/core/Grid';
-
-
-const useStyles = makeStyles((theme) => ({
-  select: {
-    borderRadius: '7px',
-    background:'#f9f9f9',
-    position: 'relative',
-    fontSize: 12,
-    height:'3.5vh',
-    cursor:'pointer',
-    color:'#1f273d',
-    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
-    outline:'none'
-  },
-}));
+import classes from './tools.module.css'
 
 const LanguagePicker = (props) => {
-  const classes = useStyles();
 
   const handleChange = (event) => {
     props.setLanguage(event.target.value);
-    // console.log(event.target.value)
   };
 
   return (
-    <Grid style={{display:'flex',margin:'2vh 0 0 15vh',height:'5vh'}}>
-        <select className={classes.select} onChange={handleChange} value={props.language}>
+    <Grid style={{display:'flex',margin:'2vh 0 0 5vh'}}>
+        <select className={classes.navSelect} onChange={handleChange} value={props.language}>
             <option value='cpp' selected>C/C++(14)</option>
             <option value='csharp'>C#</option>
             <option value='go'>Go</option>

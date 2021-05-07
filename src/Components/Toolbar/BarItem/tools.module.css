@@ -1,0 +1,35 @@
+.navButton{
+    cursor: pointer;
+    color: white;
+    height: 35px;
+    width: 90px;
+    margin:auto 10px;
+    border-radius:5px;
+    background: #872e2e;
+    font-size: 14px;
+    padding:5px;
+   text-align: center;
+}
+
+.navSelect{
+    border-radius: 7px;
+    background:#fff;
+    position:relative;
+    font-size: 12;
+    width: 90px;
+    height: 25px;
+    cursor:pointer;
+    color: #1f273d;
+    margin:auto 10px;
+    box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+    outline:none;
+}
+
+@media only screen and (max-width: 1077px) {
+    .navButton{
+        margin:3px 25px;
+    }
+    .navSelect{
+        margin:0px 15px 10px -10px;;
+    }
+}
