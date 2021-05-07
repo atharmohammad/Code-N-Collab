@@ -51,26 +51,27 @@ const MonacoEditor = (props) => {
     if (props.tools.nowCompile === true && props.tools.isLoading === false) {
       props.setOutput("");
       props.setLoading();
-      socket.emit('Compile_ON');
+      socket.emit('Compile_ON',({language:props.tools.language,code,input:props.tools.input}));
 
-      let response = await compilerFunc(
-        props.tools.language,
-        code,
-        props.tools.input
-      );
-      props.resetCompile();
-
-      try {
-        props.setOutput(response.data.output);
-        props.notify_output_on();
-      } catch (e) {
-        props.setOutPut("Oops something went wrong");
-        props.notify_output_error_on();
-      }
-      socket.emit("Compile_OFF")
-      props.resetLoading();
     }
   }, [props.tools.nowCompile]);
+
+  useEffect(()=>{
+    socket.on("COMPILE_OFF",(data)=>{
+      console.log('compile data:',data);
+      let response = data;
+      props.resetCompile();
+      props.resetLoading();
+      if(response && response.output){
+        props.setOutput(response.output);
+        props.notify_output_on();
+      }  
+      else{
+        props.setOutput("Oops something went wrong");
+        props.notify_output_error_on();
+      }
+    });
+  },[])
 
   //socket and convergence
   useEffect(async()=>{
@@ -78,11 +79,6 @@ const MonacoEditor = (props) => {
     socket.on("Compile_ON",()=>{
       props.setLoading();
     })
-
-    socket.on('Compile_OFF',()=>{
-      props.resetLoading();
-    })
-
 
     let modelService;
     const currentPath = location.pathname;

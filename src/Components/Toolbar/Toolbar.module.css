@@ -47,7 +47,8 @@
         height:150px;
     }
     .toolWrap{
-        flex-direction: column;
+        flex-direction: column-reverse;
+        margin-top:5px;
       }
       .toolsGrid{
         margin:0px;

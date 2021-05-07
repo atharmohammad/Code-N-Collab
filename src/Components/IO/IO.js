@@ -51,10 +51,14 @@ const Io = (props) => {
     console.log("useEffect");
     socket.on("IO_recieved", (data) => {
       setRecieved(3);
-      inputRef.current.value = data.inputText;
+      if(data.inputText !== undefined){
+        inputRef.current.value = data.inputText;
+        props.setInput(data.inputText);
+      }
+      if(data.outputText !== undefined){
       outputRef.current.value = data.outputText;
-      props.setInput(data.inputText);
       props.setOutput(data.outputText);
+      }
       setRecieved(2);
     });
     socket.on("sendInitialIO", (obj) => {

@@ -22,9 +22,8 @@
    width:100%;
    justify-content: flex-end;
 }
-.closeBtn:hover{
-    background:red;
-}
+
+
 .graphContainer {
   display: flex;
   flex-direction: row;

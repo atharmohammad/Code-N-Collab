@@ -1,13 +1,13 @@
 .navButton{
     cursor: pointer;
     color: white;
-    height: 35px;
+    height: 30px;
     width: 90px;
     margin:auto 10px;
     border-radius:5px;
     background: #872e2e;
     font-size: 14px;
-    padding:5px;
+    padding-Top:4px;
    text-align: center;
 }
 
