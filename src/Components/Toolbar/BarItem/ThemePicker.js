@@ -5,24 +5,9 @@ import { SET_THEME } from "../../../store/Action/action";
 import { connect } from "react-redux";
 
 import Grid from "@material-ui/core/Grid";
-
-const useStyles = makeStyles((theme) => ({
-  select: {
-    borderRadius: "7px",
-    background: "#fff",
-    position: "relative",
-    fontSize: 12,
-    height: "3.5vh",
-    cursor: "pointer",
-    color: "#1f273d",
-    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
-    outline:'none'
-  },
-}));
+import classes from "./tools.module.css";
 
 const ThemePicker = (props) => {
-  const classes = useStyles();
-
   const handleChange = (event) => {
     props.setTheme(event.target.value);
   };
@@ -30,12 +15,14 @@ const ThemePicker = (props) => {
   return (
     <Grid style={{ display: "flex", margin: "2vh 0 0 4vh" }}>
       <select
-        className={classes.select}
+        className={classes.navSelect}
         onChange={handleChange}
         value={props.theme}
       >
         <option value="light">light</option>
-        <option value="vs-dark" selected>vs-dark</option>
+        <option value="vs-dark" selected>
+          vs-dark
+        </option>
         <option value="blackBoard">blackBoard</option>
         <option value="cobalt">cobalt</option>
         <option value="merbivore">merbivore</option>

@@ -25,7 +25,7 @@ const CollabPage = (props) => {
   const history = useHistory();
   const [joined, setJoined] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
 
     if (
@@ -51,7 +51,6 @@ const CollabPage = (props) => {
     }
     const password = location.state.password;
 
-
     socket.emit(
       "join",
       {
@@ -76,9 +75,9 @@ const CollabPage = (props) => {
         console.log("joined");
       }
     );
-  },[])
+  }, []);
 
-  return joined? (
+  return joined ? (
     <>
       <Toolbar />
       <div style={{ height: "85vh", overflowY: "hidden" }}>
@@ -108,7 +107,7 @@ const CollabPage = (props) => {
                 maxSize="1600"
                 style={{ overflow: "hidden" }}
               >
-                <Editor socket={socket}/>
+                <Editor socket={socket} />
               </ReflexElement>
               <ReflexSplitter
                 className="reflex-thin"
@@ -170,7 +169,9 @@ const CollabPage = (props) => {
         </Snackbar>
       </div>
     </>
-  ):<></>
+  ) : (
+    <></>
+  );
 };
 
 const mapStateToProps = (state) => {

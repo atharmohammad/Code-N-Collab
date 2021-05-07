@@ -18,7 +18,7 @@ function Rooms(props) {
   const location = useLocation();
 
   useEffect(() => {
-    if(location.state && location.state.error){
+    if (location.state && location.state.error) {
       alert(location.state.error);
     }
 
@@ -42,8 +42,8 @@ function Rooms(props) {
       play();
       history.push({
         pathname: "/collaborate",
-        search:"?room=" + room + "&name=" + name,
-        state: { password, },
+        search: "?room=" + room + "&name=" + name,
+        state: { password },
       });
     } catch (err) {
       console.log(err);
@@ -59,7 +59,7 @@ function Rooms(props) {
       style={{
         height: "100vh",
         background: "radial-gradient(ellipse, #1B2735 0%, #090A0F 100%)",
-        overflow:'hidden'
+        overflow: "hidden",
       }}
     >
       <div className={classes.stars}></div>

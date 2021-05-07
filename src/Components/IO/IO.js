@@ -16,9 +16,9 @@ const useStyles = makeStyles((theme) => ({
     boxSizing: "content-box",
     padding: "10px 10px 0 10px",
     fontSize: "18px",
-    '&::placeholder':{
-      color:'#fff'
-    }
+    "&::placeholder": {
+      color: "#fff",
+    },
   },
 }));
 
@@ -51,10 +51,14 @@ const Io = (props) => {
     console.log("useEffect");
     socket.on("IO_recieved", (data) => {
       setRecieved(3);
-      inputRef.current.value = data.inputText;
-      outputRef.current.value = data.outputText;
-      props.setInput(data.inputText);
-      props.setOutput(data.outputText);
+      if (data.inputText !== undefined) {
+        inputRef.current.value = data.inputText;
+        props.setInput(data.inputText);
+      }
+      if (data.outputText !== undefined) {
+        outputRef.current.value = data.outputText;
+        props.setOutput(data.outputText);
+      }
       setRecieved(2);
     });
     socket.on("sendInitialIO", (obj) => {

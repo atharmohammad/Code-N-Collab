@@ -20,12 +20,14 @@ const composeEnhancers =
 
 const store = createStore(
   rootReducer,
-  composeEnhancers != null ? composeEnhancers(applyMiddleware(thunk)):applyMiddleware(thunk)
+  composeEnhancers != null
+    ? composeEnhancers(applyMiddleware(thunk))
+    : applyMiddleware(thunk)
 );
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store = {store}>
+    <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>,
