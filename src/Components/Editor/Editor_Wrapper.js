@@ -34,7 +34,7 @@ const Wrapper = (props)=>{
 
     return(
       <>
-      {domain ? <Editor socket = {socket} domain={domain}/> : <Spinner/>}
+      {true ? <Editor socket = {socket} domain={domain}/> : <Spinner/>}
       </>
     )
 }
