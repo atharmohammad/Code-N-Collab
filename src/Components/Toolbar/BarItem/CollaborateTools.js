@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import * as TYPE from "../../../store/Action/action";
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
-import classes from './tools.module.css'
-import {
-  Box,
-} from "@material-ui/core";
+import classes from "./tools.module.css";
+import { Box } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-
 
 function CollabToolbar(props) {
   const history = useHistory();
@@ -36,10 +33,7 @@ function CollabToolbar(props) {
   };
 
   return (
-    <Box
-      className={classes.navButton}
-      onClick={leaveRoomHandler}
-    >
+    <Box className={classes.navButton} onClick={leaveRoomHandler}>
       Leave Room
     </Box>
   );

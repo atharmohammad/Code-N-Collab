@@ -5,10 +5,9 @@ import { SET_THEME } from "../../../store/Action/action";
 import { connect } from "react-redux";
 
 import Grid from "@material-ui/core/Grid";
-import classes from './tools.module.css'
+import classes from "./tools.module.css";
 
 const ThemePicker = (props) => {
-
   const handleChange = (event) => {
     props.setTheme(event.target.value);
   };
@@ -21,7 +20,9 @@ const ThemePicker = (props) => {
         value={props.theme}
       >
         <option value="light">light</option>
-        <option value="vs-dark" selected>vs-dark</option>
+        <option value="vs-dark" selected>
+          vs-dark
+        </option>
         <option value="blackBoard">blackBoard</option>
         <option value="cobalt">cobalt</option>
         <option value="merbivore">merbivore</option>

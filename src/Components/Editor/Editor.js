@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import Editor from "@monaco-editor/react";
 import "@convergencelabs/monaco-collab-ext/css/monaco-collab-ext.min.css";
 
-import { compilerFunc } from "../Functions/compilerFunc";
 import Modal from "../Modal/Modal";
 import Graph from "../Graph/Graph";
 import blackBoardJSON from "./manaco-Themes/blackBoard";
@@ -13,7 +12,6 @@ import cobaltJSON from "./manaco-Themes/cobalt";
 import merbivoreJSON from "./manaco-Themes/merbivore";
 import githubJSON from "./manaco-Themes/github";
 import MonacoConvergenceAdapter from "./EditorAdaptor";
-
 
 import {
   SET_LOADING,
@@ -51,40 +49,41 @@ const MonacoEditor = (props) => {
     if (props.tools.nowCompile === true && props.tools.isLoading === false) {
       props.setOutput("");
       props.setLoading();
-      socket.emit('Compile_ON',({language:props.tools.language,code,input:props.tools.input}));
-
+      socket.emit("Compile_ON", {
+        language: props.tools.language,
+        code,
+        input: props.tools.input,
+      });
     }
   }, [props.tools.nowCompile]);
 
-  useEffect(()=>{
-    socket.on("COMPILE_OFF",(data)=>{
-      console.log('compile data:',data);
+  useEffect(() => {
+    socket.on("COMPILE_OFF", (data) => {
+      console.log("compile data:", data);
       let response = data;
       props.resetCompile();
       props.resetLoading();
-      if(response && response.output){
+      if (response && response.output) {
         props.setOutput(response.output);
         props.notify_output_on();
-      }  
-      else{
+      } else {
         props.setOutput("Oops something went wrong");
         props.notify_output_error_on();
       }
     });
-  },[])
+  }, []);
 
   //socket and convergence
-  useEffect(async()=>{
-
-    socket.on("Compile_ON",()=>{
+  useEffect(async () => {
+    socket.on("Compile_ON", () => {
       props.setLoading();
-    })
+    });
 
     let modelService;
     const currentPath = location.pathname;
     const searchParams = new URLSearchParams(location.search);
 
-    try{
+    try {
       modelService = domain.models();
 
       const model = await modelService.openAutoCreate({
@@ -103,7 +102,7 @@ const MonacoEditor = (props) => {
     } catch (error) {
       console.error("Could not open model ", error);
     }
-  },[])
+  }, []);
 
   return (
     <>

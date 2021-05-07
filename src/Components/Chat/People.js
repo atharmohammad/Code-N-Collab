@@ -17,10 +17,10 @@ const People = (props) => {
         height: "74vh",
         width: "100%",
         overflow: "hidden",
-        background:'#313332',
+        background: "#313332",
         border: "2px solid black",
         borderRadius: "10px",
-        boxShadow: '0 5px 15px 0px rgba(0,0,0,0.6)',
+        boxShadow: "0 5px 15px 0px rgba(0,0,0,0.6)",
       }}
     >
       <Typography
@@ -29,14 +29,26 @@ const People = (props) => {
           fontWeight: "bold",
           textAlign: "center",
           color: "#fff",
-
         }}
       >
         People
       </Typography>
-      <Grid style={{ height: "70vh", display: "flex", flexFlow: "row",background:'#313332', }}>
+      <Grid
+        style={{
+          height: "70vh",
+          display: "flex",
+          flexFlow: "row",
+          background: "#313332",
+        }}
+      >
         <ScrollToBottom className={classes.scroll_messages}>
-          <div style={{ width: "100%", overflowX: "hidden",background:'#313332', }}>
+          <div
+            style={{
+              width: "100%",
+              overflowX: "hidden",
+              background: "#313332",
+            }}
+          >
             {props.persons.map((person, i) => {
               return (
                 <div

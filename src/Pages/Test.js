@@ -1,6 +1,6 @@
-import Graph from '../Components/Graph/Graph'
+import Graph from "../Components/Graph/Graph";
 
-const Test = ()=>{
-  return <Graph/>
-}
-export default Graph
+const Test = () => {
+  return <Graph />;
+};
+export default Graph;

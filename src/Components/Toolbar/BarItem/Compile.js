@@ -1,8 +1,8 @@
 import React from "react";
-import { Box,Button } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
 import { connect } from "react-redux";
-import {SET_COMPILE_ON } from '../../../store/Action/action'
-import classes from './tools.module.css'
+import { SET_COMPILE_ON } from "../../../store/Action/action";
+import classes from "./tools.module.css";
 
 const Compile = (props) => {
   return (
@@ -24,7 +24,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClickCompile: () => dispatch({ type:SET_COMPILE_ON}),
+    onClickCompile: () => dispatch({ type: SET_COMPILE_ON }),
   };
 };
 

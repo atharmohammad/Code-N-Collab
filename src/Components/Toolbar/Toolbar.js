@@ -24,16 +24,16 @@ export default function Toolbar(props) {
         <img src={RoomTitle} alt="code-n-collab" />
       </Grid>
       <Grid className={classes.toolWrap}>
-      <Grid className={classes.toolsGrid}>
-        <LanguagePicker />
-        <ThemePicker />
-        <FontSize />
-      </Grid >
-      <Grid className={classes.toolsGrid}>
-        <Compile />
-        <GraphButton />
-        <CollaborateTools />
-      </Grid>
+        <Grid className={classes.toolsGrid}>
+          <LanguagePicker />
+          <ThemePicker />
+          <FontSize />
+        </Grid>
+        <Grid className={classes.toolsGrid}>
+          <Compile />
+          <GraphButton />
+          <CollaborateTools />
+        </Grid>
       </Grid>
     </Grid>
   );

@@ -1,17 +1,17 @@
 import React from "react";
-import { Box,Button } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { SHOW_GRAPH } from "../../../store/Action/action";
-import classes from './tools.module.css'
+import classes from "./tools.module.css";
 const GraphButton = (props) => {
   return (
-      <Box
-        disabled={props.showGraph}
-        onClick={() => props.onClickGraph()}
-        className={classes.navButton}
-      >
-        Graph
-      </Box>
+    <Box
+      disabled={props.showGraph}
+      onClick={() => props.onClickGraph()}
+      className={classes.navButton}
+    >
+      Graph
+    </Box>
   );
 };
 
