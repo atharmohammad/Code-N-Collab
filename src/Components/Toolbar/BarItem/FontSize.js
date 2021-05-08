@@ -4,11 +4,10 @@ import { SET_FONT_SIZE } from "../../../store/Action/action";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import classes from "./tools.module.css";
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 const CustomizeFont = (props) => {
   const handleChange = (event) => {
@@ -17,22 +16,21 @@ const CustomizeFont = (props) => {
   };
 
   return (
-    <Grid style={{ display: "flex", margin: "2vh 0 0 5vh" }}>
-    <FormControl className={classes.formControl}>
-        <InputLabel style={{color:'#fff'}}
-        shrink id="demo-simple-select-placeholder-label-label">
+    <Grid
+    className ={classes.mainGrid} 
+    >
+      <FormControl>
+        <InputLabel  style={{ color: "#fff",paddingLeft:'50px'}} >
           Font
         </InputLabel>
         <Select
-          labelId="demo-simple-select-placeholder-label-label"
-          id="demo-simple-select-placeholder-label"
           onChange={handleChange}
           displayEmpty
           className={`${classes.selectEmpty} ${classes.navSelect}`}
           value={props.font}
         >
           <MenuItem value={20} selected>
-            <em>small</em>
+            <em>Small</em>
           </MenuItem>
           <MenuItem value={25}>Medium</MenuItem>
           <MenuItem value={30}>Large</MenuItem>
