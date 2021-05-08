@@ -15,18 +15,12 @@ import MonacoConvergenceAdapter from "./EditorAdaptor";
 
 import {
   SET_LOADING,
-  RESET_LOADING,
   SET_OUTPUT,
-  SET_INPUT,
-  SET_COMPILE_OFF,
-  NOTIFY_OUTPUT_SUCCESS,
-  NOTIFY_OUTPUT_ERROR,
 } from "../../store/Action/action";
 
 const MonacoEditor = (props) => {
   const socket = props.socket;
   const [code, setCode] = useState("");
-  const [codeValue, setCodeValue] = useState("");
   const location = useLocation();
   const domain = props.domain;
   const MonacoEditorRef = useRef();
@@ -56,22 +50,6 @@ const MonacoEditor = (props) => {
       });
     }
   }, [props.tools.nowCompile]);
-
-  useEffect(() => {
-    socket.on("COMPILE_OFF", (data) => {
-      console.log("compile data:", data);
-      let response = data;
-      props.resetCompile();
-      props.resetLoading();
-      if (response && response.output) {
-        props.setOutput(response.output);
-        props.notify_output_on();
-      } else {
-        props.setOutput("Oops something went wrong");
-        props.notify_output_error_on();
-      }
-    });
-  }, []);
 
   //socket and convergence
   useEffect(async () => {
@@ -111,7 +89,6 @@ const MonacoEditor = (props) => {
         beforeMount={handleEditorWillMount}
         onMount={(editor) => handleEditorDidMount(editor)}
         theme={props.tools.theme}
-        value={codeValue}
         language={props.tools.language}
         onChange={(value) => setCode(value || "")}
         options={{
@@ -135,12 +112,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setOutput: (value) => dispatch({ type: SET_OUTPUT, value }),
-    setInput: (value) => dispatch({ type: SET_INPUT, value }),
     setLoading: () => dispatch({ type: SET_LOADING }),
-    resetLoading: () => dispatch({ type: RESET_LOADING }),
-    resetCompile: () => dispatch({ type: SET_COMPILE_OFF }),
-    notify_output_on: () => dispatch({ type: NOTIFY_OUTPUT_SUCCESS }),
-    notify_output_error_on: () => dispatch({ type: NOTIFY_OUTPUT_ERROR }),
   };
 };
 

@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { SET_INPUT, SET_OUTPUT } from "../../store/Action/action";
+
+import {
+  SET_INPUT,
+  SET_OUTPUT,
+  RESET_LOADING,
+  SET_COMPILE_OFF,
+  NOTIFY_OUTPUT_SUCCESS,
+  NOTIFY_OUTPUT_ERROR,
+} from "../../store/Action/action";
 
 import { connect } from "react-redux";
 
@@ -9,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   textarea: {
     resize: "none",
     outline: "none",
+    width: "100%",
     border: "2px solid white",
     borderRadius: "10px",
     background: "#272822",
@@ -17,8 +26,28 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px 10px 0 10px",
     fontSize: "18px",
     "&::placeholder": {
-      color: "#fff",
+      color: "grey",
     },
+  },
+  IoContainer: {
+    display: "flex",
+    height: "100%",
+    backgroundColor: "#1f273d",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: "10px",
+    boxSizing: "border-box",
+  },
+  IoGrid: {
+    backgroundColor: "#272822",
+    zIndex: "100",
+    width: "50%",
+    border: "2px solid #fff",
+    borderRadius: "5px",
+    display: "flex",
+    justifyContent: "center",
+    padding: "1vh",
+    boxSizing: "border-box",
   },
 }));
 
@@ -46,6 +75,22 @@ const Io = (props) => {
       });
     }
   };
+
+  useEffect(() => {
+    socket.on("COMPILE_OFF", (data) => {
+      console.log("compile data:", data);
+      const response = data;
+      props.resetCompile();
+      props.resetLoading();
+      if (response && response.output !== undefined) {
+        props.setOutput(response.output || "");
+        props.notify_output_on();
+      } else {
+        props.setOutput(response.e || "Oops something went wrong");
+        props.notify_output_error_on();
+      }
+    });
+  }, []);
 
   useEffect(() => {
     console.log("useEffect");
@@ -83,62 +128,21 @@ const Io = (props) => {
   }, [props.output]);
 
   return (
-    <Grid
-      style={{
-        display: "flex",
-        height: "100%",
-        backgroundColor: "#1f273d",
-        flexDirection: "row",
-        justifyContent: "space-around",
-        padding: "10px",
-        boxSizing: "border-box",
-      }}
-      lg={12}
-    >
-      <Grid
-        style={{
-          backgroundColor: "#272822",
-          width: "50%",
-          zIndex: "100",
-          border: "1px solid #fff",
-          borderRadius: "5px",
-          display: "flex",
-          justifyContent: "center",
-          padding: "1vh",
-          boxSizing: "border-box",
-        }}
-      >
+    <Grid className={classes.IoContainer} lg={12}>
+      <Grid className={classes.IoGrid}>
         <textarea
           rows="7"
           placeholder="Input"
-          style={{
-            width: "100%",
-          }}
           onChange={changeHandler}
           className={classes.textarea}
           ref={inputRef}
         ></textarea>
       </Grid>
 
-      <Grid
-        style={{
-          backgroundColor: "#272822",
-          zIndex: "100",
-          width: "50%",
-          border: "2px solid #fff",
-          borderRadius: "5px",
-          display: "flex",
-          justifyContent: "center",
-          padding: "1vh",
-          boxSizing: "border-box",
-        }}
-      >
+      <Grid className={classes.IoGrid}>
         <textarea
           rows="7"
           readOnly={true}
-          style={{
-            width: "100%",
-          }}
           className={classes.textarea}
           ref={outputRef}
         ></textarea>
@@ -158,6 +162,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setInput: (value) => dispatch({ type: SET_INPUT, value }),
     setOutput: (value) => dispatch({ type: SET_OUTPUT, value }),
+    resetLoading: () => dispatch({ type: RESET_LOADING }),
+    resetCompile: () => dispatch({ type: SET_COMPILE_OFF }),
+    notify_output_on: () => dispatch({ type: NOTIFY_OUTPUT_SUCCESS }),
+    notify_output_error_on: () => dispatch({ type: NOTIFY_OUTPUT_ERROR }),
   };
 };
 
