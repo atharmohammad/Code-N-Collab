@@ -1,0 +1,28 @@
+.spinner {
+  text-align: center;
+  top:25%;
+  left:40%;
+  position: absolute;
+}
+
+.halfSpin {
+  position: relative;
+  display: inline-block;
+  width: 150px;
+  height: 75px;
+  border-top-left-radius: 95px;
+  border-top-right-radius: 95px;
+  border: 20px solid #fff;
+  border-bottom: 0;
+  transform-origin: bottom center;
+  animation: 1s infinite turner;
+}
+
+@keyframes turner {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}

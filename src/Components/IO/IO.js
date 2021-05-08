@@ -1,22 +1,54 @@
-import React, { useState , useEffect, useRef } from "react";
-import { SET_INPUT, SET_OUTPUT } from "../../store/Action/action";
+import React, { useState, useEffect, useRef } from "react";
+
+import {
+  SET_INPUT,
+  SET_OUTPUT,
+  RESET_LOADING,
+  SET_COMPILE_OFF,
+  NOTIFY_OUTPUT_SUCCESS,
+  NOTIFY_OUTPUT_ERROR,
+} from "../../store/Action/action";
 
 import { connect } from "react-redux";
 
 import { makeStyles, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  textarea:{
-    resize:'none',
-    outline:'none',
-    border:'2px solid white',
-    borderRadius:'10px',
-    background:'#272822',
-    color:'#fff',
-    boxSizing:'content-box',
-    padding:'10px 10px 0 10px',
-    fontSize:'18px'
-  }
+  textarea: {
+    resize: "none",
+    outline: "none",
+    width: "100%",
+    border: "2px solid white",
+    borderRadius: "10px",
+    background: "#272822",
+    color: "#fff",
+    boxSizing: "content-box",
+    padding: "10px 10px 0 10px",
+    fontSize: "18px",
+    "&::placeholder": {
+      color: "grey",
+    },
+  },
+  IoContainer: {
+    display: "flex",
+    height: "100%",
+    backgroundColor: "#1f273d",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: "10px",
+    boxSizing: "border-box",
+  },
+  IoGrid: {
+    backgroundColor: "#272822",
+    zIndex: "100",
+    width: "50%",
+    border: "2px solid #fff",
+    borderRadius: "5px",
+    display: "flex",
+    justifyContent: "center",
+    padding: "1vh",
+    boxSizing: "border-box",
+  },
 }));
 
 const Io = (props) => {
@@ -24,7 +56,7 @@ const Io = (props) => {
   const outputRef = useRef();
   const classes = useStyles();
   const socket = props.socket;
-  const [recieved,setRecieved] = useState(1);
+  const [recieved, setRecieved] = useState(1);
 
   /* recieved { 1 = true for initial load , 2 = true forever ,
     3 = false forever}
@@ -34,80 +66,86 @@ const Io = (props) => {
 
   const changeHandler = (event) => {
     props.setInput(event.target.value);
-    inputRef.current.value = event.target.value
-    if(recieved == 1 || recieved == 2){
+    inputRef.current.value = event.target.value;
+    if (recieved == 1 || recieved == 2) {
       setRecieved(2);
-      socket.emit('changeIO',{inputText:event.target.value,
-        outputText:props.output});
+      socket.emit("changeIO", {
+        inputText: event.target.value,
+        outputText: props.output,
+      });
     }
   };
 
   useEffect(() => {
-    console.log("useEffect")
-    socket.on("IO_recieved",(data)=>{
-        setRecieved(3);
-        inputRef.current.value = data.inputText
-        outputRef.current.value = data.outputText
+    socket.on("COMPILE_OFF", (data) => {
+      console.log("compile data:", data);
+      const response = data;
+      props.resetCompile();
+      props.resetLoading();
+      if (response && response.output !== undefined) {
+        props.setOutput(response.output || "");
+        props.notify_output_on();
+      } else {
+        props.setOutput(response.e || "Oops something went wrong");
+        props.notify_output_error_on();
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log("useEffect");
+    socket.on("IO_recieved", (data) => {
+      setRecieved(3);
+      if (data.inputText !== undefined) {
+        inputRef.current.value = data.inputText;
         props.setInput(data.inputText);
+      }
+      if (data.outputText !== undefined) {
+        outputRef.current.value = data.outputText;
         props.setOutput(data.outputText);
-        setRecieved(2);
-    })
-    socket.on("sendInitialIO",(obj)=>{
-      console.log("sendInitialIO",inputRef.current.value)
-      socket.emit("takeInitialIO",{id:obj.id,
-      inputText:inputRef.current.value,
-      outputText:outputRef.current.value});
-    })
-
-  },[]);
-
-  useEffect(()=>{
-    if(recieved == 2){
+      }
       setRecieved(2);
-      socket.emit('changeIO',{inputText:props.input,
-        outputText:props.output});
+    });
+    socket.on("sendInitialIO", (obj) => {
+      console.log("sendInitialIO", inputRef.current.value);
+      socket.emit("takeInitialIO", {
+        id: obj.id,
+        inputText: inputRef.current.value,
+        outputText: outputRef.current.value,
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (recieved == 2) {
+      setRecieved(2);
+      socket.emit("changeIO", {
+        inputText: props.input,
+        outputText: props.output,
+      });
     }
     outputRef.current.value = props.output;
-  },[props.output])
+  }, [props.output]);
 
   return (
-    <Grid
-      style={{ display: "flex", minHeight: "28vh",
-       backgroundColor: "#1f273d",
-       flexDirection:'row',justifyContent:'space-around'}}
-     lg={12}>
-      <Grid
-      lg={5}
-        style={{
-          backgroundColor: "#272822",
-          zIndex: "100",
-          border: "2px solid #fff",
-          borderRadius: "5px",
-          display:'flex',
-          justifyContent:'center',
-          padding:'1vh'
-        }}
-      >
-        <textarea rows='7' placeholder='Input'
-        onChange={changeHandler}
-        cols='100' className={classes.textarea} ref={inputRef}></textarea>
+    <Grid className={classes.IoContainer} lg={12}>
+      <Grid className={classes.IoGrid}>
+        <textarea
+          rows="7"
+          placeholder="Input"
+          onChange={changeHandler}
+          className={classes.textarea}
+          ref={inputRef}
+        ></textarea>
       </Grid>
 
-      <Grid
-      lg={6}
-        style={{
-          backgroundColor: "#272822",
-          zIndex: "100",
-          border: "2px solid #fff",
-          borderRadius: "5px",
-          display:'flex',
-          justifyContent:'center',
-          padding:'1vh',
-        }}
-      >
-        <textarea rows='7' readOnly={true}
-        cols='100' className={classes.textarea} ref={outputRef}>
-        </textarea>
+      <Grid className={classes.IoGrid}>
+        <textarea
+          rows="7"
+          readOnly={true}
+          className={classes.textarea}
+          ref={outputRef}
+        ></textarea>
       </Grid>
     </Grid>
   );
@@ -124,6 +162,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setInput: (value) => dispatch({ type: SET_INPUT, value }),
     setOutput: (value) => dispatch({ type: SET_OUTPUT, value }),
+    resetLoading: () => dispatch({ type: RESET_LOADING }),
+    resetCompile: () => dispatch({ type: SET_COMPILE_OFF }),
+    notify_output_on: () => dispatch({ type: NOTIFY_OUTPUT_SUCCESS }),
+    notify_output_error_on: () => dispatch({ type: NOTIFY_OUTPUT_ERROR }),
   };
 };
 

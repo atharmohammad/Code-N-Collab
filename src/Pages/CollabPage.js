@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 
 import Chat from "../Components/Chat/ChatTabs";
-import Editor from "../Components/Editor/Editor";
+import Editor from "../Components/Editor/Editor_Wrapper";
 import IO from "../Components/IO/IO";
 import Problem from "../Components/Problem/Problem";
 import { connect } from "react-redux";
@@ -33,15 +33,20 @@ const CollabPage = (props) => {
       !searchParams.get("room") ||
       !location.state
     ) {
+      let err = {};
+
+      if (!searchParams.get("name") || !searchParams.get("room")) {
+        err = {
+          error: "Username or RoomName can't be empty",
+        };
+      }
+
       return history.push({
         pathname: "/rooms",
         search:
           "?" +
           (searchParams.has("room") ? "room=" + searchParams.get("room") : ""),
-        state: {
-          error:
-            "Either Password is not set or name and password can't be empty",
-        },
+        state: err,
       });
     }
     const password = location.state.password;
@@ -75,13 +80,13 @@ const CollabPage = (props) => {
   return joined ? (
     <>
       <Toolbar />
-      <div style={{ height: "85vh" ,overflowY:'hidden'}}>
+      <div style={{ height: "85vh", overflowY: "hidden" }}>
         <ReflexContainer orientation="vertical">
           <ReflexElement
-            minSize="10"
+            minSize="0"
             maxSize="900"
-            size="350"
-            style={{overflowX:'hidden'}}
+            size="400"
+            style={{ overflowX: "hidden" }}
           >
             <Problem socket={socket} />
           </ReflexElement>
@@ -113,9 +118,9 @@ const CollabPage = (props) => {
                 }}
               />
               <ReflexElement
-                minSize="8"
-                maxSize="200"
-                size="100"
+                minSize="0"
+                maxSize="300"
+                size="200"
                 style={{ overflow: "hidden" }}
               >
                 <IO socket={socket} />

@@ -3,9 +3,7 @@ import HomePageImg from "../Assets/images/HomePageImg.png";
 import { useHistory } from "react-router-dom";
 import classes from "../Assets/css/style.module.css";
 import Button from "../Components/HomePageButtons/Buttons";
-import {
-  Grid,
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 function HomePage() {
   const history = useHistory();
@@ -18,9 +16,9 @@ function HomePage() {
     history.push("/");
   };
 
-  const blogHandler = ()=>{
-    history.push('/blogs');
-  }
+  const blogHandler = () => {
+    history.push("/blogs");
+  };
 
   return (
     <div className={classes.wrap}>
