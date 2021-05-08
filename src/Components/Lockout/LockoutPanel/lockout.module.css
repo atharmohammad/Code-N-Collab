@@ -1,0 +1,24 @@
+.anchorTag{
+    text-decoration: none;
+    background: #3f51b5;
+    display: inline-flex;
+    width:70px;
+    height:70px;
+    margin:10px;
+    color:white;
+    font-size: 20px;
+    border:2px solid black;
+    padding:10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px grey;
+}
+
+.anchorContainer{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}

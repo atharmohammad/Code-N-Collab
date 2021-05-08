@@ -54,8 +54,6 @@ const MonacoEditor = (props) => {
         ref={MonacoEditorRef}
         beforeMount={handleEditorWillMount}
         onMount={(editor) => handleEditorDidMount(editor)}
-        width='50vh'
-        height='50vh'
         theme={props.tools.theme}
         language={props.tools.language}
         onChange={(value) => setCode(value || "")}
