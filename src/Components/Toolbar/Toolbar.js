@@ -15,7 +15,6 @@ import {
   makeStyles,
   Grid,
 } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
 
 export default function Toolbar(props) {
   return (
