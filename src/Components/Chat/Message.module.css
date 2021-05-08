@@ -109,6 +109,8 @@
 .input {
   height: 6vh;
   width: 95%;
+  margin-left:2px;
+  box-sizing: border-box;
   border-radius: 15px;
   outline: none;
   padding-left: 1vh;
