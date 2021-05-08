@@ -8,9 +8,6 @@ import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Toolbar from "../Components/Toolbar/Toolbar";
-import socketio from "socket.io-client";
-
-
 import * as TYPES from "../store/Action/action";
 
 function Alert(props) {
@@ -18,17 +15,9 @@ function Alert(props) {
 }
 
 const Test = (props) => {
-  const socket = socketio.connect("http://localhost:8080/");
-  const [joined, setJoined] = useState(true);
+  const socket = props.socket;
   
-  useEffect(() => {
-    return () => {
-      console.log("socket dissconnect");
-      socket.disconnect();
-    };
-  }, []);
-  
-  return joined ? (
+  return (
     <>
       <Toolbar />
       <div style={{ height: "85vh", overflowY: "hidden" }}>
@@ -37,7 +26,7 @@ const Test = (props) => {
             minSize="300"
             maxSize="300"
             size="300"
-            style={{ overflowX: "hidden" }}
+            style={{ overflow: "hidden" }}
           >
             <LockoutPanel socket={socket} />
           </ReflexElement>
@@ -120,9 +109,7 @@ const Test = (props) => {
         </Snackbar>
       </div>
     </>
-  ) : (
-    <></>
-  );
+  )
 };
 
 const mapStateToProps = (state) => {

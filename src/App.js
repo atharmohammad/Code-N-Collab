@@ -4,7 +4,7 @@ import Rooms from "./Components/Rooms/Rooms";
 import CollabPageWrapper from "./Pages/CollabPageWrapper";
 import GetStarted from "./Pages/GetStarted";
 import HomePage from "./Pages/HomePage";
-import Test from "./Pages/Test";
+import LockoutWrapper from "./Pages/LockoutWrapper";
 import BlogPage from "./Pages/BlogPage";
 
 import "./App.css";
@@ -17,7 +17,7 @@ function App(props) {
       <Route path="/rooms" exact component={Rooms} />
       <Route path="/collaborate" exact component={CollabPageWrapper} />
       <Route path="/blogs" exact component={BlogPage} />
-      <Route path="/test" exact component={Test} />
+      <Route path="/newContest" exact component={LockoutWrapper} />
       <Redirect to="/homepage" />
     </Switch>
   );
