@@ -97,15 +97,15 @@ export default function App(props) {
             <div
               style={{
                 minHeight: "4vh",
-                backgroundColor: "#fff",
-                color: "black",
+                background: "#872e2e",
+                color: "#fff",
                 width: "35px",
                 borderRadius: "5px",
                 margin: "2.5vh 0 0 1vh",
                 padding: "1vh 1vh 0 1vh",
                 cursor: "pointer",
                 textAlign: "center",
-                fontWeight: "bold",
+                
               }}
               onClick={problemFetchHandler}
             >

@@ -37,6 +37,7 @@ const LockoutPanel = () => {
               boxSizing: "border-box",
             }}
            >
+           
             <LeaderBoard/>
           </Grid>
         </Grid>

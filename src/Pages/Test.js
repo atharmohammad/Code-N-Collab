@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Toolbar from "../Components/Toolbar/Toolbar";
-//import "react-reflex/styles.css";
 import socketio from "socket.io-client";
 
 
@@ -36,8 +35,8 @@ const Test = (props) => {
         <ReflexContainer orientation="vertical">
           <ReflexElement
             minSize="300"
-            maxSize="600"
-            size="400"
+            maxSize="300"
+            size="300"
             style={{ overflowX: "hidden" }}
           >
             <LockoutPanel socket={socket} />

@@ -22,3 +22,16 @@
     justify-content: center;
     box-sizing: border-box;
 }
+
+.updateBtn {
+    cursor: pointer;
+    color: white;
+    height: 30px;
+    width: 90px;
+    margin: auto 10px;
+    border-radius: 5px;
+    background: #872e2e;
+    font-size: 14px;
+    padding-top: 4px;
+    text-align: center;
+  }
