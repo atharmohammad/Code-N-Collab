@@ -1,23 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import ScrollToBottom from "react-scroll-to-bottom";
 import "./Problem.css";
 import Spinner from "../Spinner/BlogSpinner";
 
 import {
-  Typography,
-  CssBaseline,
-  Box,
-  Button,
-  makeStyles,
   Grid,
 } from "@material-ui/core";
-import styles from "./Problem.module.css";
-import stars from "../../Assets/css/style.module.css";
 
 export default function App(props) {
   const socket = props.socket;
   const [link, setLink] = useState(null);
-  const [problem, setProblem] = useState(null);
   const [loader, setLoader] = useState(false);
   const ProblemRef = useRef();
 

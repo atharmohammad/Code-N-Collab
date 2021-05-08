@@ -1,12 +1,10 @@
 import React from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { SET_LANGUAGE } from "../../../store/Action/action";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import classes from "./tools.module.css";
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -16,15 +14,13 @@ const LanguagePicker = (props) => {
   };
 
   return (
-    <Grid style={{ display: "flex", margin: "2vh 0 0 5vh" }}>
-    <FormControl className={classes.formControl}>
-        <InputLabel style={{color:'#fff'}}
-        shrink id="demo-simple-select-placeholder-label-label">
+    <Grid  className ={classes.mainGrid} >
+    <FormControl>
+        <InputLabel  style={{ color: "#fff",paddingLeft:'35px'}}
+        >
           Language
         </InputLabel>
         <Select
-          labelId="demo-simple-select-placeholder-label-label"
-          id="demo-simple-select-placeholder-label"
           displayEmpty
           className={`${classes.selectEmpty} ${classes.navSelect}`}
           onChange={handleChange}
