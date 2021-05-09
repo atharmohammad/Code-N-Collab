@@ -5,6 +5,9 @@ import Filter from "../Filter/Filter";
 
 const FilterContest = (props) => {
   const socket = props.socket;
+  const startContestHandler = ()=>{
+    socket.emit("Start-Contest",(props.roomId))
+  }
 
   return (
     <div
@@ -29,7 +32,7 @@ const FilterContest = (props) => {
           alignText: "center",
           cursor: "pointer",
         }}
-      >
+      onClick={startContestHandler} >
         Start Contest
       </div>
     </div>

@@ -8,6 +8,7 @@ export default function Contest(props){
   const location = useLocation();
   const history = useHistory();
   const [joined,setJoined] = useState(false);
+  const [lockoutContest,setContest] = useState(null);
 
   useEffect(()=>{
     const searchParams = new URLSearchParams(location.search);
@@ -25,13 +26,19 @@ export default function Contest(props){
         })
       }else{
         console.log(contest);
+        setContest(contest)
       }
       return setJoined(true);
     });
+    socket.on("Update",(contest)=>{
+      console.log("updated!")
+      setContest(contest)
+    })
   },[]);
 
   return joined ? (
-    true ? <FilterContest socket={socket} />:
+    lockoutContest.Started === false? <FilterContest
+    socket={socket} roomId={lockoutContest.Id} />:
           <LockoutPage socket={socket} />
   ):<></>
 }
