@@ -12,7 +12,13 @@ export default function Contest(props){
 
   useEffect(()=>{
     const searchParams = new URLSearchParams(location.search);
-    console.log(location.state)
+    if(location.state === undefined){
+      history.push({
+        pathname:"/newContest",
+        search:"?room=" + searchParams.get("room"),
+        state:{Name:"Adnan"}
+      })
+    }
     const user = {
       Name:location.state ? location.state.Name : "Adnan",
       RoomId:searchParams.get("room"),

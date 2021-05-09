@@ -16,10 +16,10 @@ function Alert(props) {
 
 const Test = (props) => {
   const socket = props.socket;
-  
+
   return (
     <>
-      <Toolbar />
+      <Toolbar socket={socket}/>
       <div style={{ height: "85vh", overflowY: "hidden" }}>
         <ReflexContainer orientation="vertical">
           <ReflexElement
