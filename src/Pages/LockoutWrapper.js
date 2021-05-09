@@ -8,6 +8,7 @@ export default function LockoutWrapper(props) {
   useEffect(() => {
     return () => {
       console.log("disconnect");
+      socket.disconnect();
     };
   }, []);
 

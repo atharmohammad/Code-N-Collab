@@ -11,20 +11,22 @@ export default function Contest(props){
 
   useEffect(()=>{
     const searchParams = new URLSearchParams(location.search);
-
+    console.log(location.state)
     const user = {
-      Name:location.state.Name ? location.state.Name : "Adnan",
+      Name:location.state ? location.state.Name : "Adnan",
       RoomId:searchParams.get("room"),
     }
 
-    socket.emit("Contest-Join",user,(error,u)=>{
+    socket.emit("Contest-Join",user,({error,contest})=>{
       if(error){
         return history.push({
           pathname:"/homepage",
-          state:{error:"Room is Full"}
+          state:{error:error}
         })
+      }else{
+        console.log(contest);
       }
-      setJoined(true);
+      return setJoined(true);
     });
   },[]);
 

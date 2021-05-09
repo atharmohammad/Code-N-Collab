@@ -35,7 +35,7 @@ const Wrapper = (props) => {
 
   return (
     <>
-      {domain ? (
+      {true ? (
         <Editor socket={socket} domain={domain} />
       ) : (
         <div style={{ background: "black", height: "100%", width: "100%" }}>
