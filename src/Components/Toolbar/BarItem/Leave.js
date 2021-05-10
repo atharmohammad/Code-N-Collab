@@ -37,10 +37,12 @@ function Leave(props) {
       socket.emit("Leave-Contest",({room:searchParams.get("room"),
       name:location.state.Name}));
       history.push("/homepage");
+      window.location.reload();
     }else{
       try {
         props.leaveRoom();
         history.push("/rooms");
+        window.location.reload();
       } catch (err) {
         console.log(err);
       }

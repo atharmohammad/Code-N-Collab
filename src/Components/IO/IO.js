@@ -12,6 +12,7 @@ import {
 import { connect } from "react-redux";
 
 import { makeStyles, Grid } from "@material-ui/core";
+import {useLocation} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   textarea: {
@@ -56,7 +57,10 @@ const Io = (props) => {
   const outputRef = useRef();
   const classes = useStyles();
   const socket = props.socket;
+  const location = useLocation();
+
   const [recieved, setRecieved] = useState(1);
+  const [reason,setReason] = useState("");
 
   /* recieved { 1 = true for initial load , 2 = true forever ,
     3 = false forever}
@@ -67,16 +71,22 @@ const Io = (props) => {
   const changeHandler = (event) => {
     props.setInput(event.target.value);
     inputRef.current.value = event.target.value;
-    if (recieved == 1 || recieved == 2) {
-      setRecieved(2);
-      socket.emit("changeIO", {
-        inputText: event.target.value,
-        outputText: props.output,
-      });
-    }
+      if (recieved == 1 || recieved == 2) {
+        setRecieved(2);
+        socket.emit("changeIO", {
+          inputText: event.target.value,
+          outputText: props.output,
+          reason:reason
+        });
+      }
   };
 
   useEffect(() => {
+    if(location.pathname === "/newContest"){
+      setReason("lockout");
+    }else{
+      setReason("code-editor")
+    }
     socket.on("COMPILE_OFF", (data) => {
       console.log("compile data:", data);
       const response = data;
@@ -90,38 +100,40 @@ const Io = (props) => {
         props.notify_output_error_on();
       }
     });
-  }, []);
+  }, [location]);
 
   useEffect(() => {
-    console.log("useEffect");
-    socket.on("IO_recieved", (data) => {
-      setRecieved(3);
-      if (data.inputText !== undefined) {
-        inputRef.current.value = data.inputText;
-        props.setInput(data.inputText);
-      }
-      if (data.outputText !== undefined) {
-        outputRef.current.value = data.outputText;
-        props.setOutput(data.outputText);
-      }
-      setRecieved(2);
-    });
-    socket.on("sendInitialIO", (obj) => {
-      console.log("sendInitialIO", inputRef.current.value);
-      socket.emit("takeInitialIO", {
-        id: obj.id,
-        inputText: inputRef.current.value,
-        outputText: outputRef.current.value,
+      console.log("useEffect");
+      socket.on("IO_recieved", (data) => {
+        setRecieved(3);
+        if (data.inputText !== undefined) {
+          inputRef.current.value = data.inputText;
+          props.setInput(data.inputText);
+        }
+        if (data.outputText !== undefined) {
+          outputRef.current.value = data.outputText;
+          props.setOutput(data.outputText);
+        }
+        setRecieved(2);
       });
-    });
+      socket.on("sendInitialIO", (obj) => {
+        console.log("sendInitialIO", inputRef.current.value);
+        socket.emit("takeInitialIO", {
+          id: obj.id,
+          inputText: inputRef.current.value,
+          outputText: outputRef.current.value,
+          reason:reason
+        });
+      });
   }, []);
 
   useEffect(() => {
-    if (recieved == 2) {
+    if (recieved == 2 && location.pathname !== "newContest") {
       setRecieved(2);
       socket.emit("changeIO", {
         inputText: props.input,
         outputText: props.output,
+        reason:reason
       });
     }
     outputRef.current.value = props.output;

@@ -43,6 +43,7 @@ const MonacoEditor = (props) => {
         language: props.tools.language,
         code,
         input: props.tools.input,
+        reason:"lockout"
       });
     }
   }, [props.tools.nowCompile]);
