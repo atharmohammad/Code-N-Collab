@@ -11,12 +11,30 @@ const Chat = (props) => {
   const inputRef = useRef();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  const [name,setName] = useState("");
+
+
+  useEffect(()=>{
+    if(location.pathname === "/newContest"){
+      setName(location.state.Name);
+    }else{
+      setName(searchParams.get("name"));
+    }
+  },[])
 
   const submitHandler = (e) => {
     e.preventDefault();
     const finalValue = inputRef.current.value.trim();
-    if (finalValue) socket.emit("clientMsg", { message: finalValue });
-    inputRef.current.value = "";
+    if (finalValue){
+      if(location.pathname === "/newContest"){
+        socket.emit("Contest-Msg",{message:finalValue,
+                      room:searchParams.get("room"),
+                      name:location.state.Name});
+      }else{
+        socket.emit("clientMsg", { message: finalValue });
+      }
+      inputRef.current.value = "";
+    }
   };
 
   return (
@@ -55,7 +73,7 @@ const Chat = (props) => {
           <div className={classes.messages}>
             {props.messages.map((message, i) => (
               <div key={i}>
-                <Message message={message} name={searchParams.get("name")} />
+                <Message message={message} name={name} />
               </div>
             ))}
           </div>

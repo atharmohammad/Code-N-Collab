@@ -23,11 +23,6 @@ export default function Toolbar(props) {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
-  const leaveContest = ()=>{
-      socket.emit("Leave-Contest",({room:searchParams.get("room"),
-      name:location.state.Name}));
-  }
-
   return (
     <Grid className={classes.main}>
       <Grid className={classes.imgGrid}>
@@ -42,7 +37,7 @@ export default function Toolbar(props) {
         <Grid className={classes.toolsGrid}>
           <Compile />
           <GraphButton />
-          <Leave clickHandler={leaveContest}/>
+          <Leave socket={socket}/>
         </Grid>
       </Grid>
     </Grid>

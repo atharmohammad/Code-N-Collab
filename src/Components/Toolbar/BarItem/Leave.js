@@ -12,6 +12,8 @@ function Leave(props) {
   const [room, setRoom] = useState("");
   const [name, setName] = useState("");
   const [title,setTitle] = useState("");
+  const socket = props.socket;
+  const searchParams = new URLSearchParams(location.search);
 
   useEffect(() => {
     const currentPath = location.pathname;
@@ -19,7 +21,6 @@ function Leave(props) {
       setTitle("Leave Contest");
     }else{
       setTitle("Leave Room")
-      const searchParams = new URLSearchParams(location.search);
       if (searchParams.has("room") && searchParams.get("room")) {
         setRoom(searchParams.get("room"));
       }
@@ -33,7 +34,8 @@ function Leave(props) {
     const currentPath = location.pathname;
 
     if(currentPath === "/newContest"){
-      props.clickHandler();
+      socket.emit("Leave-Contest",({room:searchParams.get("room"),
+      name:location.state.Name}));
       history.push("/homepage");
     }else{
       try {

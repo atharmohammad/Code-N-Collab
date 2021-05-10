@@ -18,6 +18,7 @@ export default function Contest(props){
         search:"?room=" + searchParams.get("room"),
         state:{Name:"Adnan"}
       })
+      window.location.reload();
     }
     const user = {
       Name:location.state ? location.state.Name : "Adnan",
@@ -38,7 +39,7 @@ export default function Contest(props){
     });
     socket.on("Update",(contest)=>{
       console.log("updated!")
-      setContest(contest)
+      setContest(contest);
     })
   },[]);
 
