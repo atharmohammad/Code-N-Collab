@@ -14,7 +14,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const Test = (props) => {
+const LockOutPage = (props) => {
   const socket = props.socket;
 
   return (
@@ -126,4 +126,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Test);
+export default connect(mapStateToProps, mapDispatchToProps)(LockOutPage);

@@ -2,13 +2,17 @@ import {useEffect,useState} from 'react';
 import { useLocation, useHistory } from "react-router-dom";
 import FilterContest from './FilterContest/FilterContest';
 import LockoutPage from '../../Pages/LockoutPage'
+import * as TYPES from "../../store/Action/action";
+import {connect} from "react-redux";
+import Spinner from "../Spinner/ContestSpinner/ContestSpinner";
 
-export default function Contest(props){
+function Contest(props){
   const socket = props.socket;
   const location = useLocation();
   const history = useHistory();
   const [joined,setJoined] = useState(false);
-  const [lockoutContest,setContest] = useState(null);
+  const [lockOut,setLockout] = useState("");
+  const [startSpinner,setSpinner] = useState(false);
 
   useEffect(()=>{
     const searchParams = new URLSearchParams(location.search);
@@ -32,20 +36,37 @@ export default function Contest(props){
           state:{error:error}
         })
       }else{
-        console.log(contest);
-        setContest(contest)
+        const updatedContest = contest;
+        console.log(updatedContest);
+        props.setContest(updatedContest)
+        setLockout(updatedContest)
       }
       return setJoined(true);
     });
-    socket.on("Update",(contest)=>{
+    socket.on("Update",(updatedContest)=>{
       console.log("updated!")
-      setContest(contest);
+      props.setContest(updatedContest);
+      setLockout(updatedContest)
     })
   },[]);
 
   return joined ? (
-    lockoutContest.Started === false? <FilterContest
-    socket={socket} roomId={lockoutContest.Id} />:
-          <LockoutPage socket={socket} />
-  ):<></>
+    lockOut.Started === false? <FilterContest
+    socket={socket} roomId={lockOut.Id} />:
+          <LockoutPage socket={socket}/>
+  ):<Spinner/>
 }
+
+const mapStateToProps = state=>{
+  return{
+    contest:state.contest.contest
+  }
+}
+
+const mapDispatchToProps = dispatch=>{
+  return{
+    setContest:(updatedContest)=>{dispatch({type:TYPES.CONTEST_UPDATED,data:updatedContest})}
+  }
+}
+
+export default connect(null,mapDispatchToProps)(Contest)

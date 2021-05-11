@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Problem from "./Problem.js";
 import LeaderBoard from './LeaderBoard'
 
-const LockoutPanel = () => {
+const LockoutPanel = (props) => {
   return (
     <>
       <Grid
@@ -37,8 +37,8 @@ const LockoutPanel = () => {
               boxSizing: "border-box",
             }}
            >
-           
-            <LeaderBoard/>
+
+            <LeaderBoard />
           </Grid>
         </Grid>
       </Grid>

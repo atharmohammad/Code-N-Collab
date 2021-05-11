@@ -1,7 +1,12 @@
 import { Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import classes from "./lockout.module.css";
-const Problem = () => {
+import {connect} from "react-redux";
+
+const Problem = (props) => {
+  useEffect(()=>{
+    console.log(props.contest)
+  },[])
   return (
     <>
       <Grid
@@ -52,4 +57,11 @@ const Problem = () => {
     </>
   );
 };
-export default Problem;
+
+const mapStateToProps = state=>{
+  return{
+    contest:state.contest.contest
+  }
+}
+
+export default connect(mapStateToProps,null)(Problem);

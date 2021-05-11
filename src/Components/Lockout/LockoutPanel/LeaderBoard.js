@@ -26,7 +26,8 @@ const rows = [
 
 const DenseTable = () => {
   return (
-    <TableContainer component={Paper} style={{ width: "100%", height: "35vh" }}>
+    <TableContainer component={Paper} style={{ width: "100%",
+                              height: "38.5vh" }}>
       <Table size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>

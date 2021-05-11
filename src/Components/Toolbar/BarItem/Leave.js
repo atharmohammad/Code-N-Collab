@@ -18,7 +18,7 @@ function Leave(props) {
   useEffect(() => {
     const currentPath = location.pathname;
     if(currentPath == "/newContest"){
-      setTitle("Leave Contest");
+      setTitle("End Contest");
     }else{
       setTitle("Leave Room")
       if (searchParams.has("room") && searchParams.get("room")) {
