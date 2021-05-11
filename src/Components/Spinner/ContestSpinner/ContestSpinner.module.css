@@ -12,7 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  background-color: black;
   position: absolute;
 }
 
@@ -20,8 +20,8 @@
 .spinner {
   min-width: 100px;
   min-height: 100px;
-  border: 10px solid rgba(255,255,255,.1);
-  border-right: 10px solid orange;
+  border: 20px solid rgba(255,255,255,.1);
+  border-right: 20px solid orange;
   border-radius: 50%;
   animation: spinner 1s linear infinite;
 }

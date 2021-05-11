@@ -4,55 +4,26 @@ import classes from "./lockout.module.css";
 import {connect} from "react-redux";
 
 const Problem = (props) => {
-  useEffect(()=>{
-    console.log(props.contest)
-  },[])
+
+  const problems = props.contest.Problems.map(problem=>{
+    return(
+      <a
+        className={classes.anchorTag}
+        href={problem.link}
+        title={problem.name}
+        target="_blank"
+      >
+        {problem.points}
+      </a>
+    )
+  })
+
   return (
     <>
       <Grid
         className={classes.anchorContainer}
       >
-        <a
-          className={classes.anchorTag}
-          href="https://codeforces.com/problemset/problem/1516/B"
-          title="Question1"
-          target="_blank"
-        >
-          1500
-        </a>
-
-        <a
-          className={classes.anchorTag}
-          href="https://codeforces.com/problemset/problem/1516/B"
-          title="Question2"
-          target="_blank"
-        >
-          1700
-        </a>
-        <a
-          className={classes.anchorTag}
-          href="https://codeforces.com/problemset/problem/1516/B"
-          title="Question3"
-          target="_blank"
-        >
-          1500
-        </a>
-        <a
-          className={classes.anchorTag}
-          href="https://codeforces.com/problemset/problem/1516/B"
-          title="Question4"
-          target="_blank"
-        >
-          1600
-        </a>
-        <a
-          className={classes.anchorTag}
-          href="https://codeforces.com/problemset/problem/1516/B"
-          title="Question5"
-          target="_blank"
-        >
-          1700
-        </a>
+        {problems}
       </Grid>
     </>
   );
