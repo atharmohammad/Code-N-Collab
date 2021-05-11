@@ -122,7 +122,7 @@ const Io = (props) => {
           id: obj.id,
           inputText: inputRef.current.value,
           outputText: outputRef.current.value,
-          reason:reason
+          reason:"code-editor"
         });
       });
   }, []);

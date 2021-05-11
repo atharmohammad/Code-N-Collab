@@ -4,7 +4,7 @@ import { useHistory,useLocation } from "react-router-dom";
 import classes from "../Assets/css/style.module.css";
 import Button from "../Components/HomePageButtons/Buttons";
 import { Grid } from "@material-ui/core";
-import { v4 as uuidv4 } from "uuid";
+import { v1 as uuidv1 } from "uuid";
 
 function HomePage() {
   const history = useHistory();
@@ -29,7 +29,7 @@ function HomePage() {
   };
 
   const contestHandler = ()=>{
-    const room = uuidv4();
+    const room = uuidv1();
     history.push({
       pathname:"/newContest",
       search:"?room="+room,
