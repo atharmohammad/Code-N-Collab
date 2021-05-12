@@ -1,7 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import Problem from "./Problem.js";
-import LeaderBoard from './LeaderBoard'
+import LeaderBoard from "./LeaderBoard";
 
 const LockoutPanel = (props) => {
   return (
@@ -25,7 +25,7 @@ const LockoutPanel = (props) => {
             style={{
               height: "40vh",
               margin: "5px",
-              border:'10px 10px 10px 10px #fff',
+              border: "10px 10px 10px 10px #fff",
             }}
           >
             <Problem />
@@ -36,8 +36,7 @@ const LockoutPanel = (props) => {
               margin: "5px",
               boxSizing: "border-box",
             }}
-           >
-
+          >
             <LeaderBoard />
           </Grid>
         </Grid>

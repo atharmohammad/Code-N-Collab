@@ -3,22 +3,23 @@ import { useLocation, useHistory } from "react-router-dom";
 import ChatTabs from "../../Chat/ChatTabs";
 import Filter from "../Filter/Filter";
 import Spinner from "../../Spinner/ContestSpinner/ContestSpinner";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 const FilterContest = (props) => {
   const socket = props.socket;
-  const [loadContest,setLoadContest] = useState(false);
+  const [loadContest, setLoadContest] = useState(false);
 
+  const startContestHandler = () => {
+    socket.emit("Start-Contest", {
+      room: props.roomId,
+      problemTags: props.contestProblemsTags,
+      minRating: props.minRating,
+      maxRating: props.maxRating,
+    });
+    setLoadContest(true);
+  };
 
-  const startContestHandler = ()=>{
-    socket.emit("Start-Contest",({room:props.roomId,
-          problemTags:props.contestProblemsTags,
-          minRating:props.minRating,
-          maxRating:props.maxRating}));
-    setLoadContest(true)
-  }
-
-return !loadContest ? (
+  return !loadContest ? (
     <div
       style={{
         display: "flex",
@@ -41,19 +42,22 @@ return !loadContest ? (
           alignText: "center",
           cursor: "pointer",
         }}
-      onClick={startContestHandler} >
+        onClick={startContestHandler}
+      >
         Start Contest
       </div>
     </div>
-  ):<Spinner/>;
+  ) : (
+    <Spinner />
+  );
 };
 
-const mapStateToProps = state=>{
-  return{
-    contestProblemsTags:state.contest.ProblemTags,
-    minRating:state.contest.minRating,
-    maxRating:state.contest.maxRating
-  }
-}
+const mapStateToProps = (state) => {
+  return {
+    contestProblemsTags: state.contest.ProblemTags,
+    minRating: state.contest.minRating,
+    maxRating: state.contest.maxRating,
+  };
+};
 
-export default connect(mapStateToProps,null)(FilterContest);
+export default connect(mapStateToProps, null)(FilterContest);
