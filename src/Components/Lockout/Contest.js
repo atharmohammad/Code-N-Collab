@@ -1,7 +1,7 @@
 import {useEffect,useState} from 'react';
 import { useLocation, useHistory } from "react-router-dom";
 import FilterContest from './FilterContest/FilterContest';
-import LockoutPage from '../../Pages/LockoutPage'
+import Problem from '../Lockout/LockoutPanel/Problem'
 import * as TYPES from "../../store/Action/action";
 import {connect} from "react-redux";
 import Spinner from "../Spinner/ContestSpinner/ContestSpinner";
@@ -53,7 +53,7 @@ function Contest(props){
   return joined ? (
     lockOut.Started === false? <FilterContest
     socket={socket} roomId={lockOut.Id} />:
-          <LockoutPage socket={socket}/>
+          <Problem socket={socket}/>
   ):<Spinner/>
 }
 

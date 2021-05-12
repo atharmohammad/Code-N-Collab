@@ -14,7 +14,6 @@ const reducer = (state = initialState, action) => {
       return{...state,contest:action.data}
 
     case TYPE.UPDATE_PROBLEM_TAGS:{
-      console.log(action.data);
       return {...state,ProblemTags:action.data}
     }
 

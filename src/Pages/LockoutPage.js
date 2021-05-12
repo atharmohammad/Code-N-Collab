@@ -3,7 +3,7 @@ import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 import Chat from "../Components/Chat/ChatTabs";
 import Editor from "../Components/Lockout/Editor.js/LockOutEditor";
 import IO from "../Components/IO/IO";
-import LockoutPanel from "../Components/Lockout/LockoutPanel/lockoutPanel";
+import Contest from "../Components/Lockout/Contest";
 import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -19,16 +19,27 @@ const LockOutPage = (props) => {
 
   return (
     <>
-      <Toolbar socket={socket}/>
+      <Toolbar socket={socket} />
       <div style={{ height: "85vh", overflowY: "hidden" }}>
         <ReflexContainer orientation="vertical">
           <ReflexElement
             minSize="300"
             maxSize="300"
             size="300"
-            style={{ overflow: "hidden" }}
+            style={{ overflow: "hidden", minWidth: "180px" }}
           >
-            <LockoutPanel socket={socket} />
+            <div
+              style={{
+                margin: "10px 20px 10px 10px",
+                height: "96%",
+                background: "#313332",
+                border: "2px solid black",
+                borderRadius: "10px",
+                boxShadow: "0 5px 15px 0px rgba(0,0,0,0.6)",
+              }}
+            >
+              <Contest socket={socket} />
+            </div>
           </ReflexElement>
 
           <ReflexSplitter
@@ -109,7 +120,7 @@ const LockOutPage = (props) => {
         </Snackbar>
       </div>
     </>
-  )
+  );
 };
 
 const mapStateToProps = (state) => {
