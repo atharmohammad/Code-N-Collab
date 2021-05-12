@@ -13,8 +13,10 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case TYPE.SET_QUESTION_LOADING:
       return { ...state, questionLoading: true };
+
     case TYPE.RESET_QUESTION_LOADING:
       return { ...state, questionLoading: false };
+
     case TYPE.CONTEST_UPDATED:
       return { ...state, contest: action.data };
 

@@ -7,7 +7,7 @@ import { Button } from "@material-ui/core";
 
 const FilterContest = (props) => {
   const socket = props.socket;
-  const [loadContest, setLoadContest] = useState(false);
+  //const [loadContest, setLoadContest] = useState(false);
 
   const startContestHandler = () => {
     socket.emit("Start-Contest", {
@@ -16,7 +16,7 @@ const FilterContest = (props) => {
       minRating: props.minRating,
       maxRating: props.maxRating,
     });
-    setLoadContest(true);
+    props.setProblemLoading();
   };
 
   return (
@@ -121,6 +121,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setMaxRating: (value) => {
       dispatch({ type: TYPE.UPDATE_MAX_RATING, data: value });
+    },
+    setProblemLoading: () => {
+      dispatch({ type: TYPE.SET_QUESTION_LOADING });
     },
   };
 };

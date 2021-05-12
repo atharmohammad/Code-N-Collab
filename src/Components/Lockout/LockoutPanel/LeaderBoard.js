@@ -69,6 +69,7 @@ const DenseTable = () => {
           fontSize: "14px",
           paddingTop: "4px",
           textAlign: "center",
+          boxShadow: "0 3px 10px 0px #ba6261",
         }}
       >
         UPDATE

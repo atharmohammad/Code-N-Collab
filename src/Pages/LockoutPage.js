@@ -4,6 +4,7 @@ import Chat from "../Components/Chat/ChatTabs";
 import Editor from "../Components/Lockout/Editor.js/LockOutEditor";
 import IO from "../Components/IO/IO";
 import Contest from "../Components/Lockout/Contest";
+import Rules from "../Components/Lockout/LockoutPanel/Rules";
 import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -58,7 +59,7 @@ const LockOutPage = (props) => {
                 maxSize="1600"
                 style={{ overflow: "hidden" }}
               >
-                <Editor socket={socket} />
+                {props.contest && props.contest.Started ? <Editor socket={socket} /> : <Rules/>}
               </ReflexElement>
               <ReflexSplitter
                 className="reflex-thin"
@@ -127,6 +128,7 @@ const mapStateToProps = (state) => {
   return {
     output_success: state.tools.output_success,
     output_error: state.tools.output_error,
+    contest: state.contest.contest,
   };
 };
 

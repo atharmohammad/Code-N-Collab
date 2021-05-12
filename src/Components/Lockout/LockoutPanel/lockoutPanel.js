@@ -25,7 +25,7 @@ const LockoutPanel = (props) => {
               height: "40vh",
               margin: "5px",
               boxSizing: "border-box",
-               boxShadow: "0 -5px -15px 0px rgba(0,0,0,0.6)",
+              boxShadow: "5px 3px 10px 0px black",
             }}
           >
             <LeaderBoard />
