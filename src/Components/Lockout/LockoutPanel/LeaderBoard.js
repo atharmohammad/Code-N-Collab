@@ -21,14 +21,14 @@ const rows = [
   createData("Benq", 230),
   createData("Kickass", 200),
   createData("umnik", 164),
-  createData("Ginger", 102),
+  createData("Ginger", 130),
 ];
 
 const DenseTable = () => {
   return (
     <TableContainer
       component={Paper}
-      style={{ width: "100%", height: "38.5vh" }}
+      style={{ width: "100%", height: "100%" }}
     >
       <Table size="small" aria-label="a dense table">
         <TableHead>
@@ -63,7 +63,7 @@ const DenseTable = () => {
           height: "30px",
           width: "90px",
           marginLeft: "35%",
-          marginTop: "20px",
+          marginTop: "10px",
           borderRadius: "5px",
           background: "#872e2e",
           fontSize: "14px",

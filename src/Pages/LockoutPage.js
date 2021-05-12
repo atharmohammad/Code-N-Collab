@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
+import Countdown from '../Components/Coundown/Coundown'
 import Chat from "../Components/Chat/ChatTabs";
 import Editor from "../Components/Lockout/Editor.js/LockOutEditor";
 import IO from "../Components/IO/IO";
@@ -20,7 +21,7 @@ const LockOutPage = (props) => {
 
   return (
     <>
-      <Toolbar socket={socket} />
+      <Toolbar socket={socket}/>
       <div style={{ height: "85vh", overflowY: "hidden" }}>
         <ReflexContainer orientation="vertical">
           <ReflexElement
@@ -53,31 +54,47 @@ const LockOutPage = (props) => {
           />
 
           <ReflexElement orientation="horizontol" maxSize="1900" minSize="400">
-            <ReflexContainer>
-              <ReflexElement
-                minSize="100"
-                maxSize="1600"
-                style={{ overflow: "hidden" }}
-              >
-                {props.contest && props.contest.Started ? <Editor socket={socket} /> : <Rules/>}
-              </ReflexElement>
-              <ReflexSplitter
-                className="reflex-thin"
+            {props.contest && props.contest.Started ? (
+              <ReflexContainer>
+                <ReflexElement
+                  minSize="100"
+                  maxSize="1600"
+                  style={{ overflow: "hidden" }}
+                >
+                 
+                  <Editor socket={socket} />
+                </ReflexElement>
+                <ReflexSplitter
+                  className="reflex-thin"
+                  style={{
+                    backgroundColor: "#1f273d",
+                    opacity: "1",
+                    border: "0.3px",
+                  }}
+                />
+                <ReflexElement
+                  minSize="0"
+                  maxSize="300"
+                  size="200"
+                  style={{ overflow: "hidden" }}
+                >
+                  <IO socket={socket} />
+                </ReflexElement>
+              </ReflexContainer>
+            ) : (
+              <div
                 style={{
-                  backgroundColor: "#1f273d",
-                  opacity: "1",
-                  border: "0.3px",
+                  background: "#313332",
+                  boxShadow: "0 5px 15px 0px rgba(0,0,0,0.6)",
+                  height: "97%",
+                  width: "96%",
+                  margin: "auto",
+                  borderRadius: "10px",
                 }}
-              />
-              <ReflexElement
-                minSize="0"
-                maxSize="300"
-                size="200"
-                style={{ overflow: "hidden" }}
               >
-                <IO socket={socket} />
-              </ReflexElement>
-            </ReflexContainer>
+                <Rules />
+              </div>
+            )}
           </ReflexElement>
 
           <ReflexSplitter
@@ -95,6 +112,7 @@ const LockOutPage = (props) => {
             size="250"
             style={{ overflow: "hidden" }}
           >
+            
             <Chat socket={socket} />
           </ReflexElement>
         </ReflexContainer>
