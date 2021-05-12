@@ -26,7 +26,7 @@ const LockOutPage = (props) => {
             minSize="300"
             maxSize="300"
             size="300"
-            style={{ overflow: "hidden", minWidth: "180px" }}
+            style={{ overflow: "hidden", minWidth: "225px" }}
           >
             <div
               style={{
