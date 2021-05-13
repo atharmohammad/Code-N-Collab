@@ -1,50 +1,45 @@
-import React from "react";
-import LanguagePicker from './BarItem/LanguagePicker'
-import ThemePicker from './BarItem/ThemePicker'
-import CollaborateTools from './BarItem/CollaborateTools'
-import Compile from './BarItem/Compile'
-import GraphButton from './BarItem/GraphButton'
-import FontSize from './BarItem/FontSize'
-import RoomTitle from '../../Assets/images/roomTitle.png'
+import React,{useState,useEffect} from "react";
+import LanguagePicker from "./BarItem/LanguagePicker";
+import ThemePicker from "./BarItem/ThemePicker";
+import Leave from "./BarItem/Leave";
+import Compile from "./BarItem/Compile";
+import GraphButton from "./BarItem/GraphButton";
+import FontSize from "./BarItem/FontSize";
+import RoomTitle from "../../Assets/images/roomTitle.png";
+import classes from "./Toolbar.module.css";
+import {useLocation} from "react-router-dom";
+
 import {
   Typography,
   CssBaseline,
   Box,
-  Button,makeStyles,Grid
+  Button,
+  makeStyles,
+  Grid,
 } from "@material-ui/core";
-import {useHistory} from 'react-router-dom';
-
-const useStyles = makeStyles((theme) => ({
-  button:{
-    '&:hover': {
-            backgroundColor: '#fff',
-            color:'#3b362a'
-      }
-  }
-}));
 
 export default function Toolbar(props) {
-  const history = useHistory();
-  const classes = useStyles();
+  const socket = props.socket;
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
   return (
-        <Grid container direction='row' style={{backgroundColor:'#1f273d',height:'15vh',}}>
-          <Grid style={{height:'15vh',margin:'4vh 0 0 2.5vh'}}>
-            <img src={RoomTitle} alt='code-n-collab'/>
-          </Grid>
-          <Grid container direction='column' justify="center"
-          alignItems="center" style={{width:'50%'}}>
-            <Grid direction='row' style={{display:'flex',width:'100%',paddingTop:'.5vh'}}>
-              <Grid style={{display:'flex'}}>
-                <LanguagePicker/>
-                <ThemePicker/>
-                <FontSize/>
-              </Grid>
-              <Compile/>
-              <GraphButton/>
-              <CollaborateTools/>
-            </Grid>
-          </Grid>
+    <Grid className={classes.main}>
+      <Grid className={classes.imgGrid}>
+        <img src={RoomTitle} alt="code-n-collab" />
+      </Grid>
+      <Grid className={classes.toolWrap}>
+        <Grid className={classes.toolsGrid}>
+          <LanguagePicker />
+          <ThemePicker />
+          <FontSize />
         </Grid>
+        <Grid className={classes.toolsGrid}>
+          <Compile />
+          <GraphButton />
+          <Leave socket={socket}/>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }

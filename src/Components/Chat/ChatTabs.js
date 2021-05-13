@@ -34,44 +34,49 @@ export default function ChatPanel(props) {
   const [name, setName] = useState("");
   const [value, setValue] = React.useState(0);
   const [messages, setMessages] = useState([]);
-  const [persons,setPersons] = useState([])
+  const [persons, setPersons] = useState([]);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const socket = props.socket
+  const socket = props.socket;
 
-  useEffect(()=>{
-    if (searchParams.get("name")) {
+  useEffect(() => {
+    if(location.pathname === "/newContest"){
+      setName(location.state.Name.trim().toLowerCase());
+    }else{
+      if (searchParams.get("name")) {
         setName(searchParams.get("name").trim().toLowerCase());
+      }
     }
-  }, [])
+  }, [location]);
 
-  useEffect(()=>{
-      console.log(socket)
-      socket.on('serverMsg', (msg)=>{
-        setMessages([...messages, msg])
-      })
-    return ()=>{ socket.off('serverMsg');
-    console.log('off')
-    }
-  },[messages])
+  useEffect(() => {
+    console.log(socket);
+    socket.on("serverMsg", (msg) => {
+      setMessages([...messages, msg]);
+    });
+    return () => {
+      socket.off("serverMsg");
+      console.log("off");
+    };
+  }, [messages]);
 
-  useEffect(()=>{
-    console.log(socket)
-    socket.on('peopleInRoom', (people)=>{
-      console.log('settingpeople')
-      setPersons(people)
-    })
-  return ()=>{ socket.off('peopleInRoom');
-  }
-},[])
-
+  useEffect(() => {
+    console.log(socket);
+    socket.on("peopleInRoom", (people) => {
+      console.log("settingpeople");
+      setPersons(people);
+    });
+    return () => {
+      socket.off("peopleInRoom");
+    };
+  }, [persons]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <div stlye={{backgroundColor:'#313332'}}>
+    <div stlye={{ backgroundColor: "#313332" }}>
       <AppBar position="static">
         <Tabs
           value={value}
@@ -84,10 +89,10 @@ export default function ChatPanel(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Chat socket={props.socket} messages={messages}/>
+        <Chat socket={props.socket} messages={messages} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <People persons={persons} you={socket.id}/>
+        <People persons={persons} you={name} />
       </TabPanel>
     </div>
   );

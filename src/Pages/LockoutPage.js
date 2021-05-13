@@ -1,94 +1,34 @@
 import React, { useEffect, useState } from "react";
-
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
-
 import Chat from "../Components/Chat/ChatTabs";
-import Editor from "../Components/Editor/Editor_Wrapper";
+import Editor from "../Components/Lockout/Editor.js/LockOutEditor";
 import IO from "../Components/IO/IO";
-import Problem from "../Components/Problem/Problem";
+import LockoutPanel from "../Components/Lockout/LockoutPanel/lockoutPanel";
 import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Toolbar from "../Components/Toolbar/Toolbar";
-import "react-reflex/styles.css";
-import { useLocation, useHistory } from "react-router-dom";
-
 import * as TYPES from "../store/Action/action";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const CollabPage = (props) => {
+const LockOutPage = (props) => {
   const socket = props.socket;
-  const location = useLocation();
-  const history = useHistory();
-  const [joined, setJoined] = useState(false);
 
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-
-    if (
-      !searchParams.get("name") ||
-      !searchParams.get("room") ||
-      !location.state
-    ) {
-      let err = {};
-
-      if (!searchParams.get("name") || !searchParams.get("room")) {
-        err = {
-          error: "Username or RoomName can't be empty",
-        };
-      }
-
-      return history.push({
-        pathname: "/rooms",
-        search:
-          "?" +
-          (searchParams.has("room") ? "room=" + searchParams.get("room") : ""),
-        state: err,
-      });
-    }
-    const password = location.state.password;
-
-    socket.emit(
-      "join",
-      {
-        room: searchParams.get("room"),
-        username: searchParams.get("name"),
-        password,
-      },
-      ({ error, user }) => {
-        if (error) {
-          console.log(error);
-          return history.push({
-            pathname: "/rooms",
-            search:
-              "?" +
-              (searchParams.has("room")
-                ? "room=" + searchParams.get("room")
-                : ""),
-            state: { error },
-          });
-        }
-        setJoined(true);
-        console.log("joined");
-      }
-    );
-  }, []);
-
-  return joined ? (
+  return (
     <>
-      <Toolbar />
+      <Toolbar socket={socket}/>
       <div style={{ height: "85vh", overflowY: "hidden" }}>
         <ReflexContainer orientation="vertical">
           <ReflexElement
-            minSize="0"
-            maxSize="900"
-            size="400"
-            style={{ overflowX: "hidden" }}
+            minSize="300"
+            maxSize="300"
+            size="300"
+            style={{ overflow: "hidden" }}
           >
-            <Problem socket={socket} />
+            <LockoutPanel socket={socket} />
           </ReflexElement>
 
           <ReflexSplitter
@@ -169,9 +109,7 @@ const CollabPage = (props) => {
         </Snackbar>
       </div>
     </>
-  ) : (
-    <></>
-  );
+  )
 };
 
 const mapStateToProps = (state) => {
@@ -188,4 +126,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CollabPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LockOutPage);

@@ -1,28 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
-import { useLocation } from "react-router-dom";
 
 import Editor from "@monaco-editor/react";
-import "@convergencelabs/monaco-collab-ext/css/monaco-collab-ext.min.css";
 
-import Modal from "../Modal/Modal";
-import Graph from "../Graph/Graph";
-import blackBoardJSON from "../manaco-Themes/blackBoard";
-import cobaltJSON from "../manaco-Themes/cobalt";
-import merbivoreJSON from "../manaco-Themes/merbivore";
-import githubJSON from "../manaco-Themes/github";
-import MonacoConvergenceAdapter from "./EditorAdaptor";
+import Modal from "../../Modal/Modal";
+import Graph from "../../Graph/Graph";
+import blackBoardJSON from "../../manaco-Themes/blackBoard";
+import cobaltJSON from "../../manaco-Themes/cobalt";
+import merbivoreJSON from "../../manaco-Themes/merbivore";
+import githubJSON from "../../manaco-Themes/github";
 
 import {
   SET_LOADING,
   SET_OUTPUT,
-} from "../../store/Action/action";
+} from "../../../store/Action/action";
 
 const MonacoEditor = (props) => {
   const socket = props.socket;
   const [code, setCode] = useState("");
-  const location = useLocation();
-  const domain = props.domain;
   const MonacoEditorRef = useRef();
 
   const handleEditorWillMount = (monaco) => {
@@ -39,6 +34,7 @@ const MonacoEditor = (props) => {
   };
 
   //compiling the code
+
   useEffect(async () => {
     if (props.tools.nowCompile === true && props.tools.isLoading === false) {
       props.setOutput("");
@@ -47,41 +43,11 @@ const MonacoEditor = (props) => {
         language: props.tools.language,
         code,
         input: props.tools.input,
-        reason:"code-editor"
+        reason:"lockout"
       });
     }
   }, [props.tools.nowCompile]);
 
-  //socket and convergence
-  useEffect(async () => {
-    socket.on("Compile_ON", () => {
-      props.setLoading();
-    });
-
-    let modelService;
-    const currentPath = location.pathname;
-    const searchParams = new URLSearchParams(location.search);
-
-    try {
-      modelService = domain.models();
-
-      const model = await modelService.openAutoCreate({
-        collection: "Code-n-Collab`",
-        id: searchParams.get("room").trim(),
-        ephemeral: true, //Deletes model when everyone left
-        data: { text: code },
-      });
-
-      const adapter = new MonacoConvergenceAdapter(
-        MonacoEditorRef.current,
-        model.elementAt("text")
-      );
-
-      adapter.bind();
-    } catch (error) {
-      console.error("Could not open model ", error);
-    }
-  }, []);
 
   return (
     <>

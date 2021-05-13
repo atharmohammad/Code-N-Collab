@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "author": "Mohd Athar",
-  "proxy": "https://api.jdoodle.com/v1",
   "dependencies": {
     "@convergence/color-assigner": "^0.3.0",
     "@convergence/convergence": "^1.0.0-rc.7",
