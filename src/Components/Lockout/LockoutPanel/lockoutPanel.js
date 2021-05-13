@@ -29,7 +29,7 @@ const LockoutPanel = (props) => {
           </Grid>
           <Grid
             style={{
-              height: "38vh",
+              minHeight: "38vh",
               margin: "5px 8px 5px 0",
               boxSizing: "border-box",
             }}

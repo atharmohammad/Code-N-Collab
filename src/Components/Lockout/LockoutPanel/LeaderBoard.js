@@ -11,24 +11,17 @@ import {
 } from "@material-ui/core";
 
 import classes from "./lockout.module.css";
+import {connect} from "react-redux";
 
-function createData(name, score) {
-  return { name, score };
-}
-
-const rows = [
-  createData("Tourist", 237),
-  createData("Benq", 230),
-  createData("Kickass", 200),
-  createData("umnik", 164),
-  createData("Ginger", 130),
-];
-
-const DenseTable = () => {
+const DenseTable = (props) => {
+  const rows = [];
+  props.contest.Users.map(user=>{
+    rows.push({Name:user.Name,Score:user.Score});
+  })
   return (
     <TableContainer
       component={Paper}
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%",paddingBottom:"3vh" }}
     >
       <Table size="small" aria-label="a dense table">
         <TableHead>
@@ -47,11 +40,11 @@ const DenseTable = () => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.Name}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.Name}
               </TableCell>
-              <TableCell align="right">{row.score}</TableCell>
+              <TableCell align="right">{row.Score}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -77,4 +70,11 @@ const DenseTable = () => {
     </TableContainer>
   );
 };
-export default DenseTable;
+
+const mapStateToProps = state =>{
+  return{
+    contest:state.contest.contest
+  }
+}
+
+export default connect(mapStateToProps,null)(DenseTable);

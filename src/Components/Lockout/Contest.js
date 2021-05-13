@@ -21,7 +21,7 @@ function Contest(props) {
       history.push({
         pathname: "/newContest",
         search: "?room=" + searchParams.get("room"),
-        state: { Name: "Adnan" },
+        state: { Name: "AdnanShamsi" },
       });
       window.location.reload();
     }

@@ -33,7 +33,7 @@ function HomePage() {
     history.push({
       pathname:"/newContest",
       search:"?room="+room,
-      state:{Name:"Athar"}
+      state:{Name:"KickAss"}
     });
   }
 
