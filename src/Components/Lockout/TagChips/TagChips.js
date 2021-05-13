@@ -1,99 +1,125 @@
-import React,{useState} from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Chip from "@material-ui/core/Chip";
-import Paper from "@material-ui/core/Paper";
-import TagFacesIcon from "@material-ui/icons/TagFaces";
-import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import {connect} from "react-redux";
-import * as TYPES from "../../../store/Action/action"
+import { connect } from "react-redux";
+import * as TYPES from "../../../store/Action/action";
+
+import {
+  Input,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  ListItemText,
+  Select,
+  Checkbox,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    listStyle: "none",
-    padding: theme.spacing(0.5),
-    margin: 0
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    maxWidth: 180,
   },
-  chip: {
-    margin: theme.spacing(0.5)
-  }
+  noLabel: {
+    marginTop: theme.spacing(3),
+  },
 }));
 
-function TagChips(props) {
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const names = [
+  "2-sat",
+  "binary search",
+  "bitmasks",
+  "brute force",
+  "chinese remainder theorem",
+  "combinatorics",
+  "constructive algorithms",
+  "data structures",
+  "dfs and similar",
+  "divide and conquer",
+  "dp",
+  "dsu",
+  "expression parsing",
+  "fft",
+  "flows",
+  "games",
+  "geometry",
+  "graph matchings",
+  "graphs",
+  "greedy",
+  "hashing",
+  "implementation",
+  "interactive",
+  "math",
+  "matrices",
+  "meet-in-the-middle",
+  "number theory",
+  "probabilities",
+  "schedules",
+  "shortest paths",
+  "sortings",
+  "string suffix structures",
+  "strings",
+  "ternary search",
+  "trees",
+  "two pointers",
+];
+
+const MultipleSelect = (props) => {
   const classes = useStyles();
-  const [chipData, setChipData] = useState([]);
-  const [tags, setTags] = useState("");
 
   const handleChange = (event) => {
-    setTags(event.target.value);
-    let tagAlreadyExists = false;
-    let tagKey = chipData.length;
-
-    chipData.every((tag, i) => {
-      if(tag.label === event.target.value){
-        tagAlreadyExists = true;
-        return false
-      }
-    });
-
-    if(!tagAlreadyExists){
-      setChipData([...chipData,{key:tagKey,label:event.target.value}]);
-      props.updateProblemTags([...chipData,{key:tagKey,label:event.target.value}]);
-    }
-
-  };
-
-  const handleDelete = (chipToDelete) => () => {
-    const newChipArray = chipData.filter((chip) => chip.label !== chipToDelete.label)
-    setChipData(newChipArray)
-    props.updateProblemTags(newChipArray);
+    props.updateProblemTags(event.target.value);
   };
 
   return (
-    <div style={{display:"flex",flexDirection:"column"}}>
-      <Paper component="ul" className={classes.root}>
-        {chipData.map((data) => {
-          return (
-            <li key={data.key}>
-              <Chip
-                label={data.label}
-                onDelete={handleDelete(data)}
-                className={classes.chip}
-              />
-            </li>
-          );
-        })}
-      </Paper>
-      <FormControl>
-        <InputLabel style={{ color: "black" }}>Tags</InputLabel>
+    <div>
+      <FormControl className={classes.formControl}>
+        <InputLabel>Tag</InputLabel>
         <Select
+          multiple
+          value={props.ProblemTags}
           onChange={handleChange}
-          displayEmpty
-          value={tags}
-          style={{ width: "150px" }}
+          input={<Input />}
+          renderValue={(selected) => selected.join(", ")}
         >
-          <MenuItem value="greedy">
-            <em>greedy</em>
-          </MenuItem>
-          <MenuItem value="implementation"> implementation</MenuItem>
-          <MenuItem value="math">math</MenuItem>
+          {names.map((name) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox checked={props.ProblemTags.indexOf(name) > -1} />
+              <ListItemText primary={name} />
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </div>
   );
-}
+};
 
-const mapDispatchToProps = dispatch =>{
-  return{
-    updateProblemTags:(chipsArray)=>{dispatch({type:TYPES.UPDATE_PROBLEM_TAGS,
-                                data:chipsArray})}
-  }
-}
+const mapStateToProps = (state) => {
+  return {
+    ProblemTags: state.contest.ProblemTags,
+  };
+};
 
-export default connect(null,mapDispatchToProps)(TagChips);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateProblemTags: (chipsArray) => {
+      dispatch({ type: TYPES.UPDATE_PROBLEM_TAGS, data: chipsArray });
+    },
+  };
+};
+
+const x=()=>{
+  return <></> 
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MultipleSelect);

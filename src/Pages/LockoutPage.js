@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
+import Countdown from '../Components/Coundown/Coundown'
 import Chat from "../Components/Chat/ChatTabs";
 import Editor from "../Components/Lockout/Editor.js/LockOutEditor";
 import IO from "../Components/IO/IO";
-import LockoutPanel from "../Components/Lockout/LockoutPanel/lockoutPanel";
+import Contest from "../Components/Lockout/Contest";
+import Rules from "../Components/Lockout/LockoutPanel/Rules";
 import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -26,9 +28,20 @@ const LockOutPage = (props) => {
             minSize="300"
             maxSize="300"
             size="300"
-            style={{ overflow: "hidden" }}
+            style={{ overflow: "hidden", minWidth: "225px" }}
           >
-            <LockoutPanel socket={socket} />
+            <div
+              style={{
+                margin: "10px 20px 10px 10px",
+                height: "96%",
+                background: "#313332",
+                border: "2px solid black",
+                borderRadius: "10px",
+                boxShadow: "0 5px 15px 0px rgba(0,0,0,0.6)",
+              }}
+            >
+              <Contest socket={socket} />
+            </div>
           </ReflexElement>
 
           <ReflexSplitter
@@ -41,31 +54,47 @@ const LockOutPage = (props) => {
           />
 
           <ReflexElement orientation="horizontol" maxSize="1900" minSize="400">
-            <ReflexContainer>
-              <ReflexElement
-                minSize="100"
-                maxSize="1600"
-                style={{ overflow: "hidden" }}
-              >
-                <Editor socket={socket} />
-              </ReflexElement>
-              <ReflexSplitter
-                className="reflex-thin"
+            {props.contest && props.contest.Started ? (
+              <ReflexContainer>
+                <ReflexElement
+                  minSize="100"
+                  maxSize="1600"
+                  style={{ overflow: "hidden" }}
+                >
+                 
+                  <Editor socket={socket} />
+                </ReflexElement>
+                <ReflexSplitter
+                  className="reflex-thin"
+                  style={{
+                    backgroundColor: "#1f273d",
+                    opacity: "1",
+                    border: "0.3px",
+                  }}
+                />
+                <ReflexElement
+                  minSize="0"
+                  maxSize="300"
+                  size="200"
+                  style={{ overflow: "hidden" }}
+                >
+                  <IO socket={socket} />
+                </ReflexElement>
+              </ReflexContainer>
+            ) : (
+              <div
                 style={{
-                  backgroundColor: "#1f273d",
-                  opacity: "1",
-                  border: "0.3px",
+                  background: "#313332",
+                  boxShadow: "0 5px 15px 0px rgba(0,0,0,0.6)",
+                  height: "97%",
+                  width: "96%",
+                  margin: "auto",
+                  borderRadius: "10px",
                 }}
-              />
-              <ReflexElement
-                minSize="0"
-                maxSize="300"
-                size="200"
-                style={{ overflow: "hidden" }}
               >
-                <IO socket={socket} />
-              </ReflexElement>
-            </ReflexContainer>
+                <Rules />
+              </div>
+            )}
           </ReflexElement>
 
           <ReflexSplitter
@@ -83,6 +112,7 @@ const LockOutPage = (props) => {
             size="250"
             style={{ overflow: "hidden" }}
           >
+            
             <Chat socket={socket} />
           </ReflexElement>
         </ReflexContainer>
@@ -109,13 +139,14 @@ const LockOutPage = (props) => {
         </Snackbar>
       </div>
     </>
-  )
+  );
 };
 
 const mapStateToProps = (state) => {
   return {
     output_success: state.tools.output_success,
     output_error: state.tools.output_error,
+    contest: state.contest.contest,
   };
 };
 
