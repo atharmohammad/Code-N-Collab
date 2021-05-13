@@ -4,7 +4,7 @@
     display: inline-flex;
     width:65px;
     height:65px;
-    margin:10px;
+    margin:10px 10px 0 10px;
     color:white;
     font-size: 20px;
     border:2px solid black;

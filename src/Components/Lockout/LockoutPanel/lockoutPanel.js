@@ -12,14 +12,15 @@ const LockoutPanel = (props) => {
       <Grid
         container
         direction="column"
-        style={{ margin: "5px 5 100px 5px", boxSizing: "border-box" }}
+        justify="space-around"
+        style={{ margin: "5px 5px 100px 5px", boxSizing: "border-box" }}
       >
-        
+
           <Grid
             style={{
-              height: "35vh",
+              height: "29vh",
               margin: "2px",
-              maxHeight:'240px',
+              maxHeight:'250px',
               boxSizing:'border_box',
               border: "10px 10px 10px 10px #fff",
             }}
@@ -28,8 +29,8 @@ const LockoutPanel = (props) => {
           </Grid>
           <Grid
             style={{
-              height: "33vh",
-              margin: "5px",
+              height: "38vh",
+              margin: "5px 8px 5px 0",
               boxSizing: "border-box",
             }}
           >
