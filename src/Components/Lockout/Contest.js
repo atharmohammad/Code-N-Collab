@@ -45,7 +45,7 @@ function Contest(props) {
       return setJoined(true);
     });
     socket.on("Update", (updatedContest) => {
-      console.log("updated!");
+      console.log("updated!",updatedContest);
       props.setContest(updatedContest);
       setLockout(updatedContest);
       props.resetProblemLoading();
