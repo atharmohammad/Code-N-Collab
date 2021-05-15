@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import {
   Table,
   TableBody,
@@ -12,12 +12,27 @@ import {
 
 import classes from "./lockout.module.css";
 import {connect} from "react-redux";
+import {useLocation} from "react-router-dom";
 
 const DenseTable = (props) => {
+  const location = useLocation();
+  const [room,setRoom] = useState(null);
+  const socket = props.socket;
+  
+  useEffect(()=>{
+    const searchParams = new URLSearchParams(location.search);
+    setRoom(searchParams.get("room"));
+  })
+
   const rows = [];
   props.contest.Users.map(user=>{
     rows.push({Name:user.Name,Score:user.Score});
   })
+
+  const updateContest = ()=>{
+    socket.emit("Contest-Update",({roomId:room,contestIndex:props.contest.contestIndex}));
+  }
+
   return (
     <TableContainer
       component={Paper}
@@ -64,7 +79,7 @@ const DenseTable = (props) => {
           textAlign: "center",
           boxShadow: "0 3px 10px 0px #ba6261",
         }}
-      >
+      onClick={updateContest}>
         UPDATE
       </Button>
     </TableContainer>
@@ -76,5 +91,6 @@ const mapStateToProps = state =>{
     contest:state.contest.contest
   }
 }
+
 
 export default connect(mapStateToProps,null)(DenseTable);

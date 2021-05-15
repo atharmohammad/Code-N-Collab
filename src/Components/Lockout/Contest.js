@@ -21,12 +21,12 @@ function Contest(props) {
       history.push({
         pathname: "/newContest",
         search: "?room=" + searchParams.get("room"),
-        state: { Name: "AdnanShamsi" },
+        state: { Name: "Gednady" },
       });
       window.location.reload();
     }
     const user = {
-      Name: location.state ? location.state.Name : "Adnan",
+      Name: location.state ? location.state.Name : "Gednady",
       RoomId: searchParams.get("room"),
     };
 

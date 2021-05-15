@@ -6,6 +6,9 @@ import Countdown from '../../Coundown/Coundown'
 
 
 const LockoutPanel = (props) => {
+
+  const socket = props.socket;
+
   return (
     <>
     <Countdown initialMinute ={30} initialSeconds ={0} />
@@ -34,7 +37,7 @@ const LockoutPanel = (props) => {
               boxSizing: "border-box",
             }}
           >
-            <LeaderBoard />
+            <LeaderBoard socket={socket} />
           </Grid>
         </Grid>
     </>
