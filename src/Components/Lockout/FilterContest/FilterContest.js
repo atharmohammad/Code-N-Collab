@@ -9,6 +9,12 @@ const FilterContest = (props) => {
   const socket = props.socket;
   //const [loadContest, setLoadContest] = useState(false);
 
+  useEffect(()=>{
+    socket.on("Contest-Starting",()=>{
+      props.setProblemLoading();
+    })
+  },[])
+
   const startContestHandler = () => {
     socket.emit("Start-Contest", {
       room: props.roomId,
@@ -29,7 +35,7 @@ const FilterContest = (props) => {
           justify: "center",
           height:'100%',
           paddingBottom: "20px",
-          
+
         }}
       >
         <div
@@ -51,7 +57,7 @@ const FilterContest = (props) => {
               justifyContent: "center",
               justify: "center",
               gridGap: "20px",
-              
+
             }}
           >
             <TextField

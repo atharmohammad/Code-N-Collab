@@ -34,6 +34,8 @@ function Leave(props) {
     const currentPath = location.pathname;
 
     if(currentPath === "/newContest"){
+      socket.emit("Contest-Update",({roomId:searchParams.get("room"),
+                    contestIndex:props.contest.contestIndex}))
       socket.emit("Leave-Contest",({contestIndex:props.contest.contestIndex,
       name:location.state.Name}));
       history.push("/homepage");
