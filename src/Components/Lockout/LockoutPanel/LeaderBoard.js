@@ -9,27 +9,36 @@ import {
   Paper,
   Button,
 } from "@material-ui/core";
-
+import Spinner from "../../Spinner/UpdateSpinner/UpdateSpinner";
 import classes from "./lockout.module.css";
 import {connect} from "react-redux";
 import {useLocation} from "react-router-dom";
 
+
+
 const DenseTable = (props) => {
   const location = useLocation();
   const [room,setRoom] = useState(null);
+  const [load,setLoad] = useState(false);
   const socket = props.socket;
-  
+
   useEffect(()=>{
     const searchParams = new URLSearchParams(location.search);
     setRoom(searchParams.get("room"));
-  })
+  },[location])
+
+  useEffect(()=>{
+    setLoad(false);
+  },[props.contest])
 
   const rows = [];
   props.contest.Users.map(user=>{
     rows.push({Name:user.Name,Score:user.Score});
   })
 
+
   const updateContest = ()=>{
+    setLoad(true);
     socket.emit("Contest-Update",({roomId:room,contestIndex:props.contest.contestIndex}));
   }
 
@@ -68,7 +77,7 @@ const DenseTable = (props) => {
         style={{
           cursor: "pointer",
           color: "white",
-          height: "30px",
+          height: "35px",
           width: "90px",
           marginLeft: "35%",
           marginTop: "10px",
@@ -80,7 +89,7 @@ const DenseTable = (props) => {
           boxShadow: "0 3px 10px 0px #ba6261",
         }}
       onClick={updateContest}>
-        UPDATE
+        {load ? <Spinner/> : <p>UPDATE</p>}
       </Button>
     </TableContainer>
   );
