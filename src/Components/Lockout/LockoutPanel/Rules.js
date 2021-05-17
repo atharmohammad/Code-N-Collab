@@ -17,27 +17,32 @@ const Rules = (props) => {
         </h1>
         <ol>
           <li>
-            <h3>Atmost 5 people can join a contest</h3>
+            <h3>Maximum of 4 People can Join a Contest</h3>
+          </li>
+          <li>
+            <h3>Person who solves a problem first will get its point added to his Score, After that No one will get point for that problem even if they solve it</h3>
           </li>
           <li>
             <h3>
-              To validate your submission press click on update button each
-              time(after every submission)
+              To update your LeaderBoard and Unsolved Problems Click Update
             </h3>
           </li>
           <li>
-            <h3>Person with maximum marks will be the winner</h3>
+            <h3>Person Who Scores Maximum Will be the Winner</h3>
           </li>
           <li>
-            <h3>Person having same marks will have same rankings</h3>
+            <h3>Choose tags and rating for problems you want to compete for and press Start Contest</h3>
           </li>
           <li>
             <h3>The score of each question will be written on there respective block</h3>
           </li>
           <li>
-            <h3>No cheating is allowed</h3>
+            <h3>Person who Click Start Contest his configuration for contest would be taken into account so please discuss before starting</h3>
           </li>
-          
+          <li>
+            <h3>for problem blocks : Blue = unsolved , green = Solved by you , red = already solved by someone else</h3>
+          </li>
+
         </ol>
       </div>
     </>

@@ -63,10 +63,10 @@ const DenseTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row,i) => (
             <TableRow key={row.Name}>
               <TableCell component="th" scope="row">
-                {row.Name}
+                {i + 1}. {row.Name}
               </TableCell>
               <TableCell align="right">{row.Score}</TableCell>
             </TableRow>
