@@ -7,7 +7,6 @@ import { Button } from "@material-ui/core";
 
 const FilterContest = (props) => {
   const socket = props.socket;
-  //const [loadContest, setLoadContest] = useState(false);
 
   useEffect(()=>{
     socket.on("Contest-Starting",()=>{
@@ -35,7 +34,6 @@ const FilterContest = (props) => {
           justify: "center",
           height:'100%',
           paddingBottom: "20px",
-
         }}
       >
         <div
@@ -48,6 +46,7 @@ const FilterContest = (props) => {
             maxHeight: "450px",
             background:'#fff',
             boxShadow: "0 5px 15px 0px rgba(0,0,0,0.6)",
+            overflowY:'auto',
           }}
         >
           <div
