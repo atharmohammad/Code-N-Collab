@@ -39,7 +39,7 @@ const DenseTable = (props) => {
 
   const updateContest = ()=>{
     setLoad(true);
-    socket.emit("Contest-Update",({roomId:room,contestIndex:props.contest.contestIndex}));
+    socket.emit("Contest-Update",({roomId:room}));
   }
 
   return (
