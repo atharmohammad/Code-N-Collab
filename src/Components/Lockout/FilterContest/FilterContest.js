@@ -8,11 +8,11 @@ import { Button } from "@material-ui/core";
 const FilterContest = (props) => {
   const socket = props.socket;
 
-  useEffect(()=>{
-    socket.on("Contest-Starting",()=>{
+  useEffect(() => {
+    socket.on("Contest-Starting", () => {
       props.setProblemLoading();
-    })
-  },[])
+    });
+  }, []);
 
   const startContestHandler = () => {
     socket.emit("Start-Contest", {
@@ -32,7 +32,7 @@ const FilterContest = (props) => {
           flexDirection: "column",
           justifyContent: "center",
           justify: "center",
-          height:'100%',
+          height: "100%",
           paddingBottom: "20px",
         }}
       >
@@ -42,11 +42,11 @@ const FilterContest = (props) => {
             margin: "auto",
             padding: "20px",
             height: "58vh",
-            borderRadius:'10px',
+            borderRadius: "10px",
             maxHeight: "450px",
-            background:'#fff',
+            background: "#fff",
             boxShadow: "0 5px 15px 0px rgba(0,0,0,0.6)",
-            overflowY:'auto',
+            overflowY: "auto",
           }}
         >
           <div
@@ -56,7 +56,6 @@ const FilterContest = (props) => {
               justifyContent: "center",
               justify: "center",
               gridGap: "20px",
-
             }}
           >
             <TextField

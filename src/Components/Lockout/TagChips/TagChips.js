@@ -95,7 +95,7 @@ const TagChips = (props) => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column"}}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <FormControl>
         <InputLabel style={{ color: "black" }}>Tags</InputLabel>
         <Select
@@ -110,7 +110,11 @@ const TagChips = (props) => {
             </MenuItem>
           ))}
         </Select>
-        <Paper component="ul" className={classes.root} style={{marginTop:'10px'}}>
+        <Paper
+          component="ul"
+          className={classes.root}
+          style={{ marginTop: "10px" }}
+        >
           {chipData.map((data) => {
             return (
               <li key={data.key}>
