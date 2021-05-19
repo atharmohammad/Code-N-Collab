@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import socketio from "socket.io-client";
-import Contest from "../Components/Lockout/Contest";
+import LockoutPage from './LockoutPage' 
 
 export default function LockoutWrapper(props) {
   const socket = socketio.connect("http://localhost:8080/");
@@ -12,5 +12,5 @@ export default function LockoutWrapper(props) {
     };
   }, []);
 
-  return <Contest socket={socket} />;
+  return <LockoutPage socket={socket} />;
 }

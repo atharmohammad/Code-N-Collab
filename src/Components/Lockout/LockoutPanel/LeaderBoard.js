@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import {
   Table,
   TableBody,
@@ -9,25 +9,44 @@ import {
   Paper,
   Button,
 } from "@material-ui/core";
-
+import Spinner from "../../Spinner/UpdateSpinner/UpdateSpinner";
 import classes from "./lockout.module.css";
+import {connect} from "react-redux";
+import {useLocation} from "react-router-dom";
 
-function createData(name, score) {
-  return { name, score };
-}
 
-const rows = [
-  createData("Tourist", 237),
-  createData("Benq", 230),
-  createData("Kickass", 200),
-  createData("umnik", 164),
-  createData("Ginger", 102),
-];
 
-const DenseTable = () => {
+const DenseTable = (props) => {
+  const location = useLocation();
+  const [room,setRoom] = useState(null);
+  const [load,setLoad] = useState(false);
+  const socket = props.socket;
+
+  useEffect(()=>{
+    const searchParams = new URLSearchParams(location.search);
+    setRoom(searchParams.get("room"));
+  },[location])
+
+  useEffect(()=>{
+    setLoad(false);
+  },[props.contest])
+
+  const rows = [];
+  props.contest.Users.map(user=>{
+    rows.push({Name:user.Name,Score:user.Score});
+  })
+
+
+  const updateContest = ()=>{
+    setLoad(true);
+    socket.emit("Contest-Update",({roomId:room}));
+  }
+
   return (
-    <TableContainer component={Paper} style={{ width: "100%",
-                              height: "38.5vh" }}>
+    <TableContainer
+      component={Paper}
+      style={{ width: "100%", height: "100%",paddingBottom:"3vh" }}
+    >
       <Table size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
@@ -44,12 +63,12 @@ const DenseTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
+          {rows.map((row,i) => (
+            <TableRow key={row.Name}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {i + 1}. {row.Name}
               </TableCell>
-              <TableCell align="right">{row.score}</TableCell>
+              <TableCell align="right">{row.Score}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -58,20 +77,29 @@ const DenseTable = () => {
         style={{
           cursor: "pointer",
           color: "white",
-          height: "30px",
+          height: "35px",
           width: "90px",
           marginLeft: "35%",
-          marginTop:"20px",
+          marginTop: "10px",
           borderRadius: "5px",
           background: "#872e2e",
           fontSize: "14px",
           paddingTop: "4px",
           textAlign: "center",
+          boxShadow: "0 3px 10px 0px #ba6261",
         }}
-      >
-        UPDATE
+      onClick={updateContest}>
+        {load ? <Spinner/> : <p>UPDATE</p>}
       </Button>
     </TableContainer>
   );
 };
-export default DenseTable;
+
+const mapStateToProps = state =>{
+  return{
+    contest:state.contest.contest
+  }
+}
+
+
+export default connect(mapStateToProps,null)(DenseTable);

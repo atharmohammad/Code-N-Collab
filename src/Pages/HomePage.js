@@ -9,31 +9,30 @@ import { v1 as uuidv1 } from "uuid";
 function HomePage() {
   const history = useHistory();
   const location = useLocation();
-
+  
   useEffect(()=>{
     if(location.state){
       alert(location.state.error);
     }
   },[])
-
+  
   const roomHandler = () => {
     history.push("/rooms");
   };
-
+  
   const homePageHandler = () => {
     history.push("/");
   };
-
+  
   const blogHandler = () => {
     history.push("/blogs");
   };
-
+  
   const contestHandler = ()=>{
     const room = uuidv1();
     history.push({
-      pathname:"/newContest",
-      search:"?room="+room,
-      state:{Name:"Athar"}
+      pathname:"/chooseName",
+      search:"?room=" + room,
     });
   }
 

@@ -34,7 +34,8 @@ function Leave(props) {
     const currentPath = location.pathname;
 
     if(currentPath === "/newContest"){
-      socket.emit("Leave-Contest",({room:searchParams.get("room"),
+      socket.emit("Contest-Update",({roomId:searchParams.get("room")}))
+      socket.emit("Leave-Contest",({
       name:location.state.Name}));
       history.push("/homepage");
       window.location.reload();
@@ -62,4 +63,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Leave);
+const mapStateToProps = state =>{
+  return{
+    contest:state.contest.contest
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Leave);

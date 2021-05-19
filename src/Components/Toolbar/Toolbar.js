@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import LanguagePicker from "./BarItem/LanguagePicker";
 import ThemePicker from "./BarItem/ThemePicker";
 import Leave from "./BarItem/Leave";
@@ -7,16 +7,9 @@ import GraphButton from "./BarItem/GraphButton";
 import FontSize from "./BarItem/FontSize";
 import RoomTitle from "../../Assets/images/roomTitle.png";
 import classes from "./Toolbar.module.css";
-import {useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-import {
-  Typography,
-  CssBaseline,
-  Box,
-  Button,
-  makeStyles,
-  Grid,
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 export default function Toolbar(props) {
   const socket = props.socket;
@@ -37,7 +30,7 @@ export default function Toolbar(props) {
         <Grid className={classes.toolsGrid}>
           <Compile />
           <GraphButton />
-          <Leave socket={socket}/>
+          <Leave socket={socket} />
         </Grid>
       </Grid>
     </Grid>

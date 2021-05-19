@@ -12,12 +12,13 @@ const initialState = {
   output_error:false,
   showGraph:false,
   blogPosted:false,
-  contest:null,
-  ProblemTags:[],
+  
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    
+    
     case TYPE.SET_COMPILE_ON:
       return { ...state, nowCompile: true };
 
