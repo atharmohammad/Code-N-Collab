@@ -1,40 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
-import * as TYPES from "../../../store/Action/action";
-
 import {
-  Input,
+  Chip,
+  Paper,
   InputLabel,
   MenuItem,
   FormControl,
-  ListItemText,
   Select,
-  Checkbox,
 } from "@material-ui/core";
+import { connect } from "react-redux";
+import * as TYPES from "../../../store/Action/action";
 
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-    maxWidth: 180,
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    listStyle: "none",
+    padding: theme.spacing(0.5),
+    margin: 0,
   },
-  noLabel: {
-    marginTop: theme.spacing(3),
+  chip: {
+    margin: theme.spacing(0.5),
   },
 }));
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
 
 const names = [
   "2-sat",
@@ -75,40 +64,72 @@ const names = [
   "two pointers",
 ];
 
-const MultipleSelect = (props) => {
+const TagChips = (props) => {
   const classes = useStyles();
+  const [chipData, setChipData] = useState([]);
+  const [tags, setTags] = useState("");
 
   const handleChange = (event) => {
-    props.updateProblemTags(event.target.value);
+    setTags(event.target.value);
+    let tagKey = chipData.length;
+
+    const chipIndex = chipData.findIndex(
+      (tag, i) => tag.label === event.target.value
+    );
+
+    if (chipIndex === -1) {
+      setChipData([...chipData, { key: tagKey, label: event.target.value }]);
+      props.updateProblemTags([
+        ...chipData,
+        { key: tagKey, label: event.target.value },
+      ]);
+    }
+  };
+
+  const handleDelete = (chipToDelete) => () => {
+    const newChipArray = chipData.filter(
+      (chip) => chip.label !== chipToDelete.label
+    );
+    setChipData(newChipArray);
+    props.updateProblemTags(newChipArray);
   };
 
   return (
-    <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel>Tag</InputLabel>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <FormControl>
+        <InputLabel style={{ color: "black" }}>Tags</InputLabel>
         <Select
-          multiple
-          value={props.ProblemTags}
           onChange={handleChange}
-          input={<Input />}
-          renderValue={(selected) => selected.join(", ")}
+          displayEmpty
+          value={tags}
+          style={{ width: "150px" }}
         >
           {names.map((name) => (
             <MenuItem key={name} value={name}>
-              <Checkbox checked={props.ProblemTags.indexOf(name) > -1} />
-              <ListItemText primary={name} />
+              {name}
             </MenuItem>
           ))}
         </Select>
+        <Paper
+          component="ul"
+          className={classes.root}
+          style={{ marginTop: "10px" }}
+        >
+          {chipData.map((data) => {
+            return (
+              <li key={data.key}>
+                <Chip
+                  label={data.label}
+                  onDelete={handleDelete(data)}
+                  className={classes.chip}
+                />
+              </li>
+            );
+          })}
+        </Paper>
       </FormControl>
     </div>
   );
-};
-
-const mapStateToProps = (state) => {
-  return {
-    ProblemTags: state.contest.ProblemTags,
-  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -119,7 +140,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const x=()=>{
-  return <></> 
-}
-export default connect(mapStateToProps, mapDispatchToProps)(MultipleSelect);
+export default connect(null, mapDispatchToProps)(TagChips);

@@ -6,6 +6,7 @@ import GetStarted from "./Pages/GetStarted";
 import HomePage from "./Pages/HomePage";
 import LockoutWrapper from "./Pages/LockoutWrapper";
 import BlogPage from "./Pages/BlogPage";
+import ChooseName from "./Pages/ChooseName";
 
 import "./App.css";
 
@@ -18,6 +19,7 @@ function App(props) {
       <Route path="/collaborate" exact component={CollabPageWrapper} />
       <Route path="/blogs" exact component={BlogPage} />
       <Route path="/newContest" exact component={LockoutWrapper} />
+      <Route path="/chooseName" exact component={ChooseName} />
       <Redirect to="/homepage" />
     </Switch>
   );

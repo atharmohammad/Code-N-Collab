@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
-import Countdown from '../Components/Coundown/Coundown'
 import Chat from "../Components/Chat/ChatTabs";
 import Editor from "../Components/Lockout/Editor.js/LockOutEditor";
 import IO from "../Components/IO/IO";
@@ -11,6 +10,8 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Toolbar from "../Components/Toolbar/Toolbar";
 import * as TYPES from "../store/Action/action";
+import { useLocation, useHistory } from "react-router-dom";
+import Spinner from '../Components/Spinner/ContestSpinner/ContestSpinner'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -18,9 +19,40 @@ function Alert(props) {
 
 const LockOutPage = (props) => {
   const socket = props.socket;
+  const location = useLocation();
+  const history = useHistory();
+  const [joined, setJoined] = useState(false);
 
-  return (
-    <>
+  useEffect(()=>{
+    const searchParams = new URLSearchParams(location.search);
+    
+    if (!location.state) {
+      return history.push({
+        pathname: "/chooseName",
+        search: "?room=" + searchParams.get("room"),
+      });
+    }
+    const user = {
+      Name:location.state.Name,
+      RoomId: searchParams.get("room"),
+    };
+
+    socket.emit("Contest-Join", user, ({ error, contest }) => {
+      if (error) {
+        return history.push({
+          pathname: "/homepage",
+          state: { error: error },
+        });
+      } else {
+        const updatedContest = contest;
+        console.log("updated-contest", updatedContest);
+        props.setContest(updatedContest);
+      }
+      setJoined(true);
+    });
+  },[])
+  
+  return joined ? (<>
       <Toolbar socket={socket}/>
       <div style={{ height: "85vh", overflowY: "hidden" }}>
         <ReflexContainer orientation="vertical">
@@ -138,8 +170,7 @@ const LockOutPage = (props) => {
           </Alert>
         </Snackbar>
       </div>
-    </>
-  );
+    </>):(<Spinner margin={'0px'}/>)
 };
 
 const mapStateToProps = (state) => {
@@ -154,6 +185,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     notify_output_off: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_SUCCESS }),
     notify_output_error: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_ERROR }),
+    setContest: (updatedContest) => {
+      dispatch({ type: TYPES.CONTEST_UPDATED, data: updatedContest });
+    },
   };
 };
 

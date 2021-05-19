@@ -3,15 +3,16 @@ import React, { useEffect, useState } from "react";
 import Problem from "./Problem.js";
 import LeaderBoard from "./LeaderBoard";
 import Countdown from '../../Coundown/Coundown'
+import { connect } from "react-redux";
+
 
 
 const LockoutPanel = (props) => {
-
   const socket = props.socket;
 
   return (
     <>
-    <Countdown initialMinute ={30} initialSeconds ={0} />
+    <Countdown stopAt = {props.contest.EndTime}/>
       <Grid
         container
         direction="column"
@@ -43,4 +44,11 @@ const LockoutPanel = (props) => {
     </>
   );
 };
-export default LockoutPanel;
+
+const mapStateToProps = (state) => {
+  return {
+    contest: state.contest.contest,
+  };
+};
+
+export default connect(mapStateToProps,null)(LockoutPanel);

@@ -1,34 +1,33 @@
 import { useEffect, useState } from "react";
 
 const Timer = (props) => {
-  const { initialMinute = 0, initialSeconds = 0 } = props;
-  const [minutes, setMinutes] = useState(initialMinute);
-  const [seconds, setSeconds] = useState(initialSeconds);
+  const [hours, setHours] = useState("");
+  const [minutes, setMinutes] = useState("");
+  const [seconds, setSeconds] = useState("");
 
   useEffect(() => {
-    let myInterval = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds(seconds - 1);
+    const x = setInterval(() => {
+      let now = new Date().getTime();
+      let distance = props.stopAt - now;
+      let h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let s = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // If the count down is over, write some text
+      if (distance < 0) {
+        clearInterval(x);
       }
-      if (seconds === 0) {
-        if (minutes === 0) {
-          clearInterval(myInterval);
-        } else {
-          setMinutes(minutes - 1);
-          setSeconds(59);
-        }
-      }
+      setHours(h);
+      setMinutes(m);
+      setSeconds(s);
     }, 1000);
-    return () => {
-      clearInterval(myInterval);
-    };
   });
 
   return (
-    <div style={{color:'#fff',width:'100%',textAlign:'center'}} >
-    <div style={{margin:'2px'}}>Timer</div>
-      <h1 style={{margin:'0px'}}>
-        {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+    <div style={{ color: "#fff", width: "100%", textAlign: "center" }}>
+      <div style={{ margin: "2px" }}>Timer</div>
+      <h1 style={{ margin: "0px" }}>
+        {hours !== "" ? `${hours}:${minutes}:${seconds}` : "----"}
       </h1>
     </div>
   );
