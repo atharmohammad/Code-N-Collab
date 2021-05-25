@@ -90,6 +90,11 @@ const TagChips = (props) => {
     const newChipArray = chipData.filter(
       (chip) => chip.label !== chipToDelete.label
     );
+    if(newChipArray.length){
+      setTags(newChipArray[newChipArray.length-1].label);
+    }else{
+      setTags("");
+    }
     setChipData(newChipArray);
     props.updateProblemTags(newChipArray);
   };
