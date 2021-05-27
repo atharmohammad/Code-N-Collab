@@ -11,21 +11,30 @@ import MuiAlert from "@material-ui/lab/Alert";
 import Toolbar from "../Components/Toolbar/Toolbar";
 import * as TYPES from "../store/Action/action";
 import { useLocation, useHistory } from "react-router-dom";
-import Spinner from '../Components/Spinner/ContestSpinner/ContestSpinner'
+import Spinner from "../Components/Spinner/ContestSpinner/ContestSpinner";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
+
 
 const LockOutPage = (props) => {
   const socket = props.socket;
   const location = useLocation();
   const history = useHistory();
   const [joined, setJoined] = useState(false);
+  const [errorJoin, setErrorJoin] = useState(false);
+  const [joinErrorMsg, setJoinErrorMsg] = useState('');
+  
+  const closeSnackBarHandler=() => {
+    return history.push({
+      pathname: "/homepage",
+    });
+  }
 
-  useEffect(()=>{
+  useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    
+
     if (!location.state) {
       return history.push({
         pathname: "/chooseName",
@@ -33,16 +42,15 @@ const LockOutPage = (props) => {
       });
     }
     const user = {
-      Name:location.state.Name,
+      Name: location.state.Name,
       RoomId: searchParams.get("room"),
     };
 
     socket.emit("Contest-Join", user, ({ error, contest }) => {
       if (error) {
-        return history.push({
-          pathname: "/homepage",
-          state: { error: error },
-        });
+        setErrorJoin(true);
+        setJoinErrorMsg(error); 
+        return console.log("err",error);
       } else {
         const updatedContest = contest;
         console.log("updated-contest", updatedContest);
@@ -50,10 +58,11 @@ const LockOutPage = (props) => {
       }
       setJoined(true);
     });
-  },[])
-  
-  return joined ? (<>
-      <Toolbar socket={socket}/>
+  }, []);
+
+  return joined ? (
+    <>
+      <Toolbar socket={socket} />
       <div style={{ height: "85vh", overflowY: "hidden" }}>
         <ReflexContainer orientation="vertical">
           <ReflexElement
@@ -93,7 +102,6 @@ const LockOutPage = (props) => {
                   maxSize="1600"
                   style={{ overflow: "hidden" }}
                 >
-                 
                   <Editor socket={socket} />
                 </ReflexElement>
                 <ReflexSplitter
@@ -144,7 +152,6 @@ const LockOutPage = (props) => {
             size="250"
             style={{ overflow: "hidden" }}
           >
-            
             <Chat socket={socket} />
           </ReflexElement>
         </ReflexContainer>
@@ -170,7 +177,22 @@ const LockOutPage = (props) => {
           </Alert>
         </Snackbar>
       </div>
-    </>):(<Spinner margin={'0px'}/>)
+    </>
+  ) : (
+    <>
+      <Spinner margin={"0px"} />
+      <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          open={errorJoin}
+          autoHideDuration={5000}
+          onClose={closeSnackBarHandler}
+        >
+          <Alert onClose={closeSnackBarHandler} severity="error">
+            {joinErrorMsg}
+          </Alert>
+        </Snackbar>
+    </>
+  );
 };
 
 const mapStateToProps = (state) => {
