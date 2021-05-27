@@ -1,6 +1,19 @@
 import { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import {useLocation} from "react-router-dom";
+import * as TYPES from "../../store/Action/action";
+
 
 const Timer = (props) => {
+  const location = useLocation();
+  const socket = props.socket;
+  const [roomId, setRoomId] = useState('');
+ 
+  useEffect(()=>{
+    const searchParams = new URLSearchParams(location.search);
+    setRoomId(searchParams.get("room"));  
+  },[location])
+  
   const [hours, setHours] = useState("");
   const [minutes, setMinutes] = useState("");
   const [seconds, setSeconds] = useState("");
@@ -8,7 +21,7 @@ const Timer = (props) => {
   useEffect(() => {
     const x = setInterval(() => {
       let now = new Date().getTime();
-      let distance = props.stopAt - now;
+      const distance = props.stopAt - now;
       let h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       let s = Math.floor((distance % (1000 * 60)) / 1000);
@@ -16,12 +29,16 @@ const Timer = (props) => {
       // If the count down is over, write some text
       if (distance < 0) {
         clearInterval(x);
+        props.showContestEndModal();
+        props.contestEnded(true);
+        socket.emit("Contest-Update", { roomId });
+        return;
       }
       setHours(h);
       setMinutes(m);
       setSeconds(s);
     }, 1000);
-  });
+  },[]);
 
   return (
     <div style={{ color: "#fff", width: "100%", textAlign: "center" }}>
@@ -33,4 +50,12 @@ const Timer = (props) => {
   );
 };
 
-export default Timer;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showContestEndModal: () => dispatch({ type: TYPES.SHOW_CONTEST_ENDED_MODAL}),
+    contestEnded : (status) => dispatch({ type: TYPES.CONTEST_ENDED,data:status}),
+  };
+};
+
+export default connect(null,mapDispatchToProps)(Timer);

@@ -17,20 +17,19 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-
 const LockOutPage = (props) => {
   const socket = props.socket;
   const location = useLocation();
   const history = useHistory();
   const [joined, setJoined] = useState(false);
   const [errorJoin, setErrorJoin] = useState(false);
-  const [joinErrorMsg, setJoinErrorMsg] = useState('');
-  
-  const closeSnackBarHandler=() => {
+  const [joinErrorMsg, setJoinErrorMsg] = useState("");
+
+  const closeSnackBarHandler = () => {
     return history.push({
       pathname: "/homepage",
     });
-  }
+  };
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -49,14 +48,15 @@ const LockOutPage = (props) => {
     socket.emit("Contest-Join", user, ({ error, contest }) => {
       if (error) {
         setErrorJoin(true);
-        setJoinErrorMsg(error); 
-        return console.log("err",error);
+        setJoinErrorMsg(error);
+        return console.log("err", error);
       } else {
         const updatedContest = contest;
         console.log("updated-contest", updatedContest);
         props.setContest(updatedContest);
       }
       setJoined(true);
+      const now = new Date().getTime();
     });
   }, []);
 
@@ -182,15 +182,15 @@ const LockOutPage = (props) => {
     <>
       <Spinner margin={"0px"} />
       <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-          open={errorJoin}
-          autoHideDuration={5000}
-          onClose={closeSnackBarHandler}
-        >
-          <Alert onClose={closeSnackBarHandler} severity="error">
-            {joinErrorMsg}
-          </Alert>
-        </Snackbar>
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        open={errorJoin}
+        autoHideDuration={5000}
+        onClose={closeSnackBarHandler}
+      >
+        <Alert onClose={closeSnackBarHandler} severity="error">
+          {joinErrorMsg}
+        </Alert>
+      </Snackbar>
     </>
   );
 };
@@ -209,6 +209,9 @@ const mapDispatchToProps = (dispatch) => {
     notify_output_error: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_ERROR }),
     setContest: (updatedContest) => {
       dispatch({ type: TYPES.CONTEST_UPDATED, data: updatedContest });
+    },
+    contestEnded: (status) => {
+      dispatch({ type: TYPES.CONTEST_ENDED, data: status });
     },
   };
 };
