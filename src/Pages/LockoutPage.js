@@ -56,7 +56,11 @@ const LockOutPage = (props) => {
         props.setContest(updatedContest);
       }
       setJoined(true);
-      const now = new Date().getTime();
+      if(contest.EndTime){
+        const now = new Date().getTime();
+        console.log('co',contest,now);
+        props.contestEnded(contest.EndTime <= now);
+      }
     });
   }, []);
 
