@@ -7,6 +7,8 @@ import HomePage from "./Pages/HomePage";
 import LockoutWrapper from "./Pages/LockoutWrapper";
 import BlogPage from "./Pages/BlogPage";
 import ChooseName from "./Pages/ChooseName";
+import Login from "./Pages/Login"
+import SignUp from "./Pages/Signup"
 
 import "./App.css";
 
@@ -20,6 +22,8 @@ function App(props) {
       <Route path="/blogs" exact component={BlogPage} />
       <Route path="/newContest" exact component={LockoutWrapper} />
       <Route path="/chooseName" exact component={ChooseName} />
+      <Route path="/login" exact component={Login} />
+      <Route path="/signup" exact component={SignUp} />
       <Redirect to="/homepage" />
     </Switch>
   );
