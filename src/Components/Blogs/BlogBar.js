@@ -24,7 +24,7 @@ function BlogBar(props) {
       style={{ marginTop: "3vh", width: "30vh" }}
     >
       <ThumbUpAltIcon style={{ cursor: "pointer" }} />
-      <CommentIcon style={{ cursor: "pointer" }} />
+      <CommentIcon style={{ cursor: "pointer" }} onClick = {props.showComment}/>
       <DeleteIcon onClick={deleteHandler} style={{ cursor: "pointer" }} />
     </Grid>
   );
@@ -35,6 +35,9 @@ const mapDispatchToProps = (dispatch) => {
     blogPosted: () => {
       dispatch({ type: TYPES.BLOGPOSTED });
     },
+    showComment:() =>{
+      dispatch({type:TYPES.SHOW_COMMENTS})
+    }
   };
 };
 

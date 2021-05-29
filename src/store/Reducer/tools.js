@@ -12,12 +12,15 @@ const initialState = {
   output_error:false,
   showGraph:false,
   blogPosted:false,
-  
+  showComment:false,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    
+    case TYPE.RESET_SHOW_COMMENTS:
+      return{...state, showComment: false }
+    case TYPE.SHOW_COMMENTS:
+      return{...state, showComment: !state.showComment }
     
     case TYPE.SET_COMPILE_ON:
       return { ...state, nowCompile: true };
