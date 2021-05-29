@@ -12,19 +12,21 @@ const ParticularBlog = (props) => {
 
   return (
     <>
-    <div style={{background:'white',height:'100%',minHeight:'100vh',}}>
-      <div
-        style={{
-          width: "80vw",
-          margin: "auto",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <CurrentBlog _id={123} />
-        <div style={{background:'grey'}}>{props.showComment ? <Comments _id={123} /> : null}</div>
+      <div style={{ background: "white", height: "100%", minHeight: "100vh" }}>
+        <div
+          style={{
+            width: "80vw",
+            margin: "auto",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <CurrentBlog _id={123} />
+          <div style={{ background: "grey", boxShadow: "5px 5px 20px black",borderRadius:'10px' }}>
+            {props.showComment ? <Comments _id={123} /> : null}
+          </div>
+        </div>
       </div>
-    </div>
     </>
   );
 };

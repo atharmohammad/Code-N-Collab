@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Grid, Box, Button, Typography, Avatar } from "@material-ui/core";
 import axios from "../../Axios/axios";
-import BlogBar from "./BlogBar";
 import BlogSpinner from "../Spinner/BlogSpinner";
 import ReactMarkdown from "react-markdown";
 import { connect } from "react-redux";

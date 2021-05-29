@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Grid, Button, Tooltip, IconButton } from "@material-ui/core";
-import Reply from "./Reply";
+import Replies from "./Replies";
 import ForumIcon from "@material-ui/icons/Forum";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -36,52 +36,69 @@ const Comment = (props) => {
   }
   return (
     <div
-      style={{ marginBottom: "20px", background: "#fff", borderRadius: "10px" }}
+      style={{
+        marginBottom: "20px",
+        background: "#fff",
+        borderRadius: "10px",
+        background: "grey",
+      }}
     >
-      <div style={{display:'flex',padding: "4px"}}>
-        <div>User</div>
-        <div style={{paddingLeft:'20px'}}>2days ago</div>
-      </div>
-      {editComment === false ? (
-        <div
-          style={{
-            background: "#fff",
-            fontSize: "18px",
-            padding: "15px",
-            borderRadius: "10px",
-          }}
-        >
-          <pre>{initialComment}</pre>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          padding: "4px",
+          background: "#fff",
+          borderRadius: "10px",
+        }}
+      >
+        <div style={{ display: "flex" }}>
+          <div>User</div>
+          <div style={{ paddingLeft: "20px" }}>2days ago</div>
         </div>
-      ) : (
-        <div style={{ margin: "2px" }}>
-          <textarea
-            ref={divRef}
+        {editComment === false ? (
+          <div
             style={{
-              width: "100%",
-              minHeight: "200px",
-              resize: "vertical",
+              background: "#fff",
               fontSize: "18px",
-              padding: "5px",
-              boxSizing: "border-box",
+              padding: "15px",
             }}
           >
-            {initialComment}
-          </textarea>
-        </div>
-      )}
+            <pre>{initialComment}</pre>
+          </div>
+        ) : (
+          <div style={{ margin: "2px" }}>
+            <textarea
+              ref={divRef}
+              style={{
+                width: "100%",
+                minHeight: "200px",
+                resize: "vertical",
+                fontSize: "18px",
+                padding: "5px",
+                boxSizing: "border-box",
+              }}
+            >
+              {initialComment}
+            </textarea>
+          </div>
+        )}
+      </div>
       <Grid style={{ display: "flex", marginTop: "-10px", background: "#fff" }}>
         <Grid container direction="row" justify="flex-start">
           {editComment ? (
             <>
-              <Tooltip title="save Blog">
+              <Tooltip title="save Blog" onClick={saveHandler}>
                 <IconButton>
-                  <SaveIcon onClick={saveHandler} />
+                  <SaveIcon />
                 </IconButton>
               </Tooltip>
-              <Tooltip title="cancel Changes">
+              <Tooltip
+                title="cancel Changes"
+                onClick={() => setEditComment(false)}
+              >
                 <IconButton>
-                  <CancelIcon onClick={() => setEditComment(false)} />
+                  <CancelIcon />
                 </IconButton>
               </Tooltip>
             </>
@@ -96,36 +113,30 @@ const Comment = (props) => {
           </Tooltip>
 
           {editComment === false ? (
-            <Tooltip title="edit Blog">
+            <Tooltip title="edit Blog" onClick={() => setEditComment(true)}>
               <IconButton>
-                <EditIcon
-                  onClick={() => setEditComment(true)}
-                  style={{ cursor: "pointer" }}
-                />
+                <EditIcon style={{ cursor: "pointer" }} />
               </IconButton>
             </Tooltip>
           ) : null}
 
-          <Tooltip title="edit Blog">
+          <Tooltip
+            title="toggle Reply"
+            onClick={() => toggleReplyHandler(props.commentId)}
+          >
             <IconButton>
-              <ForumIcon
-                style={{ cursor: "pointer" }}
-                onClick={() => toggleReplyHandler(props.commentId)}
-              />
+              <ForumIcon style={{ cursor: "pointer" }} />
             </IconButton>
           </Tooltip>
 
-          <Tooltip title="delete Blog">
+          <Tooltip title="delete Comment" onClick={deleteHandler}>
             <IconButton>
-              <DeleteIcon
-                onClick={deleteHandler}
-                style={{ cursor: "pointer" }}
-              />
+              <DeleteIcon style={{ cursor: "pointer" }} />
             </IconButton>
           </Tooltip>
         </Grid>
       </Grid>
-      <div>{showReply ? <Reply commentId={123} /> : null}</div>
+      <div>{showReply ? <Replies commentId={123} /> : null}</div>
     </div>
   );
 };
