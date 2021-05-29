@@ -15,14 +15,14 @@ const ParticularBlog = (props) => {
     <div style={{background:'white',height:'100%',minHeight:'100vh',}}>
       <div
         style={{
-          width: "90vw",
+          width: "80vw",
           margin: "auto",
           display: "flex",
           flexDirection: "column",
         }}
       >
         <CurrentBlog _id={123} />
-        <div>{props.showComment ? <Comments _id={123} /> : null}</div>
+        <div style={{background:'grey'}}>{props.showComment ? <Comments _id={123} /> : null}</div>
       </div>
     </div>
     </>

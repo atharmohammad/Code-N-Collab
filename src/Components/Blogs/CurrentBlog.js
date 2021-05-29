@@ -13,8 +13,8 @@ const ParticularBlog = (props) => {
         margin:'10px 0px 10px 0px',
         display: "flex",
         flexDirection: "column",
-        background:'#ce287c',
         borderRadius:'20px',
+        border:'',
         boxShadow:"5px 5px 10px #888888",
       }}
     >

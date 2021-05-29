@@ -1,4 +1,11 @@
-import { Grid, Box, Button, Icon } from "@material-ui/core";
+import {
+  Grid,
+  Box,
+  Button,
+  Icon,
+  Tooltip,
+  IconButton,
+} from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import CommentIcon from "@material-ui/icons/Comment";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -23,9 +30,23 @@ function BlogBar(props) {
       justify="space-between"
       style={{ marginTop: "3vh", width: "30vh" }}
     >
-      <ThumbUpAltIcon style={{ cursor: "pointer" }} />
-      <CommentIcon style={{ cursor: "pointer" }} onClick = {props.showComment}/>
+      <Tooltip title="Like/ Dislike">
+        <IconButton>
+        <ThumbUpAltIcon style={{ cursor: "pointer" }} />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="View Comment">
+        <IconButton>
+          
+      <CommentIcon style={{ cursor: "pointer" }} onClick={props.showComment} />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="delete Blog">
+        <IconButton>
+          
       <DeleteIcon onClick={deleteHandler} style={{ cursor: "pointer" }} />
+        </IconButton>
+      </Tooltip>
     </Grid>
   );
 }
@@ -35,9 +56,9 @@ const mapDispatchToProps = (dispatch) => {
     blogPosted: () => {
       dispatch({ type: TYPES.BLOGPOSTED });
     },
-    showComment:() =>{
-      dispatch({type:TYPES.SHOW_COMMENTS})
-    }
+    showComment: () => {
+      dispatch({ type: TYPES.SHOW_COMMENTS });
+    },
   };
 };
 

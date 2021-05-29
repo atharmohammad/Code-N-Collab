@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Grid, Box, Button, Typography, Avatar } from "@material-ui/core";
-import Reply from "./Reply";
+import Comment from "./Comment";
 
 const c = [
   "comment1",
@@ -40,29 +40,16 @@ const Comments = (props) => {
   return (
     <div
       style={{
-        marginTop: "30px",
-        marginBottom: "30px",
+        margin: "30px 10px 30px 10px",
         display: "flex",
         flexDirection: "column",
       }}
     >
-      {comments.map((item) => (
-        <>
-          <div
-            style={{
-              marginTop: "10px",
-              minHeight: "50px",
-              background: "orange",
-              padding: "5px",
-              borderRadius: "10px",
-              boxShadow: "5px 5px 5px #888888",
-            }}
-          >
-            <div>{item}</div>
-          </div>
-          <Reply commentId={12} />
-        </>
+      <div>
+      {comments.map((item, i) => (
+        <Comment commentId={123} commentData={"comment "+ i} />
       ))}
+      </div>
       {c.length !== comments.length ? (
         <div style={{ alignSelf: "flex-end" }}>
           <Button
