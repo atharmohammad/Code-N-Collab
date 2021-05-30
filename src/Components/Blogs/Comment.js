@@ -1,14 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Grid, Button, Tooltip, IconButton } from "@material-ui/core";
 import Replies from "./Replies";
-import ForumIcon from "@material-ui/icons/Forum";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import SaveIcon from "@material-ui/icons/Save";
-import CancelIcon from "@material-ui/icons/Cancel";
-import AddIcon from "@material-ui/icons/Add";
 import ReactMarkdown from "react-markdown";
-
+import SaveCancel from "./SaveCancel";
+import HelperIcons from "./HelperIcons";
 
 const Comment = (props) => {
   const divRef = useRef();
@@ -67,7 +62,9 @@ const Comment = (props) => {
               zIndex: "2",
             }}
           >
-            <pre><ReactMarkdown>{initialComment}</ReactMarkdown></pre>
+            <pre>
+              <ReactMarkdown>{initialComment}</ReactMarkdown>
+            </pre>
           </div>
         ) : (
           <div style={{ margin: "2px", zIndex: "2" }}>
@@ -93,58 +90,27 @@ const Comment = (props) => {
           marginTop: "0px",
           background: "#fff",
           borderRadius: "10px",
-          zIndex:'2',
+          zIndex: "2",
         }}
       >
         <Grid container direction="row" justify="flex-start">
           {editComment ? (
-            <>
-              <Tooltip title="save Blog" onClick={saveHandler}>
-                <IconButton>
-                  <SaveIcon />
-                </IconButton>
-              </Tooltip>
-              <Tooltip
-                title="cancel Changes"
-                onClick={() => setEditComment(false)}
-              >
-                <IconButton>
-                  <CancelIcon />
-                </IconButton>
-              </Tooltip>
-            </>
+            <SaveCancel
+              type="Comment"
+              saveHandler={saveHandler}
+              cancelHandler={() => setEditComment(false)}
+            />
           ) : null}
         </Grid>
 
         <Grid container direction="row" justify="flex-end">
-          <Tooltip title="write comment">
-            <IconButton>
-              <AddIcon title="write comment" />
-            </IconButton>
-          </Tooltip>
-
-          {editComment === false ? (
-            <Tooltip title="edit Blog" onClick={() => setEditComment(true)}>
-              <IconButton>
-                <EditIcon style={{ cursor: "pointer" }} />
-              </IconButton>
-            </Tooltip>
-          ) : null}
-
-          <Tooltip
-            title="toggle Reply"
-            onClick={() => toggleReplyHandler(props.commentId)}
-          >
-            <IconButton>
-              <ForumIcon style={{ cursor: "pointer" }} />
-            </IconButton>
-          </Tooltip>
-
-          <Tooltip title="delete Comment" onClick={deleteHandler}>
-            <IconButton>
-              <DeleteIcon style={{ cursor: "pointer" }} />
-            </IconButton>
-          </Tooltip>
+          <HelperIcons
+            type="comment"
+            showEditBtn={!editComment}
+            editHandler={() => setEditComment(true)}
+            toggleReplyHandler={toggleReplyHandler}
+            deleteHandler={deleteHandler}
+          />
         </Grid>
       </Grid>
       <div>{showReply ? <Replies commentId={123} /> : null}</div>
