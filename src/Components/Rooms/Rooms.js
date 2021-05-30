@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, Button, InputLabel } from "@material-ui/core";
 
 import { useHistory, useLocation } from "react-router-dom";
-import classes from "../../Assets/css/style.module.css";
+import Stars from "../Stars/Stars"
 import styles from "./RoomsInput.module.css";
 import useSound from "use-sound";
 import roundStart from "../../Assets/sound-effects/RoundStart.mp3";
@@ -62,7 +62,7 @@ function Rooms(props) {
         overflow: "hidden",
       }}
     >
-      <div className={classes.stars}></div>
+      <Stars color="#fff"/>
 
       <img
         style={{

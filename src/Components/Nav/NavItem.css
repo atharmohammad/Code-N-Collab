@@ -17,7 +17,7 @@
   text-decoration-thickness: 2px;
 }
 
-.head{
+.header{
   display: flex;
   justify-content: space-around;
   width:20%;
