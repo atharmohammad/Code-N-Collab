@@ -20,7 +20,7 @@ function TextEditor(props) {
       .catch((e) => console.log(e));
   };
   return (
-    <Grid style={{ width: "100vh", marginTop: "10vh" }}>
+    <Grid style={{ width: "100%", marginTop: "10vh" }}>
       <Editor height={300} value={value} onChange={setValue} />
       <Box
         style={{

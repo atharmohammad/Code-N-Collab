@@ -8,11 +8,10 @@ import {
   Tooltip,
   IconButton,
 } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import SaveIcon from "@material-ui/icons/Save";
-import CancelIcon from "@material-ui/icons/Cancel";
-import AddIcon from "@material-ui/icons/Add";
+
+import ReactMarkdown from "react-markdown";
+import SaveCancel from "./SaveCancel";
+import HelperIcons from './HelperIcons'
 
 const Reply = (props) => {
   const [editReply, setEditReply] = useState(false);
@@ -39,92 +38,88 @@ const Reply = (props) => {
   }
 
   return (
-    <div
-      style={{
-        width: "70vw",
-        margin: "15px 0px 10px 0px",
-        background: "#fff",
-        borderRadius: "30px",
-        padding: "10px",
-      }}
-    >
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div style={{ display: "flex", background: "#fff" }}>
-          <div>User</div>
-          <div style={{ paddingLeft: "20px" }}>3days ago</div>
-        </div>
-        {editReply === false ? (
-          <div
-            style={{
-              background: "#fff",
-              fontSize: "18px",
-              padding: "15px",
-            }}
-          >
-            <pre>{initialReply}</pre>
+    <>
+      <div
+        style={{
+          width: "60vw",
+          margin: "15px 0px 10px 0px",
+          background: "#fff",
+          borderRadius: "30px",
+          padding: "10px",
+          zIndex: "2",
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", background: "#fff" }}>
+            <div>User</div>
+            <div style={{ paddingLeft: "20px" }}>3days ago</div>
           </div>
-        ) : (
-          <div style={{ margin: "2px" }}>
-            <textarea
-              ref={divRef}
+          {editReply === false ? (
+            <div
               style={{
-                width: "100%",
-                minHeight: "150px",
-                resize: "vertical",
+                background: "#fff",
                 fontSize: "18px",
-                padding: "5px",
-                boxSizing: "border-box",
+                padding: "15px",
               }}
             >
-              {initialReply}
-            </textarea>
-          </div>
-        )}
-        <Grid style={{ display: "flex", marginTop: "0px", background: "#fff" }}>
-          <Grid container direction="row" justify="flex-start">
-            {editReply ? (
-              <>
-                <Tooltip title="save Reply" onClick={saveHandler}>
-                  <IconButton>
-                    <SaveIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip
-                  title="cancel Changes"
-                  onClick={() => setEditReply(false)}
-                >
-                  <IconButton>
-                    <CancelIcon />
-                  </IconButton>
-                </Tooltip>
-              </>
-            ) : null}
+              <pre>
+                <ReactMarkdown>{initialReply}</ReactMarkdown>
+              </pre>
+            </div>
+          ) : (
+            <div style={{ margin: "2px" }}>
+              <textarea
+                ref={divRef}
+                style={{
+                  width: "100%",
+                  minHeight: "150px",
+                  resize: "vertical",
+                  fontSize: "18px",
+                  padding: "5px",
+                  boxSizing: "border-box",
+                }}
+              >
+                {initialReply}
+              </textarea>
+            </div>
+          )}
+          <Grid
+            style={{ display: "flex", marginTop: "0px", background: "#fff" }}
+          >
+            <Grid container direction="row" justify="flex-start">
+              {editReply ? (
+                <SaveCancel
+                  type="reply"
+                  saveHandler={saveHandler}
+                  cancelHandler={() => setEditReply(false)}
+                />
+              ) : null}
+            </Grid>
+
+            <Grid container direction="row" justify="flex-end">
+              <HelperIcons
+                type="reply"
+                showEditBtn={!editReply}
+                editHandler={() => setEditReply(true)}
+                deleteHandler={deleteHandler}
+              />
+            </Grid>
           </Grid>
-
-          <Grid container direction="row" justify="flex-end">
-            <Tooltip title="write reply">
-              <IconButton>
-                <AddIcon title="write comment" />
-              </IconButton>
-            </Tooltip>
-
-            {editReply === false ? (
-              <Tooltip title="edit Reply" onClick={() => setEditReply(true)}>
-                <IconButton>
-                  <EditIcon style={{ cursor: "pointer" }} />
-                </IconButton>
-              </Tooltip>
-            ) : null}
-
-            <Tooltip title="delete Reply" onClick={deleteHandler}>
-              <IconButton>
-                <DeleteIcon style={{ cursor: "pointer" }} />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-        </Grid>
+        </div>
       </div>
-    </div>
+      <div style={{ width: "55vw", alignSelf: "center", backgorund: "red" }}>
+        <textarea
+          placeholder="write reply"
+          style={{
+            width: "100%",
+            minHeight: "120px",
+            fontSize: "18px",
+            resize: "vertical",
+          }}
+        />
+        <div style={{ display: "flex", alignItems: "flex-end" }}></div>
+      </div>
+    </>
   );
 };
 
