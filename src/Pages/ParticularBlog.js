@@ -30,7 +30,7 @@ const ParticularBlog = (props) => {
         >
           <CurrentBlog />
           <div style={{ marginTop:'10px',background: "grey", boxShadow: "5px 5px 20px black",borderRadius:'10px'}}>
-            {props.showComment ? <Comments _id={123} /> : null}
+            {props.showComment ? <Comments /> : null}
           </div>
         </div>
       </div>

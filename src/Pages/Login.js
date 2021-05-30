@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Box,
@@ -14,6 +12,10 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { AuthContext } from "../context/auth-context";
+import axios from "../Axios/axios";
+import { useHistory } from "react-router-dom";
+
 
 function Copyright() {
   return (
@@ -48,42 +50,52 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+const SignIn = (props) => {
+  const history = useHistory();
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [emailValid, setEmailValid] = useState(null);
-  const [password, setPassword] = useState(null)
-  
+  const [password, setPassword] = useState(null);
+
+  const auth = useContext(AuthContext);
+
   useEffect(() => {
     const validateEmail = () => {
       const mailformat =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (email.toLowerCase().match(mailformat)) setEmailValid(true);
       else setEmailValid(false);
-      console.log("Email", emailValid);
     };
     if (emailValid !== null || email) {
       validateEmail();
     }
   }, [email]);
 
-  const submitHandler=(e)=>{
-   e.preventDefault();
-   let ok = true;
-   
-   if(password === null || password.trim() === ''){
-     ok &= false;
-     setPassword('');
-   }
-   if(emailValid === null || !emailValid){
-     ok &= false;
-     setEmailValid(false);
-   }
-   
-   if(!ok)
-     return;
-  alert('ok'); 
-  }
+  const submitHandler = async(e) => {
+    e.preventDefault();
+    let ok = true;
+
+    if (password === null || password.trim() === "") {
+      ok &= false;
+      setPassword("");
+    }
+    if (emailValid === null || !emailValid) {
+      ok &= false;
+      setEmailValid(false);
+    }
+
+    if (!ok) return alert("not ok");
+    let res = null;
+    
+    try{
+      res = await axios.post('/user/login',{Email:email.trim(),Password:password.trim()});
+    }catch(e){
+      return console.log(e);
+    }
+    console.log('login res',res.data.user);
+    auth.login(res.data.user, res.data.token);
+    history.push('/homepage')
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -120,7 +132,7 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
-            error={password === '' ? true : false}
+            error={password === "" ? true : false}
             onChange={(event) => setPassword(event.target.value)}
           />
           <Button
@@ -151,4 +163,5 @@ export default function SignIn() {
       </Box>
     </Container>
   );
-}
+};
+export default SignIn;

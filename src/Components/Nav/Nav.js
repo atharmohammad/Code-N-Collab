@@ -1,26 +1,37 @@
+import { useContext } from "react";
 import NavItem from "./NavItems";
 import "./NavItem.css";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { AuthContext } from "../../context/auth-context";
 
-export default function(){
-
+export default function () {
   const history = useHistory();
-
-  const signUpHandler = ()=>{
+  const auth = useContext(AuthContext);
+  const signUpHandler = () => {
     history.push("/signup");
-  }
-  const loginHandler = ()=>{
+  };
+  const loginHandler = () => {
     history.push("/login");
-  }
-  const aboutHandler = ()=>{
-    history.push("/about");
-  }
+  };
+  const logoutHandler = () => {
+    history.push("/logout");
+  };
 
-  return(
+  const aboutHandler = () => {
+    history.push("/about");
+  };
+
+  return (
     <div className="header">
-      <NavItem Name="login" clicked={loginHandler}/>
-      <NavItem Name="sign-up" clicked={signUpHandler} />
+      {auth.isLoggedIn === false ? (
+        <>
+          <NavItem Name="login" clicked={loginHandler} />
+          <NavItem Name="sign-up" clicked={signUpHandler} />
+        </>
+      ) : (
+        <NavItem Name="logout" clicked={logoutHandler} />
+      )}
       <NavItem Name="about" clicked={aboutHandler} />
     </div>
-  )
+  );
 }
