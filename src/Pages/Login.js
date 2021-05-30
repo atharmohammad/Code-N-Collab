@@ -1,27 +1,29 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React, { useEffect, useState } from "react";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="http://localhost:3000">
         Code - N - Collab
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -29,16 +31,16 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -48,6 +50,40 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const [email, setEmail] = useState("");
+  const [emailValid, setEmailValid] = useState(null);
+  const [password, setPassword] = useState(null)
+  
+  useEffect(() => {
+    const validateEmail = () => {
+      const mailformat =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (email.toLowerCase().match(mailformat)) setEmailValid(true);
+      else setEmailValid(false);
+      console.log("Email", emailValid);
+    };
+    if (emailValid !== null || email) {
+      validateEmail();
+    }
+  }, [email]);
+
+  const submitHandler=(e)=>{
+   e.preventDefault();
+   let ok = true;
+   
+   if(password === null || password.trim() === ''){
+     ok &= false;
+     setPassword('');
+   }
+   if(emailValid === null || !emailValid){
+     ok &= false;
+     setEmailValid(false);
+   }
+   
+   if(!ok)
+     return;
+  alert('ok'); 
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,7 +95,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={submitHandler}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,9 +106,12 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            error={emailValid === false ? true : false}
+            onChange={(event) => setEmail(event.target.value)}
           />
           <TextField
             variant="outlined"
+            value={password}
             margin="normal"
             required
             fullWidth
@@ -81,10 +120,8 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            error={password === '' ? true : false}
+            onChange={(event) => setPassword(event.target.value)}
           />
           <Button
             type="submit"
@@ -102,7 +139,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
