@@ -10,11 +10,11 @@ import { useHistory } from "react-router-dom";
 function Blogs(props) {
     const [blogs, setBlogs] = useState([]);
     const history = useHistory();
-    
+
   const onClickHandler = (blogId)=>{
     return history.push("/blog/" + blogId);
   }
-  
+
   useEffect(() => {
     axios
       .get("blogs/Allblogs")
@@ -26,7 +26,7 @@ function Blogs(props) {
         console.log(e);
       });
   }, [props.blogPosted]);
-  
+
   let allBlogs = <BlogSpinner />;
 
   if (blogs.length >= 1) {
@@ -42,13 +42,14 @@ function Blogs(props) {
             marginTop: "3vh",
             backgroundColor: "#fff",
             borderRadius: "20px",
+            cursor:"pointer"
           }}
           onClick={() => onClickHandler(item._id)}
         >
           <Grid container direction="row">
             <Avatar style={{ margin: "1vh 0 0 0" }}>A</Avatar>
             <Grid style={{ margin: "1vh 0 0 3vh" }}>
-              <Typography>User</Typography>
+              <Typography>{item.User ? item.User.Name : "User"}</Typography>
               <Typography style={{ fontStyle: "italic", fontSize: "14px" }}>
                 Software Engineer
               </Typography>

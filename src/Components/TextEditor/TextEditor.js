@@ -6,10 +6,9 @@ import { connect } from "react-redux";
 import * as TYPES from "../../store/Action/action";
 
 function TextEditor(props) {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(props.initialValue);
   const postHandler = async () => {
-    axios
-      .post("blogs/write", { Body: value })
+    axios({ method : props.method , url : props.Api, data:{ Body: value } })
       .then((res) => {
         try {
           props.blogPosted();
@@ -25,10 +24,10 @@ function TextEditor(props) {
       <Editor height={300} value={value} onChange={setValue} />
       <Box
         style={{
-          width: "5vh",
+          minWidth: "15px",
           backgroundColor: "#4169E1",
           borderRadius: "10px",
-          padding: "1vh",
+          padding: "0 5px 0 5px",
           textAlign: "center",
           color: "#fff",
           marginTop: "1vh",
@@ -37,7 +36,7 @@ function TextEditor(props) {
         }}
         onClick={postHandler}
       >
-        Post
+        {props.method === "patch" ? <p>Update</p> : <p>Post</p>}
       </Box>
     </Grid>
   );

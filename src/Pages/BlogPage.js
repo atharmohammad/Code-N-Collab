@@ -19,7 +19,7 @@ const BlogPage = (props)=>{
           , padding:'0 0 10vh 0',
         backgroundColor:'#18191a' }}>
           <BlogHead/>
-          <TextEditor/>
+          <TextEditor Api="blogs/write" initialValue="" method="post"/>
           <Blogs/>
         </Grid>
     </>

@@ -8,6 +8,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 
+import ReactMarkdown from "react-markdown";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import CommentIcon from "@material-ui/icons/Comment";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -15,6 +16,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
 import AddIcon from "@material-ui/icons/Add";
+import {useLocation} from "react-router-dom";
+import axios from "../../Axios/axios"
+import TextEditor from "../TextEditor/TextEditor"
 
 
 import { connect } from "react-redux";
@@ -23,40 +27,22 @@ import * as TYPES from "../../store/Action/action";
 const CurrentBlog = (props) => {
   const titleRef = useRef();
   const bodyRef = useRef();
+  const location = useLocation();
   const [deleted, setDeleted] = useState(false);
   const [editBlog, setEditBlog] = useState(false);
 
-  const [initialBlog, setInitialBlog] = useState({
-    title: "LOREM",
-    body: `What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing
-  and typesetting industry. Lorem Ipsum has been the industry's standard
-  dummy text ever since the 1500s, when an unknown printer took a galley
-  of type and scrambled it to make a type specimen book. It has survived
-  not only five centuries, but also the leap into electronic typesetting,
-  remaining essentially unchanged. It was popularised in the 1960s with
-  the release of Letraset sheets containing Lorem Ipsum passages, and more
-  recently with desktop publishing software like Aldus PageMaker including
-  versions of Lorem Ipsum`,
-  });
+  const [initialBlog, setInitialBlog] = useState(null);
+  const id = window.location.pathname.split("/")[2];
 
-  const saveHandler = () => {
-    const title = titleRef.current.value.trim();
-    const body = bodyRef.current.value.trim();
-
-    if (!title) {
-      return alert("title cant be empty");
+  useEffect(async()=>{
+    try{
+      const currBlog =  await axios.get(`blogs/currentBlog/${id}`);
+      setInitialBlog(currBlog.data.Body);
+    }catch(e){
+      console.log(e);
     }
+  },[initialBlog])
 
-    if (!body) {
-      return alert("cant be empty");
-    }
-    setInitialBlog({ title, body });
-    setEditBlog(false);
-  };
-
-  if (deleted) {
-    return <></>;
-  }
 
   return (
     <div
@@ -73,41 +59,11 @@ const CurrentBlog = (props) => {
     >
       {editBlog === false ? (
         <>
-          <h1>{initialBlog.title}</h1>
-          <div>{initialBlog.body}</div>
+          <ReactMarkdown>{initialBlog}</ReactMarkdown>
         </>
       ) : (
         <>
-          <textarea
-            ref={titleRef}
-            style={{
-              width: "100%",
-              margin:'2px',
-              minHeight: "50px",
-              resize: "vertical",
-              fontSize: "30px",
-              padding: "5px",
-              borderRadius:'10px',
-              boxSizing: "border-box",
-            }}
-          >
-            {initialBlog.title}
-          </textarea>
-          <textarea
-            ref={bodyRef}
-            style={{
-              borderRadius:'10px',
-              width: "100%",
-              margin:'2px',
-              minHeight: "200px",
-              resize: "vertical",
-              fontSize: "18px",
-              padding: "5px",
-              boxSizing: "border-box",
-            }}
-          >
-            {initialBlog.body}
-          </textarea>
+          <TextEditor initialValue={initialBlog} Api= {"/blogs/currBlog/"+id} method = "patch" ></TextEditor>
         </>
       )}
       <div>
@@ -124,11 +80,6 @@ const CurrentBlog = (props) => {
               justify="flex-start"
             >
               <>
-                <Tooltip title="save Blog" onClick={saveHandler}>
-                  <IconButton>
-                    <SaveIcon />
-                  </IconButton>
-                </Tooltip>
                 <Tooltip
                   title="cancel Changes"
                   onClick={() => setEditBlog(false)}
@@ -140,7 +91,7 @@ const CurrentBlog = (props) => {
               </>
             </Grid>
           ) :null}
-
+          <>
           <Tooltip title="Like/ Dislike">
             <IconButton>
               <ThumbUpAltIcon style={{ cursor: "pointer" }} />
@@ -156,6 +107,7 @@ const CurrentBlog = (props) => {
               <AddIcon title="write comment" />
             </IconButton>
           </Tooltip>
+          </>
           {editBlog === false ? (
             <Tooltip title="edit Reply" onClick={() => setEditBlog(true)}>
               <IconButton>
