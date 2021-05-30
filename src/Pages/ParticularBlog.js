@@ -4,6 +4,10 @@ import CurrentBlog from "../Components/Blogs/CurrentBlog";
 import Comments from "../Components/Blogs/Comments";
 import { connect } from "react-redux";
 import * as TYPES from "../store/Action/action";
+import classes from "../Assets/css/wrapstyle.module.css";
+import Stars from "../Components/Stars/Stars"
+import BlogHead from '../Components/Blogs/BlogHead'
+
 
 const ParticularBlog = (props) => {
   useEffect(() => {
@@ -12,20 +16,24 @@ const ParticularBlog = (props) => {
 
   return (
     <>
-      <div style={{ background: "white", height: "100%", minHeight: "100vh" }}>
+      <div className={classes.wrap} style={{background:'#fff'}}>
+      <Stars color="#fff"/>
+      <BlogHead color="white" textColor="black" back="/blogs"/>
+      <div style={{ background: "white",opacity:'1', height: "100%", minHeight: "100vh" }}>
         <div
           style={{
-            width: "80vw",
+            width: "70vw",
             margin: "auto",
             display: "flex",
             flexDirection: "column",
           }}
         >
-          <CurrentBlog _id={123} />
-          <div style={{ background: "grey", boxShadow: "5px 5px 20px black",borderRadius:'10px' }}>
+          <CurrentBlog />
+          <div style={{ marginTop:'10px',background: "grey", boxShadow: "5px 5px 20px black",borderRadius:'10px'}}>
             {props.showComment ? <Comments _id={123} /> : null}
           </div>
         </div>
+      </div>
       </div>
     </>
   );

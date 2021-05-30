@@ -7,7 +7,7 @@ import {
   Tooltip,
   IconButton,
 } from "@material-ui/core";
-import Stars from "../Stars/Stars"
+
 import ReactMarkdown from "react-markdown";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import CommentIcon from "@material-ui/icons/Comment";
@@ -19,8 +19,7 @@ import AddIcon from "@material-ui/icons/Add";
 import {useLocation} from "react-router-dom";
 import axios from "../../Axios/axios"
 import TextEditor from "../TextEditor/TextEditor"
-import BlogHead from "./BlogHead"
-import classes from "../../Assets/css/wrapstyle.module.css";
+
 import BlogSpinner from "../Spinner/BlogSpinner";
 
 import { connect } from "react-redux";
@@ -51,9 +50,8 @@ const CurrentBlog = (props) => {
 
 
   return (
-    <div className={classes.wrap} style={{background:'#fff'}}>
-      <Stars color="black"/>
-        <BlogHead color="white" textColor="black" back="/blog"/>
+    <>
+        
         <div
           style={{
             alignItems: "center",
@@ -62,7 +60,9 @@ const CurrentBlog = (props) => {
             display: "flex",
             flexDirection: "column",
             borderRadius: "20px",
-            border:"2px solid gray"
+            border:"2px solid grey",
+            background:'#fff',
+            zIndex:'2',
           }}
         >
           {editBlog === false ? (
@@ -131,7 +131,7 @@ const CurrentBlog = (props) => {
             </Grid>
           </div>
         </div>
-    </div>
+    </>
   );
 };
 

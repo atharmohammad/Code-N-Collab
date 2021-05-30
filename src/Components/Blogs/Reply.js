@@ -13,6 +13,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
 import AddIcon from "@material-ui/icons/Add";
+import ReactMarkdown from "react-markdown";
+
 
 const Reply = (props) => {
   const [editReply, setEditReply] = useState(false);
@@ -41,11 +43,12 @@ const Reply = (props) => {
   return (
     <div
       style={{
-        width: "70vw",
+        width: "60vw",
         margin: "15px 0px 10px 0px",
         background: "#fff",
         borderRadius: "30px",
         padding: "10px",
+        zIndex:'2',
       }}
     >
       <div style={{ display: "flex", flexDirection: "column" }}>
@@ -61,7 +64,7 @@ const Reply = (props) => {
               padding: "15px",
             }}
           >
-            <pre>{initialReply}</pre>
+            <pre><ReactMarkdown>{initialReply}</ReactMarkdown></pre>
           </div>
         ) : (
           <div style={{ margin: "2px" }}>

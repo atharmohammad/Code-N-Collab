@@ -43,7 +43,6 @@ const Comments = (props) => {
         margin: "30px 10px 30px 10px",
         display: "flex",
         flexDirection: "column",
-       
       }}
     >
       <div>

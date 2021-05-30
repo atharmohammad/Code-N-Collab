@@ -7,6 +7,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
 import AddIcon from "@material-ui/icons/Add";
+import ReactMarkdown from "react-markdown";
+
 
 const Comment = (props) => {
   const divRef = useRef();
@@ -38,9 +40,8 @@ const Comment = (props) => {
     <div
       style={{
         marginBottom: "20px",
-        background: "#fff",
-        borderRadius: "10px",
         background: "grey",
+        borderRadius: "10px",
       }}
     >
       <div
@@ -49,6 +50,7 @@ const Comment = (props) => {
           flexDirection: "column",
           padding: "4px",
           background: "#fff",
+
           borderRadius: "10px",
         }}
       >
@@ -62,12 +64,13 @@ const Comment = (props) => {
               background: "#fff",
               fontSize: "18px",
               padding: "15px",
+              zIndex: "2",
             }}
           >
-            <pre>{initialComment}</pre>
+            <pre><ReactMarkdown>{initialComment}</ReactMarkdown></pre>
           </div>
         ) : (
-          <div style={{ margin: "2px" }}>
+          <div style={{ margin: "2px", zIndex: "2" }}>
             <textarea
               ref={divRef}
               style={{
@@ -84,7 +87,15 @@ const Comment = (props) => {
           </div>
         )}
       </div>
-      <Grid style={{ display: "flex", marginTop: "-10px", background: "#fff" }}>
+      <Grid
+        style={{
+          display: "flex",
+          marginTop: "0px",
+          background: "#fff",
+          borderRadius: "10px",
+          zIndex:'2',
+        }}
+      >
         <Grid container direction="row" justify="flex-start">
           {editComment ? (
             <>
