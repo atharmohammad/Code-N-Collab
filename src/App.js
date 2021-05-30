@@ -9,6 +9,7 @@ import BlogPage from "./Pages/BlogPage";
 import ChooseName from "./Pages/ChooseName";
 import Login from "./Pages/Login"
 import SignUp from "./Pages/Signup"
+import ParticularBlog from "./Pages/ParticularBlog"
 
 import "./App.css";
 
@@ -20,6 +21,7 @@ function App(props) {
       <Route path="/rooms" exact component={Rooms} />
       <Route path="/collaborate" exact component={CollabPageWrapper} />
       <Route path="/blogs" exact component={BlogPage} />
+      <Route path="/blog/:id" component={ParticularBlog} />
       <Route path="/newContest" exact component={LockoutWrapper} />
       <Route path="/chooseName" exact component={ChooseName} />
       <Route path="/login" exact component={Login} />
