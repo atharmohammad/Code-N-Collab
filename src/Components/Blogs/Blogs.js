@@ -38,10 +38,10 @@ function Blogs(props) {
             border: "2px solid #e2e2e2",
             padding: "1vh",
             minHeight: "16vh",
-            width: "80vh",
+            width: "100vh",
             marginTop: "3vh",
             backgroundColor: "#fff",
-            borderRadius: "20px",
+            borderRadius: "5px",
             cursor:"pointer"
           }}
           onClick={() => onClickHandler(item._id)}

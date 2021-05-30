@@ -21,7 +21,7 @@ function App(props) {
       <Route path="/rooms" exact component={Rooms} />
       <Route path="/collaborate" exact component={CollabPageWrapper} />
       <Route path="/blogs" exact component={BlogPage} />
-      <Route path="/blog/:id" component={ParticularBlog} />
+      <Route path="/blog/:id" exact component={ParticularBlog} />
       <Route path="/newContest" exact component={LockoutWrapper} />
       <Route path="/chooseName" exact component={ChooseName} />
       <Route path="/login" exact component={Login} />

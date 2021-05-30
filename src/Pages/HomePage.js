@@ -1,9 +1,10 @@
 import React,{useEffect} from "react";
 import HomePageImg from "../Assets/images/HomePageImg.png";
 import { useHistory,useLocation } from "react-router-dom";
-import classes from "../Assets/css/style.module.css";
+import classes from "../Assets/css/wrapstyle.module.css";
 import Button from "../Components/HomePageButtons/Buttons";
 import { Grid } from "@material-ui/core";
+import Stars from "../Components/Stars/Stars"
 import { v1 as uuidv1 } from "uuid";
 import Nav from "../Components/Nav/Nav"
 
@@ -39,7 +40,7 @@ function HomePage() {
 
   return (
     <div className={classes.wrap}>
-      <div className={classes.stars} />
+      <Stars color="#fff"/>
       <img
         style={{ margin: "3vh 1vh 1vh 4vh", cursor: "pointer" }}
         onClick={homePageHandler}

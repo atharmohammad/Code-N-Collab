@@ -1,5 +1,6 @@
 import Collaboration from "../../Assets/images/Collaboration.jpg";
-import CodeNCollab from "../../Assets/images/HomePageImg.png";
+import CodeNCollab1 from "../../Assets/images/HomePageImg.png";
+import CodeNCollab2 from "../../Assets/images/currBlog.png";
 import { Grid, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
@@ -7,7 +8,7 @@ export default function BlogHead(props) {
   const history = useHistory();
 
   const backHandler = () => {
-    history.push("/homepage");
+    history.push(props.back);
   };
 
   return (
@@ -17,9 +18,10 @@ export default function BlogHead(props) {
       direction="row"
       style={{
         minHeight: "35vh",
-        backgroundColor: "black",
+        backgroundColor: props.color,
         width: "100%",
         textAlign: "center",
+        border:"2px solid black"
       }}
     >
       <img
@@ -40,11 +42,11 @@ export default function BlogHead(props) {
         style={{ width: "50%", marginLeft: "15vh" }}
       >
         <img
-          src={CodeNCollab}
+          src={props.textColor == "black" ? CodeNCollab2 : CodeNCollab1}
           style={{ height: "10vh", width: "60vh" }}
           alt="CodeNCollab"
         />
-        <Typography style={{ color: "#fff", marginTop: "5vh", width: "60vh" }}>
+        <Typography style={{ color: props.textColor, marginTop: "5vh", width: "60vh" , fontWeight:"bold" }}>
           {" "}
           Official Page for Community Interaction and Announcements
         </Typography>

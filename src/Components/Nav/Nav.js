@@ -15,9 +15,9 @@ export default function(){
   const aboutHandler = ()=>{
     history.push("/about");
   }
-  
+
   return(
-    <div className="head">
+    <div className="header">
       <NavItem Name="login" clicked={loginHandler}/>
       <NavItem Name="sign-up" clicked={signUpHandler} />
       <NavItem Name="about" clicked={aboutHandler} />

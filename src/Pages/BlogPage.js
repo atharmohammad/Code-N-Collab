@@ -2,27 +2,29 @@ import {useEffect} from 'react';
 import {Grid,Box,Button} from '@material-ui/core';
 import Blogs from '../Components/Blogs/Blogs';
 import TextEditor from '../Components/TextEditor/TextEditor'
-import stars from '../Assets/css/style.module.css'
+import Stars from "../Components/Stars/Stars"
 import BlogHead from '../Components/Blogs/BlogHead'
+import classes from "../Assets/css/wrapstyle.module.css";
+
 
 const BlogPage = (props)=>{
 
   return(
-    <>
-      <div className={stars.stars}></div>
+    <div className={classes.wrap}>
+      <Stars color="#fff"/>
         <Grid
           container
           direction="column"
-          justify="center"
+          justify="flex-start"
           alignItems="center"
-          style={{ minHeight: "100vh"
+          style={{ minHeight: "140vh"
           , padding:'0 0 10vh 0',
         backgroundColor:'#18191a' }}>
-          <BlogHead/>
+          <BlogHead color="black" textColor="#fff" back="/homePage"/>
           <TextEditor Api="blogs/write" initialValue="" method="post"/>
           <Blogs/>
         </Grid>
-    </>
+    </div>
   )
 }
 
