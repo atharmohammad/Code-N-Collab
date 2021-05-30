@@ -23,7 +23,7 @@ const BlogPage = (props) => {
       >
         <BlogHead color="black" textColor="#fff" back="/homePage" />
         <div style={{ width: "100vh" }}>
-          <TextEditor Api="blogs/write" initialValue="" method="post" />
+          <TextEditor Api="/blogs/write" initialValue="" method="post" />
         </div>
         <Blogs />
       </Grid>

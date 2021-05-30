@@ -36,14 +36,17 @@ const CurrentBlog = (props) => {
       <div
         style={{
           alignItems: "center",
-          padding: "10px",
+          padding: "15px",
           marginTop: "30px",
           display: "flex",
           flexDirection: "column",
-          borderRadius: "20px",
           border: "2px solid grey",
-          background: "#fff",
+          background: "#18191a",
+          color:"#fff",
           zIndex: "2",
+          fontFamily: ['Baloo Tammudu 2', 'cursive'].join(' '),
+           lineHeight:'170%',
+          fontSize:'20px'
         }}
       >
         {editBlog === false ? (
