@@ -27,7 +27,7 @@ const App = (props) => {
      setToken(storedData.token);
    }
  },[login])
-  
+
  return (
     <AuthContext.Provider value={{ isLoggedIn:!!token , login, logout,user,token }}>
       <BrowserRouter>

@@ -2,7 +2,7 @@ import "./NavItem.css"
 
 export default function NavItem(props){
   return (
-    <div className="wrapper" onClick={props.clicked}>
+    <div className="wrapperss" onClick={props.clicked}>
         <p>{props.Name}</p>
     </div>
   )

@@ -1,23 +1,23 @@
-.wrapper{
+.wrapperss{
   padding: 1vh;
   text-align: center;
   align-items: center;
   cursor:pointer;
 }
 
-.wrapper p{
+.wrapperss p{
   color:#fff;
   cursor:pointer;
   font-size: 19px;
   font-family: edgwick Ave Display,cursive
 }
 
-.wrapper:hover{
+.wrapperss:hover{
   text-decoration: underline wavy #32a86d;
   text-decoration-thickness: 2px;
 }
 
-.header{
+.headerss{
   display: flex;
   justify-content: space-around;
   width:20%;

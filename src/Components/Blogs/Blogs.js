@@ -5,7 +5,7 @@ import BlogSpinner from "../Spinner/BlogSpinner";
 import ReactMarkdown from "react-markdown";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-
+import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 
 function Blogs(props) {
     const [blogs, setBlogs] = useState([]);
@@ -46,15 +46,7 @@ function Blogs(props) {
           }}
           onClick={() => onClickHandler(item._id)}
         >
-          <Grid container direction="row">
-            <Avatar style={{ margin: "1vh 0 0 0" }}>A</Avatar>
-            <Grid style={{ margin: "1vh 0 0 3vh" }}>
-              <Typography>{item.User ? item.User.Name : "User"}</Typography>
-              <Typography style={{ fontStyle: "italic", fontSize: "14px" }}>
-                Software Engineer
-              </Typography>
-            </Grid>
-          </Grid>
+          <UserBlogDescription admin={item} />
           <Grid style={{ marginTop: "1vh" }}>
             <Typography>
               <ReactMarkdown>{item.Body}</ReactMarkdown>

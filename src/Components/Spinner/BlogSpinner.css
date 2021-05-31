@@ -2,17 +2,17 @@
   --base:#d5fff7
 }
 
-.spinner {
+.spinnered {
   width: 10em;
   height: 10em;
   border-top: 1em solid var(--base);
   border-right: 1em solid transparent;
   animation: spinner 0.4s linear infinite;
   border-radius: 50%;
-  margin-top:10vh;
   position: relative;
+  left:45%
 }
-.head {
+.headed {
   width: 1em;
   height: 1em;
   border-radius: 50%;

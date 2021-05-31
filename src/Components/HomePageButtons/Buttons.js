@@ -5,18 +5,20 @@ export default function Button(props) {
   return (
     <Box
       style={{
-        height: "6vh",
+        minHeight: "8.5vh",
         width: "40vh",
         border: "4px solid #fff",
         borderRadius: "20px",
         textAlign: "center",
-        paddingTop: "2.3vh",
         color: "#fff",
         fontSize: "20px",
         marginTop: "5vh",
         cursor: "pointer",
         borderStyle: "double",
         borderWidth: "10px",
+        alignItems:'center',
+        display:'flex',
+        justifyContent:'center',
         fontFamily: ["edgwick Ave Display", "cursive"].join(),
       }}
       className={classes.scale}

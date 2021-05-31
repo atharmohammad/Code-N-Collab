@@ -7,13 +7,13 @@ export default function Spinner(props) {
     let color = "#d5fff7"
     if(props.color){
       color = props.color
-    }  
+    }
     document.documentElement.style.setProperty('--base',color);
   },[])
 
   return (
-    <div className="spinner">
-      <div className="head"></div>
+    <div className="spinnered">
+      <div className="headed"></div>
     </div>
   );
 }
