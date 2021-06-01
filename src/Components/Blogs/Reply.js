@@ -48,7 +48,6 @@ const Reply = (props) => {
           background: "#fff",
           borderRadius: "30px",
           padding: "10px",
-          zIndex: "2",
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>

@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Button, InputLabel } from "@material-ui/core";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 import { useHistory, useLocation } from "react-router-dom";
-import Stars from "../Stars/Stars"
+import Stars from "../Stars/Stars";
 import styles from "./RoomsInput.module.css";
 import useSound from "use-sound";
 import roundStart from "../../Assets/sound-effects/RoundStart.mp3";
 import CreateRoom from "../../Assets/images/create_room.png";
 import { v4 as uuidv4 } from "uuid";
-import Back from "../Back/Back"
+import Back from "../Back/Back";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function Rooms(props) {
   const history = useHistory();
@@ -17,10 +23,11 @@ function Rooms(props) {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const location = useLocation();
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (location.state && location.state.error) {
-      alert(location.state.error);
+      setError(location.state.error);
     }
 
     const searchParams = new URLSearchParams(location.search);
@@ -63,7 +70,7 @@ function Rooms(props) {
         overflow: "hidden",
       }}
     >
-      <Stars color="#fff"/>
+      <Stars color="#fff" />
       <Back clicked={backHandler} />
       <Grid container direction="column" justify="center" alignItems="center">
         <img src={CreateRoom} alt="create-room" />
@@ -131,6 +138,16 @@ function Rooms(props) {
           >
             Join / Create
           </Button>
+          <Snackbar
+            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+            open={error!==null}
+            autoHideDuration={6000}
+            onClose={()=>setError(null)}
+          >
+            <Alert  onClose={()=>setError(null)} severity="error">
+              {error}
+            </Alert>
+          </Snackbar>
         </Grid>
       </Grid>
     </Grid>
