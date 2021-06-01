@@ -11,6 +11,7 @@ import Login from "../Pages/Login";
 import Logout from "../Pages/Logout";
 import SignUp from "../Pages/Signup";
 import ParticularBlog from "../Pages/ParticularBlog";
+import UpdateUser from "../Pages/UpdateUser";
 import { AuthContext } from "../context/auth-context";
 
 const CustomRoutes = (props) => {
@@ -22,6 +23,8 @@ const CustomRoutes = (props) => {
       <>
         <Route path="/logout" exact component={Logout} />;
         <Route path="/newContest" exact component={LockoutWrapper} />
+        <Route path="/updateUser" exact component={UpdateUser} />
+
       </>
     );
   } else {

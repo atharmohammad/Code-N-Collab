@@ -104,20 +104,20 @@ const SignIn = (props) => {
     e.preventDefault();
     let ok = true;
 
+    if (emailValid === null || !emailValid) {
+      ok &= false;
+      return setError("Invalid Email");
+    }
+
     if (password === null || password.trim() === "") {
       ok &= false;
       setPassword("");
       return setError("Password must not be empty");
     }
-    
+
     if (password.trim().length < 6) {
       ok &= false;
       return setError("Length of Password must be atleast 6");
-    }
-    
-    if (emailValid === null || !emailValid) {
-      ok &= false;
-      return setError("Invalid Email");
     }
 
     let res = null;
@@ -129,7 +129,7 @@ const SignIn = (props) => {
       });
     } catch (e) {
       console.log(e);
-      return setError('oops some thing went wrong')
+      return setError("oops some thing went wrong");
     }
     console.log("login res", res);
     auth.login(res.data.user, res.data.token);
@@ -143,7 +143,9 @@ const SignIn = (props) => {
   return (
     <>
       <div style={{ background: "#fff", height: "90vh", marginTop: "10px" }}>
-        <div style={{ position: "fixed", left: "10px", top: "5px" ,zIndex:'2'}}>
+        <div
+          style={{ position: "fixed", left: "10px", top: "5px", zIndex: "2" }}
+        >
           <Back clicked={backHandler} />
         </div>
         <Container component="main" maxWidth="sm">
@@ -240,17 +242,17 @@ const SignIn = (props) => {
             </Box>
           </div>
         </Container>
-        <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-          open={error !== null}
-          autoHideDuration={8000}
-          onClose={() => setError(null)}
-        >
-          <Alert onClose={() => setError(null)} severity="error">
-            {error}
-          </Alert>
-        </Snackbar>
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        open={error !== null}
+        autoHideDuration={8000}
+        onClose={() => setError(null)}
+      >
+        <Alert onClose={() => setError(null)} severity="error">
+          {error}
+        </Alert>
+      </Snackbar>
     </>
   );
 };

@@ -20,6 +20,13 @@ import Title from "../Assets/images/currBlog.png";
 import Gmail from "../Assets/images/Gmail.png";
 import Back from "../Components/Back/Back";
 
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -42,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
     border: "10px double gray",
     padding: "7vh 10vh 4vh 10vh",
     borderRadius: "20px",
+    boxSizing: "border-box",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -59,6 +67,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px",
   },
   gmail: {
+    width: "100%", // Fix IE 11 issue.
+
     margin: "2px 0 10px 0",
     border: "2px solid red",
     color: "black",
@@ -75,10 +85,18 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = (props) => {
   const history = useHistory();
   const classes = useStyles();
+  const [userName, setUserName] = useState(null);
+  const [codeforcesHandle, setCodeforcesHandle] = useState(null);
+  const [designation, setDesignation] = useState(null);
   const [email, setEmail] = useState("");
   const [emailValid, setEmailValid] = useState(null);
   const [password, setPassword] = useState(null);
-
+  const [confirmPassword, setConfirmPassword] = useState(null);
+  const [error, setError] = useState(
+    !props.updatePage
+      ? null
+      : "Data in unwritten feilds will remain as is was before"
+  );
   const auth = useContext(AuthContext);
 
   useEffect(() => {
@@ -96,17 +114,33 @@ const SignIn = (props) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     let ok = true;
+    if (!props.updatePage) {
+      if (userName === null || userName.trim() === "") {
+        ok &= false;
+        return setError("UserName cannot be empty");
+      }
 
+      if (emailValid === null || !emailValid) {
+        ok &= false;
+        return setError("Invalid Email");
+      }
+    }
     if (password === null || password.trim() === "") {
       ok &= false;
       setPassword("");
-    }
-    if (emailValid === null || !emailValid) {
-      ok &= false;
-      setEmailValid(false);
+      return setError("Password must not be empty");
     }
 
-    if (!ok) return alert("not ok");
+    if (password.trim().length < 6) {
+      ok &= false;
+      return setError("Length of Password must be atleast 6");
+    }
+    if (
+      confirmPassword === null ||
+      confirmPassword.trim() !== password.trim()
+    ) {
+      return setError("Password did not match");
+    }
     let res = null;
 
     try {
@@ -115,9 +149,10 @@ const SignIn = (props) => {
         Password: password.trim(),
       });
     } catch (e) {
-      return console.log(e);
+      console.log(e);
+      return setError("oops some thing went wrong");
     }
-    console.log("login res", res.data.user);
+    console.log("login res", res);
     auth.login(res.data.user, res.data.token);
     history.push("/homepage");
   };
@@ -128,65 +163,68 @@ const SignIn = (props) => {
 
   return (
     <>
-      <div
-        style={{ background: "#fff", minHeight: "100vh", marginBottom: "5vh" }}
-      >
-        <Back clicked={backHandler} />
+      <div style={{ background: "#fff", height: "90vh", marginTop: "10px" }}>
+        <div
+          style={{ position: "fixed", left: "10px", top: "5px", zIndex: "2" }}
+        >
+          <Back clicked={backHandler} />
+        </div>
         <Container component="main" maxWidth="md">
           <CssBaseline />
           <div className={classes.paper}>
             <img
               src={Title}
-              style={{ height: "40%", width: "40%" }}
+              style={{ height: "40px", width: "40%" }}
               alt="Code-N-Collab"
             />
             <img
               src={Icon}
-              style={{ height: "8%", width: "8%", marginTop: "1vh" }}
+              style={{ height: "8%", width: "8%", marginTop: "10px" }}
               alt="Login"
             />
             <Typography
               component="h1"
               variant="h5"
-              style={{ color: "black", marginTop: "1vh" }}
+              style={{ color: "black", marginTop: "5px" }}
             >
-              Sign Up
+              {!props.updatePage ? "SignUp" : "Update"}
             </Typography>
             <form className={classes.form} noValidate onSubmit={submitHandler}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  id="Name"
-                  label="UserName"
-                  name="UserName"
-                  autoComplete="UserName"
-                  autoFocus
-                  style={{ width: "30%" }}
-                  error={emailValid === false ? true : false}
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  id="Email"
-                  label="Email Adress"
-                  name="Email"
-                  autoComplete="Email"
-                  autoFocus
-                  style={{ width: "67%" }}
-                  error={emailValid === false ? true : false}
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              </div>
+              {!props.updatePage ? (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    id="Name"
+                    label="UserName"
+                    name="UserName"
+                    autoComplete="UserName"
+                    autoFocus
+                    style={{ width: "30%" }}
+                    onChange={(event) => setUserName(event.target.value)}
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    id="Email"
+                    label="Email Adress"
+                    name="Email*"
+                    autoComplete="Email"
+                    autoFocus
+                    style={{ width: "67%" }}
+                    error={emailValid === false ? true : false}
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
+                </div>
+              ) : null}
               <div
                 style={{
                   display: "flex",
@@ -199,13 +237,12 @@ const SignIn = (props) => {
                   margin="normal"
                   id="Codeforces"
                   label="Codeforces Handle"
-                  placeholder="Codeforces UserName"
+                  placeholder="Will be use in championShip matches"
                   name="CodeforcesHandle"
                   autoComplete="CodeforcesHandle"
                   style={{ width: "48%" }}
                   autoFocus
-                  error={emailValid === false ? true : false}
-                  onChange={(event) => setEmail(event.target.value)}
+                  onChange={(event) => setCodeforcesHandle(event.target.value)}
                 />
 
                 <TextField
@@ -218,8 +255,7 @@ const SignIn = (props) => {
                   name="Designation"
                   autoComplete="Designation"
                   autoFocus
-                  error={emailValid === false ? true : false}
-                  onChange={(event) => setEmail(event.target.value)}
+                  onChange={(event) => setDesignation(event.target.value)}
                 />
               </div>
               <div
@@ -235,18 +271,18 @@ const SignIn = (props) => {
                   color="primary"
                   margin="normal"
                   required
+                  placeholder="must be atleast 6 character long"
                   name="password"
                   label="Password"
                   type="password"
                   id="password"
                   style={{ width: "48%" }}
                   autoComplete="current-password"
-                  error={password === "" ? true : false}
                   onChange={(event) => setPassword(event.target.value)}
                 />
                 <TextField
                   variant="outlined"
-                  value=""
+                  value={confirmPassword}
                   color="primary"
                   margin="normal"
                   required
@@ -256,9 +292,7 @@ const SignIn = (props) => {
                   type="password"
                   id="ConfirmPassword"
                   style={{ width: "48%" }}
-                  autoComplete="current-password"
-                  error={password === "" ? true : false}
-                  onChange={(event) => setPassword(event.target.value)}
+                  onChange={(event) => setConfirmPassword(event.target.value)}
                 />
               </div>
               <Button
@@ -267,27 +301,34 @@ const SignIn = (props) => {
                 variant="contained"
                 className={classes.submit}
               >
-                SignUp
+                {!props.updatePage ? "SignUp" : "Update"}
               </Button>
-              <div style={{ textAlign: "center", fontWeight: "bold" }}>OR</div>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                className={classes.gmail}
-              >
-                <img
-                  src={Gmail}
-                  style={{ height: "20%", width: "15%" }}
-                  alt="singup via gmail"
-                />
-                {"   "}Sign up with Gmail
-              </Button>
-              <Grid item>
-                <Link href="/login" variant="body2">
-                  {"Already have an account? Sign in"}
-                </Link>
-              </Grid>
+              {!props.updatePage ? (
+                <>
+                  <div style={{ textAlign: "center", fontWeight: "bold" }}>
+                    OR
+                  </div>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    className={classes.gmail}
+                  >
+                    <img
+                      src={Gmail}
+                      style={{ height: "20%", width: "15%" }}
+                      alt="singup via gmail"
+                    />
+                    {"   "}Sign up with Gmail
+                  </Button>
+
+                  <Grid item>
+                    <Link href="/login" variant="body2">
+                      {"Already have an account? Sign in"}
+                    </Link>
+                  </Grid>
+                </>
+              ) : null}
             </form>
             <Box mt={2}>
               <Copyright />
@@ -295,6 +336,16 @@ const SignIn = (props) => {
           </div>
         </Container>
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        open={error !== null}
+        autoHideDuration={8000}
+        onClose={() => setError(null)}
+      >
+        <Alert onClose={() => setError(null)} severity="error">
+          {error}
+        </Alert>
+      </Snackbar>
     </>
   );
 };

@@ -21,6 +21,10 @@ export default function () {
     history.push("/about");
   };
 
+  const updateUserHandler = () => {
+    history.push("/updateUser");
+  };
+
   return (
     <div className="headerss">
       {auth.isLoggedIn === false ? (
@@ -28,9 +32,10 @@ export default function () {
           <NavItem Name="login" clicked={loginHandler} />
           <NavItem Name="sign-up" clicked={signUpHandler} />
         </>
-      ) : (
+      ) : (<>
         <NavItem Name="logout" clicked={logoutHandler} />
-      )}
+        <NavItem Name="updateUser" clicked={updateUserHandler} />
+      </>)}
       <NavItem Name="about" clicked={aboutHandler} />
     </div>
   );
