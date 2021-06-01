@@ -4,8 +4,11 @@ import {AuthContext} from '../context/auth-context';
 
 
 const getToken = ()=>{
-  if(localStorage.getItem("userData"))
-    return `Bearer ${JSON.parse(localStorage.getItem("userData")).token}`;
+
+  if(localStorage.getItem("userData")){
+    let token = `Bearer ${JSON.parse(localStorage.getItem("userData")).token}`;
+    return token;
+  }
 
   return "";
 }

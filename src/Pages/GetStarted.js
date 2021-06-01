@@ -28,7 +28,7 @@ function GetStarted() {
 
         <Box
           style={{
-            height: "6vh",
+            minHeight: "6vh",
             width: "25vh",
             color: "#fff",
             margin: "10vh auto",

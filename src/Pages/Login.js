@@ -16,7 +16,9 @@ import { AuthContext } from "../context/auth-context";
 import axios from "../Axios/axios";
 import { useHistory } from "react-router-dom";
 import Icon from "../Assets/images/Icon.png"
+import Title from "../Assets/images/currBlog.png"
 import Gmail from "../Assets/images/Gmail.png"
+import Back from "../Components/Back/Back"
 
 
 function Copyright() {
@@ -53,10 +55,12 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    fontWeight:'bold'
+    fontWeight:'bold',
+    border:'2px solid black',
+    borderRadius:'10px',
   },
   gmail:{
-    margin:'0 0 10px 0',
+    margin:'2px 0 10px 0',
     border:'2px solid red',
     color:'black',
     display:'flex',
@@ -116,82 +120,90 @@ const SignIn = (props) => {
     history.push('/homepage')
   };
 
-  return (
-    <div style={{background: '#fff',height:'100vh',paddingTop:'5vh'}}>
-      <Container component="main" maxWidth="sm">
-        <CssBaseline />
-        <div className={classes.paper}>
-            <img src={Icon} style={{height:"30%" , width:"30%"}} alt="Login" />
-          <Typography component="h1" variant="h5" style={{color:'black',marginTop:'1vh'}}>
-            Login
-          </Typography>
-          <form className={classes.form} noValidate onSubmit={submitHandler}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              error={emailValid === false ? true : false}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              value={password}
-              color='primary'
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              error={password === "" ? true : false}
-              onChange={(event) => setPassword(event.target.value)}
+  const backHandler = ()=>{
+    history.push('/homepage');
+  }
 
-            />
-              <Button
-                type="submit"
+  return (
+    <>
+      <div style={{background: '#fff',height:'100vh'}}>
+        <Back clicked={backHandler} />
+        <Container component="main" maxWidth="sm">
+          <CssBaseline />
+          <div className={classes.paper}>
+              <img src={Title} style={{height:'70%',width:'70%'}} alt="Code-N-Collab" />
+              <img src={Icon} style={{height:"15%" , width:"15%" ,marginTop:'1vh'}} alt="Login" />
+            <Typography component="h1" variant="h5" style={{color:'black',marginTop:'1vh'}}>
+              Login
+            </Typography>
+            <form className={classes.form} noValidate onSubmit={submitHandler}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
                 fullWidth
-                variant="contained"
-                className={classes.submit}
-              >
-                Login
-              </Button>
-                <p style={{textAlign:'center',fontWeight:'bold'}}>OR</p>
-              <Button
-                type="submit"
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                error={emailValid === false ? true : false}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+              <TextField
+                variant="outlined"
+                value={password}
+                color='primary'
+                margin="normal"
+                required
                 fullWidth
-                variant="contained"
-                className={classes.gmail}
-              >
-                <img src={Gmail} style={{height:'100%',width:'20%'}} alt="login via gmail" />
-                 {"   "}Sign in with Gmail
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                error={password === "" ? true : false}
+                onChange={(event) => setPassword(event.target.value)}
+
+              />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  className={classes.submit}
+                >
+                  Login
+                </Button>
+                  <div style={{textAlign:'center',fontWeight:'bold'}}>OR</div>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  className={classes.gmail}
+                >
+                  <img src={Gmail} style={{height:'100%',width:'20%'}} alt="login via gmail" />
+                   {"   "}Sign in with Gmail
+                </Button>
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="#" variant="body2">
+                      Forgot password?
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link href="/signup" variant="body2">
+                      {"Don't have an account? Sign Up"}
+                    </Link>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Link href="/signup" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
-          </form>
-          <Box mt={2}>
-            <Copyright />
-          </Box>
-        </div>
-      </Container>
-    </div>
+            </form>
+            <Box mt={2}>
+              <Copyright />
+            </Box>
+          </div>
+        </Container>
+      </div>
+    </>
   );
 };
 export default SignIn;
