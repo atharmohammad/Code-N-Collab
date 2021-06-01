@@ -11,12 +11,14 @@ import {
 
 import ReactMarkdown from "react-markdown";
 import SaveCancel from "./SaveCancel";
-import HelperIcons from './HelperIcons'
+import HelperIcons from "./HelperIcons";
+import WriterModal from "./WriterModal";
 
 const Reply = (props) => {
   const [editReply, setEditReply] = useState(false);
   const [initialReply, setInitialReply] = useState(props.replyData);
   const [deleted, setDeleted] = useState(false);
+  const [showWriter, setShowWriter] = useState(false);
   const divRef = useRef();
 
   const deleteHandler = () => {
@@ -102,6 +104,7 @@ const Reply = (props) => {
                 showEditBtn={!editReply}
                 editHandler={() => setEditReply(true)}
                 deleteHandler={deleteHandler}
+                openWriter={() => setShowWriter(true)}
               />
             </Grid>
           </Grid>
@@ -118,6 +121,9 @@ const Reply = (props) => {
           }}
         />
         <div style={{ display: "flex", alignItems: "flex-end" }}></div>
+        {showWriter ? (
+          <WriterModal cancelHandler={() => setShowWriter(false)} />
+        ) : null}
       </div>
     </>
   );

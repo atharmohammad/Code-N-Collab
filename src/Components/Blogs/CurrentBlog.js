@@ -2,19 +2,19 @@ import { useState, useEffect, useRef } from "react";
 import { Grid, Tooltip, IconButton } from "@material-ui/core";
 import { connect } from "react-redux";
 import ReactMarkdown from "react-markdown";
-import HelperIcons from './HelperIcons'
+import HelperIcons from "./HelperIcons";
 
 import axios from "../../Axios/axios";
 import TextEditor from "../TextEditor/TextEditor";
 import BlogSpinner from "../Spinner/BlogSpinner";
+import WriterModal from "./WriterModal";
+
 import * as TYPES from "../../store/Action/action";
-
-
 
 const CurrentBlog = (props) => {
   const [deleted, setDeleted] = useState(false);
   const [editBlog, setEditBlog] = useState(false);
-
+  const [showWriter, setShowWriter] = useState(false);
   const [initialBlog, setInitialBlog] = useState(null);
   const id = window.location.pathname.split("/")[2];
 
@@ -41,12 +41,11 @@ const CurrentBlog = (props) => {
           display: "flex",
           flexDirection: "column",
           border: "2px solid grey",
-          background: "#18191a",
-          color:"#fff",
+          background: "#fff",
           zIndex: "2",
-          fontFamily: ['Baloo Tammudu 2', 'cursive'].join(' '),
-           lineHeight:'170%',
-          fontSize:'20px'
+          fontFamily: ["Baloo Tammudu 2", "cursive"].join(" "),
+          lineHeight: "170%",
+          fontSize: "20px",
         }}
       >
         {editBlog === false ? (
@@ -73,11 +72,15 @@ const CurrentBlog = (props) => {
               type="blog"
               showCommentHandler={props.showComment}
               showEditBtn={!editBlog}
-              editHandler={()=>setEditBlog(true)}
+              editHandler={() => setEditBlog(true)}
               deleteHandler={() => setDeleted(true)}
+              openWriter={() => setShowWriter(true)}
             />
           </Grid>
         </div>
+        {showWriter ? (
+          <WriterModal cancelHandler={() => setShowWriter(false)} />
+        ) : null}
       </div>
     </>
   );

@@ -8,7 +8,7 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import CommentIcon from "@material-ui/icons/Comment";
 
 const HelperIcons = (props) => {
-  const { type, style, showEditBtn, editHandler, deleteHandler } = { ...props }; //for all
+  const { type, style, showEditBtn, editHandler, deleteHandler, openWriter } = { ...props }; //for all
   const { showCommentHandler } = { ...props }; //blogs
   const { toggleReplyHandler } = { ...props }; //comment
 
@@ -22,12 +22,12 @@ const HelperIcons = (props) => {
       <>
         <Tooltip title="Like/ Dislike">
           <IconButton>
-            <ThumbUpAltIcon style={{ cursor: "pointer", color:'#fff' }} />
+            <ThumbUpAltIcon style={{ cursor: "pointer",  }} />
           </IconButton>
         </Tooltip>
         <Tooltip title="View Comment" onClick={showCommentHandler}>
           <IconButton>
-            <CommentIcon style={{ cursor: "pointer", color:'#fff' }} />
+            <CommentIcon style={{ cursor: "pointer",  }} />
           </IconButton>
         </Tooltip>
       </>
@@ -36,7 +36,7 @@ const HelperIcons = (props) => {
     forumIcon = (
       <Tooltip title="toggle Reply" onClick={toggleReplyHandler}>
         <IconButton>
-          <ForumIcon style={{ cursor: "pointer", color:'#fff' }} />
+          <ForumIcon style={{ cursor: "pointer",  }} />
         </IconButton>
       </Tooltip>
     );
@@ -45,16 +45,16 @@ const HelperIcons = (props) => {
   return (
     <div style={style}>
       {blogIcons}
-      <Tooltip title={`write ${addIconTitle}`}>
+      <Tooltip title={`write ${addIconTitle}`} onClick = {openWriter}>
         <IconButton>
-          <AddIcon title={`write ${addIconTitle}`}  style={{color:'#fff'}}/>
+          <AddIcon title={`write ${addIconTitle}`}  style={{}}/>
         </IconButton>
       </Tooltip>
 
       {showEditBtn ? (
         <Tooltip title={`edit ${type}`} onClick={editHandler}>
           <IconButton>
-            <EditIcon style={{ cursor: "pointer" , color:'#fff'}} />
+            <EditIcon style={{ cursor: "pointer" , }} />
           </IconButton>
         </Tooltip>
       ) : null}
@@ -63,7 +63,7 @@ const HelperIcons = (props) => {
 
       <Tooltip title={`delete ${type}`} onClick={deleteHandler}>
         <IconButton>
-          <DeleteIcon style={{ cursor: "pointer" , color:'#fff'}} />
+          <DeleteIcon style={{ cursor: "pointer" , }} />
         </IconButton>
       </Tooltip>
     </div>
