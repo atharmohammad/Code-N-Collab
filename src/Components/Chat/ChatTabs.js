@@ -40,10 +40,14 @@ export default function ChatPanel(props) {
   const socket = props.socket;
 
   useEffect(() => {
-    if (searchParams.get("name")) {
-      setName(searchParams.get("name").trim().toLowerCase());
+    if(location.pathname === "/newContest"){
+      setName(location.state.Name.trim().toLowerCase());
+    }else{
+      if (searchParams.get("name")) {
+        setName(searchParams.get("name").trim().toLowerCase());
+      }
     }
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     console.log(socket);
@@ -65,7 +69,7 @@ export default function ChatPanel(props) {
     return () => {
       socket.off("peopleInRoom");
     };
-  }, []);
+  }, [persons]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -88,7 +92,7 @@ export default function ChatPanel(props) {
         <Chat socket={props.socket} messages={messages} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <People persons={persons} you={socket.id} />
+        <People persons={persons} you={name} />
       </TabPanel>
     </div>
   );

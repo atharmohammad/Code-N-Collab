@@ -1,55 +1,47 @@
 import { Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import classes from "./lockout.module.css";
-const Problem = () => {
+import { connect } from "react-redux";
+import {useLocation} from "react-router-dom";
+
+const Problem = (props) => {
+
+  const location = useLocation();
+
+  const problems = props.contest.Problems.map((problem) => {
+    let bgcolor = "#3959d4";
+
+    if(problem.solved){
+      if(problem.author === location.state.Name){
+        bgcolor = "green"
+      }else{
+        bgcolor = "#f00505"
+      }
+    }
+      return (
+        <a
+        style={{backgroundColor:`${bgcolor}`}}
+        className={classes.anchorTag}
+        href={problem.link}
+        title={problem.name}
+        target="_blank"
+        >
+        {problem.points}
+        </a>
+      );
+  });
+
   return (
     <>
-      <Grid
-        className={classes.anchorContainer}
-      >
-        <a
-          className={classes.anchorTag}
-          href="https://codeforces.com/problemset/problem/1516/B"
-          title="Question1"
-          target="_blank"
-        >
-          1500
-        </a>
-
-        <a
-          className={classes.anchorTag}
-          href="https://codeforces.com/problemset/problem/1516/B"
-          title="Question2"
-          target="_blank"
-        >
-          1700
-        </a>
-        <a
-          className={classes.anchorTag}
-          href="https://codeforces.com/problemset/problem/1516/B"
-          title="Question3"
-          target="_blank"
-        >
-          1500
-        </a>
-        <a
-          className={classes.anchorTag}
-          href="https://codeforces.com/problemset/problem/1516/B"
-          title="Question4"
-          target="_blank"
-        >
-          1600
-        </a>
-        <a
-          className={classes.anchorTag}
-          href="https://codeforces.com/problemset/problem/1516/B"
-          title="Question5"
-          target="_blank"
-        >
-          1700
-        </a>
-      </Grid>
+      <Grid className={classes.anchorContainer}>{problems}</Grid>
     </>
   );
 };
-export default Problem;
+
+const mapStateToProps = (state) => {
+  return {
+    contest: state.contest.contest,
+  };
+};
+
+export default connect(mapStateToProps, null)(Problem);

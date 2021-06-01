@@ -1,28 +1,40 @@
-import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import Rooms from "./Components/Rooms/Rooms";
-import CollabPageWrapper from "./Pages/CollabPageWrapper";
-import GetStarted from "./Pages/GetStarted";
-import HomePage from "./Pages/HomePage";
-import Test from "./Pages/Test";
-import BlogPage from "./Pages/BlogPage";
-
+import React, { useState, useCallback,useEffect } from "react";
+import { BrowserRouter} from "react-router-dom";
+import { AuthContext } from "./context/auth-context";
+import CustomRoutes from "./CustomRoutes/CustomRoutes";
 import "./App.css";
 
-function App(props) {
-  let routes = (
-    <Switch>
-      <Route path="/" exact component={GetStarted} />
-      <Route path="/homepage" exact component={HomePage} />
-      <Route path="/rooms" exact component={Rooms} />
-      <Route path="/collaborate" exact component={CollabPageWrapper} />
-      <Route path="/blogs" exact component={BlogPage} />
-      <Route path="/test" exact component={Test} />
-      <Redirect to="/homepage" />
-    </Switch>
-  );
+const App = (props) => {
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
-  return <BrowserRouter>{routes}</BrowserRouter>;
-}
+  const login = useCallback((user, token) => {
+    setUser(user);
+    setToken(token);
+    localStorage.setItem('userData',JSON.stringify({user,token}))
+  }, []);
+
+  const logout = useCallback(() => {
+    setUser(null);
+    setToken(null);
+    localStorage.removeItem('userData')
+  }, []);
+
+ useEffect(()=>{
+   const storedData = JSON.parse(localStorage.getItem('userData'));
+   if(storedData && storedData.token){
+     setUser(storedData.user);
+     setToken(storedData.token);
+   }
+ },[login])
+
+ return (
+    <AuthContext.Provider value={{ isLoggedIn:!!token , login, logout,user,token }}>
+      <BrowserRouter>
+        <CustomRoutes />
+      </BrowserRouter>
+    </AuthContext.Provider>
+  );
+};
 
 export default App;

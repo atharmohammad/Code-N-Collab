@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
 import { Grid, Box, Button, Typography, Avatar } from "@material-ui/core";
 import axios from "../../Axios/axios";
-import BlogBar from "./BlogBar";
 import BlogSpinner from "../Spinner/BlogSpinner";
 import ReactMarkdown from "react-markdown";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 
 function Blogs(props) {
-  const [blogs, setBlogs] = useState([]);
+    const [blogs, setBlogs] = useState([]);
+    const history = useHistory();
+
+  const onClickHandler = (blogId)=>{
+    return history.push("/blog/" + blogId);
+  }
 
   useEffect(() => {
     axios
@@ -20,6 +26,7 @@ function Blogs(props) {
         console.log(e);
       });
   }, [props.blogPosted]);
+
   let allBlogs = <BlogSpinner />;
 
   if (blogs.length >= 1) {
@@ -31,27 +38,20 @@ function Blogs(props) {
             border: "2px solid #e2e2e2",
             padding: "1vh",
             minHeight: "16vh",
-            width: "80vh",
+            width: "100vh",
             marginTop: "3vh",
             backgroundColor: "#fff",
-            borderRadius: "20px",
+            borderRadius: "5px",
+            cursor:"pointer"
           }}
+          onClick={() => onClickHandler(item._id)}
         >
-          <Grid container direction="row">
-            <Avatar style={{ margin: "1vh 0 0 0" }}>A</Avatar>
-            <Grid style={{ margin: "1vh 0 0 3vh" }}>
-              <Typography>User</Typography>
-              <Typography style={{ fontStyle: "italic", fontSize: "14px" }}>
-                Software Engineer
-              </Typography>
-            </Grid>
-          </Grid>
+          <UserBlogDescription admin={item} />
           <Grid style={{ marginTop: "1vh" }}>
             <Typography>
               <ReactMarkdown>{item.Body}</ReactMarkdown>
             </Typography>
           </Grid>
-          <BlogBar _id={item._id} />
         </Grid>
       );
     });

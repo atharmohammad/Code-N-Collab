@@ -12,6 +12,7 @@ import {
 import { connect } from "react-redux";
 
 import { makeStyles, Grid } from "@material-ui/core";
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   textarea: {
@@ -56,7 +57,10 @@ const Io = (props) => {
   const outputRef = useRef();
   const classes = useStyles();
   const socket = props.socket;
+  const location = useLocation();
+
   const [recieved, setRecieved] = useState(1);
+  const [reason, setReason] = useState("");
 
   /* recieved { 1 = true for initial load , 2 = true forever ,
     3 = false forever}
@@ -72,11 +76,17 @@ const Io = (props) => {
       socket.emit("changeIO", {
         inputText: event.target.value,
         outputText: props.output,
+        reason: reason,
       });
     }
   };
 
   useEffect(() => {
+    if (location.pathname === "/newContest") {
+      setReason("lockout");
+    } else {
+      setReason("code-editor");
+    }
     socket.on("COMPILE_OFF", (data) => {
       console.log("compile data:", data);
       const response = data;
@@ -90,7 +100,7 @@ const Io = (props) => {
         props.notify_output_error_on();
       }
     });
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     console.log("useEffect");
@@ -112,16 +122,18 @@ const Io = (props) => {
         id: obj.id,
         inputText: inputRef.current.value,
         outputText: outputRef.current.value,
+        reason: "code-editor",
       });
     });
   }, []);
 
   useEffect(() => {
-    if (recieved == 2) {
+    if (recieved == 2 && location.pathname !== "newContest") {
       setRecieved(2);
       socket.emit("changeIO", {
         inputText: props.input,
         outputText: props.output,
+        reason: reason,
       });
     }
     outputRef.current.value = props.output;

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Editor from "@monaco-editor/react";
 
 import Modal from "../../Modal/Modal";
+import ContestEndedModal from "../../Modal/ContestEndedModal";
 import Graph from "../../Graph/Graph";
 import blackBoardJSON from "../../manaco-Themes/blackBoard";
 import cobaltJSON from "../../manaco-Themes/cobalt";
@@ -43,6 +44,7 @@ const MonacoEditor = (props) => {
         language: props.tools.language,
         code,
         input: props.tools.input,
+        reason:"lockout"
       });
     }
   }, [props.tools.nowCompile]);
@@ -65,6 +67,7 @@ const MonacoEditor = (props) => {
       />
       {props.tools.isLoading === true ? <Modal /> : null}
       {props.tools.showGraph === true ? <Graph /> : null}
+      {props.contest.showContestEndedModal == true? <ContestEndedModal/> : null}
     </>
   );
 };

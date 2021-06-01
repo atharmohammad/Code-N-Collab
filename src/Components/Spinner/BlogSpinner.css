@@ -1,19 +1,24 @@
-.spinner {
+:root{
+  --base:#d5fff7
+}
+
+.spinnered {
   width: 10em;
   height: 10em;
-  border-top: 1em solid #d5fff7;
+  border-top: 1em solid var(--base);
   border-right: 1em solid transparent;
   animation: spinner 0.4s linear infinite;
   border-radius: 50%;
-  margin: auto;
+  position: relative;
+  left:45%
 }
-.head {
+.headed {
   width: 1em;
   height: 1em;
   border-radius: 50%;
   margin-left: 8.5em;
   margin-top: 0.5em;
-  background-color: #d5fff7;
+  background-color: var(--base);
 }
 
 @keyframes spinner {

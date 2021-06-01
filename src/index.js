@@ -6,11 +6,14 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 
 import toolsReducer from "./store/Reducer/tools";
+import contestReducer from "./store/Reducer/contest"
+
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 
 const rootReducer = combineReducers({
   tools: toolsReducer,
+  contest:contestReducer
 });
 
 const composeEnhancers =

@@ -1,22 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import LanguagePicker from "./BarItem/LanguagePicker";
 import ThemePicker from "./BarItem/ThemePicker";
-import CollaborateTools from "./BarItem/CollaborateTools";
+import Leave from "./BarItem/Leave";
 import Compile from "./BarItem/Compile";
 import GraphButton from "./BarItem/GraphButton";
 import FontSize from "./BarItem/FontSize";
 import RoomTitle from "../../Assets/images/roomTitle.png";
 import classes from "./Toolbar.module.css";
-import {
-  Typography,
-  CssBaseline,
-  Box,
-  Button,
-  makeStyles,
-  Grid,
-} from "@material-ui/core";
+import { useLocation } from "react-router-dom";
+
+import { Grid } from "@material-ui/core";
 
 export default function Toolbar(props) {
+  const socket = props.socket;
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
   return (
     <Grid className={classes.main}>
       <Grid className={classes.imgGrid}>
@@ -31,7 +30,7 @@ export default function Toolbar(props) {
         <Grid className={classes.toolsGrid}>
           <Compile />
           <GraphButton />
-          <CollaborateTools />
+          <Leave socket={socket} />
         </Grid>
       </Grid>
     </Grid>

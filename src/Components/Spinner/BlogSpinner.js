@@ -1,9 +1,19 @@
-import classes from "./BlogSpinner.module.css";
+import {useEffect} from "react";
+import "./BlogSpinner.css";
 
 export default function Spinner(props) {
+
+  useEffect(()=>{
+    let color = "#d5fff7"
+    if(props.color){
+      color = props.color
+    }
+    document.documentElement.style.setProperty('--base',color);
+  },[])
+
   return (
-    <div className={classes.spinner}>
-      <div className={classes.head}></div>
+    <div className="spinnered">
+      <div className="headed"></div>
     </div>
   );
 }

@@ -11,12 +11,17 @@ const initialState = {
   output_success:false,
   output_error:false,
   showGraph:false,
-  blogPosted:false
+  blogPosted:false,
+  showComment:false,
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action.type)
   switch (action.type) {
+    case TYPE.RESET_SHOW_COMMENTS:
+      return{...state, showComment: false }
+    case TYPE.SHOW_COMMENTS:
+      return{...state, showComment: !state.showComment }
+    
     case TYPE.SET_COMPILE_ON:
       return { ...state, nowCompile: true };
 
@@ -60,7 +65,6 @@ const reducer = (state = initialState, action) => {
       return{...state, blogPosted:state.blogPosted === true ? false : true}
 
     default:return state
-
   }
 };
 
