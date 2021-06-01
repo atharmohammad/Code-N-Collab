@@ -28,7 +28,7 @@ const CurrentBlog = (props) => {
   }, [initialBlog]);
 
   if (!initialBlog) {
-    return <BlogSpinner color="black" />;
+    return <BlogSpinner />;
   }
 
   return (

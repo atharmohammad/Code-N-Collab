@@ -7,6 +7,7 @@ import * as TYPES from "../../store/Action/action";
 
 function TextEditor(props) {
   const [value, setValue] = useState(props.initialValue);
+  const {closeTextEditor,showUpdateBtn} = {...props};
   const postHandler = async () => {
     axios({ method : props.method , url : props.Api, data:{ Body: value } })
       .then((res) => {
@@ -20,9 +21,9 @@ function TextEditor(props) {
       .catch((e) => console.log(e));
   };
   return (
-    <Grid style={{ width: "100%", marginTop: "10vh" }}>
+    <Grid style={{ width: "100%", marginTop: "10px" }}>
       <Editor height={300} value={value} onChange={setValue} />
-      <Box
+      {showUpdateBtn?<Box
         style={{
           minWidth: "15px",
           backgroundColor: "#4169E1",
@@ -37,7 +38,7 @@ function TextEditor(props) {
         onClick={postHandler}
       >
         {props.method === "patch" ? <p>Update</p> : <p>Post</p>}
-      </Box>
+      </Box>:null}
     </Grid>
   );
 }

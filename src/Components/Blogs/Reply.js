@@ -111,16 +111,6 @@ const Reply = (props) => {
         </div>
       </div>
       <div style={{ width: "55vw", alignSelf: "center", backgorund: "red" }}>
-        <textarea
-          placeholder="write reply"
-          style={{
-            width: "100%",
-            minHeight: "120px",
-            fontSize: "18px",
-            resize: "vertical",
-          }}
-        />
-        <div style={{ display: "flex", alignItems: "flex-end" }}></div>
         {showWriter ? (
           <WriterModal cancelHandler={() => setShowWriter(false)} />
         ) : null}

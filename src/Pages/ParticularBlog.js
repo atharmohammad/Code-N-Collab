@@ -16,10 +16,10 @@ const ParticularBlog = (props) => {
 
   return (
     <>
-      <div className={classes.wrap} style={{background:'#fff'}}>
+      <div className={classes.wrap}>
       <Stars color="#fff"/>
-      <BlogHead color="white" textColor="black" back="/blogs"/>
-      <div style={{ background: "white",opacity:'1', height: "100%", minHeight: "100vh" }}>
+      <BlogHead  back="/blogs"/>
+      <div style={{ background: "#18191a",opacity:'1',  minHeight: "100vh" }}>
         <div
           style={{
             width: "70vw",

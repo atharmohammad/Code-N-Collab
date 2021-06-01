@@ -21,9 +21,9 @@ const BlogPage = (props) => {
           backgroundColor: "#18191a",
         }}
       >
-        <BlogHead color="black" textColor="#fff" back="/homePage" />
+        <BlogHead back="/homePage" />
         <div style={{ width: "100vh" }}>
-          <TextEditor Api="/blogs/write" initialValue="" method="post" />
+          <TextEditor showUpdateBtn={true} Api="/blogs/write" initialValue="" method="post" />
         </div>
         <Blogs />
       </Grid>
