@@ -8,7 +8,7 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import CommentIcon from "@material-ui/icons/Comment";
 
 const HelperIcons = (props) => {
-  const { type, style, showEditBtn, editHandler, deleteHandler, openWriter } = { ...props }; //for all
+  const { type, showEditBtn, editHandler, deleteHandler, openWriter } = { ...props }; //for all
   const { showCommentHandler } = { ...props }; //blogs
   const { toggleReplyHandler } = { ...props }; //comment
 
@@ -43,7 +43,7 @@ const HelperIcons = (props) => {
   }
 
   return (
-    <div style={style}>
+    <>
       {blogIcons}
       <Tooltip title={`write ${addIconTitle}`} onClick = {openWriter}>
         <IconButton>
@@ -66,7 +66,7 @@ const HelperIcons = (props) => {
           <DeleteIcon style={{ cursor: "pointer" , }} />
         </IconButton>
       </Tooltip>
-    </div>
+    </>
   );
 };
 

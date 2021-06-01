@@ -17,7 +17,7 @@ const CurrentBlog = (props) => {
   const [showWriter, setShowWriter] = useState(false);
   const [initialBlog, setInitialBlog] = useState(null);
   const id = window.location.pathname.split("/")[2];
-
+  
   useEffect(async () => {
     try {
       const currBlog = await axios.get(`blogs/currentBlog/${id}`);
@@ -58,15 +58,19 @@ const CurrentBlog = (props) => {
               initialValue={initialBlog}
               Api={"/blogs/currBlog/" + id}
               method="patch"
+              closeTextEditor={() => setEditBlog(false)}
             ></TextEditor>
           </>
         )}
         <div>
           <Grid
-            container
-            direction="row"
-            justify="space-between"
-            style={{ marginTop: "3vh", width: "30vw" }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "3vh",
+              width: "50vw",
+              gap: "100px",
+            }}
           >
             <HelperIcons
               type="blog"

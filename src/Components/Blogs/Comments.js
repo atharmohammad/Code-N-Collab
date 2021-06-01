@@ -55,7 +55,7 @@ const Comments = (props) => {
           <Button
             onClick={onClickHandler}
             style={{
-              background: "black",
+              background: "#3e2cd4",
               color:'#fff',
               width: "100px",
               boxShadow: "5px 5px 5px #888888",
