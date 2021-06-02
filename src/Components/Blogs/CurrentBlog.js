@@ -32,6 +32,12 @@ const CurrentBlog = (props) => {
     return <BlogSpinner />;
   }
 
+  const deleteHandler = () => {
+    if (window.confirm("Are you sure you want to delete this Blog")) {
+      setDeleted(true);
+    }
+  };
+
   return (
     <>
       <div
@@ -87,7 +93,7 @@ const CurrentBlog = (props) => {
               showCommentHandler={props.showComment}
               showEditBtn={!editBlog}
               editHandler={() => setEditBlog(true)}
-              deleteHandler={() => setDeleted(true)}
+              deleteHandler={deleteHandler}
               openWriter={() => setShowWriter(true)}
             />
           </Grid>

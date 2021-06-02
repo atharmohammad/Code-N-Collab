@@ -23,7 +23,9 @@ const Reply = (props) => {
   const divRef = useRef();
 
   const deleteHandler = () => {
-    setDeleted(true);
+    if ("Are you sure you want to delete this reply") {
+      setDeleted(true);
+    }
   };
 
   const saveHandler = () => {

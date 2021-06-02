@@ -28,7 +28,9 @@ const Comment = (props) => {
     setShowReply((prev) => !prev);
   };
   const deleteHandler = () => {
-    setDeleted(true);
+    if(window.confirm('Are you sure you want to delete this comment')){
+      setDeleted(true);
+    }
   };
 
   if (deleted) {

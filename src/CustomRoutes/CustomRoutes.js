@@ -11,6 +11,7 @@ import Logout from "../Pages/Logout";
 import SignUp from "../Pages/Signup";
 import ParticularBlog from "../Pages/ParticularBlog";
 import UpdateUser from "../Pages/UpdateUser";
+import ProfilePage from "../Pages/Profile";
 import { AuthContext } from "../context/auth-context";
 
 const CustomRoutes = (props) => {
@@ -34,17 +35,20 @@ const CustomRoutes = (props) => {
   }
 
   return (
-    <Switch>
-      <Route path="/" exact component={GetStarted} />
-      <Route path="/homepage" exact component={HomePage} />
-      <Route path="/rooms" exact component={Rooms} />
-      <Route path="/collaborate" exact component={CollabPageWrapper} />
-      <Route path="/newContest" exact component={LockoutWrapper} />
-      <Route path="/blogs" exact component={BlogPage} />
-      <Route path="/blog/:id" exact component={ParticularBlog} />
-      {routes}
+    <>
+      <Switch>
+        <Route path="/" exact component={GetStarted} />
+        <Route path="/homepage" exact component={HomePage} />
+        <Route path="/rooms" exact component={Rooms} />
+        <Route path="/collaborate" exact component={CollabPageWrapper} />
+        <Route path="/newContest" exact component={LockoutWrapper} />
+        <Route path="/blogs" exact component={BlogPage} />
+        <Route path="/profilePage/:id" exact component={ProfilePage} />
+        <Route path="/blog/:id" exact component={ParticularBlog} />
+        {routes}
+      </Switch>
       <Redirect to="/homepage" />
-    </Switch>
+    </>
   );
 };
 

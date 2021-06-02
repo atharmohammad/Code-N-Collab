@@ -10,10 +10,17 @@ import HelperIcons from "./HelperIcons";
 
 function Blogs(props) {
   const [blogs, setBlogs] = useState([]);
+
   const history = useHistory();
 
   const onClickHandler = (blogId) => {
     return history.push("/blog/" + blogId);
+  };
+  
+  const deleteHandler = () => {
+    if (window.confirm("Are you sure you want to delete this Blog")) {
+      //delete procedure
+    }
   };
 
   useEffect(() => {
@@ -56,7 +63,11 @@ function Blogs(props) {
             </Typography>
           </Grid>
           <Grid container direction="row" justify="flex-end">
-            <HelperIcons type="blog" allBlogPage={true} />
+            <HelperIcons
+              type="blog"
+              allBlogPage={true}
+              deleteHandler={deleteHandler}
+            />
           </Grid>
         </Grid>
       );
