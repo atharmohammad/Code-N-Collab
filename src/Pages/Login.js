@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import {
-  Avatar,
   Button,
   CssBaseline,
   TextField,
@@ -18,9 +17,9 @@ import Icon from "../Assets/images/Icon.png";
 import Title from "../Assets/images/currBlog.png";
 import Gmail from "../Assets/images/Gmail.png";
 import Back from "../Components/Back/Back";
-
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import BlogSpinner from "../Components/Spinner/BlogSpinner";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -85,7 +84,7 @@ const SignIn = (props) => {
   const [emailValid, setEmailValid] = useState(null);
   const [password, setPassword] = useState(null);
   const [error, setError] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const auth = useContext(AuthContext);
 
   useEffect(() => {
@@ -123,12 +122,14 @@ const SignIn = (props) => {
     let res = null;
 
     try {
+      setLoading(true);
       res = await axios.post("/user/login", {
         Email: email.trim(),
         Password: password.trim(),
       });
     } catch (e) {
       console.log(e);
+      setLoading(false);
       return setError("oops some thing went wrong");
     }
     console.log("login res", res);
@@ -140,7 +141,7 @@ const SignIn = (props) => {
     history.push("/homepage");
   };
 
-  return (
+  return !loading ? (
     <>
       <div style={{ background: "#fff", height: "90vh", marginTop: "10px" }}>
         <div
@@ -149,7 +150,6 @@ const SignIn = (props) => {
           <Back clicked={backHandler} />
         </div>
         <Container component="main" maxWidth="sm">
-          <CssBaseline />
           <div className={classes.paper}>
             <img
               src={Title}
@@ -254,6 +254,17 @@ const SignIn = (props) => {
         </Alert>
       </Snackbar>
     </>
+  ) : (
+    <BlogSpinner
+      spinneredStyle={{
+        borderTop: "1em solid black",
+        position: "fixed",
+        top: "35%",
+      }}
+      headedStyle={{
+        background:'black',
+      }}
+    />
   );
 };
 export default SignIn;
