@@ -1,23 +1,28 @@
 import axios from 'axios';
-import {useContext} from 'react'
-import {AuthContext} from '../context/auth-context';
 
+const fetchClient = () => {
+  const defaultOptions = {
+    baseURL: 'http://localhost:8080/',
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
-const getToken = ()=>{
+  // Create instance
+  let instance = axios.create(defaultOptions);
 
-  if(localStorage.getItem("userData")){
-    let token = `Bearer ${JSON.parse(localStorage.getItem("userData")).token}`;
-    return token;
-  }
+  // Set the AUTH token for any request
+  instance.interceptors.request.use(function (config) {
+    let token = null
+    if(localStorage.getItem("userData")){
+      token = `Bearer ${JSON.parse(localStorage.getItem("userData")).token}`;
+    }
+    config.headers.Authorization = token;
+    return config;
+  });
 
-  return "";
-}
+  return instance;
+};
 
-const instance = axios.create({
-  baseURL: 'http://localhost:8080/',
-  headers:{
-    "Authorization" : getToken()
-  }
-})
-
-export default instance
+export default fetchClient();

@@ -92,11 +92,7 @@ const SignIn = (props) => {
   const [emailValid, setEmailValid] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
-  const [error, setError] = useState(
-    !props.updatePage
-      ? null
-      : "Data in unwritten feilds will remain as is was before"
-  );
+  const [error, setError] = useState(null);
   const auth = useContext(AuthContext);
 
   useEffect(() => {
@@ -114,17 +110,17 @@ const SignIn = (props) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     let ok = true;
-    if (!props.updatePage) {
-      if (userName === null || userName.trim() === "") {
-        ok &= false;
-        return setError("UserName cannot be empty");
-      }
 
-      if (emailValid === null || !emailValid) {
-        ok &= false;
-        return setError("Invalid Email");
-      }
+    if (userName === null || userName.trim() === "") {
+      ok &= false;
+      return setError("UserName cannot be empty");
     }
+
+    if (emailValid === null || !emailValid) {
+      ok &= false;
+      return setError("Invalid Email");
+    }
+
     if (password === null || password.trim() === "") {
       ok &= false;
       setPassword("");
@@ -187,44 +183,43 @@ const SignIn = (props) => {
               variant="h5"
               style={{ color: "black", marginTop: "5px" }}
             >
-              {!props.updatePage ? "SignUp" : "Update"}
+              "SignUp"
             </Typography>
             <form className={classes.form} noValidate onSubmit={submitHandler}>
-              {!props.updatePage ? (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    id="Name"
-                    label="UserName"
-                    name="UserName"
-                    autoComplete="UserName"
-                    autoFocus
-                    style={{ width: "30%" }}
-                    onChange={(event) => setUserName(event.target.value)}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    id="Email"
-                    label="Email Adress"
-                    name="Email*"
-                    autoComplete="Email"
-                    autoFocus
-                    style={{ width: "67%" }}
-                    error={emailValid === false ? true : false}
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                </div>
-              ) : null}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  id="Name"
+                  label="UserName"
+                  name="UserName"
+                  autoComplete="UserName"
+                  autoFocus
+                  style={{ width: "30%" }}
+                  onChange={(event) => setUserName(event.target.value)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  id="Email"
+                  label="Email Adress"
+                  name="Email*"
+                  autoComplete="Email"
+                  autoFocus
+                  style={{ width: "67%" }}
+                  error={emailValid === false ? true : false}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </div>
+
               <div
                 style={{
                   display: "flex",
@@ -301,34 +296,33 @@ const SignIn = (props) => {
                 variant="contained"
                 className={classes.submit}
               >
-                {!props.updatePage ? "SignUp" : "Update"}
+                "SignUp"
               </Button>
-              {!props.updatePage ? (
-                <>
-                  <div style={{ textAlign: "center", fontWeight: "bold" }}>
-                    OR
-                  </div>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    className={classes.gmail}
-                  >
-                    <img
-                      src={Gmail}
-                      style={{ height: "20%", width: "15%" }}
-                      alt="singup via gmail"
-                    />
-                    {"   "}Sign up with Gmail
-                  </Button>
 
-                  <Grid item>
-                    <Link href="/login" variant="body2">
-                      {"Already have an account? Sign in"}
-                    </Link>
-                  </Grid>
-                </>
-              ) : null}
+              <>
+                <div style={{ textAlign: "center", fontWeight: "bold" }}>
+                  OR
+                </div>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  className={classes.gmail}
+                >
+                  <img
+                    src={Gmail}
+                    style={{ height: "20%", width: "15%" }}
+                    alt="singup via gmail"
+                  />
+                  {"   "}Sign up with Gmail
+                </Button>
+
+                <Grid item>
+                  <Link href="/login" variant="body2">
+                    {"Already have an account? Sign in"}
+                  </Link>
+                </Grid>
+              </>
             </form>
             <Box mt={2}>
               <Copyright />

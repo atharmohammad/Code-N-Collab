@@ -39,8 +39,8 @@ const BlogPage = (props) => {
           <div style={{ width: "100vh" }}>
             <Box
               style={{
-                width: "80px",
-                height: "40px",
+                width: "20px",
+                height: "20px",
                 background: "#d82828",
                 borderRadius: "5px",
                 padding: "0 5px 0 5px",
@@ -50,10 +50,12 @@ const BlogPage = (props) => {
                 float: "right",
                 cursor: "pointer",
                 textAlign: "center",
+                fontSize:'15px',
+                border:'2px solid #fff'
               }}
               onClick={() => setShowEditor(false)}
             >
-              Cancel
+              X
             </Box>
             <div style={{ marginTop: "40px" }}>
               <TextEditor
@@ -68,21 +70,22 @@ const BlogPage = (props) => {
           <div style={{ width: "100vh" }}>
             <Box
               style={{
-                width: "100px",
+                width: "120px",
                 height: "40px",
                 backgroundColor: "#4169E1",
                 borderRadius: "5px",
-                padding: "0 5px 0 5px",
+                padding: "5px 5px 0 5px",
                 textAlign: "center",
                 color: "#fff",
                 marginTop: "1vh",
                 float: "right",
                 cursor: "pointer",
                 textAlign: "center",
+                boxSizing:'border-box',
               }}
               onClick={showEditorHandler}
             >
-              Create Blog +{" "}
+              Create Blog|+{" "}
             </Box>
           </div>
         )}

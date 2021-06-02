@@ -30,6 +30,7 @@ function TextEditor(props) {
           style={{
             display: "flex",
             justifyContent: "space-between",
+            flexDirection: "row-reverse",
             marginTop: "-10px",
             marginBottom: "5px",
           }}
@@ -75,22 +76,29 @@ function TextEditor(props) {
         style={{ padding: "5px" }}
       />
       {showUpdateBtn ? (
-        <Box
-          style={{
-            width: "40px",
-            backgroundColor: "#4169E1",
-            borderRadius: "10px",
-            padding: "0 5px 0 5px",
-            textAlign: "center",
-            color: "#fff",
-            marginTop: "10px",
-            float: "right",
-            cursor: "pointer",
-          }}
-          onClick={postHandler}
-        >
-          <p>Post</p>
-        </Box>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Box
+            style={{
+              width: "100%",
+              backgroundColor: "#4169E1",
+              borderRadius: "10px",
+              height:'35px',
+              textAlign: "center",
+              
+              color: "#fff",
+              marginTop: "10px",
+              float: "right",
+              cursor: "pointer",
+              alignItems: "center",
+              fontSize: "20px",
+              boxSizing:'border-box',
+              border:'2px solid #fff',
+            }}
+            onClick={postHandler}
+          >
+           Post
+          </Box>
+        </div>
       ) : null}
     </Grid>
   );
