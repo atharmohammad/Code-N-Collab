@@ -7,10 +7,14 @@ import ForumIcon from "@material-ui/icons/Forum";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import CommentIcon from "@material-ui/icons/Comment";
 
+
 const HelperIcons = (props) => {
-  const { type, showEditBtn, editHandler, deleteHandler, openWriter } = { ...props }; //for all
-  const { showCommentHandler } = { ...props }; //blogs
+  const { type, showEditBtn, editHandler, deleteHandler, openWriter } = {
+    ...props,
+  }; //for all
+  const { showCommentHandler } = { ...props }; //particular blogs
   const { toggleReplyHandler } = { ...props }; //comment
+  const { allBlogPage } = { ...props }; //allblogPage blog
 
   let addIconTitle = "reply";
   let forumIcon = null;
@@ -20,14 +24,9 @@ const HelperIcons = (props) => {
     addIconTitle = "comment";
     blogIcons = (
       <>
-        <Tooltip title="Like/ Dislike">
-          <IconButton>
-            <ThumbUpAltIcon style={{ cursor: "pointer",  }} />
-          </IconButton>
-        </Tooltip>
         <Tooltip title="View Comment" onClick={showCommentHandler}>
           <IconButton>
-            <CommentIcon style={{ cursor: "pointer",  }} />
+            <CommentIcon style={{ cursor: "pointer" }} />
           </IconButton>
         </Tooltip>
       </>
@@ -36,7 +35,7 @@ const HelperIcons = (props) => {
     forumIcon = (
       <Tooltip title="toggle Reply" onClick={toggleReplyHandler}>
         <IconButton>
-          <ForumIcon style={{ cursor: "pointer",  }} />
+          <ForumIcon style={{ cursor: "pointer" }} />
         </IconButton>
       </Tooltip>
     );
@@ -44,26 +43,33 @@ const HelperIcons = (props) => {
 
   return (
     <>
-      {blogIcons}
-      <Tooltip title={`write ${addIconTitle}`} onClick = {openWriter}>
+      <Tooltip title="Like">
         <IconButton>
-          <AddIcon title={`write ${addIconTitle}`}  style={{}}/>
+          <ThumbUpAltIcon style={{ cursor: "pointer" }} /> 120
         </IconButton>
       </Tooltip>
+      {!allBlogPage ? (
+        <>
+          {blogIcons}
+          <Tooltip title={`write ${addIconTitle}`} onClick={openWriter}>
+            <IconButton>
+              <AddIcon title={`write ${addIconTitle}`} style={{}} />
+            </IconButton>
+          </Tooltip>
+          {showEditBtn ? (
+            <Tooltip title={`edit ${type}`} onClick={editHandler}>
+              <IconButton>
+                <EditIcon style={{ cursor: "pointer" }} />
+              </IconButton>
+            </Tooltip>
+          ) : null}
 
-      {showEditBtn ? (
-        <Tooltip title={`edit ${type}`} onClick={editHandler}>
-          <IconButton>
-            <EditIcon style={{ cursor: "pointer" , }} />
-          </IconButton>
-        </Tooltip>
+          {forumIcon}
+        </>
       ) : null}
-
-      {forumIcon}
-
       <Tooltip title={`delete ${type}`} onClick={deleteHandler}>
         <IconButton>
-          <DeleteIcon style={{ cursor: "pointer" , }} />
+          <DeleteIcon style={{ cursor: "pointer" }} />
         </IconButton>
       </Tooltip>
     </>

@@ -8,9 +8,9 @@ import * as TYPES from "../../store/Action/action";
 function TextEditor(props) {
   const [value, setValue] = useState(props.initialValue);
 
-  const { closeTextEditor, showUpdateBtn ,} = { ...props };
-  const postHandler = async() => {
-    alert('posting')
+  const { closeTextEditor, showUpdateBtn } = { ...props };
+  const postHandler = async () => {
+    alert("posting");
     axios({ method: props.method, url: props.Api, data: { Body: value } })
       .then((res) => {
         try {
@@ -37,7 +37,7 @@ function TextEditor(props) {
           <Box
             style={{
               width: "80px",
-              background: "#d82828",
+              background: "#900606",
               borderRadius: "10px",
               padding: "0 5px 0 5px",
               textAlign: "center",

@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import SaveCancel from "./SaveCancel";
 import HelperIcons from "./HelperIcons";
 import WriterModal from "./WriterModal";
+import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 
 const Comment = (props) => {
   const divRef = useRef();
@@ -52,8 +53,7 @@ const Comment = (props) => {
         }}
       >
         <div style={{ display: "flex" }}>
-          <div>User</div>
-          <div style={{ paddingLeft: "20px" }}>2days ago</div>
+          <UserBlogDescription admin={false} />
         </div>
         {editComment === false ? (
           <div
@@ -68,7 +68,7 @@ const Comment = (props) => {
             </pre>
           </div>
         ) : (
-          <div style={{ margin: "2px",}}>
+          <div style={{ margin: "2px" }}>
             <textarea
               ref={divRef}
               style={{
@@ -116,8 +116,8 @@ const Comment = (props) => {
       </Grid>
       <div>{showReply ? <Replies commentId={123} /> : null}</div>
       {showWriter ? (
-          <WriterModal cancelHandler={() => setShowWriter(false)} />
-        ) : null}
+        <WriterModal cancelHandler={() => setShowWriter(false)} />
+      ) : null}
     </div>
   );
 };

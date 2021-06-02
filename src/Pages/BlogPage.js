@@ -1,13 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Grid, Box, Button } from "@material-ui/core";
 import Blogs from "../Components/Blogs/Blogs";
 import TextEditor from "../Components/TextEditor/TextEditor";
 import Stars from "../Components/Stars/Stars";
 import BlogHead from "../Components/Blogs/BlogHead";
 import classes from "../Assets/css/wrapstyle.module.css";
+import { AuthContext } from "../context/auth-context";
+import { useHistory } from "react-router-dom";
 
 const BlogPage = (props) => {
   const [showEditor, setShowEditor] = useState(false);
+  const auth = useContext(AuthContext);
+  const history = useHistory();
+
+  const showEditorHandler = () => {
+    if (!auth.token) {
+      return history.push("/login?redirect" + "blogs");
+    }
+    return setShowEditor(true);
+  };
+
   return (
     <div className={classes.wrap}>
       <Stars color="#fff" />
@@ -37,19 +49,19 @@ const BlogPage = (props) => {
                 marginTop: "1vh",
                 float: "right",
                 cursor: "pointer",
-                textAlign:'center'
+                textAlign: "center",
               }}
-             onClick={()=>setShowEditor(false)}
+              onClick={() => setShowEditor(false)}
             >
               Cancel
             </Box>
-            <div style={{marginTop:'40px'}}>
-            <TextEditor
-              showUpdateBtn={true}
-              Api="/blogs/write"
-              initialValue=""
-              method="post"
-            />
+            <div style={{ marginTop: "40px" }}>
+              <TextEditor
+                showUpdateBtn={true}
+                Api="/blogs/write"
+                initialValue=""
+                method="post"
+              />
             </div>
           </div>
         ) : (
@@ -66,9 +78,9 @@ const BlogPage = (props) => {
                 marginTop: "1vh",
                 float: "right",
                 cursor: "pointer",
-                textAlign:'center'
+                textAlign: "center",
               }}
-             onClick={()=>setShowEditor(true)}
+              onClick={showEditorHandler}
             >
               Create Blog +{" "}
             </Box>

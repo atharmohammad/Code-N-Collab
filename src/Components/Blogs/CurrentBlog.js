@@ -8,6 +8,7 @@ import axios from "../../Axios/axios";
 import TextEditor from "../TextEditor/TextEditor";
 import BlogSpinner from "../Spinner/BlogSpinner";
 import WriterModal from "./WriterModal";
+import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 
 import * as TYPES from "../../store/Action/action";
 
@@ -17,7 +18,7 @@ const CurrentBlog = (props) => {
   const [showWriter, setShowWriter] = useState(false);
   const [initialBlog, setInitialBlog] = useState(null);
   const id = window.location.pathname.split("/")[2];
-  
+
   useEffect(async () => {
     try {
       const currBlog = await axios.get(`blogs/currentBlog/${id}`);
@@ -50,6 +51,15 @@ const CurrentBlog = (props) => {
       >
         {editBlog === false ? (
           <>
+            <div
+              style={{
+                display: "flex",
+                alignSelf: "flex-start",
+                background: "#fff",
+              }}
+            >
+              <UserBlogDescription admin={false} />
+            </div>
             <ReactMarkdown>{initialBlog}</ReactMarkdown>
           </>
         ) : (

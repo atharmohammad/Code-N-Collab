@@ -13,6 +13,7 @@ import ReactMarkdown from "react-markdown";
 import SaveCancel from "./SaveCancel";
 import HelperIcons from "./HelperIcons";
 import WriterModal from "./WriterModal";
+import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 
 const Reply = (props) => {
   const [editReply, setEditReply] = useState(false);
@@ -52,8 +53,7 @@ const Reply = (props) => {
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", background: "#fff" }}>
-            <div>User</div>
-            <div style={{ paddingLeft: "20px" }}>3days ago</div>
+            <UserBlogDescription admin={false} />
           </div>
           {editReply === false ? (
             <div

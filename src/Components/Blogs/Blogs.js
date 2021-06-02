@@ -6,14 +6,15 @@ import ReactMarkdown from "react-markdown";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
+import HelperIcons from "./HelperIcons";
 
 function Blogs(props) {
-    const [blogs, setBlogs] = useState([]);
-    const history = useHistory();
+  const [blogs, setBlogs] = useState([]);
+  const history = useHistory();
 
-  const onClickHandler = (blogId)=>{
+  const onClickHandler = (blogId) => {
     return history.push("/blog/" + blogId);
-  }
+  };
 
   useEffect(() => {
     axios
@@ -42,15 +43,20 @@ function Blogs(props) {
             marginTop: "3vh",
             backgroundColor: "#fff",
             borderRadius: "5px",
-            cursor:"pointer"
+            cursor: "pointer",
           }}
-          onClick={() => onClickHandler(item._id)}
         >
           <UserBlogDescription admin={item} />
-          <Grid style={{ marginTop: "1vh" }}>
+          <Grid
+            style={{ marginTop: "1vh" }}
+            onClick={() => onClickHandler(item._id)}
+          >
             <Typography>
               <ReactMarkdown>{item.Body}</ReactMarkdown>
             </Typography>
+          </Grid>
+          <Grid container direction="row" justify="flex-end">
+            <HelperIcons type="blog" allBlogPage={true} />
           </Grid>
         </Grid>
       );
