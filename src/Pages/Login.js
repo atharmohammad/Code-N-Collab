@@ -177,6 +177,7 @@ const SignIn = (props) => {
               <TextField
                 variant="outlined"
                 margin="normal"
+                value={email}
                 required
                 fullWidth
                 id="email"
@@ -262,7 +263,7 @@ const SignIn = (props) => {
         top: "35%",
       }}
       headedStyle={{
-        background:'black',
+        background: "black",
       }}
     />
   );

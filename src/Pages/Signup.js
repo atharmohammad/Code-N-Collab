@@ -19,6 +19,7 @@ import Icon from "../Assets/images/Icon.png";
 import Title from "../Assets/images/currBlog.png";
 import Gmail from "../Assets/images/Gmail.png";
 import Back from "../Components/Back/Back";
+import BlogSpinner from "../Components/Spinner/BlogSpinner";
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -93,6 +94,7 @@ const SignIn = (props) => {
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const auth = useContext(AuthContext);
 
   useEffect(() => {
@@ -140,12 +142,14 @@ const SignIn = (props) => {
     let res = null;
 
     try {
+      setLoading(true);
       res = await axios.post("/user/login", {
         Email: email.trim(),
         Password: password.trim(),
       });
     } catch (e) {
       console.log(e);
+      setLoading(false);
       return setError("oops some thing went wrong");
     }
     console.log("login res", res);
@@ -157,7 +161,7 @@ const SignIn = (props) => {
     history.push("/homepage");
   };
 
-  return (
+  return !loading ? (
     <>
       <div style={{ background: "#fff", height: "90vh", marginTop: "10px" }}>
         <div
@@ -166,7 +170,6 @@ const SignIn = (props) => {
           <Back clicked={backHandler} />
         </div>
         <Container component="main" maxWidth="md">
-          <CssBaseline />
           <div className={classes.paper}>
             <img
               src={Title}
@@ -196,6 +199,7 @@ const SignIn = (props) => {
                 <TextField
                   variant="outlined"
                   margin="normal"
+                  value={userName}
                   required
                   id="Name"
                   label="UserName"
@@ -208,6 +212,7 @@ const SignIn = (props) => {
                 <TextField
                   variant="outlined"
                   margin="normal"
+                  value={email}
                   required
                   id="Email"
                   label="Email Adress"
@@ -230,6 +235,7 @@ const SignIn = (props) => {
                 <TextField
                   variant="outlined"
                   margin="normal"
+                  value={codeforcesHandle}
                   id="Codeforces"
                   label="Codeforces Handle"
                   placeholder="Will be use in championShip matches"
@@ -243,6 +249,7 @@ const SignIn = (props) => {
                 <TextField
                   variant="outlined"
                   margin="normal"
+                  value={designation}
                   style={{ width: "48%" }}
                   id="Designation"
                   label="Designation"
@@ -314,7 +321,7 @@ const SignIn = (props) => {
                     style={{ height: "20%", width: "15%" }}
                     alt="singup via gmail"
                   />
-                  {"   "}Sign up with Gmail
+                  {"   "}Connect with Google
                 </Button>
 
                 <Grid item>
@@ -341,6 +348,17 @@ const SignIn = (props) => {
         </Alert>
       </Snackbar>
     </>
+  ) : (
+    <BlogSpinner
+      spinneredStyle={{
+        borderTop: "1em solid black",
+        position: "fixed",
+        top: "35%",
+      }}
+      headedStyle={{
+        background: "black",
+      }}
+    />
   );
 };
 export default SignIn;
