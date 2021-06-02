@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useEffect, useState,useContext } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { useLocation } from "react-router-dom";
+import {AuthContext} from '../../context/auth-context'
 
 import Chat from "./Chat";
 import People from "./People";
 
 function TabPanel(props) {
   const { value, index, children } = props;
-
   return (
     <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+    role="tabpanel"
+    hidden={value !== index}
+    id={`simple-tabpanel-${index}`}
+    aria-labelledby={`simple-tab-${index}`}
     >
       {value === index && (
         <Box p={2}>
@@ -38,10 +36,11 @@ export default function ChatPanel(props) {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const socket = props.socket;
-
+  const auth = useContext(AuthContext)
+  
   useEffect(() => {
     if(location.pathname === "/newContest"){
-      setName(location.state.Name.trim().toLowerCase());
+      setName(auth.user.CodeForcesHandle);
     }else{
       if (searchParams.get("name")) {
         setName(searchParams.get("name").trim().toLowerCase());
@@ -61,7 +60,6 @@ export default function ChatPanel(props) {
   }, [messages]);
 
   useEffect(() => {
-    console.log(socket);
     socket.on("peopleInRoom", (people) => {
       console.log("settingpeople");
       setPersons(people);

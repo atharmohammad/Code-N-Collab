@@ -6,7 +6,6 @@ import GetStarted from "../Pages/GetStarted";
 import HomePage from "../Pages/HomePage";
 import LockoutWrapper from "../Pages/LockoutWrapper";
 import BlogPage from "../Pages/BlogPage";
-import ChooseName from "../Pages/ChooseName";
 import Login from "../Pages/Login";
 import Logout from "../Pages/Logout";
 import SignUp from "../Pages/Signup";
@@ -22,9 +21,7 @@ const CustomRoutes = (props) => {
     routes = (
       <>
         <Route path="/logout" exact component={Logout} />;
-        <Route path="/newContest" exact component={LockoutWrapper} />
         <Route path="/updateUser" exact component={UpdateUser} />
-
       </>
     );
   } else {
@@ -42,9 +39,9 @@ const CustomRoutes = (props) => {
       <Route path="/homepage" exact component={HomePage} />
       <Route path="/rooms" exact component={Rooms} />
       <Route path="/collaborate" exact component={CollabPageWrapper} />
+      <Route path="/newContest" exact component={LockoutWrapper} />
       <Route path="/blogs" exact component={BlogPage} />
       <Route path="/blog/:id" exact component={ParticularBlog} />
-      <Route path="/chooseName" exact component={ChooseName} />
       {routes}
       <Redirect to="/homepage" />
     </Switch>

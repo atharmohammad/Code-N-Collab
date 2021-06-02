@@ -23,7 +23,7 @@ function Contest(props) {
       <LockoutPanel socket={socket} />
     )
   ) : (<div style={{marginLeft:'-15px'}}>
-    <Spinner />
+    <Spinner marginTop='-13px'/>
     </div>
   );
 }

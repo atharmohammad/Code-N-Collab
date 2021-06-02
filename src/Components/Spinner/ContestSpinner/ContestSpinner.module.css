@@ -10,11 +10,11 @@
   width: 100%;
   height: 100%;
   display: flex;
-  margin-top:-22px;
   justify-content: center;
   align-items: center;
   background-color: black;
   position: absolute;
+  overflow:hidden;
 }
 
 
