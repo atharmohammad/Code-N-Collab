@@ -41,7 +41,9 @@ function HomePage() {
   }
 
   return (
-    <div className={classes.wrap}>
+    <div style={{height:"100vh",
+        overflow:"hidden",
+        background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)"}}>
       <Stars color="#fff"/>
       <Back clicked={homePageHandler} />
       <Nav/>

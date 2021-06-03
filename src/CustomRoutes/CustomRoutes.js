@@ -13,6 +13,7 @@ import ParticularBlog from "../Pages/ParticularBlog";
 import UpdateUser from "../Pages/UpdateUser";
 import Me from "../Pages/Me";
 import { AuthContext } from "../context/auth-context";
+import About from "../Pages/About"
 
 const CustomRoutes = (props) => {
   const auth = useContext(AuthContext);
@@ -27,6 +28,7 @@ const CustomRoutes = (props) => {
         <Route path="/newContest" exact component={LockoutWrapper} />
         <Route path="/blogs" exact component={BlogPage} />
         <Route path="/blog/:id" exact component={ParticularBlog} />
+        <Route path="/about" exact component={About} />
         {auth.isLoggedIn ? (
           <Switch>
             <Route path="/me" exact component={Me} />
