@@ -6,7 +6,9 @@ import {makeStyles} from "@material-ui/core/styles"
 import {useHistory} from "react-router-dom"
 import Title from "../Assets/images/currBlog.png"
 import Github from "../Assets/images/Github.png"
-import Admin from "../Components/Admin/Admin"
+import Admin from "../Components/About/Admin/Admin"
+import AboutContent from "../Components/About/AboutContent"
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -18,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "20px",
     boxSizing: "border-box",
     background:"#fff",
+    margin:'10px'
   },
   About:{
     color:"black",
@@ -69,38 +72,27 @@ export default function About(props){
 
               </a>
             </div>
-            <div>
-                Code - N - Collab is a Collaboration Website
-                for Competitive Coders ,software developers and all those
-                who love to code and collaborate with others to build new
-                creative things and learn from each other
-              <p>
-                It has a Real-time Code editor with a feature to chat with friends,
-                and discuss problems , for competitive coders , they can fetch question from
-                the popular websites such as codeforces , codechef , etc
-              </p>
-
-              <p>
-                It also has a lockout championShip so that friends can compete
-                with each others , and also can filter type of problems they want to compete
-                on.
-              </p>
-              <p>
-                To connect with the community or share knowledge or want to ask something
-                you can also post on Blogs section
-              </p>
-              <p>
-                Code-N-Collab is an opensource and we would love to hear from you and see you collaborate with us
-                to solve issues or build a new feature
-              </p>
-            </div>
+            <AboutContent/>
             <div style={{width:'100%',borderRadius:'20px',padding:'5px',
             background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)"}}>
+              <div style={{
+                background:'#fff',
+                borderRadius:'10px',
+                margin:'10px',
+                padding:'5px',
+                fontSize:'25px',
+                fontWeight:'bold',
+                border:'2px solid gray',
+                fontFamily: ["edgwick Ave Display", "cursive"].join(),}}>
+                Developed By :
+              </div>
 
               <div style={{border: "10px double white",
                 display:'flex',
                 justifyContent:'space-between',
-                borderRadius:'20px',padding:'10px'}}>
+                borderRadius:'20px',
+                margin:'10px',
+                padding:'10px'}}>
 
                 <Admin Name="Mohd Athar"/>
                 <Admin Name="Adnan Shamsi"/>

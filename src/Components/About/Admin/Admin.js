@@ -1,8 +1,8 @@
-import Athar from "../../Assets/images/athar.jpg"
-import Linkedin from "../../Assets/images/Linkedin.png"
-import Codeforces from "../../Assets/images/Codeforces.png"
-import AtharPortfolio from "../../Assets/images/AtharPortfolio.jpg"
-import Github from "../../Assets/images/Github.png"
+import Athar from "../../../Assets/images/athar.jpg"
+import Linkedin from "../../../Assets/images/Linkedin.png"
+import Codeforces from "../../../Assets/images/Codeforces.png"
+import AtharPortfolio from "../../../Assets/images/AtharPortfolio.jpg"
+import Github from "../../../Assets/images/Github.png"
 
 import {makeStyles} from "@material-ui/core/styles"
 
@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   Admin:{
     backgroundColor:'#fff',
     height:'20vh',
-    width:'20vw',
+    width:'19vw',
     borderRadius:'20px',
     padding:'10px',
     display:'flex',
