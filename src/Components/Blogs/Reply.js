@@ -11,16 +11,21 @@ import {
 
 import ReactMarkdown from "react-markdown";
 import SaveCancel from "./SaveCancel";
-import HelperIcons from './HelperIcons'
+import HelperIcons from "./HelperIcons";
+import WriterModal from "./WriterModal";
+import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 
 const Reply = (props) => {
   const [editReply, setEditReply] = useState(false);
   const [initialReply, setInitialReply] = useState(props.replyData);
   const [deleted, setDeleted] = useState(false);
+  const [showWriter, setShowWriter] = useState(false);
   const divRef = useRef();
 
   const deleteHandler = () => {
-    setDeleted(true);
+    if ("Are you sure you want to delete this reply") {
+      setDeleted(true);
+    }
   };
 
   const saveHandler = () => {
@@ -46,13 +51,11 @@ const Reply = (props) => {
           background: "#fff",
           borderRadius: "30px",
           padding: "10px",
-          zIndex: "2",
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", background: "#fff" }}>
-            <div>User</div>
-            <div style={{ paddingLeft: "20px" }}>3days ago</div>
+            <UserBlogDescription admin={false} />
           </div>
           {editReply === false ? (
             <div
@@ -102,22 +105,16 @@ const Reply = (props) => {
                 showEditBtn={!editReply}
                 editHandler={() => setEditReply(true)}
                 deleteHandler={deleteHandler}
+                openWriter={() => setShowWriter(true)}
               />
             </Grid>
           </Grid>
         </div>
       </div>
       <div style={{ width: "55vw", alignSelf: "center", backgorund: "red" }}>
-        <textarea
-          placeholder="write reply"
-          style={{
-            width: "100%",
-            minHeight: "120px",
-            fontSize: "18px",
-            resize: "vertical",
-          }}
-        />
-        <div style={{ display: "flex", alignItems: "flex-end" }}></div>
+        {showWriter ? (
+          <WriterModal cancelHandler={() => setShowWriter(false)} />
+        ) : null}
       </div>
     </>
   );

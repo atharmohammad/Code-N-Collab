@@ -3,17 +3,9 @@ import "./BlogSpinner.css";
 
 export default function Spinner(props) {
 
-  useEffect(()=>{
-    let color = "#d5fff7"
-    if(props.color){
-      color = props.color
-    }
-    document.documentElement.style.setProperty('--base',color);
-  },[])
-
   return (
-    <div className="spinnered">
-      <div className="headed"></div>
+    <div className="spinneredStone" style={{...props.spinneredStyle}}>
+      <div className="headedStone" style={{...props.headedStyle}}></div>
     </div>
   );
 }

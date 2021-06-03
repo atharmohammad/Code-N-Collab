@@ -25,7 +25,7 @@ const c = [
 
 const Comments = (props) => {
   const [comments, setComments] = useState([]);
-
+  
   const onClickHandler = () => {
     let counter = 0;
     let temp = [];
@@ -36,7 +36,7 @@ const Comments = (props) => {
     }
     setComments((x) => [...x, ...temp]);
   };
-
+ 
   return (
     <div
       style={{
@@ -55,9 +55,11 @@ const Comments = (props) => {
           <Button
             onClick={onClickHandler}
             style={{
-              background: "#49cc13c9",
+              background: "#3e2cd4",
+              color:'#fff',
               width: "100px",
               boxShadow: "5px 5px 5px #888888",
+              margin:'5px',
             }}
           >
             More...

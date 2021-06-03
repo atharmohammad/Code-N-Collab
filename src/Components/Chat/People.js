@@ -50,6 +50,7 @@ const People = (props) => {
             }}
           >
             {props.persons.map((person, i) => {
+              if (!person || !person.username) return <></>;
               return (
                 <div
                   className={`${classes.messageContainer} ${classes.justifyStart}`}

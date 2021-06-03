@@ -10,8 +10,8 @@ const Logout = (props) => {
   useEffect(()=>{
    auth.logout();
    history.push('/homepage');
-   window.location.reload();
   },[auth.logout])
+  
   return (
     <div>Logout</div>
   );

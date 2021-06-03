@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 import Chat from "../Components/Chat/ChatTabs";
 import Editor from "../Components/Lockout/Editor.js/LockOutEditor";
@@ -12,6 +12,8 @@ import Toolbar from "../Components/Toolbar/Toolbar";
 import * as TYPES from "../store/Action/action";
 import { useLocation, useHistory } from "react-router-dom";
 import Spinner from "../Components/Spinner/ContestSpinner/ContestSpinner";
+import { AuthContext } from "../context/auth-context";
+
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -24,6 +26,7 @@ const LockOutPage = (props) => {
   const [joined, setJoined] = useState(false);
   const [errorJoin, setErrorJoin] = useState(false);
   const [joinErrorMsg, setJoinErrorMsg] = useState("");
+  const auth = useContext(AuthContext)
 
   const closeSnackBarHandler = () => {
     return history.push({
@@ -34,22 +37,34 @@ const LockOutPage = (props) => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
 
-    if (!location.state) {
+    if (!auth.token ){
       return history.push({
-        pathname: "/chooseName",
-        search: "?room=" + searchParams.get("room"),
+        pathname: "/login",
       });
     }
+    
+    if (!searchParams.get("room") || searchParams.get("room").trim === '') {
+      return history.push({
+        pathname: "/homepage",
+      });
+    }
+    
+    if(!auth.user.CodeforcesHandle){
+      alert('codeforces handle required')
+      return history.push({
+        pathname: "/updateUser",
+      });
+    }
+    
     const user = {
-      Name: location.state.Name,
+      Name: auth.user.CodeforcesHandle,
       RoomId: searchParams.get("room"),
     };
 
     socket.emit("Contest-Join", user, ({ error, contest }) => {
       if (error) {
         setErrorJoin(true);
-        setJoinErrorMsg(error);
-        return console.log("err", error);
+        return setJoinErrorMsg(error);
       } else {
         const updatedContest = contest;
         console.log("updated-contest", updatedContest);

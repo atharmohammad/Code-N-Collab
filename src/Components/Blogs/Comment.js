@@ -4,12 +4,15 @@ import Replies from "./Replies";
 import ReactMarkdown from "react-markdown";
 import SaveCancel from "./SaveCancel";
 import HelperIcons from "./HelperIcons";
+import WriterModal from "./WriterModal";
+import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 
 const Comment = (props) => {
   const divRef = useRef();
   const [showReply, setShowReply] = useState(false);
   const [editComment, setEditComment] = useState(false);
   const [initialComment, setInitialComment] = useState(props.commentData);
+  const [showWriter, setShowWriter] = useState(false);
   const [deleted, setDeleted] = useState(false);
 
   const saveHandler = () => {
@@ -25,7 +28,9 @@ const Comment = (props) => {
     setShowReply((prev) => !prev);
   };
   const deleteHandler = () => {
-    setDeleted(true);
+    if(window.confirm('Are you sure you want to delete this comment')){
+      setDeleted(true);
+    }
   };
 
   if (deleted) {
@@ -50,8 +55,7 @@ const Comment = (props) => {
         }}
       >
         <div style={{ display: "flex" }}>
-          <div>User</div>
-          <div style={{ paddingLeft: "20px" }}>2days ago</div>
+          <UserBlogDescription admin={false} />
         </div>
         {editComment === false ? (
           <div
@@ -59,7 +63,6 @@ const Comment = (props) => {
               background: "#fff",
               fontSize: "18px",
               padding: "15px",
-              zIndex: "2",
             }}
           >
             <pre>
@@ -67,7 +70,7 @@ const Comment = (props) => {
             </pre>
           </div>
         ) : (
-          <div style={{ margin: "2px", zIndex: "2" }}>
+          <div style={{ margin: "2px" }}>
             <textarea
               ref={divRef}
               style={{
@@ -90,7 +93,6 @@ const Comment = (props) => {
           marginTop: "0px",
           background: "#fff",
           borderRadius: "10px",
-          zIndex: "2",
         }}
       >
         <Grid container direction="row" justify="flex-start">
@@ -110,10 +112,14 @@ const Comment = (props) => {
             editHandler={() => setEditComment(true)}
             toggleReplyHandler={toggleReplyHandler}
             deleteHandler={deleteHandler}
+            openWriter={() => setShowWriter(true)}
           />
         </Grid>
       </Grid>
       <div>{showReply ? <Replies commentId={123} /> : null}</div>
+      {showWriter ? (
+        <WriterModal cancelHandler={() => setShowWriter(false)} />
+      ) : null}
     </div>
   );
 };

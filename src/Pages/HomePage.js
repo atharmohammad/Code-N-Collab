@@ -35,7 +35,7 @@ function HomePage() {
   const contestHandler = ()=>{
     const room = uuidv1();
     history.push({
-      pathname:"/chooseName",
+      pathname:"/newContest",
       search:"?room=" + room,
     });
   }

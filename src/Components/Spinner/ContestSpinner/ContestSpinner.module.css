@@ -14,6 +14,7 @@
   align-items: center;
   background-color: black;
   position: absolute;
+  overflow:hidden;
 }
 
 
