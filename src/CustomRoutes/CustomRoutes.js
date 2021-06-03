@@ -16,7 +16,6 @@ import { AuthContext } from "../context/auth-context";
 
 const CustomRoutes = (props) => {
   const auth = useContext(AuthContext);
-  //Do not try to merge routes as react fragment does not work in switch statement
 
   return (
     <>
@@ -29,17 +28,18 @@ const CustomRoutes = (props) => {
         <Route path="/blogs" exact component={BlogPage} />
         <Route path="/blog/:id" exact component={ParticularBlog} />
         {auth.isLoggedIn ? (
-          <Route path="/logout" exact component={Logout} />
+          <Switch>
+            <Route path="/me" exact component={Me} />
+            <Route path="/logout" exact component={Logout} />
+            <Route path="/updateUser" exact component={UpdateUser} />
+            <Redirect to="/homepage" />
+          </Switch>
         ) : (
-          <Route path="/login" exact component={Login} />
-        )}
-        {auth.isLoggedIn ? (
-          <Route path="/updateUser" exact component={UpdateUser} />
-        ) : null}
-        {auth.isLoggedIn ? (
-          <Route path="/me" exact component={Me} />
-        ) : (
-          <Route path="/signup" exact component={SignUp} />
+          <Switch>
+            <Route path="/login" exact component={Login} />
+            <Route path="/signup" exact component={SignUp} />
+            <Redirect to="/homepage" />
+          </Switch>
         )}
         <Redirect to="/homepage" />
       </Switch>

@@ -32,7 +32,7 @@ const App = (props) => {
   }, [login]);
 
   if (!loaded) return <></>;
-  
+
   return (
     <AuthContext.Provider
       value={{ isLoggedIn: !!token, login, logout, user, token, loaded }}
