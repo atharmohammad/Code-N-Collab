@@ -78,8 +78,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#fff",
     borderRadius: "10px",
     fontWeight: "bold",
-    justifyContent: "space-around",
-    padding: "8px 250px 8px 250px",
+    justifyContent: "center",
   },
 }));
 
@@ -99,8 +98,7 @@ const SignIn = (props) => {
 
   useEffect(() => {
     const validateEmail = () => {
-      const mailformat =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const mailformat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (email.toLowerCase().match(mailformat)) setEmailValid(true);
       else setEmailValid(false);
     };
@@ -163,7 +161,13 @@ const SignIn = (props) => {
 
   return !loading ? (
     <>
-      <div style={{ background: "#fff", height: "90vh", marginTop: "10px" }}>
+      <div
+        style={{
+          background: "#fff",
+          minHeight: "100vh",
+          margin: "50px 400px 50px 400px",
+        }}
+      >
         <div
           style={{ position: "fixed", left: "10px", top: "5px", zIndex: "2" }}
         >
@@ -173,21 +177,22 @@ const SignIn = (props) => {
           <div className={classes.paper}>
             <img
               src={Title}
-              style={{ height: "40px", width: "40%" }}
+              style={{ height: "50px", width: "60%" }}
               alt="Code-N-Collab"
             />
             <img
               src={Icon}
-              style={{ height: "8%", width: "8%", marginTop: "10px" }}
-              alt="Login"
+              style={{ height: "10%", width: "15%", marginTop: "10px" }}
+              alt="Signup"
             />
             <Typography
               component="h1"
               variant="h5"
               style={{ color: "black", marginTop: "5px" }}
             >
-              "SignUp"
+              SignUp
             </Typography>
+
             <form className={classes.form} noValidate onSubmit={submitHandler}>
               <div
                 style={{
@@ -303,11 +308,17 @@ const SignIn = (props) => {
                 variant="contained"
                 className={classes.submit}
               >
-                "SignUp"
+                SignUp
               </Button>
 
               <>
-                <div style={{ textAlign: "center", fontWeight: "bold" }}>
+                <div
+                  style={{
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    marginBottom: "10px",
+                  }}
+                >
                   OR
                 </div>
                 <Button
@@ -318,7 +329,7 @@ const SignIn = (props) => {
                 >
                   <img
                     src={Gmail}
-                    style={{ height: "20%", width: "15%" }}
+                    style={{ height: "20%", width: "10%", marginRight: "10px" }}
                     alt="singup via gmail"
                   />
                   {"   "}Connect with Google

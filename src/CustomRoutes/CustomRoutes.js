@@ -43,7 +43,6 @@ const CustomRoutes = (props) => {
             <Redirect to="/homepage" />
           </Switch>
         )}
-        <Redirect to="/homepage" />
       </Switch>
     </>
   );
