@@ -70,7 +70,13 @@ const Profile = (props) => {
                   <EditIcon style={{ cursor: "pointer" }} />
                 </IconButton>
               </Tooltip>
-              <Tooltip title="share">
+              <Tooltip
+                title="share"
+                onClick={() => {
+                  navigator.clipboard.writeText("dsfsd");
+                  return alert("copied to clipBoard");
+                }}
+              >
                 <IconButton>
                   <ShareIcon style={{ cursor: "pointer" }} />
                 </IconButton>
