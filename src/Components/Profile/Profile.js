@@ -15,26 +15,35 @@ import CodechefIcon from "../../Assets/images/codechef.png";
 import AtcoderIcon from "../../Assets/images/atcoder.png";
 import Stars from "../Stars/Stars";
 import Nav from "../Nav/Nav";
-import Back from "../Back/Back"
+import Back from "../Back/Back";
 
 const Profile = (props) => {
   const history = useHistory();
-  const backHandler = ()=>{
-    history.push("/homepage")
-  }
+  const backHandler = () => {
+    history.push("/homepage");
+  };
   return (
     <div
       style={{
         minHeight: "100vh",
         background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
-        paddingBottom:'50px'
+        paddingBottom: "50px",
+        paddingTop:'20px',
+        boxSizing:'border-box',
       }}
     >
       <Stars />
-      <Back clicked={backHandler}/>
+      <div style={{position:'absolute',}}>
+      <Back clicked={backHandler} />
+      </div>
       <Nav />
       <div
-        style={{ display: "flex", justifyContent: "center" , marginLeft:'30px' }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginLeft: "30px",
+          boxSizing: "border-box",
+        }}
       >
         <img src={HomePageImg} style={{ height: "70px" }} alt="code-n-collab" />
       </div>
@@ -56,6 +65,7 @@ const Profile = (props) => {
             flexDirection: "column",
             padding: "5px 40px 5px 40px",
             background: "#fff",
+            boxSizing: "border-box",
             borderRadius: "20px",
           }}
         >
@@ -78,6 +88,7 @@ const Profile = (props) => {
                   display: "flex",
                   alignItems: "flex-end",
                   margin: "10px",
+                  boxSizing: "border-box",
                 }}
               >
                 <div>Adnan Shamsi</div>
@@ -130,6 +141,7 @@ const Profile = (props) => {
             style={{
               display: "flex",
               justifyContent: "space-around",
+              flexWrap: "wrap",
             }}
           >
             <a
@@ -137,6 +149,7 @@ const Profile = (props) => {
               style={{
                 display: "inline-block",
                 margin: "10px",
+                boxSizing: "border-box",
               }}
               href={""}
               target="_blank"
@@ -144,7 +157,12 @@ const Profile = (props) => {
               <img
                 src={CodeforcesIcon}
                 alt="Codeforces"
-                style={{ height: "50px", marginTop: "10px", cursor: "pointer" }}
+                style={{
+                  height: "50px",
+                  marginTop: "10px",
+                  cursor: "pointer",
+                  boxSizing: "border-box",
+                }}
               />
             </a>
             <a
@@ -152,6 +170,7 @@ const Profile = (props) => {
               style={{
                 display: "inline-block",
                 margin: "10px",
+                boxSizing: "border-box",
               }}
               href={""}
               target="_blank"
@@ -159,7 +178,12 @@ const Profile = (props) => {
               <img
                 src={CodechefIcon}
                 alt="Codechef"
-                style={{ height: "50px", marginTop: "10px", cursor: "pointer" }}
+                style={{
+                  height: "50px",
+                  marginTop: "10px",
+                  cursor: "pointer",
+                  boxSizing: "border-box",
+                }}
               />
             </a>
             <a
@@ -167,6 +191,7 @@ const Profile = (props) => {
               style={{
                 display: "inline-block",
                 margin: "10px",
+                boxSizing: "border-box",
               }}
               href={""}
               target="_blank"
@@ -174,7 +199,12 @@ const Profile = (props) => {
               <img
                 src={AtcoderIcon}
                 alt="Atcoder"
-                style={{ height: "50px", marginTop: "10px", cursor: "pointer" }}
+                style={{
+                  height: "50px",
+                  marginTop: "10px",
+                  cursor: "pointer",
+                  boxSizing: "border-box",
+                }}
               />
             </a>
             <a
@@ -182,6 +212,7 @@ const Profile = (props) => {
               style={{
                 display: "inline-block",
                 margin: "10px",
+                boxSizing: "border-box",
               }}
               target="_blank"
               href={null}
@@ -189,7 +220,12 @@ const Profile = (props) => {
               <img
                 src={LinkedInIcon}
                 alt="Linkedin"
-                style={{ height: "50px", marginTop: "10px", cursor: "pointer" }}
+                style={{
+                  height: "50px",
+                  marginTop: "10px",
+                  cursor: "pointer",
+                  boxSizing: "border-box",
+                }}
               />
             </a>
             <a
@@ -197,6 +233,7 @@ const Profile = (props) => {
               style={{
                 display: "inline-block",
                 margin: "10px",
+                boxSizing: "border-box",
               }}
               href={null}
               target="_blank"
@@ -204,7 +241,12 @@ const Profile = (props) => {
               <img
                 src={GithubIcon}
                 alt="Github"
-                style={{ height: "50px", marginTop: "10px", cursor: "pointer" }}
+                style={{
+                  height: "50px",
+                  marginTop: "10px",
+                  cursor: "pointer",
+                  boxSizing: "border-box",
+                }}
               />
             </a>
           </div>
