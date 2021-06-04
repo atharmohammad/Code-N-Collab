@@ -116,8 +116,20 @@ export default function About(props) {
                   padding: "10px",
                 }}
               >
-                <Admin Name="Mohd Athar" />
-                <Admin Name="Adnan Shamsi" />
+                <Admin
+                  Name="Mohd Athar"
+                  linkedIn="https://www.linkedin.com/in/athar-mohammad-34068a157/"
+                  github='https://github.com/atharmohammad'
+                  codeForces="https://codeforces.com/profile/KickAss"
+                  portFolio = "https://atharmohammad.github.io/Portfolio/"
+                  />
+                <Admin
+                  Name="Adnan Shamsi"
+                  linkedIn="https://www.linkedin.com/in/adnan-shamsi-5830301b3/"
+                  github='https://github.com/Adnan-shamsi'
+                  codeForces='https://codeforces.com/profile/AdnanShamsi'
+                  portFolio ={null}
+                />
               </div>
             </div>
           </div>

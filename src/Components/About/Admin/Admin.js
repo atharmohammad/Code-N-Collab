@@ -30,7 +30,7 @@ export default function Admin(props) {
     <div className={classes.Admin}>
       <div style={{ display: "flex", height: "10vh" }}>
         <img
-          src={Athar}
+          src={props.Name === "Mohd Athar" ?Athar:Adnan}
           style={{ height: "80%", borderRadius: "50%", marginRight: "10px" }}
         />
         <p className={classes.Athar}>{props.Name}</p>
@@ -50,14 +50,14 @@ export default function Admin(props) {
           title="linkedIn"
           style={{ width: "50%" }}
           target='_blank'
-          href="https://www.linkedin.com/in/athar-mohammad-34068a157/"
+          href={props.linkedIn}
         >
           <img src={Linkedin} alt="Linkedin" style={{ height: "80%" }} />
         </a>
         <a
           title="Github"
           style={{ width: "50%" }}
-          href="https://github.com/atharmohammad"
+          href={props.github}
           target='_blank'
         >
           <img src={Github} alt="Github" style={{ height: "80%" }} />
@@ -65,7 +65,7 @@ export default function Admin(props) {
         <a
           title="Codeforces"
           style={{ width: "50%" }}
-          href="https://codeforces.com/profile/KickAss"
+          href={props.codeForces}
           target='_blank'
         >
           <img src={Codeforces} alt="Codeforces" style={{ height: "80%" }} />
@@ -73,7 +73,7 @@ export default function Admin(props) {
         <a
           title="My Portfolio"
           style={{ width: "50%" }}
-          href="https://atharmohammad.github.io/Portfolio/"
+          href={props.portFolio}
           target='_blank'
         >
           <img
