@@ -47,10 +47,10 @@ function HomePage() {
   };
 
   const profileHandler = () => {
-    if (!auth.token) {
+    if (auth.token) {
       return history.push("/me");
     }
-    history.push("/login");
+  history.push({pathname:"/homepage",state:{error:'plz login'}});
   };
 
   const contestHandler = () => {
