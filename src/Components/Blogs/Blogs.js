@@ -17,12 +17,11 @@ function Blogs(props) {
   const onClickHandler = (blogId) => {
     return history.push("/blog/" + blogId);
   };
-  
-  const deleteHandler = () => {
+
+  const deleteHandler = (blogId) => {
     if (window.confirm("Are you sure you want to delete this Blog")) {
       axios.delete("/blogs/delete/" + blogId)
           .then(res=>{
-            props.deleteBlog();
             console.log("deleted");
           }).catch(e=>alert("delete error"));
     }
@@ -71,7 +70,7 @@ function Blogs(props) {
             <HelperIcons
               type="blog"
               allBlogPage={true}
-              deleteHandler={deleteHandler}
+              deleteHandler={()=>deleteHandler(item._id)}
             />
           </Grid>
         </Grid>
