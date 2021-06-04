@@ -1,4 +1,4 @@
-import React, { useEffect,useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import HomePageImg from "../Assets/images/HomePageImg.png";
 import { useHistory, useLocation } from "react-router-dom";
 import classes from "../Assets/css/wrapstyle.module.css";
@@ -8,18 +8,31 @@ import Stars from "../Components/Stars/Stars";
 import { v1 as uuidv1 } from "uuid";
 import Nav from "../Components/Nav/Nav";
 import Back from "../Components/Back/Back";
-import {AuthContext} from "../context/auth-context"
-
+import axios from "../Axios/axios";
+import { AuthContext } from "../context/auth-context";
 function HomePage() {
   const history = useHistory();
   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
   const auth = useContext(AuthContext);
-  
-  useEffect(() => {
-    if (location.state) {
-      alert(location.state.error);
+
+  useEffect(async () => {
+    if (searchParams.get("code")) {
+      const code = searchParams.get("code");
+
+      let data;
+
+      try {
+        data = await axios.post("/Oauth/authenticated", { code: code });
+        auth.login(data.data.user, data.data.token);
+      } catch (e) {
+        console.log("error", e);
+      }
     }
-  }, [location.state]);
+    // if(location.state){
+    //   alert(location.state.error);
+    // }
+  }, []);
 
   const roomHandler = () => {
     history.push("/rooms");
@@ -34,10 +47,10 @@ function HomePage() {
   };
 
   const profileHandler = () => {
-    if(!auth.token){
-    return history.push("/me")
+    if (!auth.token) {
+      return history.push("/me");
     }
-    history.push("/login") 
+    history.push("/login");
   };
 
   const contestHandler = () => {

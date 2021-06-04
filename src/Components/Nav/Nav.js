@@ -1,17 +1,20 @@
 import { useContext } from "react";
 import NavItem from "./NavItems";
 import "./NavItem.css";
-import { useHistory } from "react-router-dom";
+import { useHistory , Route } from "react-router-dom";
 import { AuthContext } from "../../context/auth-context";
+import axios from "../../Axios/axios"
 
 export default function () {
   const history = useHistory();
   const auth = useContext(AuthContext);
-  const signUpHandler = () => {
-    history.push("/signup");
-  };
-  const loginHandler = () => {
-    history.push("/login");
+  const loginHandler = async() => {
+    try{
+      const req = await axios.get("/Oauth/googleOauth");
+      window.location.href = req.data
+    }catch(e){
+      console.log(e);
+    }
   };
   const logoutHandler = () => {
     history.push("/logout");
@@ -30,11 +33,9 @@ export default function () {
       {auth.isLoggedIn === false ? (
         <>
           <NavItem Name="login" clicked={loginHandler} />
-          <NavItem Name="sign-up" clicked={signUpHandler} />
         </>
       ) : (<>
         <NavItem Name="logout" clicked={logoutHandler} />
-        <NavItem Name="updateUser" clicked={updateUserHandler} />
       </>)}
       <NavItem Name="about" clicked={aboutHandler} />
     </div>
