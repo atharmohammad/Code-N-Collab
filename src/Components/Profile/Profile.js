@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 
 import ProfileFeild from "./ProfileFeild";
 import Amongus1 from "../../Assets/images/amongus1.png";
+import HomePageImg from "../../Assets/images/HomePageImg.png";
+
 import EditIcon from "@material-ui/icons/Edit";
 import ShareIcon from "@material-ui/icons/Share";
 import CodeforcesIcon from "../../Assets/images/Codeforces.png";
@@ -11,22 +13,35 @@ import LinkedInIcon from "../../Assets/images/Linkedin.png";
 import GithubIcon from "../../Assets/images/Github.png";
 import CodechefIcon from "../../Assets/images/codechef.png";
 import AtcoderIcon from "../../Assets/images/atcoder.png";
+import Stars from "../Stars/Stars";
 import Nav from "../Nav/Nav";
+import Back from "../Back/Back"
 
 const Profile = (props) => {
   const history = useHistory();
   return (
-    <div style={{ height: "100vh" }}>
+    <div
+      style={{
+        height: "100vh",
+        background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
+      }}
+    >
+      <Stars />
+      <Nav />
+      <div
+        style={{ display: "flex", marginTop: "20px", justifyContent: "center" }}
+      >
+        <img src={HomePageImg} style={{ height: "80px" }} alt="code-n-collab" />
+      </div>
       <div
         style={{
           width: "80%",
           margin: "auto",
           marginTop: "50px",
-          padding: "50px",
+          padding: "30px",
           boxSizing: "border-box",
-          height: "80%",
           fontSize: "25px",
-          border: "20px double grey",
+          border: "10px double grey",
           borderRadius: "20px",
         }}
       >
@@ -34,7 +49,9 @@ const Profile = (props) => {
           style={{
             display: "flex",
             flexDirection: "column",
-            padding: "5px",
+            padding: "5px 40px 5px 40px",
+            background: "#fff",
+            borderRadius: "20px",
           }}
         >
           <div
@@ -42,7 +59,6 @@ const Profile = (props) => {
               display: "flex",
               borderBottom: "2px solid grey",
               width: "100%",
-              margin: "auto",
               justifyContent: "space-between",
             }}
           >
@@ -93,7 +109,6 @@ const Profile = (props) => {
             style={{
               width: "90%",
               margin: "auto",
-              marginTop: "20px",
             }}
           >
             <ProfileFeild title="Designation" value="Web Developer" />
@@ -124,7 +139,7 @@ const Profile = (props) => {
               <img
                 src={CodeforcesIcon}
                 alt="Codeforces"
-                style={{ height: "70px" }}
+                style={{ height: "50px", marginTop: "10px", cursor: "pointer" }}
               />
             </a>
             <a
@@ -139,7 +154,7 @@ const Profile = (props) => {
               <img
                 src={CodechefIcon}
                 alt="Codechef"
-                style={{ height: "70px" }}
+                style={{ height: "50px", marginTop: "10px", cursor: "pointer" }}
               />
             </a>
             <a
@@ -151,7 +166,11 @@ const Profile = (props) => {
               href={""}
               target="_blank"
             >
-              <img src={AtcoderIcon} alt="Atcoder" style={{ height: "70px" }} />
+              <img
+                src={AtcoderIcon}
+                alt="Atcoder"
+                style={{ height: "50px", marginTop: "10px", cursor: "pointer" }}
+              />
             </a>
             <a
               title="linkedIn"
@@ -165,7 +184,7 @@ const Profile = (props) => {
               <img
                 src={LinkedInIcon}
                 alt="Linkedin"
-                style={{ height: "70px" }}
+                style={{ height: "50px", marginTop: "10px", cursor: "pointer" }}
               />
             </a>
             <a
@@ -177,7 +196,11 @@ const Profile = (props) => {
               href={null}
               target="_blank"
             >
-              <img src={GithubIcon} alt="Github" style={{ height: "70px" }} />
+              <img
+                src={GithubIcon}
+                alt="Github"
+                style={{ height: "50px", marginTop: "10px", cursor: "pointer" }}
+              />
             </a>
           </div>
         </div>
