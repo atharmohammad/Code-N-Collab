@@ -25,7 +25,7 @@ const c = [
 
 const Comments = (props) => {
   const [comments, setComments] = useState([]);
-  
+
   const onClickHandler = () => {
     let counter = 0;
     let temp = [];
@@ -36,7 +36,7 @@ const Comments = (props) => {
     }
     setComments((x) => [...x, ...temp]);
   };
- 
+
   return (
     <div
       style={{
@@ -47,7 +47,7 @@ const Comments = (props) => {
     >
       <div>
       {comments.map((item, i) => (
-        <Comment commentId={123} commentData={"comment "+ i} />
+        <Comment comment={item} />
       ))}
       </div>
       {c.length !== comments.length ? (

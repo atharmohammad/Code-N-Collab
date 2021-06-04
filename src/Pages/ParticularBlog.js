@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Grid, Box, Button, Typography, Avatar } from "@material-ui/core";
 import CurrentBlog from "../Components/Blogs/CurrentBlog";
 import Comments from "../Components/Blogs/Comments";
@@ -7,11 +7,7 @@ import * as TYPES from "../store/Action/action";
 import classes from "../Assets/css/wrapstyle.module.css";
 import Stars from "../Components/Stars/Stars";
 import BlogHead from "../Components/Blogs/BlogHead";
-
 const ParticularBlog = (props) => {
-  useEffect(() => {
-    props.resetShowComment();
-  }, []);
 
   return (
     <>
@@ -30,16 +26,7 @@ const ParticularBlog = (props) => {
             }}
           >
             <CurrentBlog />
-            <div
-              style={{
-                marginTop: "10px",
-                background: "grey",
-                boxShadow: "5px 5px 20px black",
-                borderRadius: "10px",
-              }}
-            >
-              {props.showComment ? <Comments /> : null}
-            </div>
+
           </div>
         </div>
       </div>
@@ -47,16 +34,5 @@ const ParticularBlog = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    showComment: state.tools.showComment,
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    resetShowComment: () => dispatch({ type: TYPES.RESET_SHOW_COMMENTS }),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ParticularBlog);
+export default ParticularBlog;

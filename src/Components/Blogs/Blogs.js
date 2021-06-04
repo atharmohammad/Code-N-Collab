@@ -45,36 +45,40 @@ function Blogs(props) {
   if (blogs.length >= 1) {
     allBlogs = blogs.map((item) => {
       return (
-        <Grid
-          key={item._id}
-          style={{
-            border: "2px solid #e2e2e2",
-            padding: "1vh",
-            minHeight: "16vh",
-            width: "100vh",
-            marginTop: "3vh",
-            backgroundColor: "#fff",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          <UserBlogDescription admin={item} />
+        <div style={{border:"10px double #fff" ,
+        padding:"10px",
+        marginTop:"20px",
+        borderRadius: "20px",}}>
           <Grid
-            style={{ marginTop: "1vh" }}
-            onClick={() => onClickHandler(item._id)}
+            key={item._id}
+            style={{
+              border: "2px double #e2e2e2",
+              padding: "1vh",
+              minHeight: "16vh",
+              width: "100vh",
+              backgroundColor: "#fff",
+              borderRadius: "20px",
+              cursor: "pointer",
+            }}
           >
-            <Typography>
-              <ReactMarkdown>{item.Body}</ReactMarkdown>
-            </Typography>
+            <UserBlogDescription admin={item} />
+            <Grid
+              style={{ marginTop: "1vh" }}
+              onClick={() => onClickHandler(item._id)}
+            >
+              <Typography>
+                <ReactMarkdown>{item.Body}</ReactMarkdown>
+              </Typography>
+            </Grid>
+            <Grid container direction="row" justify="flex-end">
+              <HelperIcons
+                type="blog"
+                allBlogPage={true}
+                deleteHandler={()=>deleteHandler(item._id)}
+              />
+            </Grid>
           </Grid>
-          <Grid container direction="row" justify="flex-end">
-            <HelperIcons
-              type="blog"
-              allBlogPage={true}
-              deleteHandler={()=>deleteHandler(item._id)}
-            />
-          </Grid>
-        </Grid>
+        </div>
       );
     });
   }

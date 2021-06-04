@@ -4,15 +4,24 @@ import { useHistory } from "react-router-dom";
 import SendIcon from "@material-ui/icons/Send";
 import CancelIcon from "@material-ui/icons/Cancel";
 import classes from './blogs.module.css'
+import axios from "../../Axios/axios"
 
 const WriterModal = (props) => {
-  const { cancelHandler, submitHandler } = { ...props };
+  const { cancelHandler, parentId} = { ...props };
+
+  const submitHandler = ()=>{
+    axios.post(`/comment/createComment/${parentId}`)
+      .then(res=>{
+        console.log("comment posted")
+      }).catch(e=>console.log(e));
+  }
+
   return (
     <>
       <Grid
         onClick={props.cancelHandler}
         className={classes.backdrop}
-        
+
       ></Grid>
       <Grid
       className={classes.modal}
@@ -29,7 +38,7 @@ const WriterModal = (props) => {
                 <CancelIcon style={{ cursor: "pointer", color: "#fff" }} />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Post">
+            <Tooltip title="Post" onClick={submitHandler}>
               <IconButton>
                 <SendIcon style={{ cursor: "pointer", color: "#fff" }} />
               </IconButton>
