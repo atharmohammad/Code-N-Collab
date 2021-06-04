@@ -6,6 +6,7 @@ import SaveCancel from "./SaveCancel";
 import HelperIcons from "./HelperIcons";
 import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
+import axios from "../../Axios/axios";
 
 const Comment = (props) => {
   const divRef = useRef();
@@ -29,6 +30,7 @@ const Comment = (props) => {
   };
   const deleteHandler = () => {
     if(window.confirm('Are you sure you want to delete this comment')){
+      axios.delete("/comment/deleteComment/")
       setDeleted(true);
     }
   };

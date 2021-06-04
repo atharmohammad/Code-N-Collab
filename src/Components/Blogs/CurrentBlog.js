@@ -9,6 +9,7 @@ import TextEditor from "../TextEditor/TextEditor";
 import BlogSpinner from "../Spinner/BlogSpinner";
 import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
+import Comments from "./Comments"
 
 import * as TYPES from "../../store/Action/action";
 
@@ -17,6 +18,7 @@ const CurrentBlog = (props) => {
   const [editBlog, setEditBlog] = useState(false);
   const [showWriter, setShowWriter] = useState(false);
   const [initialBlog, setInitialBlog] = useState(null);
+  const [showComment,setShowComment] = useState(false);
   const id = window.location.pathname.split("/")[2];
 
   useEffect(async () => {
@@ -26,7 +28,7 @@ const CurrentBlog = (props) => {
     } catch (e) {
       console.log(e);
     }
-  }, [initialBlog]);
+  }, []);
 
   if (!initialBlog) {
     return <BlogSpinner />;
@@ -37,6 +39,20 @@ const CurrentBlog = (props) => {
       setDeleted(true);
     }
   };
+
+  const showCommentHandler = async()=>{
+    if(!showComment){
+      try{
+        const data = await axios.get(`/comment/getComments/${id}`);
+        console.log(data);
+        setShowComment(true)
+      }catch(e){
+        console.log(e)
+      }
+    }else{
+      setShowComment(false);
+    }
+  }
 
   return (
     <>
@@ -90,7 +106,7 @@ const CurrentBlog = (props) => {
           >
             <HelperIcons
               type="blog"
-              showCommentHandler={props.showComment}
+              showCommentHandler={showCommentHandler}
               showEditBtn={!editBlog}
               editHandler={() => setEditBlog(true)}
               deleteHandler={deleteHandler}
@@ -102,17 +118,27 @@ const CurrentBlog = (props) => {
           <WriterModal cancelHandler={() => setShowWriter(false)} />
         ) : null}
       </div>
+      <div
+        style={{
+          marginTop: "10px",
+          background: "grey",
+          boxShadow: "5px 5px 20px black",
+          borderRadius: "10px",
+        }}
+      >
+        {showComment ? <Comments /> : null}
+      </div>
     </>
   );
 };
+
+
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
     blogPosted: () => {
       dispatch({ type: TYPES.BLOGPOSTED });
-    },
-    showComment: () => {
-      dispatch({ type: TYPES.SHOW_COMMENTS });
     },
   };
 };
