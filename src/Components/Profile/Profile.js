@@ -19,25 +19,30 @@ import Back from "../Back/Back"
 
 const Profile = (props) => {
   const history = useHistory();
+  const backHandler = ()=>{
+    history.push("/homepage")
+  }
   return (
     <div
       style={{
-        height: "100vh",
+        minHeight: "100vh",
         background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
+        paddingBottom:'50px'
       }}
     >
       <Stars />
+      <Back clicked={backHandler}/>
       <Nav />
       <div
-        style={{ display: "flex", marginTop: "20px", justifyContent: "center" }}
+        style={{ display: "flex", justifyContent: "center" , marginLeft:'30px' }}
       >
-        <img src={HomePageImg} style={{ height: "80px" }} alt="code-n-collab" />
+        <img src={HomePageImg} style={{ height: "70px" }} alt="code-n-collab" />
       </div>
       <div
         style={{
           width: "80%",
           margin: "auto",
-          marginTop: "50px",
+          marginTop: "35px",
           padding: "30px",
           boxSizing: "border-box",
           fontSize: "25px",

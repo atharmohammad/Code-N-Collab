@@ -1226,7 +1226,7 @@
     2272px 4744px var(--base), 6028px 4378px var(--base), 689px 541px var(--base), 4814px 1745px var(--base),
     5777px 658px var(--base), 6421px 1232px var(--base), 3330px 4060px var(--base), 1958px 285px var(--base),
     1774px 5493px var(--base), 2656px 1859px var(--base);
-  animation: animStar 30s linear infinite;
+  animation: animStar 28s linear infinite;
 }
 .stars:after {
   content: " ";
