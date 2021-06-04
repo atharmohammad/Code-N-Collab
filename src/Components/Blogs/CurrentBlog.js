@@ -3,7 +3,7 @@ import { Grid, Tooltip, IconButton } from "@material-ui/core";
 import { connect } from "react-redux";
 import ReactMarkdown from "react-markdown";
 import HelperIcons from "./HelperIcons";
-
+import {useHistory} from "react-router-dom"
 import axios from "../../Axios/axios";
 import TextEditor from "../TextEditor/TextEditor";
 import BlogSpinner from "../Spinner/BlogSpinner";
@@ -20,7 +20,8 @@ const CurrentBlog = (props) => {
   const [initialBlog, setInitialBlog] = useState(null);
   const [showComment,setShowComment] = useState(false);
   const id = window.location.pathname.split("/")[2];
-
+  const history = useHistory();
+  
   useEffect(async () => {
     try {
       const currBlog = await axios.get(`blogs/currentBlog/${id}`);
@@ -35,8 +36,11 @@ const CurrentBlog = (props) => {
   }
 
   const deleteHandler = async() => {
-    if (window.confirm("Are you sure you want to delete this Blog")) {
-
+    if (window.confirm("Are you sure you want to delete this Blog ?")) {
+      axios.delete(`/blogs/delete/${id}`)
+        .then(res=>{
+          history.push("/blogs");
+        }).catch(e=>console.log(e));
     }
   };
 
@@ -45,9 +49,9 @@ const CurrentBlog = (props) => {
       try{
         const data = await axios.get(`/comment/getComments/${id}`);
         console.log(data);
-        setShowComment(true)
+        setShowComment(true);
       }catch(e){
-        console.log(e)
+        console.log(e);
       }
     }else{
       setShowComment(false);
@@ -115,7 +119,7 @@ const CurrentBlog = (props) => {
           </Grid>
         </div>
         {showWriter ? (
-          <WriterModal cancelHandler={() => setShowWriter(false)} />
+          <WriterModal id={id} cancelHandler={() => setShowWriter(false)} />
         ) : null}
       </div>
       <div
