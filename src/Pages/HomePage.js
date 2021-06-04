@@ -8,16 +8,23 @@ import Stars from "../Components/Stars/Stars"
 import { v1 as uuidv1 } from "uuid";
 import Nav from "../Components/Nav/Nav"
 import Back from "../Components/Back/Back"
+import axios from "../Axios/axios"
 
 
 function HomePage() {
   const history = useHistory();
   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
-  useEffect(()=>{
-    if(location.state){
-      alert(location.state.error);
+  useEffect(async()=>{
+    if(searchParams.get("code")){
+      const code = searchParams.get("code");
+      const data = await axios.post("/Oauth/authenticated",{code:code});
+      console.log(data)
     }
+    // if(location.state){
+    //   alert(location.state.error);
+    // }
   },[])
 
   const roomHandler = () => {
