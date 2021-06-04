@@ -12,17 +12,23 @@ const Comment = (props) => {
   const divRef = useRef();
   const [showReply, setShowReply] = useState(false);
   const [editComment, setEditComment] = useState(false);
-  const [initialComment, setInitialComment] = useState(props.commentData);
+  const [initialComment, setInitialComment] = useState(props.comment.Body);
   const [showWriter, setShowWriter] = useState(false);
   const [deleted, setDeleted] = useState(false);
+  const id = props.comment._id;
 
   const saveHandler = () => {
     const data = divRef.current.value.trim();
     if (!data) {
       return alert("cant be empty");
     }
-    setInitialComment(data);
-    setEditComment(false);
+    axios.patch("/comment/updateComment/" + id)
+      .then(res=>{
+        setInitialComment(data)
+        setEditComment(false);
+      })
+      .catch(e=>console.log(e));
+
   };
 
   const toggleReplyHandler = () => {
@@ -30,8 +36,11 @@ const Comment = (props) => {
   };
   const deleteHandler = () => {
     if(window.confirm('Are you sure you want to delete this comment')){
-      axios.delete("/comment/deleteComment/")
-      setDeleted(true);
+        axios.delete("/comment/deleteComment/" + id)
+          .then(res=>{
+            setDeleted(true);
+          }).catch(e=>console.log(e));
+
     }
   };
 

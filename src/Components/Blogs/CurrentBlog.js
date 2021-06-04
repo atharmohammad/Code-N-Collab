@@ -34,9 +34,9 @@ const CurrentBlog = (props) => {
     return <BlogSpinner />;
   }
 
-  const deleteHandler = () => {
+  const deleteHandler = async() => {
     if (window.confirm("Are you sure you want to delete this Blog")) {
-      setDeleted(true);
+
     }
   };
 
