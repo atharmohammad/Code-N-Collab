@@ -22,6 +22,7 @@ function Blogs(props) {
     if (window.confirm("Are you sure you want to delete this Blog")) {
       axios.delete("/blogs/delete/" + blogId)
           .then(res=>{
+            props.deleteBlog();
             console.log("deleted");
           }).catch(e=>alert("delete error"));
     }
