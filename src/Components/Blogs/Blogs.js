@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import HelperIcons from "./HelperIcons";
+import {BLOGPOSTED} from "../../store/Action/action";
 
 function Blogs(props) {
   const [blogs, setBlogs] = useState([]);
@@ -21,6 +22,7 @@ function Blogs(props) {
     if (window.confirm("Are you sure you want to delete this Blog")) {
       axios.delete("/blogs/delete/" + blogId)
           .then(res=>{
+            props.deleteBlog();
             console.log("deleted");
           }).catch(e=>alert("delete error"));
     }
@@ -85,4 +87,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Blogs);
+const mapDispatchToProps= (dispatch) =>{
+  return{
+    deleteBlog : ()=>{dispatch({type:BLOGPOSTED})}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Blogs);
