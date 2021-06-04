@@ -8,9 +8,12 @@ import Select from "@material-ui/core/Select";
 
 const CountrySelect = (props) => {
   return (
-    <FormControl style={{ width: props.width ,marginTop:'20px'}}>
+    <FormControl style={{ width: props.width, marginTop: "20px" }}>
       <InputLabel>Country</InputLabel>
-      <Select onChange={props.changeHandler} value={props.country}>
+      <Select
+        onChange={(e) => props.changeHandler(e.target.value)}
+        value={props.country}
+      >
         {countries.map((country, idx) => (
           <MenuItem value={country.id}>{country.label}</MenuItem>
         ))}

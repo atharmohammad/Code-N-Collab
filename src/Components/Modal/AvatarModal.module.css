@@ -13,8 +13,8 @@
   position: fixed;
   z-index: 200;
   top: 25%;
-  left: 25%;
-  width: 50%;
+  left: 30%;
+  width: 40%;
   height: 50%;
   background: white;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
@@ -27,6 +27,7 @@
 .AvatarGridone {
   height: 96%;
   margin: 1px;
+  overflow: auto;
   width: 100%;
   resize: none;
   border-radius: 10px;
