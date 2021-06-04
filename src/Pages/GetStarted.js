@@ -2,9 +2,10 @@ import React from "react";
 import Title from "../Assets/images/Title.png";
 import GetStartedImg from "../Assets/images/GetStarted.png";
 import { useHistory } from "react-router-dom";
-import classes from "../Assets/css/style.module.css";
-
+import Stars from "../Components/Stars/Stars"
 import { Grid, Box } from "@material-ui/core";
+import classes from "../Assets/css/wrapstyle.module.css";
+
 
 function GetStarted() {
   const history = useHistory();
@@ -14,8 +15,10 @@ function GetStarted() {
   };
 
   return (
-    <div className={classes.wrap}>
-      <div className={classes.stars} />
+    <div style={{height:"100vh",
+        overflow:"hidden",
+        background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)"}}>
+      <Stars color="#fff"/>
       <Grid
         container
         direction="column"
@@ -27,7 +30,7 @@ function GetStarted() {
 
         <Box
           style={{
-            height: "6vh",
+            minHeight: "6vh",
             width: "25vh",
             color: "#fff",
             margin: "10vh auto",

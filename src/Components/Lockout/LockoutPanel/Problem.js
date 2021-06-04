@@ -1,18 +1,19 @@
 import { Grid } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import classes from "./lockout.module.css";
 import { connect } from "react-redux";
 import {useLocation} from "react-router-dom";
+import {AuthContext} from '../../../context/auth-context'
 
 const Problem = (props) => {
 
   const location = useLocation();
-
+  const auth = useContext(AuthContext)
   const problems = props.contest.Problems.map((problem) => {
     let bgcolor = "#3959d4";
 
     if(problem.solved){
-      if(problem.author === location.state.Name){
+      if(problem.author === auth.user.CodeforcesHandle){
         bgcolor = "green"
       }else{
         bgcolor = "#f00505"

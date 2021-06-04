@@ -1,0 +1,5 @@
+.wrap {
+  height:100vh;
+  background: radial-gradient(ellipse, #1b2735 0%, #090a0f 100%);
+  color: black;
+}

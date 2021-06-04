@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef,useContext } from "react";
 import { Typography, Grid } from "@material-ui/core";
 import { v4 as uuidv4 } from "uuid";
 import ScrollToBottom from "react-scroll-to-bottom";
 import Message from "./Message";
 import { useLocation } from "react-router-dom";
 import classes from "./Message.module.css";
+import {AuthContext} from '../../context/auth-context'
+
 
 const Chat = (props) => {
   const socket = props.socket;
@@ -12,11 +14,11 @@ const Chat = (props) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const [name,setName] = useState("");
-
+  const auth = useContext(AuthContext)
 
   useEffect(()=>{
     if(location.pathname === "/newContest"){
-      setName(location.state.Name);
+      setName(auth.user.CodeforcesHandle);
     }else{
       setName(searchParams.get("name"));
     }
@@ -26,10 +28,11 @@ const Chat = (props) => {
     e.preventDefault();
     const finalValue = inputRef.current.value.trim();
     if (finalValue){
+      console.log('asa',auth.user)
       if(location.pathname === "/newContest"){
         socket.emit("Contest-Msg",{message:finalValue,
                       room:searchParams.get("room"),
-                      name:location.state.Name});
+                      name:auth.user.CodeforcesHandle});
       }else{
         socket.emit("clientMsg", { message: finalValue });
       }

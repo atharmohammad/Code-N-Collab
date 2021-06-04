@@ -6,12 +6,23 @@ const initialState = {
   contest: null,
   ProblemTags: [],
   questionLoading: false,
+  showContestEndedModal : false,
+  contestEnded: false,
 };
 
 const reducer = (state = initialState, action) => {
   console.log(action.type);
   switch (action.type) {
-    case TYPE.SET_QUESTION_LOADING:
+    case TYPE.CONTEST_ENDED:
+      return{...state, contestEnded: action.data}
+    
+      case TYPE.SHOW_CONTEST_ENDED_MODAL:
+      return { ...state, showContestEndedModal: true};
+    
+    case TYPE.HIDE_CONTEST_ENDED_MODAL:
+      return { ...state, showContestEndedModal: false};
+    
+      case TYPE.SET_QUESTION_LOADING:
       return { ...state, questionLoading: true };
 
     case TYPE.RESET_QUESTION_LOADING:
@@ -23,7 +34,7 @@ const reducer = (state = initialState, action) => {
     case TYPE.UPDATE_PROBLEM_TAGS: {
       return { ...state, ProblemTags: action.data };
     }
-
+ 
     case TYPE.UPDATE_MIN_RATING:
       return { ...state, minRating: action.data };
 
