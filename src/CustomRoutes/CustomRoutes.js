@@ -8,7 +8,6 @@ import LockoutWrapper from "../Pages/LockoutWrapper";
 import BlogPage from "../Pages/BlogPage";
 import Login from "../Pages/Login";
 import Logout from "../Pages/Logout";
-import SignUp from "../Pages/Signup";
 import ParticularBlog from "../Pages/ParticularBlog";
 import UpdateUser from "../Pages/UpdateUser";
 import Me from "../Pages/Me";
@@ -29,9 +28,9 @@ const CustomRoutes = (props) => {
         <Route path="/blogs" exact component={BlogPage} />
         <Route path="/blog/:id" exact component={ParticularBlog} />
         <Route path="/about" exact component={About} />
+        <Route path="/me" exact component={Me} />
         {auth.isLoggedIn ? (
           <Switch>
-            <Route path="/me" exact component={Me} />
             <Route path="/logout" exact component={Logout} />
             <Route path="/updateUser" exact component={UpdateUser} />
             <Redirect to="/homepage" />
@@ -39,7 +38,6 @@ const CustomRoutes = (props) => {
         ) : (
           <Switch>
             <Route path="/login" exact component={Login} />
-            <Route path="/signup" exact component={SignUp} />
             <Redirect to="/homepage" />
           </Switch>
         )}
