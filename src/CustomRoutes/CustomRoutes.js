@@ -26,9 +26,9 @@ const CustomRoutes = (props) => {
         <Route path="/blogs" exact component={BlogPage} />
         <Route path="/blog/:id" exact component={ParticularBlog} />
         <Route path="/about" exact component={About} />
+        <Route path="/me" exact component={Me} />
         {auth.isLoggedIn ? (
           <Switch>
-            <Route path="/me" exact component={Me} />
             <Route path="/logout" exact component={Logout} />
             <Redirect to="/homepage" />
           </Switch>
