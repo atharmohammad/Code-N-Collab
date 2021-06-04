@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Grid, Tooltip, IconButton } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+
 import ProfileFeild from "./ProfileFeild";
 import Amongus1 from "../../Assets/images/amongus1.png";
 import EditIcon from "@material-ui/icons/Edit";
@@ -12,6 +14,7 @@ import AtcoderIcon from "../../Assets/images/atcoder.png";
 import Nav from "../Nav/Nav";
 
 const Profile = (props) => {
+  const history = useHistory();
   return (
     <div style={{ height: "100vh" }}>
       <div
@@ -65,12 +68,21 @@ const Profile = (props) => {
                 alignItems: "flex-end",
               }}
             >
-              <Tooltip title="update profile">
+              <Tooltip
+                title="update profile"
+                onClick={() => history.push("/updateUser")}
+              >
                 <IconButton>
                   <EditIcon style={{ cursor: "pointer" }} />
                 </IconButton>
               </Tooltip>
-              <Tooltip title="share">
+              <Tooltip
+                title="share"
+                onClick={() => {
+                  navigator.clipboard.writeText("dsfsd");
+                  return alert("copied to clipboard");
+                }}
+              >
                 <IconButton>
                   <ShareIcon style={{ cursor: "pointer" }} />
                 </IconButton>
