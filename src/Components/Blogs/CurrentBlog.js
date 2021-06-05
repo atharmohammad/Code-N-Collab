@@ -25,6 +25,9 @@ const CurrentBlog = (props) => {
   const [dummy, setDummy] = useState(uuidv4());
   const [user, setUser] = useState("NA");
 
+  const [likesLength, setlikesLength] = useState(null);
+  const [viewerLiked, setViewerLiked] = useState(null);
+
   const id = window.location.pathname.split("/")[2];
 
   const history = useHistory();
@@ -36,6 +39,12 @@ const CurrentBlog = (props) => {
         const currBlog = await axios.get(`blogs/currentBlog/${id}`);
         setInitialBlog(currBlog.data.Body);
         setUser(currBlog.data.User);
+        setlikesLength(currBlog.data.Likes.length);
+        setViewerLiked(
+          currBlog.data.Likes.findIndex(
+            (like, i) => like === currBlog.data.User._id
+          ) !== -1
+        );
       } catch (e) {
         console.log(e);
       }
@@ -77,8 +86,6 @@ const CurrentBlog = (props) => {
     setCommentLoading(true);
     setTimeout(() => setCommentLoading(false), 2000);
   };
-
- 
 
   if (blogLoading) {
     return <BlogSpinner />;
@@ -142,6 +149,9 @@ const CurrentBlog = (props) => {
               editHandler={() => setEditBlog(true)}
               deleteHandler={deleteHandler}
               openWriter={() => setShowWriter(true)}
+              likeChangeHandler={() => {}}
+              likesLength={likesLength}
+              viewerLiked={false}
             />
           </Grid>
         </div>
@@ -168,11 +178,7 @@ const CurrentBlog = (props) => {
               >
                 <div>
                   {comments.map((item, key) => (
-                    <Comment
-                      comment = {item}
-                      key = {key}
-                      dummy = {dummy}
-                    />
+                    <Comment comment={item} key={key} dummy={dummy} />
                   ))}
                 </div>
               </div>
