@@ -17,8 +17,14 @@ const AvatarArray = [
   Amongus6,
   Amongus7,
 ];
-const Avatar = (props) => {
-  return AvatarArray[props.key];
+const Avatar = (key) => {
+  return AvatarArray[key];
 };
+
+const AllAvatars = () => {
+  return AvatarArray;
+};
+
+export { AllAvatars };
 
 export default Avatar;

@@ -6,22 +6,13 @@ import AvatarModal from "../Components/Modal/AvatarModal";
 import Back from "../Components/Back/Back";
 import Nav from "../Components/Nav/Nav";
 import Stars from "../Components/Stars/Stars";
-import HomePageImg from "../Assets/images/HomePageImg.png";
 import ProfileUpdate from "../Assets/images/ProfileUpdate.png";
 import axios from "../Axios/axios";
 
-import Amongus1 from "../Assets/images/amongus1.png";
-import Amongus2 from "../Assets/images/amongus2.png";
-import Amongus3 from "../Assets/images/amongus3.png";
-import Amongus4 from "../Assets/images/amongus4.png";
-import Amongus5 from "../Assets/images/amongus5.png";
-import Amongus6 from "../Assets/images/amongus6.png";
-import Amongus7 from "../Assets/images/amongus7.png";
+import SelectAvatar from "../Components/SelectAvatars/SelectAvatars";
 
 import UpdateFeild from "../Components/updateUserHelper/UpdateFeilds";
 import CountryFeild from "../Components/updateUserHelper/CountryFeild";
-
-const Amongus = [Amongus1, Amongus2, Amongus3, Amongus5, Amongus6, Amongus7];
 
 const UpdateUser = (props) => {
   const user = useContext(AuthContext).user;
@@ -55,7 +46,7 @@ const UpdateUser = (props) => {
       Github: githubLink,
       AtCoder: atcoderLink,
       Linkedin: linkedInLink,
-      Avatar: `amongus${amongusChar}`,
+      Avatar: amongusChar,
       Designation: designation,
       Country: country,
       Institution: institution,
@@ -120,7 +111,7 @@ const UpdateUser = (props) => {
               >
                 <div style={{ margin: "10px" }}>
                   <img
-                    src={Amongus[amongusChar]}
+                    src={SelectAvatar(amongusChar)}
                     alt="avatar"
                     style={{
                       height: "120px",
