@@ -37,25 +37,6 @@ const LockOutPage = (props) => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
 
-    if (!auth.token ){
-      return history.push({
-        pathname: "/login",
-      });
-    }
-    
-    if (!searchParams.get("room") || searchParams.get("room").trim === '') {
-      return history.push({
-        pathname: "/homepage",
-      });
-    }
-    
-    if(!auth.user.CodeforcesHandle){
-      alert('codeforces handle required')
-      return history.push({
-        pathname: "/updateUser",
-      });
-    }
-    
     const user = {
       Name: auth.user.CodeforcesHandle,
       RoomId: searchParams.get("room"),

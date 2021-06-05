@@ -24,6 +24,7 @@ function HomePage() {
 
       try {
         data = await axios.post("/Oauth/authenticated", { code: code });
+        console.log(data.data.user)
         auth.login(data.data.user, data.data.token);
       } catch (e) {
         console.log("error", e);
