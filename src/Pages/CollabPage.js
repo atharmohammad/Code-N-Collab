@@ -60,7 +60,6 @@ const CollabPage = (props) => {
       },
       ({ error, user }) => {
         if (error) {
-          console.log(error);
           return history.push({
             pathname: "/rooms",
             search:
@@ -72,7 +71,7 @@ const CollabPage = (props) => {
           });
         }
         setJoined(true);
-        console.log("joined");
+
       }
     );
   }, []);

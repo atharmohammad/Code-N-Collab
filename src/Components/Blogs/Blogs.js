@@ -25,7 +25,6 @@ function Blogs(props) {
         .delete("/blogs/delete/" + blogId)
         .then((res) => {
           props.deleteBlog();
-          console.log("deleted");
         })
         .catch((e) => alert("delete error"));
     }
@@ -37,7 +36,6 @@ function Blogs(props) {
       axios
         .get("blogs/Allblogs")
         .then((res) => {
-          console.log(res.data);
           setBlogs(res.data);
         })
         .catch((e) => {

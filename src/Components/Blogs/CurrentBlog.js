@@ -35,7 +35,6 @@ const CurrentBlog = (props) => {
       try {
         const currBlog = await axios.get(`blogs/currentBlog/${id}`);
         setInitialBlog(currBlog.data.Body);
-        console.log('user',currBlog.data.User);
         setUser(currBlog.data.User);
       } catch (e) {
         console.log(e);
@@ -64,7 +63,6 @@ const CurrentBlog = (props) => {
       try {
         setShowComment(true);
         const data = await axios.get(`/comment/getComments/${id}`);
-        console.log("comments", data);
         setComments(data.data.Comments);
         setDummy(uuidv4());
       } catch (e) {

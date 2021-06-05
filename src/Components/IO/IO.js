@@ -88,7 +88,6 @@ const Io = (props) => {
       setReason("code-editor");
     }
     socket.on("COMPILE_OFF", (data) => {
-      console.log("compile data:", data);
       const response = data;
       props.resetCompile();
       props.resetLoading();
@@ -103,7 +102,6 @@ const Io = (props) => {
   }, [location]);
 
   useEffect(() => {
-    console.log("useEffect");
     socket.on("IO_recieved", (data) => {
       setRecieved(3);
       if (data.inputText !== undefined) {
@@ -117,7 +115,6 @@ const Io = (props) => {
       setRecieved(2);
     });
     socket.on("sendInitialIO", (obj) => {
-      console.log("sendInitialIO", inputRef.current.value);
       socket.emit("takeInitialIO", {
         id: obj.id,
         inputText: inputRef.current.value,
