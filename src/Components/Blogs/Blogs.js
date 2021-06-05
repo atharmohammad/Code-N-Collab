@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import HelperIcons from "./HelperIcons";
+import { v4 as uuidv4 } from "uuid";
 import * as TYPES from "../../store/Action/action";
 
 function Blogs(props) {
@@ -19,36 +20,37 @@ function Blogs(props) {
     return history.push("/blog/" + blogId);
   };
 
-  const deleteHandler = (blogId) => {
+  const deleteHandler = async (blogId) => {
     if (window.confirm("Are you sure you want to delete this Blog")) {
-      axios
-        .delete("/blogs/delete/" + blogId)
-        .then((res) => {
-          props.deleteBlog();
-        })
-        .catch((e) => alert("delete error"));
+      setBlogsLoading(true);
+      try {
+        await axios.delete("/blogs/delete/" + blogId);
+        props.deleteBlog();
+      } catch (e) {
+        alert("delete error");
+      }
+      setBlogsLoading(false);
     }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     if (props.blogPosted) {
       setBlogsLoading(true);
-      axios
-        .get("blogs/Allblogs")
-        .then((res) => {
-          setBlogs(res.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      try {
+        const res = await axios.get("blogs/Allblogs");
+        setBlogs(res.data);
+      } catch (e) {
+        alert("delete error", e);
+      }
       setBlogsLoading(false);
       props.fetchBlog(false);
     }
   }, [props.blogPosted]);
 
-  let allBlogs = <BlogSpinner />;
+  let allBlogs = <></>;
 
   if (!blogsLoading) {
+    console.log("fa", blogsLoading);
     allBlogs = blogs.map((item) => {
       return (
         <div
@@ -84,7 +86,7 @@ function Blogs(props) {
               <HelperIcons
                 type="blog"
                 allBlogPage={true}
-                admin = {{User:item.User}}
+                admin={{ User: item.User }}
                 deleteHandler={() => deleteHandler(item._id)}
               />
             </Grid>
@@ -92,6 +94,12 @@ function Blogs(props) {
         </div>
       );
     });
+  } else {
+    return (
+      <div>
+        <BlogSpinner />
+      </div>
+    );
   }
   return <div>{allBlogs}</div>;
 }
