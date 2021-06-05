@@ -3,6 +3,12 @@ import { Grid, Box, Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../context/auth-context";
 import AvatarModal from "../Components/Modal/AvatarModal";
+import Back from "../Components/Back/Back";
+import Nav from "../Components/Nav/Nav";
+import Stars from "../Components/Stars/Stars"
+import HomePageImg from "../Assets/images/HomePageImg.png";
+
+
 import Amongus1 from "../Assets/images/amongus1.png";
 import Amongus2 from "../Assets/images/amongus2.png";
 import Amongus3 from "../Assets/images/amongus3.png";
@@ -38,176 +44,192 @@ const UpdateUser = (props) => {
           changeHandler={(e) => setAmongusChar(e)}
         />
       ) : null}
-      <div style={{ paddingTop: "30px" }}>
-        <div
-          style={{
+      <div style={{ background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
+          minHeight:'100vh',paddingBottom:'50px'}}>
+      <Stars/>
+      <Back/>
+      <Nav/>
+        <div style={{display:'flex',
+                justifyContent:'center',margin:'10px 0 30px 17%'}}>
+          <img src={HomePageImg} />
+        </div>
+        <div style={{
+          margin: "auto",
+          padding: "20px",
+          minHeight: "70%",
+          width: "70%",
+          border: "10px double #fff",
+          borderRadius: "20px",
+        }}>
+          <div style={{
             margin: "auto",
             padding: "20px",
-            minHeight: "60vh",
-            width: "80%",
-            border: "20px double grey",
+            minHeight: "70%",
             borderRadius: "20px",
+            background:'#fff'
           }}
-        >
-          <div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-              }}
-            >
-              <div style={{ margin: "10px" }}>
-                <img
-                  src={Amongus[amongusChar]}
-                  alt="avatar"
-                  style={{
-                    height: "120px",
-                    width: "110px",
-                    borderRadius: "10px",
-                  }}
+
+          >
+            <div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                }}
+              >
+                <div style={{ margin: "10px" }}>
+                  <img
+                    src={Amongus[amongusChar]}
+                    alt="avatar"
+                    style={{
+                      height: "120px",
+                      width: "110px",
+                      borderRadius: "10px",
+                    }}
+                  />
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <Button
+                    onClick={() => setShowAvatarModal(true)}
+                    style={{
+                      fontSize: "12px",
+                      height: "30px",
+                      width: "130px",
+                      background: "#8e33bc",
+                      color: "#fff",
+                    }}
+                  >
+                    Choose Avatar
+                  </Button>
+                  <Button
+                    style={{
+                      height: "60px",
+                      marginTop: "-100px",
+                      width: "200px",
+                      background: "#336abc",
+                      color: "#fff",
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <UpdateFeild
+                  width="25%"
+                  value={name}
+                  title="Name"
+                  placeHolder="Adnan Shamsi"
+                  changeHandler={(e) => setName(e)}
+                />
+
+                <UpdateFeild
+                  width="50%"
+                  value={institution}
+                  title="Institution"
+                  placeHolder="IIT"
+                  changeHandler={(e) => setInstitution(e)}
+                />
+                <CountryFeild
+                  width="20%"
+                  country={country}
+                  changeHandler={(e) => setCountry(e)}
                 />
               </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Button
-                  onClick={() => setShowAvatarModal(true)}
-                  style={{
-                    fontSize: "12px",
-                    height: "30px",
-                    width: "130px",
-                    background: "#8e33bc",
-                    color: "#fff",
-                  }}
-                >
-                  Choose Avatar
-                </Button>
-                <Button
-                  style={{
-                    height: "60px",
-                    marginTop: "-100px",
-                    width: "200px",
-                    background: "#336abc",
-                    color: "#fff",
-                  }}
-                >
-                  Submit
-                </Button>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <UpdateFeild
+                  width="48%"
+                  value={designation}
+                  title="Designation"
+                  placeHolder="web developer"
+                  changeHandler={(e) => setDesignation(e)}
+                />
+                <UpdateFeild
+                  width="48%"
+                  value={moto}
+                  title="Moto"
+                  changeHandler={(e) => setMoto(e)}
+                />
               </div>
-            </div>
-          </div>
-          <div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <UpdateFeild
-                width="25%"
-                value={name}
-                title="Name"
-                placeHolder="Adnan Shamsi"
-                changeHandler={(e) => setName(e)}
-              />
-
-              <UpdateFeild
-                width="50%"
-                value={institution}
-                title="Institution"
-                placeHolder="IIT"
-                changeHandler={(e) => setInstitution(e)}
-              />
-              <CountryFeild
-                width="20%"
-                country={country}
-                changeHandler={(e) => setCountry(e)}
-              />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <UpdateFeild
-                width="48%"
-                value={designation}
-                title="Designation"
-                placeHolder="web developer"
-                changeHandler={(e) => setDesignation(e)}
-              />
-              <UpdateFeild
-                width="48%"
-                value={moto}
-                title="Moto"
-                changeHandler={(e) => setMoto(e)}
-              />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <UpdateFeild
-                width="30%"
-                value={codeForcesHandle}
-                title="Codeforces Handle"
-                placeHolder="Tourist"
-                changeHandler={(e) => setCodeForcesHandle(e)}
-              />
-              <UpdateFeild
-                width="67%"
-                value={codeForcesLink}
-                title="CodeForces Profile Link"
-                placeHolder="https://codeforces.com/profile/tourist"
-                changeHandler={(e) => setCodeForcesLink(e)}
-              />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <UpdateFeild
-                width="48%"
-                value={codechefLink}
-                title="Codechef Profile Link"
-                placeHolder="https://www.codechef.com/users/gennady.korotkevich"
-                changeHandler={(e) => setCodechefLink(e)}
-              />
-              <UpdateFeild
-                width="48%"
-                value={atcoderLink}
-                title="Atcoder Profile Link"
-                placeHolder="https://www.codechef.com/users/gennady.korotkevich"
-                changeHandler={(e) => setAtcoderLink(e)}
-              />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <UpdateFeild
-                width="48%"
-                value={githubLink}
-                title="Github Profile Link"
-                changeHandler={(e) => setGithubLink(e)}
-              />
-              <UpdateFeild
-                width="48%"
-                value={linkedInLink}
-                title="LinkedIn Profile Link"
-                changeHandler={(e) => setLinkedInLink(e)}
-              />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <UpdateFeild
+                  width="30%"
+                  value={codeForcesHandle}
+                  title="Codeforces Handle"
+                  placeHolder="Tourist"
+                  changeHandler={(e) => setCodeForcesHandle(e)}
+                />
+                <UpdateFeild
+                  width="67%"
+                  value={codeForcesLink}
+                  title="CodeForces Profile Link"
+                  placeHolder="https://codeforces.com/profile/tourist"
+                  changeHandler={(e) => setCodeForcesLink(e)}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <UpdateFeild
+                  width="48%"
+                  value={codechefLink}
+                  title="Codechef Profile Link"
+                  placeHolder="https://www.codechef.com/users/gennady.korotkevich"
+                  changeHandler={(e) => setCodechefLink(e)}
+                />
+                <UpdateFeild
+                  width="48%"
+                  value={atcoderLink}
+                  title="Atcoder Profile Link"
+                  placeHolder="https://www.codechef.com/users/gennady.korotkevich"
+                  changeHandler={(e) => setAtcoderLink(e)}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <UpdateFeild
+                  width="48%"
+                  value={githubLink}
+                  title="Github Profile Link"
+                  changeHandler={(e) => setGithubLink(e)}
+                />
+                <UpdateFeild
+                  width="48%"
+                  value={linkedInLink}
+                  title="LinkedIn Profile Link"
+                  changeHandler={(e) => setLinkedInLink(e)}
+                />
+              </div>
             </div>
           </div>
         </div>
