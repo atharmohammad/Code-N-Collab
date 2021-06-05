@@ -16,7 +16,6 @@ export default function App(props) {
     socket.on("problem", (problem) => {
       ProblemRef.current.innerHTML = problem;
       setLoader(false);
-      console.log(problem);
     });
   }, []);
 

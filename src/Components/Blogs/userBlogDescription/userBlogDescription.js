@@ -10,7 +10,6 @@ export default function UserBlogDescription(props){
   const fetchUser = ()=>{
     history.push(`/profile/:${props.admin._id}`);
   }
-
   return (
     <Grid container direction="row" onClick={fetchUser}>
       <Avatar style={{ margin: "1vh 0 0 0" }}>{admin ? admin.Name[0] : "?"}</Avatar>

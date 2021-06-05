@@ -49,19 +49,16 @@ export default function ChatPanel(props) {
   }, [location]);
 
   useEffect(() => {
-    console.log(socket);
     socket.on("serverMsg", (msg) => {
       setMessages([...messages, msg]);
     });
     return () => {
       socket.off("serverMsg");
-      console.log("off");
     };
   }, [messages]);
 
   useEffect(() => {
     socket.on("peopleInRoom", (people) => {
-      console.log("settingpeople");
       setPersons(people);
     });
     return () => {

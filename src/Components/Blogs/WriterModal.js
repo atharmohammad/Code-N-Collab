@@ -9,11 +9,12 @@ import axios from "../../Axios/axios"
 const WriterModal = (props) => {
   const { cancelHandler, parentId} = { ...props };
 
-  const submitHandler = ()=>{
-    axios.post(`/comment/createComment/${parentId}`)
-      .then(res=>{
-        console.log("comment posted")
-      }).catch(e=>console.log(e));
+  const submitHandler = async()=>{
+    try{
+      axios.post(`/comment/createComment/${parentId}`)
+    }catch(e){
+      console.log(e);
+    }
   }
 
   return (

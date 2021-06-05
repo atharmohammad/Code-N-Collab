@@ -11,7 +11,6 @@ const App = (props) => {
 
   const login = useCallback((user, token) => {
     setUser(user);
-    console.log("user", user);
     setToken(token);
     localStorage.setItem("userData", JSON.stringify({ user, token }));
   }, []);

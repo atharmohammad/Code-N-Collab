@@ -10,17 +10,17 @@ function TextEditor(props) {
 
   const { closeTextEditor, showUpdateBtn } = { ...props };
   const postHandler = async () => {
-    alert("posting");
-    axios({ method: props.method, url: props.Api, data: { Body: value } })
-      .then((res) => {
-        try {
-          props.blogPosted();
-          setValue("");
-        } catch (err) {
-          console.log(err);
-        }
-      })
-      .catch((e) => console.log(e));
+    try{
+    props.updateBtnClick();
+    }catch(e){
+      console.log('no update btn')
+    }
+    try{
+      await axios({ method: props.method, url: props.Api, data: { Body: value } })
+      props.blogPosted(true);
+    }catch(e){
+      console.log(e);
+    }
   };
 
   return (
@@ -82,21 +82,21 @@ function TextEditor(props) {
               width: "100%",
               backgroundColor: "#4169E1",
               borderRadius: "10px",
-              height:'35px',
+              height: "35px",
               textAlign: "center",
-              
+
               color: "#fff",
               marginTop: "10px",
               float: "right",
               cursor: "pointer",
               alignItems: "center",
               fontSize: "20px",
-              boxSizing:'border-box',
-              border:'2px solid #fff',
+              boxSizing: "border-box",
+              border: "2px solid #fff",
             }}
             onClick={postHandler}
           >
-           Post
+            Post
           </Box>
         </div>
       ) : null}
@@ -106,8 +106,8 @@ function TextEditor(props) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    blogPosted: () => {
-      dispatch({ type: TYPES.BLOGPOSTED });
+    blogPosted: (action) => {
+      dispatch({ type: TYPES.BLOGPOSTED, value: action });
     },
   };
 };

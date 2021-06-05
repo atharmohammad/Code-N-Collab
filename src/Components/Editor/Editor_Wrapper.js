@@ -27,7 +27,6 @@ const Wrapper = (props) => {
   useEffect(() => {
     return () => {
       if (domain) {
-        console.log("disposed");
         domain.dispose();
       }
     };
