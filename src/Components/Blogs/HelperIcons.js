@@ -70,8 +70,8 @@ const HelperIcons = (props) => {
         <Button>
           <ThumbUpAltIcon
             style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
-          />{" "}
-          120
+          />
+          {props.likesLength !== undefined ? props.likesLength : "NA"}
         </Button>
       </Tooltip>
 
