@@ -77,7 +77,7 @@ const UpdateUser = (props) => {
           }}
 
           >
-            <div>
+            <div style={{display:'flex',justifyContent:'space-between'}}>
               <div
                 style={{
                   display: "flex",
@@ -96,7 +96,6 @@ const UpdateUser = (props) => {
                     }}
                   />
                 </div>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
                   <Button
                     onClick={() => setShowAvatarModal(true)}
                     style={{
@@ -109,19 +108,18 @@ const UpdateUser = (props) => {
                   >
                     Choose Avatar
                   </Button>
-                  <Button
-                    style={{
-                      height: "60px",
-                      marginTop: "-100px",
-                      width: "200px",
-                      background: "#336abc",
-                      color: "#fff",
-                    }}
-                  >
-                    Submit
-                  </Button>
-                </div>
               </div>
+                <Button
+                  style={{
+                    height: "20%",
+                    padding:'5px 10px 5px 10px',
+                    background: "#336abc",
+                    color: "#fff",
+                    top:'0',
+                  }}
+                >
+                  Update
+                </Button>
             </div>
             <div>
               <div
