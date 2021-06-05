@@ -35,15 +35,15 @@ const CurrentBlog = (props) => {
       try {
         const currBlog = await axios.get(`blogs/currentBlog/${id}`);
         setInitialBlog(currBlog.data.Body);
-        console.log(currBlog.data);
+        console.log('user',currBlog.data.User);
         setUser(currBlog.data.User);
       } catch (e) {
         console.log(e);
       }
       props.blogPostedOff(false);
+      setEditBlog(false);
+      setBlogLoading(false);
     }
-    setEditBlog(false);
-    setBlogLoading(false);
   }, [props.blogPosted]);
 
   
@@ -125,8 +125,7 @@ const CurrentBlog = (props) => {
                 background: "#fff",
               }}
             >
-              {console.log('user :',user)}
-              <UserBlogDescription admin={false} />
+              <UserBlogDescription admin={{User:user}} />
             </div>
             <ReactMarkdown>{initialBlog}</ReactMarkdown>
           </>

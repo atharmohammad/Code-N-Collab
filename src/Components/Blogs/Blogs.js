@@ -44,12 +44,12 @@ function Blogs(props) {
           console.log(e);
         });
       setBlogsLoading(false);
+      props.fetchBlog(false);
     }
-    props.fetchBlog(false);
   }, [props.blogPosted]);
 
   let allBlogs = <BlogSpinner />;
-
+  console.log('block loading',blogsLoading);
   if (!blogsLoading) {
     allBlogs = blogs.map((item) => {
       return (
