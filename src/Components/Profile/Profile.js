@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import { Grid, Tooltip, IconButton } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import {AuthContext} from "../../context/auth-context";
 
 import ProfileFeild from "./ProfileFeild";
 import Amongus1 from "../../Assets/images/amongus1.png";
@@ -19,6 +20,9 @@ import Back from "../Back/Back";
 
 const Profile = (props) => {
   const history = useHistory();
+  const auth = useContext(AuthContext);
+  const user = auth.user;
+
   const backHandler = () => {
     history.push("/homepage");
   };
@@ -91,7 +95,7 @@ const Profile = (props) => {
                   fontFamily: ["edgwick Ave Display", "cursive"].join(),
                 }}
               >
-                <div>Adnan Shamsi</div>
+                <div>{user.Name}</div>
               </div>
             </div>
             <div
@@ -127,14 +131,14 @@ const Profile = (props) => {
               margin: "auto",
             }}
           >
-            <ProfileFeild title="Designation" value="Web Developer" />
-            <ProfileFeild title="Country" value="India" />
-            <ProfileFeild title="Institution" value="Jamia Millia Islamia" />
+            <ProfileFeild title="Designation" value={user.Designation} />
+            <ProfileFeild title="Country" value={user.Country} />
+            <ProfileFeild title="Institution" value={user.Institution} />
             <ProfileFeild
               title="Motto"
-              value="To complete code-n-collab work"
+              value={user.Moto}
             />
-            <ProfileFeild title="CodeForces Handle" value="AdnanShamsi" />
+            <ProfileFeild title="CodeForces Handle" value={user.CodeforcesHandle} />
           </div>
 
           <div
@@ -151,7 +155,7 @@ const Profile = (props) => {
                 margin: "10px",
                 boxSizing: "border-box",
               }}
-              href={""}
+              href={user.Codeforces}
               target="_blank"
             >
               <img
@@ -172,7 +176,7 @@ const Profile = (props) => {
                 margin: "10px",
                 boxSizing: "border-box",
               }}
-              href={""}
+              href={user.Codechef}
               target="_blank"
             >
               <img
@@ -193,7 +197,7 @@ const Profile = (props) => {
                 margin: "10px",
                 boxSizing: "border-box",
               }}
-              href={""}
+              href={user.AtCoder}
               target="_blank"
             >
               <img
@@ -215,7 +219,7 @@ const Profile = (props) => {
                 boxSizing: "border-box",
               }}
               target="_blank"
-              href={null}
+              href={user.Linkedin}
             >
               <img
                 src={LinkedInIcon}
@@ -235,7 +239,7 @@ const Profile = (props) => {
                 margin: "10px",
                 boxSizing: "border-box",
               }}
-              href={null}
+              href={user.Github}
               target="_blank"
             >
               <img
