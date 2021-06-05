@@ -26,6 +26,9 @@ function HomePage() {
         data = await axios.post("/Oauth/authenticated", { code: code });
         console.log(data.data.user)
         auth.login(data.data.user, data.data.token);
+        if(data.data.Way === "signup"){
+          history.push("/updateUser")
+        }
       } catch (e) {
         console.log("error", e);
       }

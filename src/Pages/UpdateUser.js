@@ -36,7 +36,7 @@ const UpdateUser = (props) => {
   const [codechefLink, setCodechefLink] = useState(user.Codechef);
   const [atcoderLink, setAtcoderLink] = useState(user.AtCoder);
   const [linkedInLink, setLinkedInLink] = useState(user.Linkedin);
-  const [amongusChar, setAmongusChar] = useState(0);
+  const [amongusChar, setAmongusChar] = useState(parseInt(user.Avatar.slice(-1)));
   const [country, setCountry] = useState(user.Country);
 
   const history = useHistory();
@@ -53,7 +53,8 @@ const UpdateUser = (props) => {
         AtCoder:atcoderLink,
         Linkedin:linkedInLink,
         Avatar:`amongus${amongusChar}`,
-        Designation:designation
+        Designation:designation,
+        Country:country
       }
 
       axios.patch(`/user/updateProfile/`,data)
@@ -172,7 +173,7 @@ const UpdateUser = (props) => {
                 <CountryFeild
                   width="20%"
                   country={country}
-                  changeHandler={(e) => setCountry(e)}
+                  changeHandler={(e) =>setCountry(e)}
                 />
               </div>
               <div

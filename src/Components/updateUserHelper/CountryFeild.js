@@ -15,7 +15,7 @@ const CountrySelect = (props) => {
         value={props.country}
       >
         {countries.map((country, idx) => (
-          <MenuItem value={country.id}>{country.label}</MenuItem>
+          <MenuItem key={idx} value={country.label}>{country.label}</MenuItem>
         ))}
       </Select>
     </FormControl>
