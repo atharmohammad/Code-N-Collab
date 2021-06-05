@@ -10,9 +10,10 @@ const ProfileFeild = (props) => {
         margin: "auto",
         marginTop:'10px',
         borderBottom: "2px solid #b5b0a3",
+        boxSizing:'boxder-box',
       }}
     >
-      <div style={{ fontSize: "25px", width: "50%" }}>{props.title}:</div>
+      <div style={{ fontSize: "25px", width: "45%" }}>{props.title}:</div>
       <div style={{ fontSize: "20px", color: "#524d3f", marginLeft: "50px" }}>
         {props.value}
       </div>
