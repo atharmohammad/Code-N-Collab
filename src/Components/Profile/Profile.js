@@ -32,20 +32,17 @@ const Profile = (props) => {
         minHeight: "100vh",
         background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
         paddingBottom: "50px",
-        paddingTop:'20px',
         boxSizing:'border-box',
       }}
     >
       <Stars />
-      <div style={{position:'absolute',}}>
       <Back clicked={backHandler} />
-      </div>
       <Nav />
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          marginLeft: "30px",
+          marginLeft: "15%",
           boxSizing: "border-box",
         }}
       >

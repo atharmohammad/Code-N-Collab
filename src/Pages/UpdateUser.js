@@ -32,9 +32,16 @@ const UpdateUser = (props) => {
   const [codechefLink, setCodechefLink] = useState(null);
   const [atcoderLink, setAtcoderLink] = useState(null);
   const [linkedInLink, setLinkedInLink] = useState(null);
-
   const [amongusChar, setAmongusChar] = useState(0);
   const [country, setCountry] = useState(1);
+
+  const history = useHistory();
+
+
+  const backHandler = ()=>{
+    history.push("/me");
+  }
+
 
   return (
     <>
@@ -47,7 +54,7 @@ const UpdateUser = (props) => {
       <div style={{ background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
           minHeight:'100vh',paddingBottom:'50px'}}>
       <Stars/>
-      <Back/>
+      <Back clicked={backHandler}/>
       <Nav/>
         <div style={{display:'flex',
                 justifyContent:'center',margin:'10px 0 30px 17%'}}>
