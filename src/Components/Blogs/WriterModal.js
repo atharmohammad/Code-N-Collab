@@ -12,7 +12,6 @@ const WriterModal = (props) => {
   const submitHandler = ()=>{
     axios.post(`/comment/createComment/${parentId}`)
       .then(res=>{
-        console.log("comment posted")
       }).catch(e=>console.log(e));
   }
 

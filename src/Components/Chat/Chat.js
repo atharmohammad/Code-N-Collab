@@ -28,7 +28,6 @@ const Chat = (props) => {
     e.preventDefault();
     const finalValue = inputRef.current.value.trim();
     if (finalValue){
-      console.log('asa',auth.user)
       if(location.pathname === "/newContest"){
         socket.emit("Contest-Msg",{message:finalValue,
                       room:searchParams.get("room"),

@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 
 const LockoutPanel = (props) => {
   const socket = props.socket;
-  console.log("leader board updating");
   return (
     <>
     <Countdown stopAt = {props.contest.EndTime} socket = {socket}/>

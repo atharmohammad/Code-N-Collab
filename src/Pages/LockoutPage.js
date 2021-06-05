@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 import Chat from "../Components/Chat/ChatTabs";
 import Editor from "../Components/Lockout/Editor.js/LockOutEditor";
@@ -14,7 +14,6 @@ import { useLocation, useHistory } from "react-router-dom";
 import Spinner from "../Components/Spinner/ContestSpinner/ContestSpinner";
 import { AuthContext } from "../context/auth-context";
 
-
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -26,7 +25,7 @@ const LockOutPage = (props) => {
   const [joined, setJoined] = useState(false);
   const [errorJoin, setErrorJoin] = useState(false);
   const [joinErrorMsg, setJoinErrorMsg] = useState("");
-  const auth = useContext(AuthContext)
+  const auth = useContext(AuthContext);
 
   const closeSnackBarHandler = () => {
     return history.push({
@@ -48,13 +47,12 @@ const LockOutPage = (props) => {
         return setJoinErrorMsg(error);
       } else {
         const updatedContest = contest;
-        console.log("updated-contest", updatedContest);
+
         props.setContest(updatedContest);
       }
       setJoined(true);
-      if(contest.EndTime){
+      if (contest.EndTime) {
         const now = new Date().getTime();
-        console.log('co',contest,now);
         props.contestEnded(contest.EndTime <= now);
       }
     });
