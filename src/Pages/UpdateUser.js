@@ -54,7 +54,8 @@ const UpdateUser = (props) => {
         Linkedin:linkedInLink,
         Avatar:`amongus${amongusChar}`,
         Designation:designation,
-        Country:country
+        Country:country,
+        Institution:institution
       }
 
       axios.patch(`/user/updateProfile/`,data)
