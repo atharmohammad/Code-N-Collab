@@ -10,7 +10,7 @@ import TextEditor from "../TextEditor/TextEditor";
 import BlogSpinner from "../Spinner/BlogSpinner";
 import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
-import Comments from "./Comments";
+import Comment from "./Comment";
 
 import * as TYPES from "../../store/Action/action";
 
@@ -25,6 +25,9 @@ const CurrentBlog = (props) => {
   const [dummy, setDummy] = useState(uuidv4());
   const [user, setUser] = useState("NA");
 
+  const [likesLength, setlikesLength] = useState(null);
+  const [viewerLiked, setViewerLiked] = useState(null);
+
   const id = window.location.pathname.split("/")[2];
 
   const history = useHistory();
@@ -36,6 +39,12 @@ const CurrentBlog = (props) => {
         const currBlog = await axios.get(`blogs/currentBlog/${id}`);
         setInitialBlog(currBlog.data.Body);
         setUser(currBlog.data.User);
+        setlikesLength(currBlog.data.Likes.length);
+        setViewerLiked(
+          currBlog.data.Likes.findIndex(
+            (like, i) => like === currBlog.data.User._id
+          ) !== -1
+        );
       } catch (e) {
         console.log(e);
       }
@@ -76,21 +85,6 @@ const CurrentBlog = (props) => {
   const moreCommentClickHandler = () => {
     setCommentLoading(true);
     setTimeout(() => setCommentLoading(false), 2000);
-  };
-
-  const commentDeleteHandler = async (id) => {
-    if (window.confirm("Are you sure you want to delete this comment")) {
-      setCommentLoading(true);
-      try{
-        await axios.delete("/comment/deleteComment/" + id)
-        const t = comments.filter((comment, key) => comment._id !== id);
-        setComments(...t);
-        setDummy(uuidv4());
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    setCommentLoading(false);
   };
 
   if (blogLoading) {
@@ -155,6 +149,9 @@ const CurrentBlog = (props) => {
               editHandler={() => setEditBlog(true)}
               deleteHandler={deleteHandler}
               openWriter={() => setShowWriter(true)}
+              likeChangeHandler={() => {}}
+              likesLength={likesLength}
+              viewerLiked={false}
             />
           </Grid>
         </div>
@@ -172,11 +169,20 @@ const CurrentBlog = (props) => {
             <BlogSpinner />
           ) : (
             <>
-              <Comments
-                comments={comments}
-                key={dummy}
-                deleteHandler={commentDeleteHandler}
-              />
+              <div
+                style={{
+                  margin: "30px 10px 30px 10px",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <div>
+                  {comments.map((item, key) => (
+                    <Comment comment={item} key={key} dummy={dummy} />
+                  ))}
+                </div>
+              </div>
+
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button
                   onClick={moreCommentClickHandler}

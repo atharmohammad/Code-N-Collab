@@ -6,23 +6,14 @@ import AvatarModal from "../Components/Modal/AvatarModal";
 import Back from "../Components/Back/Back";
 import Nav from "../Components/Nav/Nav";
 import Stars from "../Components/Stars/Stars";
-import HomePageImg from "../Assets/images/HomePageImg.png";
 import ProfileUpdate from "../Assets/images/ProfileUpdate.png";
 import axios from "../Axios/axios";
 import Spinner from "../Components/Spinner/BlogSpinner"
 
-import Amongus1 from "../Assets/images/amongus1.png";
-import Amongus2 from "../Assets/images/amongus2.png";
-import Amongus3 from "../Assets/images/amongus3.png";
-import Amongus4 from "../Assets/images/amongus4.png";
-import Amongus5 from "../Assets/images/amongus5.png";
-import Amongus6 from "../Assets/images/amongus6.png";
-import Amongus7 from "../Assets/images/amongus7.png";
+import SelectAvatar from "../Components/SelectAvatars/SelectAvatars";
 
 import UpdateFeild from "../Components/updateUserHelper/UpdateFeilds";
 import CountryFeild from "../Components/updateUserHelper/CountryFeild";
-
-const Amongus = [Amongus1, Amongus2, Amongus3, Amongus5, Amongus6, Amongus7];
 
 const UpdateUser = (props) => {
   const auth = useContext(AuthContext);
@@ -56,7 +47,7 @@ const UpdateUser = (props) => {
       Github: githubLink,
       AtCoder: atcoderLink,
       Linkedin: linkedInLink,
-      Avatar: `amongus${amongusChar}`,
+      Avatar: amongusChar,
       Designation: designation,
       Country: country,
       Institution: institution,
@@ -104,36 +95,18 @@ const UpdateUser = (props) => {
               borderRadius: "20px",
             }}
           >
-            <div
-              style={{
-                margin: "auto",
-                padding: "20px",
-                minHeight: "70%",
-                borderRadius: "20px",
-                background: "#fff",
-              }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                  }}
-                >
-                  <div style={{ margin: "10px" }}>
-                    <img
-                      src={Amongus[amongusChar]}
-                      alt="avatar"
-                      style={{
-                        height: "120px",
-                        width: "110px",
-                        borderRadius: "10px",
-                      }}
-                    />
-                  </div>
-                  <Button
-                    onClick={() => setShowAvatarModal(true)}
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                }}
+              >
+                <div style={{ margin: "10px" }}>
+                  <img
+                    src={SelectAvatar(amongusChar)}
+                    alt="avatar"
                     style={{
                       fontSize: "12px",
                       height: "30px",

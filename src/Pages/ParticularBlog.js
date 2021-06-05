@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Grid, Box, Button, Typography, Avatar } from "@material-ui/core";
 import CurrentBlog from "../Components/Blogs/CurrentBlog";
-import Comments from "../Components/Blogs/Comments";
 import { connect } from "react-redux";
 import * as TYPES from "../store/Action/action";
 import classes from "../Assets/css/wrapstyle.module.css";
