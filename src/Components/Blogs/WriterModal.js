@@ -8,10 +8,12 @@ import axios from "../../Axios/axios"
 
 const WriterModal = (props) => {
   const { cancelHandler, parentId} = { ...props };
+  const [body,setBody] = useState("")
 
   const submitHandler = async()=>{
+
     try{
-      axios.post(`/comment/createComment/${parentId}`)
+      await axios.post(`/comment/createComment/${parentId}`,{Body:body});
     }catch(e){
       console.log(e);
     }
@@ -29,7 +31,9 @@ const WriterModal = (props) => {
       >
         <div style={{ height: "100%", width: "100%" }}>
           <textarea
-      className={classes.textArea}
+              value={body}
+              onChange={e => setBody(e.target.value)}
+              className={classes.textArea}
           ></textarea>
           <div
            className={classes.toolTipGrid}

@@ -202,7 +202,7 @@ const CurrentBlog = (props) => {
         ) : null}
       </div>
       {showWriter ? (
-        <WriterModal id={id} cancelHandler={() => setShowWriter(false)} />
+        <WriterModal parentId={id} cancelHandler={() => setShowWriter(false)} />
       ) : null}
     </>
   );
