@@ -8,8 +8,10 @@ import Amongus3 from "../../Assets/images/amongus3.png";
 import Amongus4 from "../../Assets/images/amongus4.png";
 import Amongus5 from "../../Assets/images/amongus5.png";
 import Amongus6 from "../../Assets/images/amongus6.png";
+import Amongus7 from "../../Assets/images/amongus7.png";
 
-const Amongus = [Amongus1, Amongus2, Amongus3, Amongus5, Amongus6];
+
+const Amongus = [Amongus1, Amongus2, Amongus3, Amongus5, Amongus6, Amongus7];
 
 const WriterModal = (props) => {
   const { cancelHandler, submitHandler } = { ...props };
@@ -31,6 +33,7 @@ const WriterModal = (props) => {
                 width:'90px',
                 margin: "30px",
                 borderRadius: "10px",
+                cursor:"pointer"
               }}
             />
           ))}

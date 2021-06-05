@@ -16,10 +16,12 @@ import Amongus3 from "../Assets/images/amongus3.png";
 import Amongus4 from "../Assets/images/amongus4.png";
 import Amongus5 from "../Assets/images/amongus5.png";
 import Amongus6 from "../Assets/images/amongus6.png";
+import Amongus7 from "../Assets/images/amongus7.png";
+
 import UpdateFeild from "../Components/updateUserHelper/UpdateFeilds";
 import CountryFeild from "../Components/updateUserHelper/CountryFeild";
 
-const Amongus = [Amongus1, Amongus2, Amongus3, Amongus5, Amongus6];
+const Amongus = [Amongus1, Amongus2, Amongus3, Amongus5, Amongus6 , Amongus7];
 
 const UpdateUser = (props) => {
   const [showAvatarModal, setShowAvatarModal] = useState(false);
@@ -57,10 +59,7 @@ const UpdateUser = (props) => {
       <Stars/>
       <Back clicked={backHandler}/>
       <Nav/>
-        <div style={{display:'flex',
-                justifyContent:'center',margin:'10px 0 30px 17%'}}>
-          <img src={HomePageImg} />
-        </div>
+      
         <div style={{
           margin: "auto",
           padding: "20px",

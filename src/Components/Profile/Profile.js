@@ -46,7 +46,9 @@ const Profile = (props) => {
           boxSizing: "border-box",
         }}
       >
-        <img src={ProfileTitle} style={{ height: "70px" , width:'200px' }} alt="code-n-collab" />
+        <img src={ProfileTitle}
+          style={{ height: "70px" , width:'200px' }}
+          alt="code-n-collab" />
       </div>
       <div
         style={{
@@ -56,7 +58,7 @@ const Profile = (props) => {
           padding: "30px",
           boxSizing: "border-box",
           fontSize: "25px",
-          border: "10px double grey",
+          border: "10px double #fff",
           borderRadius: "20px",
         }}
       >
