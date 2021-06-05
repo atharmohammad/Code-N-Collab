@@ -13,9 +13,8 @@ import * as TYPES from "../../store/Action/action";
 function Blogs(props) {
   const [blogs, setBlogs] = useState([]);
   const [blogsLoading, setBlogsLoading] = useState(true);
-
   const history = useHistory();
-
+ 
   const onClickHandler = (blogId) => {
     return history.push("/blog/" + blogId);
   };
@@ -50,8 +49,9 @@ function Blogs(props) {
   let allBlogs = <></>;
 
   if (!blogsLoading) {
-    console.log("fa", blogsLoading);
+
     allBlogs = blogs.map((item) => {
+      console.log('item',item.Likes.length)
       return (
         <div
           style={{
@@ -88,6 +88,9 @@ function Blogs(props) {
                 allBlogPage={true}
                 admin={{ User: item.User }}
                 deleteHandler={() => deleteHandler(item._id)}
+                likeChangeHandler = {()=>{}}
+                likesLength = {item.Likes.length}
+                viewerLiked = {false}
               />
             </Grid>
           </Grid>
