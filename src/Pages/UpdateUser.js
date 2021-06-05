@@ -8,7 +8,7 @@ import Nav from "../Components/Nav/Nav";
 import Stars from "../Components/Stars/Stars"
 import HomePageImg from "../Assets/images/HomePageImg.png";
 import ProfileUpdate from "../Assets/images/ProfileUpdate.png";
-
+import axios from "../Axios/axios";
 
 import Amongus1 from "../Assets/images/amongus1.png";
 import Amongus2 from "../Assets/images/amongus2.png";
@@ -24,22 +24,42 @@ import CountryFeild from "../Components/updateUserHelper/CountryFeild";
 const Amongus = [Amongus1, Amongus2, Amongus3, Amongus5, Amongus6 , Amongus7];
 
 const UpdateUser = (props) => {
+  const user = useContext(AuthContext).user;
   const [showAvatarModal, setShowAvatarModal] = useState(false);
-  const [name, setName] = useState("Adnan");
-  const [designation, setDesignation] = useState("Web developer");
-  const [moto, setMoto] = useState("To be a good competitive Programmer");
-  const [institution, setInstitution] = useState("Jamia Millia Islamia");
-  const [codeForcesHandle, setCodeForcesHandle] = useState("AdnanShamsi");
-  const [codeForcesLink, setCodeForcesLink] = useState(null);
-  const [githubLink, setGithubLink] = useState(null);
-  const [codechefLink, setCodechefLink] = useState(null);
-  const [atcoderLink, setAtcoderLink] = useState(null);
-  const [linkedInLink, setLinkedInLink] = useState(null);
+  const [name, setName] = useState(user.Name);
+  const [designation, setDesignation] = useState(user.Designation);
+  const [moto, setMoto] = useState(user.Moto);
+  const [institution, setInstitution] = useState(user.Institution);
+  const [codeForcesHandle, setCodeForcesHandle] = useState(user.CodeforcesHandle);
+  const [codeForcesLink, setCodeForcesLink] = useState(user.Codeforces);
+  const [githubLink, setGithubLink] = useState(user.Github);
+  const [codechefLink, setCodechefLink] = useState(user.Codechef);
+  const [atcoderLink, setAtcoderLink] = useState(user.AtCoder);
+  const [linkedInLink, setLinkedInLink] = useState(user.Linkedin);
   const [amongusChar, setAmongusChar] = useState(0);
-  const [country, setCountry] = useState(1);
+  const [country, setCountry] = useState(user.Country);
 
   const history = useHistory();
 
+  const updateProfile = ()=>{
+
+      const data = {
+        Name : name,
+        Moto:moto,
+        CodeforcesHandle:codeForcesHandle,
+        Codeforces:codeForcesLink,
+        Codechef:codechefLink,
+        Github:githubLink,
+        AtCoder:atcoderLink,
+        Linkedin:linkedInLink,
+        Avatar:`amongus${amongusChar}`,
+        Designation:designation
+      }
+
+      axios.patch(`/user/updateProfile/`,data)
+            .then(res=>alert("updated! stop the spinner"))
+            .catch(e=>console.log(e));
+  }
 
   const backHandler = ()=>{
     history.push("/me");
@@ -59,7 +79,7 @@ const UpdateUser = (props) => {
       <Stars/>
       <Back clicked={backHandler}/>
       <Nav/>
-      
+
         <div style={{
           margin: "auto",
           padding: "20px",
@@ -121,6 +141,7 @@ const UpdateUser = (props) => {
                     color: "#fff",
                     top:'0',
                   }}
+                  onClick={updateProfile}
                 >
                   Update
                 </Button>
