@@ -15,16 +15,12 @@ function TextEditor(props) {
     }catch(e){
       console.log('no update btn')
     }
-    axios({ method: props.method, url: props.Api, data: { Body: value } })
-      .then((res) => {
-        try {
-          props.blogPosted(true);
-          setValue("");
-        } catch (err) {
-          console.log(err);
-        }
-      })
-      .catch((e) => console.log(e));
+    try{
+      await axios({ method: props.method, url: props.Api, data: { Body: value } })
+      props.blogPosted(true);
+    }catch(e){
+      console.log(e);
+    }
   };
 
   return (

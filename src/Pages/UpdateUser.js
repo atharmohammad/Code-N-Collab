@@ -5,7 +5,7 @@ import { AuthContext } from "../context/auth-context";
 import AvatarModal from "../Components/Modal/AvatarModal";
 import Back from "../Components/Back/Back";
 import Nav from "../Components/Nav/Nav";
-import Stars from "../Components/Stars/Stars"
+import Stars from "../Components/Stars/Stars";
 import HomePageImg from "../Assets/images/HomePageImg.png";
 import ProfileUpdate from "../Assets/images/ProfileUpdate.png";
 import axios from "../Axios/axios";
@@ -21,7 +21,7 @@ import Amongus7 from "../Assets/images/amongus7.png";
 import UpdateFeild from "../Components/updateUserHelper/UpdateFeilds";
 import CountryFeild from "../Components/updateUserHelper/CountryFeild";
 
-const Amongus = [Amongus1, Amongus2, Amongus3, Amongus5, Amongus6 , Amongus7];
+const Amongus = [Amongus1, Amongus2, Amongus3, Amongus5, Amongus6, Amongus7];
 
 const UpdateUser = (props) => {
   const user = useContext(AuthContext).user;
@@ -30,43 +30,47 @@ const UpdateUser = (props) => {
   const [designation, setDesignation] = useState(user.Designation);
   const [moto, setMoto] = useState(user.Moto);
   const [institution, setInstitution] = useState(user.Institution);
-  const [codeForcesHandle, setCodeForcesHandle] = useState(user.CodeforcesHandle);
+  const [codeForcesHandle, setCodeForcesHandle] = useState(
+    user.CodeforcesHandle
+  );
   const [codeForcesLink, setCodeForcesLink] = useState(user.Codeforces);
   const [githubLink, setGithubLink] = useState(user.Github);
   const [codechefLink, setCodechefLink] = useState(user.Codechef);
   const [atcoderLink, setAtcoderLink] = useState(user.AtCoder);
   const [linkedInLink, setLinkedInLink] = useState(user.Linkedin);
-  const [amongusChar, setAmongusChar] = useState(parseInt(user.Avatar.slice(-1)));
+  const [amongusChar, setAmongusChar] = useState(
+    parseInt(user.Avatar.slice(-1))
+  );
   const [country, setCountry] = useState(user.Country);
 
   const history = useHistory();
 
-  const updateProfile = ()=>{
+  const updateProfile = async () => {
+    const data = {
+      Name: name,
+      Moto: moto,
+      CodeforcesHandle: codeForcesHandle,
+      Codeforces: codeForcesLink,
+      Codechef: codechefLink,
+      Github: githubLink,
+      AtCoder: atcoderLink,
+      Linkedin: linkedInLink,
+      Avatar: `amongus${amongusChar}`,
+      Designation: designation,
+      Country: country,
+      Institution: institution,
+    };
+    try {
+      await axios.patch(`/user/updateProfile/`, data);
+      alert("updated! stop the spinner");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-      const data = {
-        Name : name,
-        Moto:moto,
-        CodeforcesHandle:codeForcesHandle,
-        Codeforces:codeForcesLink,
-        Codechef:codechefLink,
-        Github:githubLink,
-        AtCoder:atcoderLink,
-        Linkedin:linkedInLink,
-        Avatar:`amongus${amongusChar}`,
-        Designation:designation,
-        Country:country,
-        Institution:institution
-      }
-
-      axios.patch(`/user/updateProfile/`,data)
-            .then(res=>alert("updated! stop the spinner"))
-            .catch(e=>console.log(e));
-  }
-
-  const backHandler = ()=>{
+  const backHandler = () => {
     history.push("/me");
-  }
-
+  };
 
   return (
     <>
@@ -76,30 +80,37 @@ const UpdateUser = (props) => {
           changeHandler={(e) => setAmongusChar(e)}
         />
       ) : null}
-      <div style={{ background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
-          minHeight:'100vh',paddingBottom:'50px'}}>
-      <Stars/>
-      <Back clicked={backHandler}/>
-      <Nav/>
+      <div
+        style={{
+          background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
+          minHeight: "100vh",
+          paddingBottom: "50px",
+        }}
+      >
+        <Stars />
+        <Back clicked={backHandler} />
+        <Nav />
 
-        <div style={{
-          margin: "auto",
-          padding: "20px",
-          minHeight: "70%",
-          width: "70%",
-          border: "10px double #fff",
-          borderRadius: "20px",
-        }}>
-          <div style={{
+        <div
+          style={{
             margin: "auto",
             padding: "20px",
             minHeight: "70%",
+            width: "70%",
+            border: "10px double #fff",
             borderRadius: "20px",
-            background:'#fff'
           }}
-
+        >
+          <div
+            style={{
+              margin: "auto",
+              padding: "20px",
+              minHeight: "70%",
+              borderRadius: "20px",
+              background: "#fff",
+            }}
           >
-            <div style={{display:'flex',justifyContent:'space-between'}}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div
                 style={{
                   display: "flex",
@@ -118,35 +129,37 @@ const UpdateUser = (props) => {
                     }}
                   />
                 </div>
-                  <Button
-                    onClick={() => setShowAvatarModal(true)}
-                    style={{
-                      fontSize: "12px",
-                      height: "30px",
-                      width: "130px",
-                      background: "#8e33bc",
-                      color: "#fff",
-                    }}
-                  >
-                    Choose Avatar
-                  </Button>
-              </div>
-              <img src={ProfileUpdate}
-                style={{alignSelf:'center'}}
-                alt="profile" />
-
                 <Button
+                  onClick={() => setShowAvatarModal(true)}
                   style={{
-                    height: "20%",
-                    padding:'5px 10px 5px 10px',
-                    background: "#336abc",
+                    fontSize: "12px",
+                    height: "30px",
+                    width: "130px",
+                    background: "#8e33bc",
                     color: "#fff",
-                    top:'0',
                   }}
-                  onClick={updateProfile}
                 >
-                  Update
+                  Choose Avatar
                 </Button>
+              </div>
+              <img
+                src={ProfileUpdate}
+                style={{ alignSelf: "center" }}
+                alt="profile"
+              />
+
+              <Button
+                style={{
+                  height: "20%",
+                  padding: "5px 10px 5px 10px",
+                  background: "#336abc",
+                  color: "#fff",
+                  top: "0",
+                }}
+                onClick={updateProfile}
+              >
+                Update
+              </Button>
             </div>
             <div>
               <div
@@ -174,7 +187,7 @@ const UpdateUser = (props) => {
                 <CountryFeild
                   width="20%"
                   country={country}
-                  changeHandler={(e) =>setCountry(e)}
+                  changeHandler={(e) => setCountry(e)}
                 />
               </div>
               <div

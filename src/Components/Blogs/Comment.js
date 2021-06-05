@@ -17,18 +17,18 @@ const Comment = (props) => {
   const [deleted, setDeleted] = useState(false);
   const id = props.comment._id;
 
-  const saveHandler = () => {
+  const saveHandler = async () => {
     const data = divRef.current.value.trim();
     if (!data) {
       return alert("cant be empty");
     }
-    axios
-      .patch("/comment/updateComment/" + id)
-      .then((res) => {
-        setInitialComment(data);
-        setEditComment(false);
-      })
-      .catch((e) => console.log(e));
+    try {
+      const res = await axios.patch("/comment/updateComment/" + id);
+      setInitialComment(res.data);
+      setEditComment(false);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const toggleReplyHandler = () => {

@@ -23,8 +23,8 @@ const CurrentBlog = (props) => {
   const [blogLoading, setBlogLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [dummy, setDummy] = useState(uuidv4());
-  const [user, setUser] = useState('NA');
-  
+  const [user, setUser] = useState("NA");
+
   const id = window.location.pathname.split("/")[2];
 
   const history = useHistory();
@@ -45,18 +45,17 @@ const CurrentBlog = (props) => {
     }
   }, [props.blogPosted]);
 
-  
   const deleteHandler = async () => {
     if (window.confirm("Are you sure you want to delete this Blog ?")) {
-      axios
-      .delete(`/blogs/delete/${id}`)
-      .then((res) => {
+      try {
+        await axios.delete(`/blogs/delete/${id}`);
         history.push("/blogs");
-      })
-      .catch((e) => console.log(e));
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
-  
+
   const showCommentHandler = async () => {
     if (!showComment) {
       setCommentLoading(true);
@@ -73,27 +72,27 @@ const CurrentBlog = (props) => {
       setShowComment(false);
     }
   };
-  
+
   const moreCommentClickHandler = () => {
     setCommentLoading(true);
     setTimeout(() => setCommentLoading(false), 2000);
   };
-  
-  const commentDeleteHandler = (id) => {
+
+  const commentDeleteHandler = async (id) => {
     if (window.confirm("Are you sure you want to delete this comment")) {
       setCommentLoading(true);
-      axios
-      .delete("/comment/deleteComment/" + id)
-      .then((res) => {
+      try{
+        await axios.delete("/comment/deleteComment/" + id)
         const t = comments.filter((comment, key) => comment._id !== id);
         setComments(...t);
         setDummy(uuidv4());
-      })
-      .catch((e) => console.log(e));
+      } catch (e) {
+        console.log(e);
+      }
     }
     setCommentLoading(false);
   };
-  
+
   if (blogLoading) {
     return <BlogSpinner />;
   }
@@ -123,7 +122,7 @@ const CurrentBlog = (props) => {
                 background: "#fff",
               }}
             >
-              <UserBlogDescription admin={{User:user}} />
+              <UserBlogDescription admin={{ User: user }} />
             </div>
             <ReactMarkdown>{initialBlog}</ReactMarkdown>
           </>
@@ -134,7 +133,7 @@ const CurrentBlog = (props) => {
               Api={"/blogs/currBlog/" + id}
               method="patch"
               closeTextEditor={() => setEditBlog(false)}
-              updateBtnClick = {() => setBlogLoading(true)}
+              updateBtnClick={() => setBlogLoading(true)}
             ></TextEditor>
           </>
         )}
@@ -152,7 +151,7 @@ const CurrentBlog = (props) => {
               type="blog"
               showCommentHandler={showCommentHandler}
               showEditBtn={!editBlog}
-              admin={{User:user}}
+              admin={{ User: user }}
               editHandler={() => setEditBlog(true)}
               deleteHandler={deleteHandler}
               openWriter={() => setShowWriter(true)}
