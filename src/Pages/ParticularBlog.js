@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Grid, Box, Button, Typography, Avatar } from "@material-ui/core";
 import CurrentBlog from "../Components/Blogs/CurrentBlog";
 import Comments from "../Components/Blogs/Comments";
@@ -7,8 +7,11 @@ import * as TYPES from "../store/Action/action";
 import classes from "../Assets/css/wrapstyle.module.css";
 import Stars from "../Components/Stars/Stars";
 import BlogHead from "../Components/Blogs/BlogHead";
-const ParticularBlog = (props) => {
 
+const ParticularBlog = (props) => {
+  useEffect(() => {
+    props.blogPosted(true);
+  }, []);
   return (
     <>
       <div className={classes.wrap}>
@@ -26,7 +29,6 @@ const ParticularBlog = (props) => {
             }}
           >
             <CurrentBlog />
-
           </div>
         </div>
       </div>
@@ -34,5 +36,12 @@ const ParticularBlog = (props) => {
   );
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    blogPosted: (action) => {
+      dispatch({ type: TYPES.BLOGPOSTED, value: action });
+    },
+  };
+};
 
-export default ParticularBlog;
+export default connect(null, mapDispatchToProps)(ParticularBlog);

@@ -1,5 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { Grid, Box, Button } from "@material-ui/core";
+import { connect } from "react-redux";
+
 import Blogs from "../Components/Blogs/Blogs";
 import TextEditor from "../Components/TextEditor/TextEditor";
 import Stars from "../Components/Stars/Stars";
@@ -7,12 +9,18 @@ import BlogHead from "../Components/Blogs/BlogHead";
 import classes from "../Assets/css/wrapstyle.module.css";
 import { AuthContext } from "../context/auth-context";
 import { useHistory } from "react-router-dom";
+import * as TYPES from "../store/Action/action";
 
 const BlogPage = (props) => {
   const [showEditor, setShowEditor] = useState(false);
   const auth = useContext(AuthContext);
   const history = useHistory();
-
+  
+  useEffect(() => {
+    props.fetchBlog(true);
+  }, []);
+  
+  
   const showEditorHandler = () => {
     if (!auth.token) {
       return history.push("/login?redirect" + "blogs");
@@ -50,8 +58,8 @@ const BlogPage = (props) => {
                 float: "right",
                 cursor: "pointer",
                 textAlign: "center",
-                fontSize:'15px',
-                border:'2px solid #fff'
+                fontSize: "15px",
+                border: "2px solid #fff",
               }}
               onClick={() => setShowEditor(false)}
             >
@@ -61,6 +69,7 @@ const BlogPage = (props) => {
               <TextEditor
                 showUpdateBtn={true}
                 Api="/blogs/write"
+                updateBtnClick={() => setShowEditor(false)}
                 initialValue=""
                 method="post"
               />
@@ -81,7 +90,7 @@ const BlogPage = (props) => {
                 float: "right",
                 cursor: "pointer",
                 textAlign: "center",
-                boxSizing:'border-box',
+                boxSizing: "border-box",
               }}
               onClick={showEditorHandler}
             >
@@ -95,4 +104,12 @@ const BlogPage = (props) => {
   );
 };
 
-export default BlogPage;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchBlog: (action) => {
+      dispatch({ type: TYPES.BLOGPOSTED, value: action });
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(BlogPage);

@@ -7,10 +7,11 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import HelperIcons from "./HelperIcons";
-import {BLOGPOSTED} from "../../store/Action/action";
+import * as TYPES from "../../store/Action/action";
 
 function Blogs(props) {
   const [blogs, setBlogs] = useState([]);
+  const [blogsLoading, setBlogsLoading] = useState(true);
 
   const history = useHistory();
 
@@ -20,35 +21,46 @@ function Blogs(props) {
 
   const deleteHandler = (blogId) => {
     if (window.confirm("Are you sure you want to delete this Blog")) {
-      axios.delete("/blogs/delete/" + blogId)
-          .then(res=>{
-            props.deleteBlog();
-            console.log("deleted");
-          }).catch(e=>alert("delete error"));
+      axios
+        .delete("/blogs/delete/" + blogId)
+        .then((res) => {
+          props.deleteBlog();
+          console.log("deleted");
+        })
+        .catch((e) => alert("delete error"));
     }
   };
 
   useEffect(() => {
-    axios
-      .get("blogs/Allblogs")
-      .then((res) => {
-        console.log(res.data);
-        setBlogs(res.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    if (props.blogPosted) {
+      setBlogsLoading(true);
+      axios
+        .get("blogs/Allblogs")
+        .then((res) => {
+          console.log(res.data);
+          setBlogs(res.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      setBlogsLoading(false);
+    }
+    props.fetchBlog(false);
   }, [props.blogPosted]);
 
   let allBlogs = <BlogSpinner />;
 
-  if (blogs.length >= 1) {
+  if (!blogsLoading) {
     allBlogs = blogs.map((item) => {
       return (
-        <div style={{border:"10px double #fff" ,
-        padding:"10px",
-        marginTop:"20px",
-        borderRadius: "20px",}}>
+        <div
+          style={{
+            border: "10px double #fff",
+            padding: "10px",
+            marginTop: "20px",
+            borderRadius: "20px",
+          }}
+        >
           <Grid
             key={item._id}
             style={{
@@ -61,7 +73,7 @@ function Blogs(props) {
               cursor: "pointer",
             }}
           >
-            <UserBlogDescription admin={item} />
+            <UserBlogDescription admin={{ User: item.User }} />
             <Grid
               style={{ marginTop: "1vh" }}
               onClick={() => onClickHandler(item._id)}
@@ -74,7 +86,8 @@ function Blogs(props) {
               <HelperIcons
                 type="blog"
                 allBlogPage={true}
-                deleteHandler={()=>deleteHandler(item._id)}
+                admin = {{User:item.User}}
+                deleteHandler={() => deleteHandler(item._id)}
               />
             </Grid>
           </Grid>
@@ -91,10 +104,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps= (dispatch) =>{
-  return{
-    deleteBlog : ()=>{dispatch({type:BLOGPOSTED})}
-  }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteBlog: () => {
+      dispatch({ type: TYPES.BLOGPOSTED, value: true });
+    },
+    fetchBlog: (action) => {
+      dispatch({ type: TYPES.BLOGPOSTED, value: action });
+    },
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Blogs);

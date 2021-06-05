@@ -22,26 +22,17 @@ const Comment = (props) => {
     if (!data) {
       return alert("cant be empty");
     }
-    axios.patch("/comment/updateComment/" + id)
-      .then(res=>{
-        setInitialComment(data)
+    axios
+      .patch("/comment/updateComment/" + id)
+      .then((res) => {
+        setInitialComment(data);
         setEditComment(false);
       })
-      .catch(e=>console.log(e));
-
+      .catch((e) => console.log(e));
   };
 
   const toggleReplyHandler = () => {
     setShowReply((prev) => !prev);
-  };
-  const deleteHandler = () => {
-    if(window.confirm('Are you sure you want to delete this comment')){
-        axios.delete("/comment/deleteComment/" + id)
-          .then(res=>{
-            setDeleted(true);
-          }).catch(e=>console.log(e));
-
-    }
   };
 
   if (deleted) {
@@ -66,7 +57,7 @@ const Comment = (props) => {
         }}
       >
         <div style={{ display: "flex" }}>
-          <UserBlogDescription admin={false} />
+          <UserBlogDescription admin={{ User: props.comment.User }} />
         </div>
         {editComment === false ? (
           <div
@@ -122,7 +113,7 @@ const Comment = (props) => {
             showEditBtn={!editComment}
             editHandler={() => setEditComment(true)}
             toggleReplyHandler={toggleReplyHandler}
-            deleteHandler={deleteHandler}
+            deleteHandler={props.deleteHandler}
             openWriter={() => setShowWriter(true)}
           />
         </Grid>
