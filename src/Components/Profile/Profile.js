@@ -5,7 +5,7 @@ import {AuthContext} from "../../context/auth-context";
 
 import ProfileFeild from "./ProfileFeild";
 import Amongus1 from "../../Assets/images/amongus1.png";
-import HomePageImg from "../../Assets/images/HomePageImg.png";
+import ProfileTitle from "../../Assets/images/Profile.png";
 
 import EditIcon from "@material-ui/icons/Edit";
 import ShareIcon from "@material-ui/icons/Share";
@@ -46,7 +46,7 @@ const Profile = (props) => {
           boxSizing: "border-box",
         }}
       >
-        <img src={HomePageImg} style={{ height: "70px" }} alt="code-n-collab" />
+        <img src={ProfileTitle} style={{ height: "70px" , width:'200px' }} alt="code-n-collab" />
       </div>
       <div
         style={{

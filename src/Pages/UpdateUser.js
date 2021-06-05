@@ -7,6 +7,7 @@ import Back from "../Components/Back/Back";
 import Nav from "../Components/Nav/Nav";
 import Stars from "../Components/Stars/Stars"
 import HomePageImg from "../Assets/images/HomePageImg.png";
+import ProfileUpdate from "../Assets/images/ProfileUpdate.png";
 
 
 import Amongus1 from "../Assets/images/amongus1.png";
@@ -109,6 +110,10 @@ const UpdateUser = (props) => {
                     Choose Avatar
                   </Button>
               </div>
+              <img src={ProfileUpdate}
+                style={{alignSelf:'center'}}
+                alt="profile" />
+
                 <Button
                   style={{
                     height: "20%",
