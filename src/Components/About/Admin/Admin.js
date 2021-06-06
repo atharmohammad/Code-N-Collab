@@ -43,7 +43,7 @@ export default function Admin(props) {
           flexDirection: "row",
           paddingRight: "1vh",
           boxSizing: "border-box",
-          width: "60%",
+          width: "100%",
         }}
       >
         <a

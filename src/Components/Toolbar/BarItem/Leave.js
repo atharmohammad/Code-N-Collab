@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import * as TYPE from "../../../store/Action/action";
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
 import classes from "./tools.module.css";
 import { Box } from "@material-ui/core";
+import {AuthContext} from "../../../context/auth-context"
 import { useHistory } from "react-router-dom";
 
 function Leave(props) {
@@ -12,6 +13,8 @@ function Leave(props) {
   const [room, setRoom] = useState("");
   const [name, setName] = useState("");
   const [title,setTitle] = useState("");
+  const auth = useContext(AuthContext);
+
   const socket = props.socket;
   const searchParams = new URLSearchParams(location.search);
 
@@ -32,13 +35,13 @@ function Leave(props) {
 
   const leaveRoomHandler = () => {
     const currentPath = location.pathname;
-
     if(currentPath === "/newContest"){
       socket.emit("Contest-Update",({roomId:searchParams.get("room")}))
       socket.emit("Leave-Contest",({
-      name:location.state.Name}));
+        name:auth.user.CodeforcesHandle,
+        roomId:searchParams.get("room")
+      }));
       history.push("/homepage");
-      window.location.reload();
     }else{
       try {
         props.leaveRoom();

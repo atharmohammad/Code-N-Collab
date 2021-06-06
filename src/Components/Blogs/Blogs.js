@@ -7,76 +7,102 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import HelperIcons from "./HelperIcons";
-import {BLOGPOSTED} from "../../store/Action/action";
+import { v4 as uuidv4 } from "uuid";
+import * as TYPES from "../../store/Action/action";
 
 function Blogs(props) {
   const [blogs, setBlogs] = useState([]);
-
+  const [blogsLoading, setBlogsLoading] = useState(true);
   const history = useHistory();
 
   const onClickHandler = (blogId) => {
     return history.push("/blog/" + blogId);
   };
 
-  const deleteHandler = (blogId) => {
+  const deleteHandler = async (blogId) => {
     if (window.confirm("Are you sure you want to delete this Blog")) {
-      axios.delete("/blogs/delete/" + blogId)
-          .then(res=>{
-            props.deleteBlog();
-            console.log("deleted");
-          }).catch(e=>alert("delete error"));
+      setBlogsLoading(true);
+      try {
+        await axios.delete("/blogs/delete/" + blogId);
+        props.deleteBlog();
+      } catch (e) {
+        alert("delete error");
+      }
+      setBlogsLoading(false);
     }
   };
 
-  useEffect(() => {
-    axios
-      .get("blogs/Allblogs")
-      .then((res) => {
-        console.log(res.data);
+  useEffect(async () => {
+    if (props.blogPosted) {
+      setBlogsLoading(true);
+      try {
+        const res = await axios.get("blogs/Allblogs");
+        console.log(res.data)
         setBlogs(res.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+      } catch (e) {
+        alert("delete error", e);
+      }
+      setBlogsLoading(false);
+      props.fetchBlog(false);
+    }
   }, [props.blogPosted]);
 
-  let allBlogs = <BlogSpinner />;
+  let allBlogs = <></>;
 
-  if (blogs.length >= 1) {
+  if (!blogsLoading) {
+
     allBlogs = blogs.map((item) => {
+      console.log('item',item.Likes.length)
       return (
-        <Grid
-          key={item._id}
+        <div
           style={{
-            border: "2px solid #e2e2e2",
-            padding: "1vh",
-            minHeight: "16vh",
-            width: "100vh",
-            marginTop: "3vh",
-            backgroundColor: "#fff",
-            borderRadius: "5px",
-            cursor: "pointer",
+            border: "10px double #fff",
+            padding: "10px",
+            marginTop: "20px",
+            borderRadius: "20px",
           }}
         >
-          <UserBlogDescription admin={item} />
+
           <Grid
-            style={{ marginTop: "1vh" }}
-            onClick={() => onClickHandler(item._id)}
+            key={item._id}
+            style={{
+              padding: "1vh",
+              minHeight: "16vh",
+              width: "100vh",
+              background:'#fff',
+              borderRadius: "20px",
+            }}
           >
-            <Typography>
-              <ReactMarkdown>{item.Body}</ReactMarkdown>
-            </Typography>
+          <UserBlogDescription admin={{ User: item.User }} />
+            <Grid
+                style={{ marginTop: "1vh",cursor:'pointer'}}
+                onClick={() => onClickHandler(item._id)}
+              >
+                <Typography>
+                  <ReactMarkdown>{item.Body}</ReactMarkdown>
+                </Typography>
+              </Grid>
+              <Grid container  direction="row" justify="flex-end">
+                <HelperIcons
+                  type="blog"
+                  allBlogPage={true}
+                  admin={{ User: item.User }}
+                  deleteHandler={() => deleteHandler(item._id)}
+                  likeChangeHandler = {()=>{}}
+                  likesLength = {item.Likes.length}
+                  viewerLiked = {false}
+                />
+              </Grid>
           </Grid>
-          <Grid container direction="row" justify="flex-end">
-            <HelperIcons
-              type="blog"
-              allBlogPage={true}
-              deleteHandler={()=>deleteHandler(item._id)}
-            />
-          </Grid>
-        </Grid>
+        </div>
       );
     });
+  } else {
+    return (
+      <div>
+        <BlogSpinner />
+      </div>
+    );
   }
   return <div>{allBlogs}</div>;
 }
@@ -87,10 +113,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps= (dispatch) =>{
-  return{
-    deleteBlog : ()=>{dispatch({type:BLOGPOSTED})}
-  }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteBlog: () => {
+      dispatch({ type: TYPES.BLOGPOSTED, value: true });
+    },
+    fetchBlog: (action) => {
+      dispatch({ type: TYPES.BLOGPOSTED, value: action });
+    },
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Blogs);

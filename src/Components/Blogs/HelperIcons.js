@@ -1,13 +1,17 @@
-import { useState, useEffect } from "react";
-import { Grid, Tooltip, IconButton } from "@material-ui/core";
+import { useState, useEffect, useContext } from "react";
+import { Grid, Tooltip, IconButton, Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import AddIcon from "@material-ui/icons/Add";
 import ForumIcon from "@material-ui/icons/Forum";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import CommentIcon from "@material-ui/icons/Comment";
+import Fade from "@material-ui/core/Fade";
+import { AuthContext } from "../../context/auth-context";
 
 const HelperIcons = (props) => {
+  const auth = useContext(AuthContext);
+
   const { type, showEditBtn, editHandler, deleteHandler, openWriter } = {
     ...props,
   }; //for all
@@ -25,41 +29,50 @@ const HelperIcons = (props) => {
       <>
         <Tooltip
           title="View Comment"
-          style={{ width: "60px" }}
+          style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
           onClick={showCommentHandler}
         >
-          <IconButton>
-            <CommentIcon style={{ cursor: "pointer" }} />
-            <p style={{ height: "10px", marginLeft: "5px", fontSize: "15px" }}>
-              93
-            </p>
-          </IconButton>
+          <Button>
+            <CommentIcon
+              style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
+            />
+            93
+          </Button>
         </Tooltip>
       </>
     );
   } else if (props.type.toLowerCase() == "comment") {
     forumIcon = (
       <Tooltip
+        TransitionComponent={Fade}
+        TransitionProps={{ timeout: 600 }}
         title="toggle Reply"
-        style={{ width: "60px" }}
+        style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
         onClick={toggleReplyHandler}
       >
-        <IconButton>
-          <ForumIcon style={{ cursor: "pointer" }} />
-        </IconButton>
+        <Button>
+          <ForumIcon
+            style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
+          />
+        </Button>
       </Tooltip>
     );
   }
 
   return (
     <>
-      <Tooltip title="Like" style={{ width: "60px", marginRight: "10px" }}>
-        <IconButton>
-          <ThumbUpAltIcon style={{ cursor: "pointer" }} />{" "}
-          <p style={{ height: "10px", marginLeft: "5px", fontSize: "15px" }}>
-            120
-          </p>
-        </IconButton>
+      <Tooltip
+        TransitionComponent={Fade}
+        TransitionProps={{ timeout: 600 }}
+        title="Like"
+        style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
+      >
+        <Button>
+          <ThumbUpAltIcon
+            style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
+          />
+          {props.likesLength !== undefined ? props.likesLength : "NA"}
+        </Button>
       </Tooltip>
 
       {blogIcons}
@@ -67,38 +80,62 @@ const HelperIcons = (props) => {
       {!allBlogPage ? (
         <>
           <Tooltip
+            TransitionComponent={Fade}
+            TransitionProps={{ timeout: 600 }}
             title={`write ${addIconTitle}`}
             onClick={openWriter}
-            style={{ width: "60px" }}
+            style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
           >
-            <IconButton>
-              <AddIcon title={`write ${addIconTitle}`} style={{}} />
-            </IconButton>
+            <Button>
+              <AddIcon
+                title={`write ${addIconTitle}`}
+                style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
+              />
+            </Button>
           </Tooltip>
-          {showEditBtn ? (
-            <Tooltip
-              title={`edit ${type}`}
-              onClick={editHandler}
-              style={{ width: "60px" }}
-            >
-              <IconButton>
-                <EditIcon style={{ cursor: "pointer" }} />
-              </IconButton>
-            </Tooltip>
+          {auth.token &&
+          props.admin &&
+          props.admin.User._id === auth.user._id ? (
+            showEditBtn ? (
+              <Tooltip
+                TransitionComponent={Fade}
+                TransitionProps={{ timeout: 600 }}
+                title={`edit ${type}`}
+                onClick={editHandler}
+                style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
+              >
+                <Button>
+                  <EditIcon
+                    style={{
+                      cursor: "pointer",
+                      color: "gray",
+                      marginRight: "5px",
+                    }}
+                  />
+                </Button>
+              </Tooltip>
+            ) : null
           ) : null}
 
           {forumIcon}
         </>
       ) : null}
-      <Tooltip
-        title={`delete ${type}`}
-        onClick={deleteHandler}
-        style={{ width: "60px" }}
-      >
-        <IconButton>
-          <DeleteIcon style={{ cursor: "pointer" }} />
-        </IconButton>
-      </Tooltip>
+
+      {auth.token && props.admin && props.admin.User._id === auth.user._id ? (
+        <Tooltip
+          TransitionComponent={Fade}
+          TransitionProps={{ timeout: 600 }}
+          title={`delete ${type}`}
+          onClick={deleteHandler}
+          style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
+        >
+          <Button>
+            <DeleteIcon
+              style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
+            />
+          </Button>
+        </Tooltip>
+      ) : null}
     </>
   );
 };

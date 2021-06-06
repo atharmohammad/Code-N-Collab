@@ -1,42 +1,95 @@
 import { useState, useEffect, useRef } from "react";
-import { Grid, Tooltip, IconButton } from "@material-ui/core";
+import { Grid, Tooltip, IconButton, Button } from "@material-ui/core";
 import { connect } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import ReactMarkdown from "react-markdown";
 import HelperIcons from "./HelperIcons";
-
+import { useHistory } from "react-router-dom";
 import axios from "../../Axios/axios";
 import TextEditor from "../TextEditor/TextEditor";
 import BlogSpinner from "../Spinner/BlogSpinner";
 import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
+import Comment from "./Comment";
 
 import * as TYPES from "../../store/Action/action";
 
 const CurrentBlog = (props) => {
-  const [deleted, setDeleted] = useState(false);
   const [editBlog, setEditBlog] = useState(false);
   const [showWriter, setShowWriter] = useState(false);
   const [initialBlog, setInitialBlog] = useState(null);
+  const [showComment, setShowComment] = useState(false);
+  const [commentLoading, setCommentLoading] = useState(false);
+  const [blogLoading, setBlogLoading] = useState(true);
+  const [comments, setComments] = useState([]);
+  const [dummy, setDummy] = useState(uuidv4());
+  const [user, setUser] = useState("NA");
+
+  const [likesLength, setlikesLength] = useState(null);
+  const [viewerLiked, setViewerLiked] = useState(null);
+
   const id = window.location.pathname.split("/")[2];
 
+  const history = useHistory();
+
   useEffect(async () => {
-    try {
-      const currBlog = await axios.get(`blogs/currentBlog/${id}`);
-      setInitialBlog(currBlog.data.Body);
-    } catch (e) {
-      console.log(e);
+    if (props.blogPosted) {
+      setBlogLoading(true);
+      try {
+        const currBlog = await axios.get(`blogs/currentBlog/${id}`);
+        setInitialBlog(currBlog.data.Body);
+        setUser(currBlog.data.User);
+        setlikesLength(currBlog.data.Likes.length);
+        setViewerLiked(
+          currBlog.data.Likes.findIndex(
+            (like, i) => like === currBlog.data.User._id
+          ) !== -1
+        );
+      } catch (e) {
+        console.log(e);
+      }
+      props.blogPostedOff(false);
+      setEditBlog(false);
+      setBlogLoading(false);
     }
-  }, [initialBlog]);
+  }, [props.blogPosted]);
 
-  if (!initialBlog) {
-    return <BlogSpinner />;
-  }
-
-  const deleteHandler = () => {
-    if (window.confirm("Are you sure you want to delete this Blog")) {
-      setDeleted(true);
+  const deleteHandler = async () => {
+    if (window.confirm("Are you sure you want to delete this Blog ?")) {
+      try {
+        await axios.delete(`/blogs/delete/${id}`);
+        history.push("/blogs");
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
+
+  const showCommentHandler = async () => {
+    if (!showComment) {
+      setCommentLoading(true);
+      try {
+        setShowComment(true);
+        const data = await axios.get(`/comment/getComments/${id}`);
+        setComments(data.data.Comments);
+        setDummy(uuidv4());
+      } catch (e) {
+        console.log(e);
+      }
+      setCommentLoading(false);
+    } else {
+      setShowComment(false);
+    }
+  };
+
+  const moreCommentClickHandler = () => {
+    setCommentLoading(true);
+    setTimeout(() => setCommentLoading(false), 2000);
+  };
+
+  if (blogLoading) {
+    return <BlogSpinner />;
+  }
 
   return (
     <>
@@ -49,23 +102,15 @@ const CurrentBlog = (props) => {
           flexDirection: "column",
           border: "2px solid grey",
           background: "#fff",
-          zIndex: "2",
           fontFamily: ["Baloo Tammudu 2", "cursive"].join(" "),
           lineHeight: "170%",
           fontSize: "20px",
+          borderRadius:'20px'
         }}
       >
         {editBlog === false ? (
           <>
-            <div
-              style={{
-                display: "flex",
-                alignSelf: "flex-start",
-                background: "#fff",
-              }}
-            >
-              <UserBlogDescription admin={false} />
-            </div>
+            <UserBlogDescription admin={{ User: user }} />
             <ReactMarkdown>{initialBlog}</ReactMarkdown>
           </>
         ) : (
@@ -75,6 +120,7 @@ const CurrentBlog = (props) => {
               Api={"/blogs/currBlog/" + id}
               method="patch"
               closeTextEditor={() => setEditBlog(false)}
+              updateBtnClick={() => setBlogLoading(true)}
             ></TextEditor>
           </>
         )}
@@ -90,31 +136,83 @@ const CurrentBlog = (props) => {
           >
             <HelperIcons
               type="blog"
-              showCommentHandler={props.showComment}
+              showCommentHandler={showCommentHandler}
               showEditBtn={!editBlog}
+              admin={{ User: user }}
               editHandler={() => setEditBlog(true)}
               deleteHandler={deleteHandler}
               openWriter={() => setShowWriter(true)}
+              likeChangeHandler={() => {}}
+              likesLength={likesLength}
+              viewerLiked={false}
             />
           </Grid>
         </div>
-        {showWriter ? (
-          <WriterModal cancelHandler={() => setShowWriter(false)} />
+      </div>
+      <div
+        style={{
+          marginTop: "10px",
+          background: "grey",
+          boxShadow: "5px 5px 20px black",
+          borderRadius: "10px",
+        }}
+      >
+        {showComment ? (
+          commentLoading ? (
+            <BlogSpinner />
+          ) : (
+            <>
+              <div
+                style={{
+                  margin: "30px 10px 30px 10px",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <div>
+                  {comments.map((item, key) => (
+                    <Comment comment={item} key={key} dummy={dummy} />
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <Button
+                  onClick={moreCommentClickHandler}
+                  style={{
+                    background: "#3e2cd4",
+                    color: "#fff",
+                    width: "100px",
+                    boxShadow: "5px 5px 5px #888888",
+                    margin: "0px 10px 10px 2px",
+                  }}
+                >
+                  More...
+                </Button>
+              </div>
+            </>
+          )
         ) : null}
       </div>
+      {showWriter ? (
+        <WriterModal parentId={id} cancelHandler={() => setShowWriter(false)} />
+      ) : null}
     </>
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    blogPosted: state.tools.blogPosted,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    blogPosted: () => {
-      dispatch({ type: TYPES.BLOGPOSTED });
-    },
-    showComment: () => {
-      dispatch({ type: TYPES.SHOW_COMMENTS });
+    blogPostedOff: (action) => {
+      dispatch({ type: TYPES.BLOGPOSTED, value: action });
     },
   };
 };
 
-export default connect(null, mapDispatchToProps)(CurrentBlog);
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentBlog);

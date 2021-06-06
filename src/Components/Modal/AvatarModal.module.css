@@ -1,0 +1,53 @@
+.backdrop {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #00000066;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  z-index: 200;
+  top: 20%;
+  left: 30%;
+  width: 40%;
+  background: black;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+  border:10px double white;
+  border-radius: 20px;
+  padding: 15px;
+  height: 60%;
+  box-sizing: border-box;
+}
+
+.AvatarGridone {
+  margin: 1px;
+  overflow: auto;
+  resize: none;
+  border-radius: 20px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap:60px;
+  height: 94%;
+  padding: 10px;
+  background: #fff
+}
+.avatar{
+  height: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.background{
+  border-radius: 10px
+}
+
+.background:hover{
+  background: black
+}

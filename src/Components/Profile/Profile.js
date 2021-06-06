@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Grid, Tooltip, IconButton } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { AuthContext } from "../../context/auth-context";
+
+import SelectAvatar from "../SelectAvatars/SelectAvatars";
 import ProfileFeild from "./ProfileFeild";
-import Amongus1 from "../../Assets/images/amongus1.png";
+import ProfileTitle from "../../Assets/images/Profile.png";
+
 import EditIcon from "@material-ui/icons/Edit";
 import ShareIcon from "@material-ui/icons/Share";
 import CodeforcesIcon from "../../Assets/images/Codeforces.png";
@@ -9,21 +14,37 @@ import LinkedInIcon from "../../Assets/images/Linkedin.png";
 import GithubIcon from "../../Assets/images/Github.png";
 import CodechefIcon from "../../Assets/images/codechef.png";
 import AtcoderIcon from "../../Assets/images/atcoder.png";
-import Nav from "../Nav/Nav";
 
 const Profile = (props) => {
+  const history = useHistory();
+  const user = props.user;
+  const auth = useContext(AuthContext);
+
   return (
-    <div style={{ height: "100vh" }}>
+    <>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginLeft: "15%",
+          boxSizing: "border-box",
+        }}
+      >
+        <img
+          src={ProfileTitle}
+          style={{ height: "70px", width: "200px" }}
+          alt="code-n-collab"
+        />
+      </div>
       <div
         style={{
           width: "80%",
           margin: "auto",
-          marginTop: "50px",
-          padding: "50px",
+          marginTop: "35px",
+          padding: "30px",
           boxSizing: "border-box",
-          height: "80%",
           fontSize: "25px",
-          border: "20px double grey",
+          border: "10px double #fff",
           borderRadius: "20px",
         }}
       >
@@ -31,7 +52,10 @@ const Profile = (props) => {
           style={{
             display: "flex",
             flexDirection: "column",
-            padding: "5px",
+            padding: "5px 40px 5px 40px",
+            background: "#fff",
+            boxSizing: "border-box",
+            borderRadius: "20px",
           }}
         >
           <div
@@ -39,13 +63,12 @@ const Profile = (props) => {
               display: "flex",
               borderBottom: "2px solid grey",
               width: "100%",
-              margin: "auto",
               justifyContent: "space-between",
             }}
           >
             <div style={{ display: "flex" }}>
               <img
-                src={Amongus1}
+                src={SelectAvatar(parseInt(user.Avatar.slice(-1)))}
                 alt="avatar"
                 style={{ height: "80px", width: "80px", borderRadius: "10px" }}
               />
@@ -54,9 +77,10 @@ const Profile = (props) => {
                   display: "flex",
                   alignItems: "flex-end",
                   margin: "10px",
+                  fontFamily: ["edgwick Ave Display", "cursive"].join(),
                 }}
               >
-                <div>Adnan Shamsi</div>
+                <div>{user.Name}</div>
               </div>
             </div>
             <div
@@ -64,13 +88,23 @@ const Profile = (props) => {
                 display: "flex",
                 alignItems: "flex-end",
               }}
-            >
-              <Tooltip title="update profile">
+            >{(auth.user && user._id === auth.user._id
+              ?(<Tooltip
+                title="update profile"
+                onClick={() => history.push("/updateUser")}
+              >
                 <IconButton>
                   <EditIcon style={{ cursor: "pointer" }} />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="share">
+                    </IconButton>
+                </Tooltip>
+                ):null)}
+              <Tooltip
+                title="share"
+                onClick={() => {
+                  navigator.clipboard.writeText(window.location.href);
+                  return alert("copied to clipboard");
+                }}
+              >
                 <IconButton>
                   <ShareIcon style={{ cursor: "pointer" }} />
                 </IconButton>
@@ -81,23 +115,23 @@ const Profile = (props) => {
             style={{
               width: "90%",
               margin: "auto",
-              marginTop: "20px",
             }}
           >
-            <ProfileFeild title="Designation" value="Web Developer" />
-            <ProfileFeild title="Country" value="India" />
-            <ProfileFeild title="Institution" value="Jamia Millia Islamia" />
+            <ProfileFeild title="Designation" value={user.Designation} />
+            <ProfileFeild title="Country" value={user.Country} />
+            <ProfileFeild title="Institution" value={user.Institution} />
+            <ProfileFeild title="Motto" value={user.Moto} />
             <ProfileFeild
-              title="Motto"
-              value="To complete code-n-collab work"
+              title="CodeForces Handle"
+              value={user.CodeforcesHandle}
             />
-            <ProfileFeild title="CodeForces Handle" value="AdnanShamsi" />
           </div>
 
           <div
             style={{
               display: "flex",
               justifyContent: "space-around",
+              flexWrap: "wrap",
             }}
           >
             <a
@@ -105,14 +139,20 @@ const Profile = (props) => {
               style={{
                 display: "inline-block",
                 margin: "10px",
+                boxSizing: "border-box",
               }}
-              href={""}
+              href={user.Codeforces}
               target="_blank"
             >
               <img
                 src={CodeforcesIcon}
                 alt="Codeforces"
-                style={{ height: "70px" }}
+                style={{
+                  height: "50px",
+                  marginTop: "10px",
+                  cursor: "pointer",
+                  boxSizing: "border-box",
+                }}
               />
             </a>
             <a
@@ -120,14 +160,20 @@ const Profile = (props) => {
               style={{
                 display: "inline-block",
                 margin: "10px",
+                boxSizing: "border-box",
               }}
-              href={""}
+              href={user.Codechef}
               target="_blank"
             >
               <img
                 src={CodechefIcon}
                 alt="Codechef"
-                style={{ height: "70px" }}
+                style={{
+                  height: "50px",
+                  marginTop: "10px",
+                  cursor: "pointer",
+                  boxSizing: "border-box",
+                }}
               />
             </a>
             <a
@@ -135,25 +181,41 @@ const Profile = (props) => {
               style={{
                 display: "inline-block",
                 margin: "10px",
+                boxSizing: "border-box",
               }}
-              href={""}
+              href={user.AtCoder}
               target="_blank"
             >
-              <img src={AtcoderIcon} alt="Atcoder" style={{ height: "70px" }} />
+              <img
+                src={AtcoderIcon}
+                alt="Atcoder"
+                style={{
+                  height: "50px",
+                  marginTop: "10px",
+                  cursor: "pointer",
+                  boxSizing: "border-box",
+                }}
+              />
             </a>
             <a
               title="linkedIn"
               style={{
                 display: "inline-block",
                 margin: "10px",
+                boxSizing: "border-box",
               }}
               target="_blank"
-              href={null}
+              href={user.Linkedin}
             >
               <img
                 src={LinkedInIcon}
                 alt="Linkedin"
-                style={{ height: "70px" }}
+                style={{
+                  height: "50px",
+                  marginTop: "10px",
+                  cursor: "pointer",
+                  boxSizing: "border-box",
+                }}
               />
             </a>
             <a
@@ -161,16 +223,26 @@ const Profile = (props) => {
               style={{
                 display: "inline-block",
                 margin: "10px",
+                boxSizing: "border-box",
               }}
-              href={null}
+              href={user.Github}
               target="_blank"
             >
-              <img src={GithubIcon} alt="Github" style={{ height: "70px" }} />
+              <img
+                src={GithubIcon}
+                alt="Github"
+                style={{
+                  height: "50px",
+                  marginTop: "10px",
+                  cursor: "pointer",
+                  boxSizing: "border-box",
+                }}
+              />
             </a>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
