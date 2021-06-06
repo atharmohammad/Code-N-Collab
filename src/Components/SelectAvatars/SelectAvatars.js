@@ -14,7 +14,6 @@ const AvatarArray = [
   Amongus4,
   Amongus5,
   Amongus6,
-  Amongus6,
   Amongus7,
 ];
 const Avatar = (key) => {

@@ -15,15 +15,15 @@ const Comment = (props) => {
   const [editComment, setEditComment] = useState(false);
   const [initialComment, setInitialComment] = useState(props.comment.Body);
   const [commentLoading, setCommentLoading] = useState(false);
-  
+
   const [likesLength, setlikesLength] = useState(props.comment.Likes.length);
   const [viewerLiked, setViewerLiked] = useState(
     props.comment.Likes.findIndex(
       (like, i) => like === props.comment.User._id
       ) !== -1
       );
-  
-      const [replies, setReplies] = useState([]);
+
+  const [replies, setReplies] = useState([]);
   const [showWriter, setShowWriter] = useState(false);
   const [deleted, setDeleted] = useState(false);
 
@@ -143,6 +143,7 @@ const Comment = (props) => {
         <Grid container direction="row" justify="flex-end">
           <HelperIcons
             type="comment"
+            admin={{ User: user }}
             showEditBtn={!editComment}
             editHandler={() => setEditComment(true)}
             toggleReplyHandler={toggleReplyHandler}

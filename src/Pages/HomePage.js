@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext , useState } from "react";
 import HomePageImg from "../Assets/images/HomePageImg.png";
 import { useHistory, useLocation } from "react-router-dom";
 import classes from "../Assets/css/wrapstyle.module.css";
@@ -9,12 +9,15 @@ import { v1 as uuidv1 } from "uuid";
 import Nav from "../Components/Nav/Nav";
 import Back from "../Components/Back/Back";
 import axios from "../Axios/axios";
+import Spinner from "../Components/Spinner/BlogSpinner";
 import { AuthContext } from "../context/auth-context";
+
 function HomePage() {
   const history = useHistory();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const auth = useContext(AuthContext);
+  const [startSpinner , setSpinner] = useState(false);
 
   useEffect(async () => {
     if (searchParams.get("code")) {
@@ -23,16 +26,19 @@ function HomePage() {
       let data;
 
       try {
+        setSpinner(true);
         data = await axios.post("/Oauth/authenticated", { code: code });
+        setSpinner(false);
         auth.login(data.data.user, data.data.token);
         if(data.data.Way === "signup"){
           history.push("/updateUser")
         }
       } catch (e) {
+        setSpinner(false)
         console.log("error", e);
       }
     }
-   
+
   }, []);
 
   const roomHandler = () => {
@@ -71,24 +77,28 @@ function HomePage() {
     >
       <Stars color="#fff" />
       <Back clicked={homePageHandler} />
-      <Nav />
-      <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        style={{ minHeight: "80vh" }}
-      >
-        <img
-          src={HomePageImg}
-          alt="Code-N-Collab"
-          style={{ marginBottom: "5vh" }}
-        />
-        <Button name="Code - Editor" clicked={roomHandler} />
-        <Button name="LockOut - Championship" clicked={contestHandler} />
-        <Button name="Blogs" clicked={blogHandler} />
-        <Button name="Profile" clicked={profileHandler} />
-      </Grid>
+      {startSpinner ? <Spinner/> : (
+        <>
+          <Nav />
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            style={{ minHeight: "80vh" }}
+          >
+            <img
+              src={HomePageImg}
+              alt="Code-N-Collab"
+              style={{ marginBottom: "5vh" }}
+            />
+            <Button name="Code - Editor" clicked={roomHandler} />
+            <Button name="LockOut - Championship" clicked={contestHandler} />
+            <Button name="Blogs" clicked={blogHandler} />
+            <Button name="Profile" clicked={profileHandler} />
+          </Grid>
+        </>
+      )}
     </div>
   );
 }
