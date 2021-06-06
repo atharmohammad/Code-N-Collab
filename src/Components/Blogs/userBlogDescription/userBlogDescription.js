@@ -21,6 +21,9 @@ export default function UserBlogDescription(props){
         <Typography style={{ fontStyle: "italic", fontSize: "14px" }}>
           {admin ? admin.Designation : null}
         </Typography>
+        <Typography style={{ fontStyle: "italic", fontSize: "14px" }}>
+          {admin ? admin.Institution : null}
+        </Typography>
       </Grid>
     </Grid>
   )
