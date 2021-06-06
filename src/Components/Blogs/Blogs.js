@@ -62,38 +62,37 @@ function Blogs(props) {
             borderRadius: "20px",
           }}
         >
+
           <Grid
             key={item._id}
             style={{
-              border: "2px double #e2e2e2",
               padding: "1vh",
               minHeight: "16vh",
               width: "100vh",
-              backgroundColor: "#fff",
+              background:'#fff',
               borderRadius: "20px",
-              cursor: "pointer",
             }}
           >
-            <UserBlogDescription admin={{ User: item.User }} />
+          <UserBlogDescription admin={{ User: item.User }} />
             <Grid
-              style={{ marginTop: "1vh" }}
-              onClick={() => onClickHandler(item._id)}
-            >
-              <Typography>
-                <ReactMarkdown>{item.Body}</ReactMarkdown>
-              </Typography>
-            </Grid>
-            <Grid container direction="row" justify="flex-end">
-              <HelperIcons
-                type="blog"
-                allBlogPage={true}
-                admin={{ User: item.User }}
-                deleteHandler={() => deleteHandler(item._id)}
-                likeChangeHandler = {()=>{}}
-                likesLength = {item.Likes.length}
-                viewerLiked = {false}
-              />
-            </Grid>
+                style={{ marginTop: "1vh",cursor:'pointer'}}
+                onClick={() => onClickHandler(item._id)}
+              >
+                <Typography>
+                  <ReactMarkdown>{item.Body}</ReactMarkdown>
+                </Typography>
+              </Grid>
+              <Grid container  direction="row" justify="flex-end">
+                <HelperIcons
+                  type="blog"
+                  allBlogPage={true}
+                  admin={{ User: item.User }}
+                  deleteHandler={() => deleteHandler(item._id)}
+                  likeChangeHandler = {()=>{}}
+                  likesLength = {item.Likes.length}
+                  viewerLiked = {false}
+                />
+              </Grid>
           </Grid>
         </div>
       );

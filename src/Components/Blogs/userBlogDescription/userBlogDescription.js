@@ -3,6 +3,7 @@ import {AuthContext} from "../../../context/auth-context";
 import {useContext} from "react"
 import {Grid , Avatar , Typography} from "@material-ui/core"
 import SelectAvatars from "../../SelectAvatars/SelectAvatars"
+import classes from "./userBlogDescription.module.css"
 
 
 export default function UserBlogDescription(props){
@@ -11,17 +12,17 @@ export default function UserBlogDescription(props){
   const admin = props.admin.User;
 
   const fetchUser = ()=>{
-    history.push(`/profile/:${admin._id}`);
+    history.push(`/profile/?user=${admin._id}`);
   }
   return (
-    <Grid container direction="row" onClick={fetchUser} style={{borderBottom:'2px solid gray'}}>
-      <img style={{height:'60px'}} src={SelectAvatars(admin.Avatar.slice(-1))} alt='?' />
-      <Grid style={{ margin: "1vh 0 0 3vh" }}>
+    <Grid container direction="row" onClick={fetchUser} className={classes.cover} >
+      <img className={classes.img} src={SelectAvatars(admin.Avatar.slice(-1))} alt='?' />
+      <Grid className={classes.textCover}>
         <Typography>{admin ? admin.Name : "User"}</Typography>
-        <Typography style={{ fontStyle: "italic", fontSize: "14px" }}>
+        <Typography>
           {admin ? admin.Designation : null}
         </Typography>
-        <Typography style={{ fontStyle: "italic", fontSize: "14px" }}>
+        <Typography>
           {admin ? admin.Institution : null}
         </Typography>
       </Grid>

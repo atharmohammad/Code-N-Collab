@@ -9,14 +9,16 @@ import Stars from "../Components/Stars/Stars";
 const Logout = (props) => {
   const history = useHistory();
   const auth = useContext(AuthContext);
+  const token = auth.token;
   useEffect(async()=>{
 
    try{
      await axios.get("/user/logout");
-     auth.logout();
-     history.push('/homepage');
    }catch(e){
      console.log(e);
+   }finally{
+     auth.logout();
+     history.push('/homepage');
    }
 
   },[])

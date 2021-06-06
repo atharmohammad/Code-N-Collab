@@ -14,31 +14,14 @@ import LinkedInIcon from "../../Assets/images/Linkedin.png";
 import GithubIcon from "../../Assets/images/Github.png";
 import CodechefIcon from "../../Assets/images/codechef.png";
 import AtcoderIcon from "../../Assets/images/atcoder.png";
-import Stars from "../Stars/Stars";
-import Nav from "../Nav/Nav";
-import Back from "../Back/Back";
 
 const Profile = (props) => {
   const history = useHistory();
+  const user = props.user;
   const auth = useContext(AuthContext);
-  const user = auth.user;
-  //const Amongus = [Amongus1, Amongus2, Amongus3, Amongus5, Amongus6 , Amongus7]
 
-  const backHandler = () => {
-    history.push("/homepage");
-  };
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
-        paddingBottom: "50px",
-        boxSizing: "border-box",
-      }}
-    >
-      <Stars />
-      <Back clicked={backHandler} />
-      <Nav />
+    <>
       <div
         style={{
           display: "flex",
@@ -105,19 +88,20 @@ const Profile = (props) => {
                 display: "flex",
                 alignItems: "flex-end",
               }}
-            >
-              <Tooltip
+            >{(auth.user && user._id === auth.user._id
+              ?(<Tooltip
                 title="update profile"
                 onClick={() => history.push("/updateUser")}
               >
                 <IconButton>
                   <EditIcon style={{ cursor: "pointer" }} />
-                </IconButton>
-              </Tooltip>
+                    </IconButton>
+                </Tooltip>
+                ):null)}
               <Tooltip
                 title="share"
                 onClick={() => {
-                  navigator.clipboard.writeText("dsfsd");
+                  navigator.clipboard.writeText(window.location.href);
                   return alert("copied to clipboard");
                 }}
               >
@@ -258,7 +242,7 @@ const Profile = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
