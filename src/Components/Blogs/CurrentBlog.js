@@ -105,19 +105,12 @@ const CurrentBlog = (props) => {
           fontFamily: ["Baloo Tammudu 2", "cursive"].join(" "),
           lineHeight: "170%",
           fontSize: "20px",
+          borderRadius:'20px'
         }}
       >
         {editBlog === false ? (
           <>
-            <div
-              style={{
-                display: "flex",
-                alignSelf: "flex-start",
-                background: "#fff",
-              }}
-            >
-              <UserBlogDescription admin={{ User: user }} />
-            </div>
+            <UserBlogDescription admin={{ User: user }} />
             <ReactMarkdown>{initialBlog}</ReactMarkdown>
           </>
         ) : (

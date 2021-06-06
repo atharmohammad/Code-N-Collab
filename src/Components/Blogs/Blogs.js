@@ -14,7 +14,7 @@ function Blogs(props) {
   const [blogs, setBlogs] = useState([]);
   const [blogsLoading, setBlogsLoading] = useState(true);
   const history = useHistory();
- 
+
   const onClickHandler = (blogId) => {
     return history.push("/blog/" + blogId);
   };
@@ -37,6 +37,7 @@ function Blogs(props) {
       setBlogsLoading(true);
       try {
         const res = await axios.get("blogs/Allblogs");
+        console.log(res.data)
         setBlogs(res.data);
       } catch (e) {
         alert("delete error", e);
