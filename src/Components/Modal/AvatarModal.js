@@ -12,21 +12,17 @@ const WriterModal = (props) => {
       <Grid className={classes.modal}>
         <Grid className={classes.AvatarGridone}>
           {AllAvatars().map((e, idx) => (
-            <img
-              onClick={() => {
-                props.cancelHandler();
-                props.changeHandler(idx);
-              }}
-              src={e}
-              alt="avatar"
-              style={{
-                height: "100px",
-                width: "90px",
-                margin: "30px",
-                borderRadius: "10px",
-                cursor: "pointer",
-              }}
-            />
+            <div className={classes.background}>
+              <img
+                onClick={() => {
+                  props.cancelHandler();
+                  props.changeHandler(idx);
+                }}
+                src={e}
+                alt="avatar"
+                className={classes.avatar}
+              />
+            </div>
           ))}
         </Grid>
       </Grid>

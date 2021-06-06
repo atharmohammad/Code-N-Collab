@@ -6,6 +6,7 @@ import Amongus4 from "../../Assets/images/amongus4.png";
 import Amongus5 from "../../Assets/images/amongus5.png";
 import Amongus6 from "../../Assets/images/amongus6.png";
 import Amongus7 from "../../Assets/images/amongus7.png";
+import Amongus8 from "../../Assets/images/amongus8.png";
 
 const AvatarArray = [
   Amongus1,
@@ -15,6 +16,7 @@ const AvatarArray = [
   Amongus5,
   Amongus6,
   Amongus7,
+  Amongus8
 ];
 const Avatar = (key) => {
   return AvatarArray[key];

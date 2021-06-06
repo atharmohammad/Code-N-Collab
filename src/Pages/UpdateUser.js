@@ -118,7 +118,6 @@ const UpdateUser = (props) => {
                     alt="avatar"
                     style={{
                       height: "120px",
-                      width: "110px",
                       borderRadius: "10px",
                     }}
                   />

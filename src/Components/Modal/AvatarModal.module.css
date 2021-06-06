@@ -12,25 +12,42 @@
 .modal {
   position: fixed;
   z-index: 200;
-  top: 25%;
+  top: 20%;
   left: 30%;
   width: 40%;
-  height: 50%;
-  background: white;
+  background: black;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
-  padding: 1rem;
-  border-radius: 10px;
-  padding: 10px;
+  border:10px double white;
+  border-radius: 20px;
+  padding: 15px;
+  height: 60%;
   box-sizing: border-box;
 }
 
 .AvatarGridone {
-  height: 96%;
   margin: 1px;
   overflow: auto;
-  width: 100%;
   resize: none;
-  border-radius: 10px;
+  border-radius: 20px;
   font-size: 18px;
-  border: 2px solid grey;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap:60px;
+  height: 94%;
+  padding: 10px;
+  background: #fff
+}
+.avatar{
+  height: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.background{
+  border-radius: 10px
+}
+
+.background:hover{
+  background: black
 }
