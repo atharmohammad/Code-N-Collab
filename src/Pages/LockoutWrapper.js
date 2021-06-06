@@ -5,7 +5,7 @@ import {useHistory , useLocation} from "react-router-dom";
 import {AuthContext} from "../context/auth-context"
 
 export default function LockoutWrapper(props) {
-  const socket = socketio.connect("http://localhost:8080/");
+  const socket = socketio.connect(process.env.REACT_APP_BASE_URL);
   const auth = useContext(AuthContext);
   const history = useHistory();
   const [valid,setValid] = useState(false);

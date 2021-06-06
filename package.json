@@ -16,6 +16,7 @@
     "@uiw/react-md-editor": "*",
     "axios": "^0.21.1",
     "copy-to-clipboard": "^3.3.1",
+    "dotenv": "^8.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-emoji": "^0.5.0",
