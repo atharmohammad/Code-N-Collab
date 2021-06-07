@@ -1,9 +1,8 @@
-<p align"center">
-<img src="https://user-images.githubusercontent.com/56029409/120934611-a10e1b00-c71c-11eb-8f9a-c22ecfc82652.png"
-<img src="https://user-images.githubusercontent.com/56029409/120935296-af116b00-c71f-11eb-8a47-9ca6a54832db.png"
-   height="100" style="border-radius:50%"/>
- height="100"/>
- </p>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/56029409/120935296-af116b00-c71f-11eb-8a47-9ca6a54832db.png" height="90"
+     style="border-radius:50%"/>
+<img src="https://user-images.githubusercontent.com/56029409/120934611-a10e1b00-c71c-11eb-8f9a-c22ecfc82652.png" height="70">
+</p>
 
 # Code - N - Collab
 
