@@ -36,7 +36,7 @@ const HelperIcons = (props) => {
             <CommentIcon
               style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
             />
-            93
+            {props.commentsLength}
           </Button>
         </Tooltip>
       </>

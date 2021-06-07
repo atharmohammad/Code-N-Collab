@@ -25,8 +25,9 @@ const CurrentBlog = (props) => {
   const [dummy, setDummy] = useState(uuidv4());
   const [user, setUser] = useState("NA");
 
-  const [likesLength, setlikesLength] = useState(null);
-  const [viewerLiked, setViewerLiked] = useState(null);
+  const [likesLength, setlikesLength] = useState(0);
+  const [viewerLiked, setViewerLiked] = useState(false);
+  const [commentsLength,setCommentsLength] = useState(0);
 
   const id = window.location.pathname.split("/")[2];
 
@@ -40,6 +41,7 @@ const CurrentBlog = (props) => {
         setInitialBlog(currBlog.data.Body);
         setUser(currBlog.data.User);
         setlikesLength(currBlog.data.Likes.length);
+        setCommentsLength(currBlog.data.Comments.length);
         setViewerLiked(
           currBlog.data.Likes.findIndex(
             (like, i) => like === currBlog.data.User._id
@@ -145,6 +147,7 @@ const CurrentBlog = (props) => {
               likeChangeHandler={() => {}}
               likesLength={likesLength}
               viewerLiked={false}
+              commentsLength={commentsLength}
             />
           </Grid>
         </div>

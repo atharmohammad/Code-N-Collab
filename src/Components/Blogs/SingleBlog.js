@@ -75,6 +75,7 @@ export default function SingleBlog(props){
               deleteHandler={deleteHandler}
               likesLength = {blog.Likes.length}
               viewerLiked = {false}
+              commentsLength = {blog.Comments.length}
             />
           </Grid>
       </Grid>
