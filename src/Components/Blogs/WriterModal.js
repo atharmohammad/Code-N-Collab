@@ -13,7 +13,7 @@ const WriterModal = (props) => {
   const submitHandler = async()=>{
 
     try{
-      await axios.post(`/comment/createComment/${parentId}`,{Body:body});
+      await axios.post(`${props.Api}${parentId}`,{Body:body});
     }catch(e){
       console.log(e);
     }

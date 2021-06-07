@@ -37,7 +37,7 @@ const Comment = (props) => {
     }
     setCommentLoading(true);
     try {
-      const res = await axios.patch("/comment/updateComment/" + id);
+      const res = await axios.patch("/comment/updateComment/" + id,{Body:data});
       setInitialComment(res.data);
       setEditComment(false);
     } catch (e) {
@@ -46,8 +46,14 @@ const Comment = (props) => {
     setCommentLoading(false);
   };
 
-  const toggleReplyHandler = () => {
-    setShowReply((prev) => !prev);
+  const toggleReplyHandler = async() => {
+    try{
+      const data = await axios.get("/reply/getReply/"+id);
+      setReplies(data.data.Replies)
+      setShowReply((prev) => !prev);
+    }catch(e){
+      console.log(e);
+    }
   };
 
   const deleteHandler = async () => {
@@ -166,7 +172,7 @@ const Comment = (props) => {
               }}
             >
               {replies.map((reply) => (
-                <Reply replyData={reply.replyData} />
+                <Reply replyData={reply} />
               ))}
             </div>
             <div
@@ -180,7 +186,9 @@ const Comment = (props) => {
         ) : null}
       </div>
       {showWriter ? (
-        <WriterModal cancelHandler={() => setShowWriter(false)} />
+        <WriterModal Api="/reply/newReply/"
+        parentId={id}
+        cancelHandler={() => setShowWriter(false)} />
       ) : null}
     </div>
   );

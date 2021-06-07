@@ -9,6 +9,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 
+import axios from "../../Axios/axios"
 import ReactMarkdown from "react-markdown";
 import SaveCancel from "./SaveCancel";
 import HelperIcons from "./HelperIcons";
@@ -16,26 +17,37 @@ import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 
 const Reply = (props) => {
+  const reply = props.replyData;
   const [editReply, setEditReply] = useState(false);
-  const [initialReply, setInitialReply] = useState(props.replyData);
+  const [initialReply, setInitialReply] = useState(reply.Body);
   const [deleted, setDeleted] = useState(false);
   const [showWriter, setShowWriter] = useState(false);
   const divRef = useRef();
 
-  const deleteHandler = () => {
+  const deleteHandler = async() => {
     if ("Are you sure you want to delete this reply") {
-      setDeleted(true);
+      try{
+        setDeleted(true);
+        const res = await axios.delete("/reply/deleteReply" +  reply._id);
+      }catch(e){
+        console.log(e);
+      }
     }
   };
 
-  const saveHandler = () => {
+  const saveHandler = async() => {
     const data = divRef.current.value.trim();
-
     if (!data) {
       return alert("cant be empty");
     }
-    setInitialReply(data);
-    setEditReply(false);
+    try{
+      const res = await axios.patch("/reply/updateReply/" + reply._id);
+      console.log(res.data)
+      setEditReply(false);
+    }catch(e){
+      console.log(e);
+    }
+
   };
 
   if (deleted) {
@@ -55,7 +67,7 @@ const Reply = (props) => {
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", background: "#fff" }}>
-            <UserBlogDescription admin={false} />
+            <UserBlogDescription admin={{ User: reply.User }} />
           </div>
           {editReply === false ? (
             <div

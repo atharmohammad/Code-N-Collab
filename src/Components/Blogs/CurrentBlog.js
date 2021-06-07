@@ -151,7 +151,7 @@ const CurrentBlog = (props) => {
       </div>
       <div
         style={{
-          marginTop: "10px",
+          margin: "10px 0 100px 0",
           background: "grey",
           boxShadow: "5px 5px 20px black",
           borderRadius: "10px",
@@ -195,7 +195,8 @@ const CurrentBlog = (props) => {
         ) : null}
       </div>
       {showWriter ? (
-        <WriterModal parentId={id} cancelHandler={() => setShowWriter(false)} />
+        <WriterModal Api="/comment/createComment/"
+                parentId={id} cancelHandler={() => setShowWriter(false)} />
       ) : null}
     </>
   );
