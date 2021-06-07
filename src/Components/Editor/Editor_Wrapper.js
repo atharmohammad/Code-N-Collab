@@ -4,6 +4,8 @@ import Editor from "./Editor";
 import { useLocation, useHistory } from "react-router-dom";
 import Spinner from "../Spinner/EditorSpinner/EditorSpinner";
 
+//Wrapper for connecting editor to convergence
+
 const Wrapper = (props) => {
   const socket = props.socket;
   const location = useLocation();
