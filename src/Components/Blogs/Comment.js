@@ -15,13 +15,14 @@ const Comment = (props) => {
   const [editComment, setEditComment] = useState(false);
   const [initialComment, setInitialComment] = useState(props.comment.Body);
   const [commentLoading, setCommentLoading] = useState(false);
+  const [replySpinner, setReplySpinner] = useState(false);
 
   const [likesLength, setlikesLength] = useState(props.comment.Likes.length);
   const [viewerLiked, setViewerLiked] = useState(
     props.comment.Likes.findIndex(
       (like, i) => like === props.comment.User._id
-      ) !== -1
-      );
+    ) !== -1
+  );
 
   const [replies, setReplies] = useState([]);
   const [showWriter, setShowWriter] = useState(false);
@@ -37,7 +38,9 @@ const Comment = (props) => {
     }
     setCommentLoading(true);
     try {
-      const res = await axios.patch("/comment/updateComment/" + id,{Body:data});
+      const res = await axios.patch("/comment/updateComment/" + id, {
+        Body: data,
+      });
       setInitialComment(res.data);
       setEditComment(false);
     } catch (e) {
@@ -46,13 +49,20 @@ const Comment = (props) => {
     setCommentLoading(false);
   };
 
-  const toggleReplyHandler = async() => {
-    try{
-      const data = await axios.get("/reply/getReply/"+id);
-      setReplies(data.data.Replies)
+  const toggleReplyHandler = async () => {
+    if (!showReply) {
+      try {
+        setShowReply((prev) => !prev);
+        setReplySpinner(true);
+        const data = await axios.get("/reply/getReply/" + id);
+        setReplies(data.data.Replies);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setReplySpinner(false);
+      }
+    } else {
       setShowReply((prev) => !prev);
-    }catch(e){
-      console.log(e);
     }
   };
 
@@ -171,9 +181,20 @@ const Comment = (props) => {
                 alignItems: "flex-end",
               }}
             >
-              {replies.map((reply) => (
-                <Reply replyData={reply} />
-              ))}
+              {replySpinner ? (
+                <div
+                  style={{
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "flexStart",
+                    width: "100%",
+                  }}
+                >
+                  <BlogSpinner />
+                </div>
+              ) : (
+                replies.map((reply) => <Reply replyData={reply} />)
+              )}
             </div>
             <div
               style={{
@@ -186,9 +207,11 @@ const Comment = (props) => {
         ) : null}
       </div>
       {showWriter ? (
-        <WriterModal Api="/reply/newReply/"
-        parentId={id}
-        cancelHandler={() => setShowWriter(false)} />
+        <WriterModal
+          Api="/reply/newReply/"
+          parentId={id}
+          cancelHandler={() => setShowWriter(false)}
+        />
       ) : null}
     </div>
   );

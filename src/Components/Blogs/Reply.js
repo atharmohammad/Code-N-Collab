@@ -9,7 +9,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 
-import axios from "../../Axios/axios"
+import axios from "../../Axios/axios";
 import ReactMarkdown from "react-markdown";
 import SaveCancel from "./SaveCancel";
 import HelperIcons from "./HelperIcons";
@@ -24,30 +24,29 @@ const Reply = (props) => {
   const [showWriter, setShowWriter] = useState(false);
   const divRef = useRef();
 
-  const deleteHandler = async() => {
+  const deleteHandler = async () => {
     if ("Are you sure you want to delete this reply") {
-      try{
+      try {
         setDeleted(true);
-        const res = await axios.delete("/reply/deleteReply" +  reply._id);
-      }catch(e){
+        const res = await axios.delete("/reply/deleteReply" + reply._id);
+      } catch (e) {
         console.log(e);
       }
     }
   };
 
-  const saveHandler = async() => {
+  const saveHandler = async () => {
     const data = divRef.current.value.trim();
     if (!data) {
       return alert("cant be empty");
     }
-    try{
+    try {
       const res = await axios.patch("/reply/updateReply/" + reply._id);
-      console.log(res.data)
+      console.log(res.data);
       setEditReply(false);
-    }catch(e){
+    } catch (e) {
       console.log(e);
     }
-
   };
 
   if (deleted) {

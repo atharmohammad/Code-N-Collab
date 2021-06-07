@@ -18,7 +18,7 @@ function Blogs(props) {
       setBlogsLoading(true);
       try {
         const res = await axios.get("blogs/Allblogs");
-        console.log(res.data)
+        console.log(res.data);
         setBlogs(res.data);
       } catch (e) {
         alert("delete error", e);
@@ -31,11 +31,8 @@ function Blogs(props) {
   let allBlogs = <></>;
 
   if (!blogsLoading) {
-
     allBlogs = blogs.map((item) => {
-      return (
-        <SingleBlog blog={item}/>
-      );
+      return <SingleBlog blog={item} />;
     });
   } else {
     return (

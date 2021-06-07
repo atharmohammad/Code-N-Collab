@@ -1,23 +1,23 @@
-.cover{
+.cover {
   background: #fff;
-  border-radius:20px;
+  border-radius: 20px;
   border-bottom: 1px solid gray;
   padding: 2px;
-  cursor: pointer
+  cursor: pointer;
 }
 
-.cover:hover{
+.cover:hover {
   background: black;
-  color:#fff
+  color: #fff;
 }
 
-.img{
-  height:60px;
+.img {
+  height: 60px;
   border-radius: 50%;
   background: #fff;
   align-self: center;
 }
 
-.textCover{
-  margin: 1vh 0 0 3vh
+.textCover {
+  margin: 1vh 0 0 3vh;
 }

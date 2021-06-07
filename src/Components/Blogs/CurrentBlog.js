@@ -27,7 +27,7 @@ const CurrentBlog = (props) => {
 
   const [likesLength, setlikesLength] = useState(0);
   const [viewerLiked, setViewerLiked] = useState(false);
-  const [commentsLength,setCommentsLength] = useState(0);
+  const [commentsLength, setCommentsLength] = useState(0);
 
   const id = window.location.pathname.split("/")[2];
 
@@ -107,7 +107,7 @@ const CurrentBlog = (props) => {
           fontFamily: ["Baloo Tammudu 2", "cursive"].join(" "),
           lineHeight: "170%",
           fontSize: "20px",
-          borderRadius:'20px'
+          borderRadius: "20px",
         }}
       >
         {editBlog === false ? (
@@ -198,8 +198,11 @@ const CurrentBlog = (props) => {
         ) : null}
       </div>
       {showWriter ? (
-        <WriterModal Api="/comment/createComment/"
-                parentId={id} cancelHandler={() => setShowWriter(false)} />
+        <WriterModal
+          Api="/comment/createComment/"
+          parentId={id}
+          cancelHandler={() => setShowWriter(false)}
+        />
       ) : null}
     </>
   );
