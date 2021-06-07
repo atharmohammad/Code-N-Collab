@@ -4,7 +4,7 @@
 <img src="https://user-images.githubusercontent.com/56029409/120934611-a10e1b00-c71c-11eb-8f9a-c22ecfc82652.png" height="70">
 </p>
 
-# Code - N - Collab
+# 🚀 Features
 
 Code - N - Collab is a Collaboration website for Software developers , Competitive coders , and every one who loves to code and collaborate with others to learn and grow. It provides user with :
 
@@ -18,14 +18,15 @@ Code - N - Collab is a Collaboration website for Software developers , Competiti
   People can share their knowledge , learn and ask any thing in our blogs section 
 
 
-## Contribution guidelines 
+## 💁 Contribution guidelines 
 
-code - n - collab is an opensource project and we would love to see you contributing , to contribute to this project :
-- The Code of Conduct
-- The Contribution Guidelines
-- The Documentation Style Guide
+We would love for you to contribute to the Code-N-Collab! To contribute to this project, please read:
 
-## Build Code - N - Collab locally
+- The <a href="CODE_OF_CONDUCT.md" >Code of Conduct</a>
+- The <a href="" >Contribution Guidelines</a>
+- The <a href="" >Documentation Style Guide</a>
+
+## 🔥 Getting Started 
 
 ### fork the repo
 
@@ -36,4 +37,9 @@ code - n - collab is an opensource project and we would love to see you contribu
    $ npm install
    $ npm start
 ```
+
+### 📚 Resources 
+- <a href="https://socket.io/docs/v4" >Socket.Io Documentation </a>
+- <a href="https://convergence.io/documentation/" > Convergence Docs </a>
+- <a href="https://docs.docker.com/docker-for-windows/install/">Docker for Windows</a> (For windows user)
 
