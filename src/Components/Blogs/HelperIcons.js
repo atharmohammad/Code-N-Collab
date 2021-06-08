@@ -76,12 +76,12 @@ const HelperIcons = (props) => {
         TransitionComponent={Fade}
         TransitionProps={{ timeout: 600 }}
         title="Like"
-        style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
+        style={{ height: "40px", width: "80px", margin: "10px 5px 0" }}
         onClick={likeHandler}
       >
         <Button>
           <ThumbUpAltIcon
-            style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
+            style={{ cursor: "pointer", color: (liked?"blue":'grey'), marginRight: "5px" }}
           />
           {likesLength}
         </Button>

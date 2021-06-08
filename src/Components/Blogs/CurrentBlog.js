@@ -59,7 +59,6 @@ const CurrentBlog = (props) => {
     }
     setEditBlog(false);
     setBlogLoading(false);
-    
   }, []);
 
   const deleteHandler = async () => {
@@ -73,11 +72,11 @@ const CurrentBlog = (props) => {
     }
   };
 
- const fetchBlog = async()=>{
-  if(blogLoading){
-   return;
-  } 
-  setBlogLoading(true);
+  const fetchBlog = async () => {
+    if (blogLoading) {
+      return;
+    }
+    setBlogLoading(true);
     try {
       const currBlog = await axios.get(`blogs/currentBlog/${id}`);
       setInitialBlog(currBlog.data.Body);
@@ -86,10 +85,10 @@ const CurrentBlog = (props) => {
     }
     setEditBlog(false);
     setBlogLoading(false);
- }
+  };
 
   const fetchComment = async () => {
-    if(commentLoading){
+    if (commentLoading) {
       return;
     }
     setCommentLoading(true);
@@ -122,17 +121,14 @@ const CurrentBlog = (props) => {
     } else {
       setlikesLength((state) => state - 1);
     }
+    setViewerLiked((state) => !state);
 
     try {
       const blog = await axios.post("/blogs/like/" + id);
       setInitialBlog(blog.data.Body);
-      setViewerLiked((state) => !state);
     } catch (e) {
-      if (!viewerLiked) {
-        setlikesLength((state) => state - 1);
-      } else {
-        setlikesLength((state) => state + 1);
-      }
+      setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
+      setViewerLiked((state) => !state);
       alert("problem liking");
     }
     setDisableLikeBtn(false);
@@ -171,8 +167,8 @@ const CurrentBlog = (props) => {
               Api={"/blogs/currBlog/" + id}
               method="patch"
               closeTextEditor={() => setEditBlog(false)}
-              postBtnClick = {() => setBlogLoading(true)}
-              fetchBlog = {fetchBlog}
+              postBtnClick={() => setBlogLoading(true)}
+              fetchBlog={fetchBlog}
             ></TextEditor>
           </>
         )}
@@ -197,6 +193,7 @@ const CurrentBlog = (props) => {
               likeHandler={likeHandler}
               likesLength={likesLength}
               commentsLength={commentsLength}
+              liked={viewerLiked}
             />
           </Grid>
         </div>
@@ -257,6 +254,5 @@ const CurrentBlog = (props) => {
     </>
   );
 };
-
 
 export default CurrentBlog;
