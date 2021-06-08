@@ -44,12 +44,15 @@ const CurrentBlog = (props) => {
       setUser(currBlog.data.User);
       setlikesLength(currBlog.data.Likes.length);
       setCommentsLength(currBlog.data.Comments.length);
-      const isUserLiked = currBlog.data.Likes.find(
-        (like) => (like.toString().trim() == auth.user._id.toString().trim())
-      );
-      if (isUserLiked) {
-        setViewerLiked(true);
+      if(auth.user){
+        const isUserLiked = currBlog.data.Likes.find(
+          (like) => (like.toString().trim() == auth.user._id.toString().trim())
+        );
+        if (isUserLiked) {
+          setViewerLiked(true);
+        }
       }
+
     } catch (e) {
       console.log(e);
     } finally {
@@ -110,7 +113,7 @@ const CurrentBlog = (props) => {
         setlikesLength((state) => state + 1);
       }
       alert("problem liking");
-    } 
+    }
   };
 
   if (blogLoading) {
