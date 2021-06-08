@@ -116,11 +116,7 @@ const CurrentBlog = (props) => {
       return;
     }
     setDisableLikeBtn(true);
-    if (!viewerLiked) {
-      setlikesLength((state) => state + 1);
-    } else {
-      setlikesLength((state) => state - 1);
-    }
+    setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
     setViewerLiked((state) => !state);
 
     try {

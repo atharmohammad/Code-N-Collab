@@ -36,7 +36,10 @@ const BlogPage = (props) => {
 
   const showEditorHandler = () => {
     if (!auth.token) {
-      return history.push("/login?redirect" + "blogs");
+      return history.push({
+        pathname: "/homepage",
+        state:{error:'Login Required !'},
+      });
     }
     return setShowEditor(true);
   };

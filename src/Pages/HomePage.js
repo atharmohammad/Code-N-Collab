@@ -70,7 +70,7 @@ function HomePage() {
     if (auth.token) {
       return history.push("/me");
     }
-   setError('Plz first login');
+   setError('Login Required !');
   };
 
   const contestHandler = () => {
