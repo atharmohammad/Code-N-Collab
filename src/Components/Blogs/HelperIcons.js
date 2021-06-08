@@ -12,7 +12,7 @@ import { AuthContext } from "../../context/auth-context";
 const HelperIcons = (props) => {
   const auth = useContext(AuthContext);
 
-  const { type, showEditBtn, editHandler, deleteHandler, openWriter } = {
+  const { type, showEditBtn, editHandler, deleteHandler, openWriter,likeHandler,liked} = {
     ...props,
   }; //for all
   const { showCommentHandler } = { ...props }; //particular blogs
@@ -66,12 +66,13 @@ const HelperIcons = (props) => {
         TransitionProps={{ timeout: 600 }}
         title="Like"
         style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
+        onClick={likeHandler}
       >
         <Button>
           <ThumbUpAltIcon
             style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
           />
-          {props.likesLength !== undefined ? props.likesLength : "NA"}
+          {props.likesLength}
         </Button>
       </Tooltip>
 

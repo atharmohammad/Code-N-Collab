@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Grid, Box, Button, Typography, Avatar } from "@material-ui/core";
 import axios from "../../Axios/axios";
 import { useHistory } from "react-router-dom";
@@ -6,12 +6,25 @@ import Spinner from "../Spinner/BlogSpinner";
 import ReactMarkdown from "react-markdown";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import HelperIcons from "./HelperIcons";
+import { AuthContext } from "../../context/auth-context";
 
 export default function SingleBlog(props) {
   const blog = props.blog;
   const history = useHistory();
   const [spinner, setSpinner] = useState(false);
   const [deleted, setDeleted] = useState(false);
+  const [viewerLiked, setViewerLiked] = useState(false);
+  const [likesLength, setlikesLength] = useState(blog.Likes.length);
+  const auth = useContext(AuthContext);
+
+  useEffect(() => {
+    const isUserLiked = blog.Likes.find(
+      (like) => like.toString().trim() == auth.user._id.toString().trim()
+    );
+    if (isUserLiked) {
+      setViewerLiked(true);
+    }
+  }, []);
 
   const onClickHandler = () => {
     return history.push("/blog/" + blog._id);
@@ -27,6 +40,26 @@ export default function SingleBlog(props) {
         alert("delete error");
       }
       setSpinner(false);
+    }
+  };
+
+  const likeHandler = async () => {
+    if (!viewerLiked) {
+      setlikesLength((state) => state + 1);
+    } else {
+      setlikesLength((state) => state - 1);
+    }
+
+    try {
+      await axios.post("/blogs/like/" + blog._id);
+      setViewerLiked((state) => !state);
+    } catch (e) {
+      alert("error liking");
+      if (!viewerLiked) {
+        setlikesLength((state) => state - 1);
+      } else {
+        setlikesLength((state) => state + 1);
+      }
     }
   };
 
@@ -72,8 +105,8 @@ export default function SingleBlog(props) {
             allBlogPage={true}
             admin={{ User: blog.User }}
             deleteHandler={deleteHandler}
-            likesLength={blog.Likes.length}
-            viewerLiked={false}
+            likeHandler={likeHandler}
+            likesLength={likesLength}
             commentsLength={blog.Comments.length}
           />
         </Grid>

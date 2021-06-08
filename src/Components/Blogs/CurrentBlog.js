@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { Grid, Tooltip, IconButton, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
@@ -11,10 +11,13 @@ import BlogSpinner from "../Spinner/BlogSpinner";
 import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import Comment from "./Comment";
+import { AuthContext } from "../../context/auth-context";
 
 import * as TYPES from "../../store/Action/action";
 
 const CurrentBlog = (props) => {
+  const auth = useContext(AuthContext);
+
   const [editBlog, setEditBlog] = useState(false);
   const [showWriter, setShowWriter] = useState(false);
   const [initialBlog, setInitialBlog] = useState(null);
@@ -34,22 +37,22 @@ const CurrentBlog = (props) => {
   const history = useHistory();
 
   useEffect(async () => {
-    if (props.blogPosted) {
-      setBlogLoading(true);
-      try {
-        const currBlog = await axios.get(`blogs/currentBlog/${id}`);
-        setInitialBlog(currBlog.data.Body);
-        setUser(currBlog.data.User);
-        setlikesLength(currBlog.data.Likes.length);
-        setCommentsLength(currBlog.data.Comments.length);
-        setViewerLiked(
-          currBlog.data.Likes.findIndex(
-            (like, i) => like === currBlog.data.User._id
-          ) !== -1
-        );
-      } catch (e) {
-        console.log(e);
+    setBlogLoading(true);
+    try {
+      const currBlog = await axios.get(`blogs/currentBlog/${id}`);
+      setInitialBlog(currBlog.data.Body);
+      setUser(currBlog.data.User);
+      setlikesLength(currBlog.data.Likes.length);
+      setCommentsLength(currBlog.data.Comments.length);
+      const isUserLiked = currBlog.data.Likes.find(
+        (like) => (like.toString().trim() == auth.user._id.toString().trim())
+      );
+      if (isUserLiked) {
+        setViewerLiked(true);
       }
+    } catch (e) {
+      console.log(e);
+    } finally {
       props.blogPostedOff(false);
       setEditBlog(false);
       setBlogLoading(false);
@@ -87,6 +90,27 @@ const CurrentBlog = (props) => {
   const moreCommentClickHandler = () => {
     setCommentLoading(true);
     setTimeout(() => setCommentLoading(false), 2000);
+  };
+
+  const likeHandler = async () => {
+    if (!viewerLiked) {
+      setlikesLength((state) => state + 1);
+    } else {
+      setlikesLength((state) => state - 1);
+    }
+
+    try {
+      const blog = await axios.post("/blogs/like/" + id);
+      setInitialBlog(blog.data.Body);
+      setViewerLiked((state) => !state);
+    } catch (e) {
+      if (!viewerLiked) {
+        setlikesLength((state) => state - 1);
+      } else {
+        setlikesLength((state) => state + 1);
+      }
+      alert("problem liking");
+    } 
   };
 
   if (blogLoading) {
@@ -144,9 +168,8 @@ const CurrentBlog = (props) => {
               editHandler={() => setEditBlog(true)}
               deleteHandler={deleteHandler}
               openWriter={() => setShowWriter(true)}
-              likeChangeHandler={() => {}}
+              likeHandler={likeHandler}
               likesLength={likesLength}
-              viewerLiked={false}
               commentsLength={commentsLength}
             />
           </Grid>
