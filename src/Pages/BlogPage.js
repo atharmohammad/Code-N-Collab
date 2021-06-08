@@ -69,7 +69,7 @@ const BlogPage = (props) => {
               <TextEditor
                 showUpdateBtn={true}
                 Api="/blogs/write"
-                updateBtnClick={() => setShowEditor(false)}
+                postBtnClick = {() => setShowEditor(false)}
                 initialValue=""
                 method="post"
               />

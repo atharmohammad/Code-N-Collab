@@ -10,15 +10,21 @@ function TextEditor(props) {
 
   const { closeTextEditor, showUpdateBtn } = { ...props };
   const postHandler = async () => {
-    try{
-    props.updateBtnClick();
-    }catch(e){
-      console.log('no update btn')
-    }
-    try{
-      await axios({ method: props.method, url: props.Api, data: { Body: value } })
-      props.blogPosted(true);
-    }catch(e){
+    try {
+      
+      props.postBtnClick();
+      
+      await axios({
+        method: props.method,
+        url: props.Api,
+        data: { Body: value },
+      });
+      if (props.method === "patch") {
+        props.fetchBlog();
+      } else {
+        props.blogPosted(true);
+      }
+    } catch (e) {
       console.log(e);
     }
   };

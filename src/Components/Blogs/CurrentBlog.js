@@ -56,10 +56,10 @@ const CurrentBlog = (props) => {
       }
     } catch (e) {
       console.log(e);
-    } finally {
-      setEditBlog(false);
-      setBlogLoading(false);
     }
+    setEditBlog(false);
+    setBlogLoading(false);
+    
   }, []);
 
   const deleteHandler = async () => {
@@ -72,6 +72,18 @@ const CurrentBlog = (props) => {
       }
     }
   };
+
+ const fetchBlog = async()=>{
+  setBlogLoading(true);
+    try {
+      const currBlog = await axios.get(`blogs/currentBlog/${id}`);
+      setInitialBlog(currBlog.data.Body);
+    } catch (e) {
+      console.log(e);
+    }
+    setEditBlog(false);
+    setBlogLoading(false);
+ }
 
   const fetchComment = async () => {
     setCommentLoading(true);
@@ -153,7 +165,8 @@ const CurrentBlog = (props) => {
               Api={"/blogs/currBlog/" + id}
               method="patch"
               closeTextEditor={() => setEditBlog(false)}
-              updateBtnClick={() => setBlogLoading(true)}
+              postBtnClick = {() => setBlogLoading(true)}
+              fetchBlog = {fetchBlog}
             ></TextEditor>
           </>
         )}
@@ -239,18 +252,5 @@ const CurrentBlog = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    blogPosted: state.tools.blogPosted,
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    blogPostedOff: (action) => {
-      dispatch({ type: TYPES.BLOGPOSTED, value: action });
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentBlog);
+export default CurrentBlog;
