@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef , useContext} from "react";
 import { Grid, Button, Tooltip, IconButton } from "@material-ui/core";
 import Reply from "./Reply";
 import ReactMarkdown from "react-markdown";
@@ -8,8 +8,12 @@ import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import axios from "../../Axios/axios";
 import BlogSpinner from "../Spinner/BlogSpinner";
+import {AuthContext} from "../../context/auth-context";
 
 const Comment = (props) => {
+
+  const auth = useContext(AuthContext);
+
   const divRef = useRef();
   const [showReply, setShowReply] = useState(false);
   const [editComment, setEditComment] = useState(false);
@@ -18,11 +22,7 @@ const Comment = (props) => {
   const [replySpinner, setReplySpinner] = useState(false);
 
   const [likesLength, setlikesLength] = useState(props.comment.Likes.length);
-  const [viewerLiked, setViewerLiked] = useState(
-    props.comment.Likes.findIndex(
-      (like, i) => like === props.comment.User._id
-    ) !== -1
-  );
+  const [viewerLiked, setViewerLiked] = useState(false);
 
   const [replies, setReplies] = useState([]);
   const [showWriter, setShowWriter] = useState(false);
@@ -30,6 +30,17 @@ const Comment = (props) => {
 
   const user = props.comment.User;
   const id = props.comment._id;
+
+  useEffect(()=>{
+    if(auth.user){
+      const isUserLiked = props.comment.Likes.find(
+        (like) => like.toString().trim() == auth.user._id.toString().trim()
+      );
+      if (isUserLiked) {
+        setViewerLiked(true);
+      }
+    }
+  },[])
 
   const saveHandler = async () => {
     const data = divRef.current.value.trim();
@@ -78,6 +89,26 @@ const Comment = (props) => {
     }
     setCommentLoading(false);
   };
+
+  const likeHandler = async()=>{
+    if (!viewerLiked) {
+      setlikesLength((state) => state + 1);
+    } else {
+      setlikesLength((state) => state - 1);
+    }
+
+    try {
+      await axios.post("/comment/like/" + id);
+      setViewerLiked((state) => !state);
+    } catch (e) {
+      alert("error liking");
+      if (!viewerLiked) {
+        setlikesLength((state) => state - 1);
+      } else {
+        setlikesLength((state) => state + 1);
+      }
+    }
+  }
 
   if (deleted) {
     return <></>;
@@ -165,7 +196,7 @@ const Comment = (props) => {
             toggleReplyHandler={toggleReplyHandler}
             deleteHandler={deleteHandler}
             openWriter={() => setShowWriter(true)}
-            likeChangeHandler={() => {}}
+            likeHandler={likeHandler}
             likesLength={likesLength}
             viewerLiked={viewerLiked}
           />
