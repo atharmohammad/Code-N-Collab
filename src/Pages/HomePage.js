@@ -1,4 +1,4 @@
-import React, { useEffect, useContext , useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import HomePageImg from "../Assets/images/HomePageImg.png";
 import { useHistory, useLocation } from "react-router-dom";
 import classes from "../Assets/css/wrapstyle.module.css";
@@ -17,7 +17,7 @@ function HomePage() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const auth = useContext(AuthContext);
-  const [startSpinner , setSpinner] = useState(false);
+  const [startSpinner, setSpinner] = useState(false);
 
   useEffect(async () => {
     if (searchParams.get("code")) {
@@ -28,17 +28,15 @@ function HomePage() {
       try {
         setSpinner(true);
         data = await axios.post("/Oauth/authenticated", { code: code });
-        setSpinner(false);
         auth.login(data.data.user, data.data.token);
-        if(data.data.Way === "signup"){
-          history.push("/updateUser")
+        if (data.data.Way === "signup") {
+          history.push("/updateUser");
         }
       } catch (e) {
-        setSpinner(false)
         console.log("error", e);
       }
+      setSpinner(false);
     }
-
   }, []);
 
   const roomHandler = () => {
@@ -57,7 +55,7 @@ function HomePage() {
     if (auth.token) {
       return history.push("/me");
     }
-  history.push({pathname:"/homepage",state:{error:'plz login'}});
+    history.push({ pathname: "/homepage", state: { error: "plz login" } });
   };
 
   const contestHandler = () => {
@@ -77,7 +75,9 @@ function HomePage() {
     >
       <Stars color="#fff" />
       <Back clicked={homePageHandler} />
-      {startSpinner ? <Spinner/> : (
+      {startSpinner ? (
+        <Spinner />
+      ) : (
         <>
           <Nav />
           <Grid

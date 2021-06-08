@@ -67,7 +67,6 @@ const Comment = (props) => {
       setReplySpinner(true);
       const data = await axios.get("/reply/getReply/" + id);
       setReplies(data.data.Replies);
-      console.log(data.data.Replies);
     } catch (e) {
       console.log(e);
     }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Grid, Typography, Tooltip, IconButton } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
 import SendIcon from "@material-ui/icons/Send";
 import CancelIcon from "@material-ui/icons/Cancel";
 import classes from "./blogs.module.css";
@@ -20,7 +19,7 @@ const WriterModal = (props) => {
     try {
       setSpinner(true);
       await axios.post(`${props.Api}${parentId}`, { Body: body });
-      if (fetchData !== undefined) fetchData();
+      fetchData();
     } catch (e) {
       alert("error Posting!");
       console.log(e);
@@ -44,6 +43,7 @@ const WriterModal = (props) => {
               value={body}
               onChange={(e) => setBody(e.target.value)}
               className={classes.textArea}
+              placeHolder="write something... (Markdown is supported)"
             ></textarea>
             <div className={classes.toolTipGrid}>
               <Tooltip title="cancel" onClick={cancelHandler}>

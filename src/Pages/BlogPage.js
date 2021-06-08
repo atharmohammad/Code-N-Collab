@@ -27,7 +27,6 @@ const BlogPage = (props) => {
     setBlogsLoading(true);
     try {
       const res = await axios.get("blogs/Allblogs");
-      console.log(res.data);
       setBlogs(res.data);
     } catch (e) {
       alert("error", e);
