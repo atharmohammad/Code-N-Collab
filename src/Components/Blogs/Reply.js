@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef,useContext} from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import {
   Grid,
   Box,
@@ -9,13 +9,14 @@ import {
   IconButton,
 } from "@material-ui/core";
 
-import {AuthContext} from "../../context/auth-context";
+import { AuthContext } from "../../context/auth-context";
 import axios from "../../Axios/axios";
 import ReactMarkdown from "react-markdown";
 import SaveCancel from "./SaveCancel";
 import HelperIcons from "./HelperIcons";
 import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
+import Spinner from "../Spinner/BlogSpinner";
 
 const Reply = (props) => {
   const auth = useContext(AuthContext);
@@ -25,11 +26,12 @@ const Reply = (props) => {
   const [initialReply, setInitialReply] = useState(reply.Body);
   const [deleted, setDeleted] = useState(false);
   const [showWriter, setShowWriter] = useState(false);
-  const [viewerLiked,setViewerLiked] = useState(false);
-  const [likesLength,setlikesLength] = useState(reply.Likes.length);
+  const [viewerLiked, setViewerLiked] = useState(false);
+  const [likesLength, setlikesLength] = useState(reply.Likes.length);
+  const [spinner, setSpinner] = useState(false);
   const divRef = useRef();
 
-  useEffect(()=>{
+  useEffect(() => {
     if (auth.user) {
       const isUserLiked = reply.Likes.find(
         (like) => like.toString().trim() == auth.user._id.toString().trim()
@@ -38,15 +40,18 @@ const Reply = (props) => {
         setViewerLiked(true);
       }
     }
-  },[])
+  }, []);
 
   const deleteHandler = async () => {
-    if ("Are you sure you want to delete this reply") {
+    if (window.confirm("Are you sure you want to delete this comment")) {
+      setSpinner(true);
       try {
-        setDeleted(true);
-        const res = await axios.delete("/reply/deleteReply" + reply._id);
+        const res = await axios.delete("/reply/deleteReply/" + reply._id);
       } catch (e) {
         console.log(e);
+      } finally {
+        setSpinner(false);
+        setDeleted(true);
       }
     }
   };
@@ -65,7 +70,7 @@ const Reply = (props) => {
     }
   };
 
-  const likeHandler = async()=>{
+  const likeHandler = async () => {
     if (!viewerLiked) {
       setlikesLength((state) => state + 1);
     } else {
@@ -83,6 +88,14 @@ const Reply = (props) => {
         setlikesLength((state) => state + 1);
       }
     }
+  };
+
+  if (spinner) {
+    return (
+      <div style={{ display: "flex", alignSelf: "center" }}>
+        <Spinner />
+      </div>
+    );
   }
 
   if (deleted) {
@@ -110,6 +123,7 @@ const Reply = (props) => {
                 background: "#fff",
                 fontSize: "18px",
                 padding: "15px",
+                overflow: "auto",
               }}
             >
               <pre>
@@ -149,6 +163,7 @@ const Reply = (props) => {
             <Grid container direction="row" justify="flex-end">
               <HelperIcons
                 type="reply"
+                admin={{ User: reply.User }}
                 showEditBtn={!editReply}
                 editHandler={() => setEditReply(true)}
                 likeHandler={likeHandler}
@@ -162,7 +177,11 @@ const Reply = (props) => {
       </div>
       <div style={{ width: "55vw", alignSelf: "center", backgorund: "red" }}>
         {showWriter ? (
-          <WriterModal cancelHandler={() => setShowWriter(false)} />
+          <WriterModal
+            Api="/reply/newReply/"
+            parentId={reply.Comment}
+            cancelHandler={() => setShowWriter(false)}
+          />
         ) : null}
       </div>
     </>
