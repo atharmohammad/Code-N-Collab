@@ -20,10 +20,13 @@ const HelperIcons = (props) => {
     openWriter,
     likeHandler,
     liked,
+    commentsLength,
+    likesLength,
+    admin,
   } = {
     ...props,
   }; //for all
-  const { showCommentHandler } = { ...props }; //particular blogs
+  const { toggleCommentHandler } = { ...props }; //particular blogs
   const { toggleReplyHandler } = { ...props }; //comment
   const { allBlogPage } = { ...props }; //allblogPage blog
 
@@ -31,25 +34,25 @@ const HelperIcons = (props) => {
   let forumIcon = null;
   let blogIcons = null;
 
-  if (props.type.toLowerCase() == "blog") {
+  if (type.toLowerCase() == "blog") {
     addIconTitle = "comment";
     blogIcons = (
       <>
         <Tooltip
           title="View Comment"
           style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
-          onClick={showCommentHandler}
+          onClick={toggleCommentHandler}
         >
           <Button>
             <CommentIcon
               style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
             />
-            {props.commentsLength}
+            {commentsLength}
           </Button>
         </Tooltip>
       </>
     );
-  } else if (props.type.toLowerCase() == "comment") {
+  } else if (type.toLowerCase() == "comment") {
     forumIcon = (
       <Tooltip
         TransitionComponent={Fade}
@@ -80,7 +83,7 @@ const HelperIcons = (props) => {
           <ThumbUpAltIcon
             style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
           />
-          {props.likesLength}
+          {likesLength}
         </Button>
       </Tooltip>
 
@@ -102,9 +105,7 @@ const HelperIcons = (props) => {
               />
             </Button>
           </Tooltip>
-          {auth.token &&
-          props.admin &&
-          props.admin.User._id === auth.user._id ? (
+          {auth.token && admin && admin.User._id === auth.user._id ? (
             showEditBtn ? (
               <Tooltip
                 TransitionComponent={Fade}
@@ -130,7 +131,7 @@ const HelperIcons = (props) => {
         </>
       ) : null}
 
-      {auth.token && props.admin && props.admin.User._id === auth.user._id ? (
+      {auth.token && admin && admin.User._id === auth.user._id ? (
         <Tooltip
           TransitionComponent={Fade}
           TransitionProps={{ timeout: 600 }}

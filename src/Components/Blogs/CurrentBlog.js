@@ -30,6 +30,7 @@ const CurrentBlog = (props) => {
 
   const [likesLength, setlikesLength] = useState(0);
   const [viewerLiked, setViewerLiked] = useState(false);
+  const [disableLikeBtn, setDisableLikeBtn] = useState(true);
   const [commentsLength, setCommentsLength] = useState(0);
 
   const id = window.location.pathname.split("/")[2];
@@ -45,6 +46,7 @@ const CurrentBlog = (props) => {
       setlikesLength(currBlog.data.Likes.length);
       setCommentsLength(currBlog.data.Comments.length);
       if (auth.user) {
+        setDisableLikeBtn(false);
         const isUserLiked = currBlog.data.Likes.find(
           (like) => like.toString().trim() == auth.user._id.toString().trim()
         );
@@ -71,29 +73,33 @@ const CurrentBlog = (props) => {
     }
   };
 
-  const showCommentHandler = async () => {
+  const fetchComment = async()=>{
+    setCommentLoading(true);
+    try {
+      setShowComment(true);
+      const data = await axios.get(`/comment/getComments/${id}`);
+      setComments(data.data.Comments);
+      setDummy(uuidv4());
+    } catch (e) {
+      console.log(e);
+    }
+    setCommentLoading(false);
+  }
+
+  const toggleCommentHandler = async() => {
     if (!showComment) {
-      setCommentLoading(true);
-      try {
-        setShowComment(true);
-        const data = await axios.get(`/comment/getComments/${id}`);
-        setComments(data.data.Comments);
-        setDummy(uuidv4());
-      } catch (e) {
-        console.log(e);
-      }
-      setCommentLoading(false);
+      fetchComment();
     } else {
       setShowComment(false);
     }
   };
 
-  const moreCommentClickHandler = () => {
-    setCommentLoading(true);
-    setTimeout(() => setCommentLoading(false), 2000);
-  };
 
   const likeHandler = async () => {
+    if(disableLikeBtn === true){
+      return;
+    }
+    setDisableLikeBtn(true);
     if (!viewerLiked) {
       setlikesLength((state) => state + 1);
     } else {
@@ -112,6 +118,7 @@ const CurrentBlog = (props) => {
       }
       alert("problem liking");
     }
+    setDisableLikeBtn(false);
   };
 
   if (blogLoading) {
@@ -163,7 +170,7 @@ const CurrentBlog = (props) => {
           >
             <HelperIcons
               type="blog"
-              showCommentHandler={showCommentHandler}
+              toggleCommentHandler = {toggleCommentHandler}
               showEditBtn={!editBlog}
               admin={{ User: user }}
               editHandler={() => setEditBlog(true)}
@@ -205,7 +212,7 @@ const CurrentBlog = (props) => {
 
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button
-                  onClick={moreCommentClickHandler}
+                  onClick={fetchComment}
                   style={{
                     background: "#3e2cd4",
                     color: "#fff",
@@ -214,7 +221,7 @@ const CurrentBlog = (props) => {
                     margin: "0px 10px 10px 2px",
                   }}
                 >
-                  More...
+                  Reload...
                 </Button>
               </div>
             </>
@@ -225,6 +232,7 @@ const CurrentBlog = (props) => {
         <WriterModal
           Api="/comment/createComment/"
           parentId={id}
+          fetchData = {fetchComment}
           cancelHandler={() => setShowWriter(false)}
         />
       ) : null}
