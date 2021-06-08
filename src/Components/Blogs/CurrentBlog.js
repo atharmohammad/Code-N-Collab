@@ -74,6 +74,9 @@ const CurrentBlog = (props) => {
   };
 
  const fetchBlog = async()=>{
+  if(blogLoading){
+   return;
+  } 
   setBlogLoading(true);
     try {
       const currBlog = await axios.get(`blogs/currentBlog/${id}`);
@@ -86,6 +89,9 @@ const CurrentBlog = (props) => {
  }
 
   const fetchComment = async () => {
+    if(commentLoading){
+      return;
+    }
     setCommentLoading(true);
     try {
       setShowComment(true);

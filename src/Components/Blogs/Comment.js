@@ -62,6 +62,10 @@ const Comment = (props) => {
   };
 
   const fetchReply = useCallback(async() => {
+    if(replySpinner){
+      return;
+    }
+    
     try {
       setShowReply(true);
       setReplySpinner(true);
