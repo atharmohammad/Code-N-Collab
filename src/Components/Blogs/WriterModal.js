@@ -8,18 +8,19 @@ import axios from "../../Axios/axios";
 import Spinner from "../Spinner/BlogSpinner";
 
 const WriterModal = (props) => {
-  const { cancelHandler, parentId } = { ...props };
+  const { cancelHandler, parentId, fetchData } = { ...props };
   const [body, setBody] = useState("");
   const [spinner, setSpinner] = useState(false);
 
   const submitHandler = async () => {
-    if(!body.trim()){
-      return alert('cant be empty');
+    if (!body.trim()) {
+      return alert("cant be empty");
     }
-      
+
     try {
       setSpinner(true);
       await axios.post(`${props.Api}${parentId}`, { Body: body });
+      if (fetchData !== undefined) fetchData();
     } catch (e) {
       alert("error Posting!");
       console.log(e);

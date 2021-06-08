@@ -61,20 +61,24 @@ const Comment = (props) => {
     setCommentLoading(false);
   };
 
-  const toggleReplyHandler = async () => {
+  const fetchReply = async() => {
+    try {
+      setShowReply(true);
+      setReplySpinner(true);
+      const data = await axios.get("/reply/getReply/" + id);
+      setReplies(data.data.Replies);
+      console.log(data.data.Replies);
+    } catch (e) {
+      console.log(e);
+    }
+    setReplySpinner(false);
+  }
+
+  const toggleReplyHandler = () => {
     if (!showReply) {
-      try {
-        setShowReply((prev) => !prev);
-        setReplySpinner(true);
-        const data = await axios.get("/reply/getReply/" + id);
-        setReplies(data.data.Replies);
-        console.log(data.data.Replies);
-      } catch (e) {
-        console.log(e);
-      }
-      setReplySpinner(false);
+      fetchReply();
     } else {
-      setShowReply((prev) => !prev);
+      setShowReply(false);
     }
   };
 
@@ -251,7 +255,8 @@ const Comment = (props) => {
         <WriterModal
           Api="/reply/newReply/"
           parentId={id}
-          cancelHandler={() => setShowWriter(false)}
+          fetchData = {fetchReply}
+          cancelHandler={() => {setShowWriter(false)}}
         />
       ) : null}
     </div>
