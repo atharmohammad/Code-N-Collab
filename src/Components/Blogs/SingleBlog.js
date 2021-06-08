@@ -109,6 +109,7 @@ export default function SingleBlog(props) {
             deleteHandler={deleteHandler}
             likeHandler={likeHandler}
             likesLength={likesLength}
+            toggleCommentHandler = {onClickHandler}
             commentsLength={blog.Comments.length}
             liked={viewerLiked}
           />
