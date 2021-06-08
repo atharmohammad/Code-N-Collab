@@ -81,7 +81,7 @@ const HelperIcons = (props) => {
       >
         <Button>
           <ThumbUpAltIcon
-            style={{ cursor: "pointer", color: (liked?"blue":'grey'), marginRight: "5px" }}
+            style={{ cursor: "pointer", color: (liked?"#353af3":'#bec4c3'), marginRight: "5px" }}
           />
           {likesLength}
         </Button>

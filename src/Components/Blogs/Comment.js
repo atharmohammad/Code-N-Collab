@@ -61,11 +61,11 @@ const Comment = (props) => {
     setCommentLoading(false);
   };
 
-  const fetchReply = useCallback(async() => {
-    if(replySpinner){
+  const fetchReply = useCallback(async () => {
+    if (replySpinner) {
       return;
     }
-    
+
     try {
       setShowReply(true);
       setReplySpinner(true);
@@ -75,7 +75,7 @@ const Comment = (props) => {
       console.log(e);
     }
     setReplySpinner(false);
-  },[])
+  }, []);
 
   const toggleReplyHandler = () => {
     if (!showReply) {
@@ -103,22 +103,15 @@ const Comment = (props) => {
       return;
     }
     setDisableLikeBtn(true);
-    if (!viewerLiked) {
-      setlikesLength((state) => state + 1);
-    } else {
-      setlikesLength((state) => state - 1);
-    }
+    setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
+    setViewerLiked((state) => !state);
 
     try {
       await axios.post("/comment/like/" + id);
-      setViewerLiked((state) => !state);
     } catch (e) {
+      setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
+      setViewerLiked((state) => !state);
       alert("error liking");
-      if (!viewerLiked) {
-        setlikesLength((state) => state - 1);
-      } else {
-        setlikesLength((state) => state + 1);
-      }
     }
     setDisableLikeBtn(false);
   };
@@ -158,14 +151,12 @@ const Comment = (props) => {
               background: "#fff",
               fontSize: "18px",
               padding: "15px",
-              boxSizing:'border-box',
+              boxSizing: "border-box",
               overflow: "auto",
               wordWrap: "break-word",
             }}
           >
-            
-              <ReactMarkdown>{initialComment}</ReactMarkdown>
-            
+            <ReactMarkdown>{initialComment}</ReactMarkdown>
           </div>
         ) : (
           <div style={{ margin: "2px" }}>
@@ -179,8 +170,8 @@ const Comment = (props) => {
                 padding: "5px",
                 boxSizing: "border-box",
               }}
-              placeHolder='write your comment...'
-              >
+              placeHolder="write your comment..."
+            >
               {initialComment}
             </textarea>
           </div>
@@ -215,7 +206,7 @@ const Comment = (props) => {
             openWriter={() => setShowWriter(true)}
             likeHandler={likeHandler}
             likesLength={likesLength}
-            viewerLiked={viewerLiked}
+            liked={viewerLiked}
           />
         </Grid>
       </Grid>
@@ -241,7 +232,9 @@ const Comment = (props) => {
                   <BlogSpinner />
                 </div>
               ) : (
-                replies.map((reply) => <Reply replyData={reply} fetchRepliesAgain={fetchReply} />)
+                replies.map((reply) => (
+                  <Reply replyData={reply} fetchRepliesAgain={fetchReply} />
+                ))
               )}
             </div>
             <div
@@ -258,8 +251,10 @@ const Comment = (props) => {
         <WriterModal
           Api="/reply/newReply/"
           parentId={id}
-          fetchData = {fetchReply}
-          cancelHandler={() => {setShowWriter(false)}}
+          fetchData={fetchReply}
+          cancelHandler={() => {
+            setShowWriter(false);
+          }}
         />
       ) : null}
     </div>

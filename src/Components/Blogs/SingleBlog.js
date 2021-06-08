@@ -15,10 +15,12 @@ export default function SingleBlog(props) {
   const [deleted, setDeleted] = useState(false);
   const [viewerLiked, setViewerLiked] = useState(false);
   const [likesLength, setlikesLength] = useState(blog.Likes.length);
+  const [disableLikeBtn, setDisableLikeBtn] = useState(true);
   const auth = useContext(AuthContext);
 
   useEffect(() => {
     if (auth.user) {
+      setDisableLikeBtn(false);
       const isUserLiked = blog.Likes.find(
         (like) => like.toString().trim() == auth.user._id.toString().trim()
       );
@@ -46,23 +48,21 @@ export default function SingleBlog(props) {
   };
 
   const likeHandler = async () => {
-    if (!viewerLiked) {
-      setlikesLength((state) => state + 1);
-    } else {
-      setlikesLength((state) => state - 1);
+    if (disableLikeBtn === true) {
+      return;
     }
+    setDisableLikeBtn(true);
+    setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
+    setViewerLiked((state) => !state);
 
     try {
       await axios.post("/blogs/like/" + blog._id);
-      setViewerLiked((state) => !state);
     } catch (e) {
+      setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
+      setViewerLiked((state) => !state);
       alert("error liking");
-      if (!viewerLiked) {
-        setlikesLength((state) => state - 1);
-      } else {
-        setlikesLength((state) => state + 1);
-      }
     }
+    setDisableLikeBtn(false);
   };
 
   if (spinner) {
@@ -110,6 +110,7 @@ export default function SingleBlog(props) {
             likeHandler={likeHandler}
             likesLength={likesLength}
             commentsLength={blog.Comments.length}
+            liked={viewerLiked}
           />
         </Grid>
       </Grid>

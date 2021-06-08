@@ -81,22 +81,15 @@ const Reply = (props) => {
       return;
     }
     setDisableLikeBtn(true);
-    if (!viewerLiked) {
-      setlikesLength((state) => state + 1);
-    } else {
-      setlikesLength((state) => state - 1);
-    }
+    setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
+    setViewerLiked((state) => !state);
 
     try {
       await axios.post("/reply/like/" + reply._id);
-      setViewerLiked((state) => !state);
     } catch (e) {
+      setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
+      setViewerLiked((state) => !state);
       alert("error liking");
-      if (!viewerLiked) {
-        setlikesLength((state) => state - 1);
-      } else {
-        setlikesLength((state) => state + 1);
-      }
     }
     setDisableLikeBtn(false);
   };
@@ -181,6 +174,7 @@ const Reply = (props) => {
                 likesLength={likesLength}
                 deleteHandler={deleteHandler}
                 openWriter={() => setShowWriter(true)}
+                liked={viewerLiked}
               />
             </Grid>
           </Grid>
