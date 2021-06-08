@@ -18,7 +18,7 @@ export default function SingleBlog(props) {
   const auth = useContext(AuthContext);
 
   useEffect(() => {
-    if(auth.user){
+    if (auth.user) {
       const isUserLiked = blog.Likes.find(
         (like) => like.toString().trim() == auth.user._id.toString().trim()
       );
@@ -26,7 +26,6 @@ export default function SingleBlog(props) {
         setViewerLiked(true);
       }
     }
-
   }, []);
 
   const onClickHandler = () => {

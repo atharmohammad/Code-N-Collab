@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef , useContext} from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { Grid, Button, Tooltip, IconButton } from "@material-ui/core";
 import Reply from "./Reply";
 import ReactMarkdown from "react-markdown";
@@ -8,10 +8,9 @@ import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import axios from "../../Axios/axios";
 import BlogSpinner from "../Spinner/BlogSpinner";
-import {AuthContext} from "../../context/auth-context";
+import { AuthContext } from "../../context/auth-context";
 
 const Comment = (props) => {
-
   const auth = useContext(AuthContext);
 
   const divRef = useRef();
@@ -31,8 +30,8 @@ const Comment = (props) => {
   const user = props.comment.User;
   const id = props.comment._id;
 
-  useEffect(()=>{
-    if(auth.user){
+  useEffect(() => {
+    if (auth.user) {
       const isUserLiked = props.comment.Likes.find(
         (like) => like.toString().trim() == auth.user._id.toString().trim()
       );
@@ -40,7 +39,7 @@ const Comment = (props) => {
         setViewerLiked(true);
       }
     }
-  },[])
+  }, []);
 
   const saveHandler = async () => {
     const data = divRef.current.value.trim();
@@ -90,7 +89,7 @@ const Comment = (props) => {
     setCommentLoading(false);
   };
 
-  const likeHandler = async()=>{
+  const likeHandler = async () => {
     if (!viewerLiked) {
       setlikesLength((state) => state + 1);
     } else {
@@ -108,7 +107,7 @@ const Comment = (props) => {
         setlikesLength((state) => state + 1);
       }
     }
-  }
+  };
 
   if (deleted) {
     return <></>;

@@ -12,7 +12,15 @@ import { AuthContext } from "../../context/auth-context";
 const HelperIcons = (props) => {
   const auth = useContext(AuthContext);
 
-  const { type, showEditBtn, editHandler, deleteHandler, openWriter,likeHandler,liked} = {
+  const {
+    type,
+    showEditBtn,
+    editHandler,
+    deleteHandler,
+    openWriter,
+    likeHandler,
+    liked,
+  } = {
     ...props,
   }; //for all
   const { showCommentHandler } = { ...props }; //particular blogs

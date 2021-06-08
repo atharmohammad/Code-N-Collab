@@ -44,23 +44,21 @@ const CurrentBlog = (props) => {
       setUser(currBlog.data.User);
       setlikesLength(currBlog.data.Likes.length);
       setCommentsLength(currBlog.data.Comments.length);
-      if(auth.user){
+      if (auth.user) {
         const isUserLiked = currBlog.data.Likes.find(
-          (like) => (like.toString().trim() == auth.user._id.toString().trim())
+          (like) => like.toString().trim() == auth.user._id.toString().trim()
         );
         if (isUserLiked) {
           setViewerLiked(true);
         }
       }
-
     } catch (e) {
       console.log(e);
     } finally {
-      props.blogPostedOff(false);
       setEditBlog(false);
       setBlogLoading(false);
     }
-  }, [props.blogPosted]);
+  }, []);
 
   const deleteHandler = async () => {
     if (window.confirm("Are you sure you want to delete this Blog ?")) {
