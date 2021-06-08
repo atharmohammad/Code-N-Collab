@@ -22,6 +22,7 @@ const Comment = (props) => {
 
   const [likesLength, setlikesLength] = useState(props.comment.Likes.length);
   const [viewerLiked, setViewerLiked] = useState(false);
+  const [disableLikeBtn, setDisableLikeBtn] = useState(true);
 
   const [replies, setReplies] = useState([]);
   const [showWriter, setShowWriter] = useState(false);
@@ -32,6 +33,7 @@ const Comment = (props) => {
 
   useEffect(() => {
     if (auth.user) {
+      setDisableLikeBtn(false);
       const isUserLiked = props.comment.Likes.find(
         (like) => like.toString().trim() == auth.user._id.toString().trim()
       );
@@ -69,9 +71,8 @@ const Comment = (props) => {
         console.log(data.data.Replies);
       } catch (e) {
         console.log(e);
-      } finally {
-        setReplySpinner(false);
       }
+      setReplySpinner(false);
     } else {
       setShowReply((prev) => !prev);
     }
@@ -91,6 +92,10 @@ const Comment = (props) => {
   };
 
   const likeHandler = async () => {
+    if (disableLikeBtn === true) {
+      return;
+    }
+    setDisableLikeBtn(true);
     if (!viewerLiked) {
       setlikesLength((state) => state + 1);
     } else {
@@ -108,6 +113,7 @@ const Comment = (props) => {
         setlikesLength((state) => state + 1);
       }
     }
+    setDisableLikeBtn(false);
   };
 
   if (deleted) {
@@ -145,12 +151,14 @@ const Comment = (props) => {
               background: "#fff",
               fontSize: "18px",
               padding: "15px",
+              boxSizing:'border-box',
               overflow: "auto",
+              wordWrap: "break-word",
             }}
           >
-            <pre>
+            
               <ReactMarkdown>{initialComment}</ReactMarkdown>
-            </pre>
+            
           </div>
         ) : (
           <div style={{ margin: "2px" }}>
@@ -164,7 +172,8 @@ const Comment = (props) => {
                 padding: "5px",
                 boxSizing: "border-box",
               }}
-            >
+              placeHolder='write your comment...'
+              >
               {initialComment}
             </textarea>
           </div>
