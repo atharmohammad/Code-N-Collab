@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useRef, useContext, useCallback } from "react";
 import { Grid, Button, Tooltip, IconButton } from "@material-ui/core";
 import Reply from "./Reply";
 import ReactMarkdown from "react-markdown";
@@ -61,7 +61,7 @@ const Comment = (props) => {
     setCommentLoading(false);
   };
 
-  const fetchReply = async() => {
+  const fetchReply = useCallback(async() => {
     try {
       setShowReply(true);
       setReplySpinner(true);
@@ -72,7 +72,7 @@ const Comment = (props) => {
       console.log(e);
     }
     setReplySpinner(false);
-  }
+  },[])
 
   const toggleReplyHandler = () => {
     if (!showReply) {
@@ -238,7 +238,7 @@ const Comment = (props) => {
                   <BlogSpinner />
                 </div>
               ) : (
-                replies.map((reply) => <Reply replyData={reply} />)
+                replies.map((reply) => <Reply replyData={reply} fetchRepliesAgain={fetchReply} />)
               )}
             </div>
             <div

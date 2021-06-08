@@ -29,10 +29,13 @@ const Reply = (props) => {
   const [viewerLiked, setViewerLiked] = useState(false);
   const [likesLength, setlikesLength] = useState(reply.Likes.length);
   const [spinner, setSpinner] = useState(false);
+  const [disableLikeBtn, setDisableLikeBtn] = useState(true);
+
   const divRef = useRef();
 
   useEffect(() => {
     if (auth.user) {
+      setDisableLikeBtn(false);
       const isUserLiked = reply.Likes.find(
         (like) => like.toString().trim() == auth.user._id.toString().trim()
       );
@@ -46,13 +49,12 @@ const Reply = (props) => {
     if (window.confirm("Are you sure you want to delete this comment")) {
       setSpinner(true);
       try {
-        const res = await axios.delete("/reply/deleteReply/" + reply._id);
+        await axios.delete("/reply/deleteReply/" + reply._id);
       } catch (e) {
         console.log(e);
-      } finally {
-        setSpinner(false);
-        setDeleted(true);
       }
+      setSpinner(false);
+      setDeleted(true);
     }
   };
 
@@ -63,17 +65,22 @@ const Reply = (props) => {
     }
     setSpinner(true);
     try {
-      const res = await axios.patch("/reply/updateReply/" + reply._id , {Body:data});
+      const res = await axios.patch("/reply/updateReply/" + reply._id, {
+        Body: data,
+      });
       setEditReply(false);
       setInitialReply(res.data.Body);
     } catch (e) {
       console.log(e);
-    }finally{
-      setSpinner(false);
     }
+    setSpinner(false);
   };
 
   const likeHandler = async () => {
+    if (disableLikeBtn === true) {
+      return;
+    }
+    setDisableLikeBtn(true);
     if (!viewerLiked) {
       setlikesLength((state) => state + 1);
     } else {
@@ -91,6 +98,7 @@ const Reply = (props) => {
         setlikesLength((state) => state + 1);
       }
     }
+    setDisableLikeBtn(false);
   };
 
   if (spinner) {
@@ -126,12 +134,11 @@ const Reply = (props) => {
                 background: "#fff",
                 fontSize: "18px",
                 padding: "15px",
+                boxSizing: "border-box",
                 overflow: "auto",
               }}
             >
-              <pre>
-                <ReactMarkdown>{initialReply}</ReactMarkdown>
-              </pre>
+              <ReactMarkdown>{initialReply}</ReactMarkdown>
             </div>
           ) : (
             <div style={{ margin: "2px" }}>
@@ -145,6 +152,7 @@ const Reply = (props) => {
                   padding: "5px",
                   boxSizing: "border-box",
                 }}
+                placeHolder="Write your reply (Markdown is supported)"
               >
                 {initialReply}
               </textarea>
@@ -183,6 +191,7 @@ const Reply = (props) => {
           <WriterModal
             Api="/reply/newReply/"
             parentId={reply.Comment}
+            fetchData={props.fetchRepliesAgain}
             cancelHandler={() => setShowWriter(false)}
           />
         ) : null}

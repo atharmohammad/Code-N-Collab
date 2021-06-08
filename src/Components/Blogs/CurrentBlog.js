@@ -73,7 +73,7 @@ const CurrentBlog = (props) => {
     }
   };
 
-  const fetchComment = async()=>{
+  const fetchComment = async () => {
     setCommentLoading(true);
     try {
       setShowComment(true);
@@ -84,9 +84,9 @@ const CurrentBlog = (props) => {
       console.log(e);
     }
     setCommentLoading(false);
-  }
+  };
 
-  const toggleCommentHandler = async() => {
+  const toggleCommentHandler = async () => {
     if (!showComment) {
       fetchComment();
     } else {
@@ -94,9 +94,8 @@ const CurrentBlog = (props) => {
     }
   };
 
-
   const likeHandler = async () => {
-    if(disableLikeBtn === true){
+    if (disableLikeBtn === true) {
       return;
     }
     setDisableLikeBtn(true);
@@ -170,7 +169,7 @@ const CurrentBlog = (props) => {
           >
             <HelperIcons
               type="blog"
-              toggleCommentHandler = {toggleCommentHandler}
+              toggleCommentHandler={toggleCommentHandler}
               showEditBtn={!editBlog}
               admin={{ User: user }}
               editHandler={() => setEditBlog(true)}
@@ -232,7 +231,7 @@ const CurrentBlog = (props) => {
         <WriterModal
           Api="/comment/createComment/"
           parentId={id}
-          fetchData = {fetchComment}
+          fetchData={fetchComment}
           cancelHandler={() => setShowWriter(false)}
         />
       ) : null}
