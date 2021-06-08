@@ -61,12 +61,15 @@ const Reply = (props) => {
     if (!data) {
       return alert("cant be empty");
     }
+    setSpinner(true);
     try {
-      const res = await axios.patch("/reply/updateReply/" + reply._id);
-      console.log(res.data);
+      const res = await axios.patch("/reply/updateReply/" + reply._id , {Body:data});
       setEditReply(false);
+      setInitialReply(res.data.Body);
     } catch (e) {
       console.log(e);
+    }finally{
+      setSpinner(false);
     }
   };
 
