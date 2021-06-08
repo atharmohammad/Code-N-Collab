@@ -1,26 +1,40 @@
 import { useEffect, useState, useContext } from "react";
-import { Grid, Box, Button } from "@material-ui/core";
-import { connect } from "react-redux";
+import { Grid, Box, Button, Typography, Avatar } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
-import Blogs from "../Components/Blogs/Blogs";
 import TextEditor from "../Components/TextEditor/TextEditor";
 import Stars from "../Components/Stars/Stars";
 import BlogHead from "../Components/Blogs/BlogHead";
 import classes from "../Assets/css/wrapstyle.module.css";
+import BlogSpinner from "../Components/Spinner/BlogSpinner";
+import SingleBlog from "../Components/Blogs/SingleBlog";
+import axios from "../Axios/axios";
 import { AuthContext } from "../context/auth-context";
-import { useHistory } from "react-router-dom";
-import * as TYPES from "../store/Action/action";
+
 
 const BlogPage = (props) => {
   const [showEditor, setShowEditor] = useState(false);
   const auth = useContext(AuthContext);
   const history = useHistory();
-  
+  const [blogs, setBlogs] = useState([]);
+  const [blogsLoading, setBlogsLoading] = useState(true);
+
   useEffect(() => {
-    props.fetchBlog(true);
+    fetchBlogs();
   }, []);
-  
-  
+
+  const fetchBlogs = async () => {
+    setBlogsLoading(true);
+    try {
+      const res = await axios.get("blogs/Allblogs");
+      console.log(res.data);
+      setBlogs(res.data);
+    } catch (e) {
+      alert("error", e);
+    }
+    setBlogsLoading(false);
+  };
+
   const showEditorHandler = () => {
     if (!auth.token) {
       return history.push("/login?redirect" + "blogs");
@@ -69,7 +83,8 @@ const BlogPage = (props) => {
               <TextEditor
                 showUpdateBtn={true}
                 Api="/blogs/write"
-                postBtnClick = {() => setShowEditor(false)}
+                postBtnClick={() => setShowEditor(false)}
+                fetchBlog = {fetchBlogs} 
                 initialValue=""
                 method="post"
               />
@@ -98,18 +113,16 @@ const BlogPage = (props) => {
             </Box>
           </div>
         )}
-        <Blogs />
+        <div>
+          {blogsLoading ? (
+            <BlogSpinner />
+          ) : (
+            blogs.map((item) => <SingleBlog blog={item} />)
+          )}
+        </div>
       </Grid>
     </div>
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchBlog: (action) => {
-      dispatch({ type: TYPES.BLOGPOSTED, value: action });
-    },
-  };
-};
-
-export default connect(null, mapDispatchToProps)(BlogPage);
+export default BlogPage;

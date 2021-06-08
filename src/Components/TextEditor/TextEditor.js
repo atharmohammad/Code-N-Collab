@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Editor from "@uiw/react-md-editor";
 import { Grid, Box } from "@material-ui/core";
 import axios from "../../Axios/axios";
-import { connect } from "react-redux";
-import * as TYPES from "../../store/Action/action";
 
 function TextEditor(props) {
   const [value, setValue] = useState(props.initialValue);
@@ -19,11 +17,7 @@ function TextEditor(props) {
         url: props.Api,
         data: { Body: value },
       });
-      if (props.method === "patch") {
-        props.fetchBlog();
-      } else {
-        props.blogPosted(true);
-      }
+      props.fetchBlog();
     } catch (e) {
       console.log(e);
     }
@@ -110,12 +104,5 @@ function TextEditor(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    blogPosted: (action) => {
-      dispatch({ type: TYPES.BLOGPOSTED, value: action });
-    },
-  };
-};
 
-export default connect(null, mapDispatchToProps)(TextEditor);
+export default TextEditor
