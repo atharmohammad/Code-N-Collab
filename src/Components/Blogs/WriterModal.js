@@ -13,23 +13,30 @@ const WriterModal = (props) => {
   const [spinner, setSpinner] = useState(false);
 
   const submitHandler = async () => {
+    if(!body.trim()){
+      return alert('cant be empty');
+    }
+      
     try {
       setSpinner(true);
       await axios.post(`${props.Api}${parentId}`, { Body: body });
     } catch (e) {
       alert("error Posting!");
       console.log(e);
-    } finally {
-      setSpinner(false);
     }
+    setSpinner(false);
+    cancelHandler();
   };
 
   return (
     <>
-      <Grid onClick={props.cancelHandler} className={classes.backdrop}></Grid>
+      <Grid onClick={cancelHandler} className={classes.backdrop}></Grid>
       <Grid className={classes.modal}>
         {spinner ? (
-          <Spinner />
+          <Spinner
+            headedStyle={{ background: "black" }}
+            spinneredStyle={{ borderTop: "1em solid black" }}
+          />
         ) : (
           <div style={{ height: "100%", width: "100%" }}>
             <textarea
@@ -38,7 +45,7 @@ const WriterModal = (props) => {
               className={classes.textArea}
             ></textarea>
             <div className={classes.toolTipGrid}>
-              <Tooltip title="cancel" onClick={props.cancelHandler}>
+              <Tooltip title="cancel" onClick={cancelHandler}>
                 <IconButton>
                   <CancelIcon style={{ cursor: "pointer", color: "#fff" }} />
                 </IconButton>
