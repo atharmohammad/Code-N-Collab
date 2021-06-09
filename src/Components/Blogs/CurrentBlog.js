@@ -18,6 +18,7 @@ const CurrentBlog = (props) => {
   const [showComment, setShowComment] = useState(false);
   const [commentLoading, setCommentLoading] = useState(false);
   const [blogLoading, setBlogLoading] = useState(true);
+  const [totalCommentLength, setTotalCommentLength] = useState(0);
   const [comments, setComments] = useState([]);
   const [dummy, setDummy] = useState(uuidv4());
 
@@ -33,6 +34,8 @@ const CurrentBlog = (props) => {
         throw new Error("bad request");
       }
       setBlog(currBlog.data);
+      setTotalCommentLength(currBlog.data.Comments.length);
+      console.log("current blog data", currBlog.data);
     } catch (e) {
       console.log(e);
     }
@@ -149,7 +152,7 @@ const CurrentBlog = (props) => {
               editHandler={() => setEditBlog(true)}
               deleteHandler={deleteHandler}
               openWriter={() => setShowWriter(true)}
-              commentsLength={blog.Comments.length}
+              commentsLength={totalCommentLength}
               likeArray={blog.Likes}
               likeRoute={"/blogs/like/" + id}
             />
@@ -205,7 +208,10 @@ const CurrentBlog = (props) => {
         <WriterModal
           Api="/comment/createComment/"
           parentId={id}
-          fetchData={fetchComment}
+          fetchData={() => {
+            setTotalCommentLength((state) => state + 1);
+            fetchComment();
+          }}
           cancelHandler={() => setShowWriter(false)}
         />
       ) : null}
