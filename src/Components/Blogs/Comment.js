@@ -109,7 +109,7 @@ const Comment = (props) => {
       >
         <div style={{ display: "flex" }}>
           <UserBlogDescription
-            admin={{ User: props.comment.User }}
+            admin={{ User: user }}
             date = {props.comment.createdAt}
           />
         </div>

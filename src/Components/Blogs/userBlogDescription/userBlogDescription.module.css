@@ -29,6 +29,8 @@
 
 .date{
   display: flex;
-  justify-content: center;
-  width: 20%
+  justify-content: flex-end;
+  padding-right: 10px;
+  width: 20%;
+  font-style: italic;
 }

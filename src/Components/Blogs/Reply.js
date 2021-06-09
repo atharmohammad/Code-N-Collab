@@ -77,7 +77,7 @@ const Reply = (props) => {
           <div style={{ display: "flex", background: "#fff" }}>
             <UserBlogDescription
               admin={{ User: reply.User }}
-              dated={{ created: reply.createdAt, updated: reply.updatedAt }}
+              date={reply.createdAt}
             />
           </div>
           {editReply === false ? (
