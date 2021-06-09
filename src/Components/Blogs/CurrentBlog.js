@@ -243,7 +243,7 @@ const CurrentBlog = (props) => {
         <WriterModal
           Api="/comment/createComment/"
           parentId={id}
-          fetchData={fetchComment}
+          fetchData = {fetchComment}
           cancelHandler={() => setShowWriter(false)}
         />
       ) : null}
