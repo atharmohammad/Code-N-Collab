@@ -1,38 +1,94 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext, useCallback } from "react";
 import { Grid, Button, Tooltip, IconButton } from "@material-ui/core";
-import Replies from "./Replies";
+import Reply from "./Reply";
 import ReactMarkdown from "react-markdown";
 import SaveCancel from "./SaveCancel";
 import HelperIcons from "./HelperIcons";
 import WriterModal from "./WriterModal";
+import UserBlogDescription from "./userBlogDescription/userBlogDescription";
+import axios from "../../Axios/axios";
+import BlogSpinner from "../Spinner/BlogSpinner";
+import { AuthContext } from "../../context/auth-context";
 
 const Comment = (props) => {
+  const auth = useContext(AuthContext);
+
   const divRef = useRef();
   const [showReply, setShowReply] = useState(false);
   const [editComment, setEditComment] = useState(false);
-  const [initialComment, setInitialComment] = useState(props.commentData);
+  const [initialComment, setInitialComment] = useState(props.comment.Body);
+  const [commentLoading, setCommentLoading] = useState(false);
+  const [replySpinner, setReplySpinner] = useState(false);
+  const [replies, setReplies] = useState([]);
   const [showWriter, setShowWriter] = useState(false);
   const [deleted, setDeleted] = useState(false);
 
-  const saveHandler = () => {
+  const user = props.comment.User;
+  const id = props.comment._id;
+
+  const saveHandler = async () => {
     const data = divRef.current.value.trim();
     if (!data) {
       return alert("cant be empty");
     }
-    setInitialComment(data);
-    setEditComment(false);
+    setCommentLoading(true);
+    try {
+      const res = await axios.patch("/comment/updateComment/" + id, {
+        Body: data,
+      });
+      setInitialComment(res.data);
+      setEditComment(false);
+    } catch (e) {
+      console.log(e);
+    }
+    setCommentLoading(false);
   };
 
+  const fetchReply = useCallback(async () => {
+    if (replySpinner) {
+      return;
+    }
+
+    try {
+      setShowReply(true);
+      setReplySpinner(true);
+      const data = await axios.get("/reply/getReply/" + id);
+      setReplies(data.data.Replies);
+    } catch (e) {
+      console.log(e);
+    }
+    setReplySpinner(false);
+  }, []);
+
   const toggleReplyHandler = () => {
-    setShowReply((prev) => !prev);
+    if (!showReply) {
+      fetchReply();
+    } else {
+      setShowReply(false);
+    }
   };
-  const deleteHandler = () => {
-    setDeleted(true);
+
+  const deleteHandler = async () => {
+    if (window.confirm("Are you sure you want to delete this comment")) {
+      setCommentLoading(true);
+      try {
+        await axios.delete("/comment/deleteComment/" + id);
+        setDeleted(true);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    setCommentLoading(false);
   };
 
   if (deleted) {
     return <></>;
   }
+
+  if (commentLoading) {
+    return <BlogSpinner />;
+  }
+
   return (
     <div
       style={{
@@ -52,8 +108,7 @@ const Comment = (props) => {
         }}
       >
         <div style={{ display: "flex" }}>
-          <div>User</div>
-          <div style={{ paddingLeft: "20px" }}>2days ago</div>
+          <UserBlogDescription admin={{ User: props.comment.User }} />
         </div>
         {editComment === false ? (
           <div
@@ -61,14 +116,15 @@ const Comment = (props) => {
               background: "#fff",
               fontSize: "18px",
               padding: "15px",
+              boxSizing: "border-box",
+              overflow: "auto",
+              wordWrap: "break-word",
             }}
           >
-            <pre>
-              <ReactMarkdown>{initialComment}</ReactMarkdown>
-            </pre>
+            <ReactMarkdown>{initialComment}</ReactMarkdown>
           </div>
         ) : (
-          <div style={{ margin: "2px",}}>
+          <div style={{ margin: "2px" }}>
             <textarea
               ref={divRef}
               style={{
@@ -79,6 +135,7 @@ const Comment = (props) => {
                 padding: "5px",
                 boxSizing: "border-box",
               }}
+              placeHolder="write your comment..."
             >
               {initialComment}
             </textarea>
@@ -106,18 +163,64 @@ const Comment = (props) => {
         <Grid container direction="row" justify="flex-end">
           <HelperIcons
             type="comment"
+            admin={{ User: user }}
             showEditBtn={!editComment}
             editHandler={() => setEditComment(true)}
             toggleReplyHandler={toggleReplyHandler}
             deleteHandler={deleteHandler}
             openWriter={() => setShowWriter(true)}
+            likeArray = {props.comment.Likes}
+            likeRoute = {"/comment/like/" + id} 
           />
         </Grid>
       </Grid>
-      <div>{showReply ? <Replies commentId={123} /> : null}</div>
-      {showWriter ? (
-          <WriterModal cancelHandler={() => setShowWriter(false)} />
+      <div>
+        {showReply ? (
+          <div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+              }}
+            >
+              {replySpinner ? (
+                <div
+                  style={{
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "flexStart",
+                    width: "100%",
+                  }}
+                >
+                  <BlogSpinner />
+                </div>
+              ) : (
+                replies.map((reply) => (
+                  <Reply replyData={reply} fetchRepliesAgain={fetchReply} />
+                ))
+              )}
+            </div>
+            <div
+              style={{
+                margin: "auto",
+                borderBottom: "10px solid grey",
+                width: "10vw",
+              }}
+            ></div>
+          </div>
         ) : null}
+      </div>
+      {showWriter ? (
+        <WriterModal
+          Api="/reply/newReply/"
+          parentId={id}
+          fetchData={fetchReply}
+          cancelHandler={() => {
+            setShowWriter(false);
+          }}
+        />
+      ) : null}
     </div>
   );
 };

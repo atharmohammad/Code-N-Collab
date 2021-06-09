@@ -48,7 +48,6 @@ class MonacoConvergenceAdapter {
           break;
         }
         case "replace": {
-          console.log("replace", e.index, e.value.length, e.value);
           this.contentManager.replace(e.index, e.value.length, e.value);
           break;
         }

@@ -12,7 +12,6 @@ import Select from "@material-ui/core/Select";
 const CustomizeFont = (props) => {
   const handleChange = (event) => {
     props.setFontSize(parseInt(event.target.value));
-    // console.log(event.target.value)
   };
 
   return (

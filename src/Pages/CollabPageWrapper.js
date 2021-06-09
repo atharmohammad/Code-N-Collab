@@ -3,11 +3,10 @@ import socketio from "socket.io-client";
 import CollabPage from "./CollabPage";
 
 const CollabPageWrapper = () => {
-  const socket = socketio.connect("http://localhost:8080/");
+  const socket = socketio.connect(process.env.REACT_APP_BASE_URL);
   useEffect(() => {
 
     return () => {
-      console.log("socket dissconnect");
       socket.disconnect();
     };
   }, []);

@@ -2,25 +2,25 @@ import React, { useEffect, useState } from "react";
 import Editor from "@uiw/react-md-editor";
 import { Grid, Box } from "@material-ui/core";
 import axios from "../../Axios/axios";
-import { connect } from "react-redux";
-import * as TYPES from "../../store/Action/action";
 
 function TextEditor(props) {
   const [value, setValue] = useState(props.initialValue);
 
-  const { closeTextEditor, showUpdateBtn ,} = { ...props };
-  const postHandler = async() => {
-    alert('posting')
-    axios({ method: props.method, url: props.Api, data: { Body: value } })
-      .then((res) => {
-        try {
-          props.blogPosted();
-          setValue("");
-        } catch (err) {
-          console.log(err);
-        }
-      })
-      .catch((e) => console.log(e));
+  const { closeTextEditor, showUpdateBtn } = { ...props };
+  const postHandler = async () => {
+    try {
+      
+      props.postBtnClick();
+      
+      await axios({
+        method: props.method,
+        url: props.Api,
+        data: { Body: value },
+      });
+      props.fetchBlog();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -30,6 +30,7 @@ function TextEditor(props) {
           style={{
             display: "flex",
             justifyContent: "space-between",
+            flexDirection: "row-reverse",
             marginTop: "-10px",
             marginBottom: "5px",
           }}
@@ -37,7 +38,7 @@ function TextEditor(props) {
           <Box
             style={{
               width: "80px",
-              background: "#d82828",
+              background: "#900606",
               borderRadius: "10px",
               padding: "0 5px 0 5px",
               textAlign: "center",
@@ -75,33 +76,33 @@ function TextEditor(props) {
         style={{ padding: "5px" }}
       />
       {showUpdateBtn ? (
-        <Box
-          style={{
-            width: "40px",
-            backgroundColor: "#4169E1",
-            borderRadius: "10px",
-            padding: "0 5px 0 5px",
-            textAlign: "center",
-            color: "#fff",
-            marginTop: "10px",
-            float: "right",
-            cursor: "pointer",
-          }}
-          onClick={postHandler}
-        >
-          <p>Post</p>
-        </Box>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Box
+            style={{
+              width: "100%",
+              backgroundColor: "#4169E1",
+              borderRadius: "10px",
+              height: "35px",
+              textAlign: "center",
+
+              color: "#fff",
+              marginTop: "10px",
+              float: "right",
+              cursor: "pointer",
+              alignItems: "center",
+              fontSize: "20px",
+              boxSizing: "border-box",
+              border: "2px solid #fff",
+            }}
+            onClick={postHandler}
+          >
+            Post
+          </Box>
+        </div>
       ) : null}
     </Grid>
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    blogPosted: () => {
-      dispatch({ type: TYPES.BLOGPOSTED });
-    },
-  };
-};
 
-export default connect(null, mapDispatchToProps)(TextEditor);
+export default TextEditor

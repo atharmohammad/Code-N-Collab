@@ -8,20 +8,13 @@ const initialState = {
   fontSize: 20,
   input: "",
   output: "",
-  output_success:false,
-  output_error:false,
-  showGraph:false,
-  blogPosted:false,
-  showComment:false,
+  output_success: false,
+  output_error: false,
+  showGraph: false,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case TYPE.RESET_SHOW_COMMENTS:
-      return{...state, showComment: false }
-    case TYPE.SHOW_COMMENTS:
-      return{...state, showComment: !state.showComment }
-    
     case TYPE.SET_COMPILE_ON:
       return { ...state, nowCompile: true };
 
@@ -50,21 +43,19 @@ const reducer = (state = initialState, action) => {
       return { ...state, output: action.value };
 
     case TYPE.NOTIFY_OUTPUT_SUCCESS:
-      return { ...state, output_success: (state.output_success ? false : true) };
+      return { ...state, output_success: state.output_success ? false : true };
 
     case TYPE.NOTIFY_OUTPUT_ERROR:
-      return { ...state, output_error: (state.output_error ? false : true) };
+      return { ...state, output_error: state.output_error ? false : true };
 
     case TYPE.SHOW_GRAPH:
-      return { ...state,showGraph:true};
+      return { ...state, showGraph: true };
 
     case TYPE.HIDE_GRAPH:
-      return { ...state,showGraph:false};
+      return { ...state, showGraph: false };
 
-    case TYPE.BLOGPOSTED:
-      return{...state, blogPosted:state.blogPosted === true ? false : true}
-
-    default:return state
+    default:
+      return state;
   }
 };
 

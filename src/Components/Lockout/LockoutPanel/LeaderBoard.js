@@ -37,7 +37,6 @@ const DenseTable = (props) => {
     setLoad(true);
     socket.emit("Contest-Update", { roomId: room });
   };
-  console.log('contestEnded',props.contestEnded);
   return (
     <TableContainer
       component={Paper}

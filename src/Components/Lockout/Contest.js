@@ -10,12 +10,10 @@ function Contest(props) {
 
   useEffect(() => {
     socket.on("Update", (updatedContest) => {
-      console.log("updated!",updatedContest);
       props.setContest(updatedContest);
       props.resetProblemLoading();
     });
   }, []);
-  console.log('props.contest',props.contest)
   return !props.questionLoading? (
     props.contest.Started === false ? (
       <FilterContest socket={socket} roomId={props.contest.Id} />
@@ -23,7 +21,7 @@ function Contest(props) {
       <LockoutPanel socket={socket} />
     )
   ) : (<div style={{marginLeft:'-15px'}}>
-    <Spinner />
+    <Spinner marginTop='-13px'/>
     </div>
   );
 }
