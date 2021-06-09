@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext,useCallback } from "react";
 import { Grid, Tooltip, IconButton, Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -10,6 +10,7 @@ import Fade from "@material-ui/core/Fade";
 import { AuthContext } from "../../context/auth-context";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import axios from '../../Axios/axios'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -18,28 +19,60 @@ function Alert(props) {
 const HelperIcons = (props) => {
   const auth = useContext(AuthContext);
   const [error, setError] = useState(null);
-
+  const [disableLikeBtn,setDisableLikeBtn] = useState(true);
+   
   const {
     type,
     showEditBtn,
     editHandler,
     deleteHandler,
     openWriter,
-    likeHandler,
-    liked,
     commentsLength,
-    likesLength,
     admin,
+    likeRoute,
+    likeArray,
   } = {
     ...props,
   }; //for all
   const { toggleCommentHandler } = { ...props }; //particular blogs
   const { toggleReplyHandler } = { ...props }; //comment
   const { allBlogPage } = { ...props }; //allblogPage blog
-
+  
+  const [viewerLiked, setViewerLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(likeArray.length);
+  
   let addIconTitle = "reply";
   let forumIcon = null;
   let blogIcons = null;
+  
+  useEffect(()=>{
+    if(auth.user){
+      setDisableLikeBtn(false);
+      const isUserLiked = likeArray.find(
+        (like) => like.toString().trim() == auth.user._id.toString().trim()
+      );
+      if (isUserLiked) {
+        setViewerLiked(true);
+      }
+    }
+  },[])
+  
+  const likeHandler = async () => {
+    if (disableLikeBtn === true) {
+      return;
+    }
+    setDisableLikeBtn(true);
+    setLikesCount((state) => (viewerLiked ? state - 1 : state + 1));
+    setViewerLiked((state) => !state);
+    try {
+      const blog = await axios.post(likeRoute);
+    } catch (e) {
+      setLikesCount((state) => (viewerLiked ? state - 1 : state + 1));
+      setViewerLiked((state) => !state);
+      alert("problem liking");
+    }
+    setDisableLikeBtn(false);
+  };
 
   if (type.toLowerCase() == "blog") {
     addIconTitle = "comment";
@@ -95,11 +128,11 @@ const HelperIcons = (props) => {
           <ThumbUpAltIcon
             style={{
               cursor: "pointer",
-              color: liked ? "#353af3" : "#bec4c3",
+              color: viewerLiked ? "#353af3" : "#bec4c3",
               marginRight: "5px",
             }}
           />
-          {likesLength}
+          {likesCount}
         </Button>
       </Tooltip>
 

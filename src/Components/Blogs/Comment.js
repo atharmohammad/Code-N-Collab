@@ -19,29 +19,12 @@ const Comment = (props) => {
   const [initialComment, setInitialComment] = useState(props.comment.Body);
   const [commentLoading, setCommentLoading] = useState(false);
   const [replySpinner, setReplySpinner] = useState(false);
-
-  const [likesLength, setlikesLength] = useState(props.comment.Likes.length);
-  const [viewerLiked, setViewerLiked] = useState(false);
-  const [disableLikeBtn, setDisableLikeBtn] = useState(true);
-
   const [replies, setReplies] = useState([]);
   const [showWriter, setShowWriter] = useState(false);
   const [deleted, setDeleted] = useState(false);
 
   const user = props.comment.User;
   const id = props.comment._id;
-
-  useEffect(() => {
-    if (auth.user) {
-      setDisableLikeBtn(false);
-      const isUserLiked = props.comment.Likes.find(
-        (like) => like.toString().trim() == auth.user._id.toString().trim()
-      );
-      if (isUserLiked) {
-        setViewerLiked(true);
-      }
-    }
-  }, []);
 
   const saveHandler = async () => {
     const data = divRef.current.value.trim();
@@ -96,24 +79,6 @@ const Comment = (props) => {
       }
     }
     setCommentLoading(false);
-  };
-
-  const likeHandler = async () => {
-    if (disableLikeBtn === true) {
-      return;
-    }
-    setDisableLikeBtn(true);
-    setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
-    setViewerLiked((state) => !state);
-
-    try {
-      await axios.post("/comment/like/" + id);
-    } catch (e) {
-      setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
-      setViewerLiked((state) => !state);
-      alert("error liking");
-    }
-    setDisableLikeBtn(false);
   };
 
   if (deleted) {
@@ -204,9 +169,8 @@ const Comment = (props) => {
             toggleReplyHandler={toggleReplyHandler}
             deleteHandler={deleteHandler}
             openWriter={() => setShowWriter(true)}
-            likeHandler={likeHandler}
-            likesLength={likesLength}
-            liked={viewerLiked}
+            likeArray = {props.comment.Likes}
+            likeRoute = {"/comment/like/" + id} 
           />
         </Grid>
       </Grid>

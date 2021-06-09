@@ -1,15 +1,6 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import {
-  Grid,
-  Box,
-  Button,
-  Typography,
-  Avatar,
-  Tooltip,
-  IconButton,
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
-import { AuthContext } from "../../context/auth-context";
 import axios from "../../Axios/axios";
 import ReactMarkdown from "react-markdown";
 import SaveCancel from "./SaveCancel";
@@ -19,31 +10,14 @@ import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import Spinner from "../Spinner/BlogSpinner";
 
 const Reply = (props) => {
-  const auth = useContext(AuthContext);
-
   const reply = props.replyData;
   const [editReply, setEditReply] = useState(false);
   const [initialReply, setInitialReply] = useState(reply.Body);
   const [deleted, setDeleted] = useState(false);
   const [showWriter, setShowWriter] = useState(false);
-  const [viewerLiked, setViewerLiked] = useState(false);
-  const [likesLength, setlikesLength] = useState(reply.Likes.length);
   const [spinner, setSpinner] = useState(false);
-  const [disableLikeBtn, setDisableLikeBtn] = useState(true);
 
   const divRef = useRef();
-
-  useEffect(() => {
-    if (auth.user) {
-      setDisableLikeBtn(false);
-      const isUserLiked = reply.Likes.find(
-        (like) => like.toString().trim() == auth.user._id.toString().trim()
-      );
-      if (isUserLiked) {
-        setViewerLiked(true);
-      }
-    }
-  }, []);
 
   const deleteHandler = async () => {
     if (window.confirm("Are you sure you want to delete this comment")) {
@@ -74,24 +48,6 @@ const Reply = (props) => {
       console.log(e);
     }
     setSpinner(false);
-  };
-
-  const likeHandler = async () => {
-    if (disableLikeBtn === true) {
-      return;
-    }
-    setDisableLikeBtn(true);
-    setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
-    setViewerLiked((state) => !state);
-
-    try {
-      await axios.post("/reply/like/" + reply._id);
-    } catch (e) {
-      setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
-      setViewerLiked((state) => !state);
-      alert("error liking");
-    }
-    setDisableLikeBtn(false);
   };
 
   if (spinner) {
@@ -170,11 +126,10 @@ const Reply = (props) => {
                 admin={{ User: reply.User }}
                 showEditBtn={!editReply}
                 editHandler={() => setEditReply(true)}
-                likeHandler={likeHandler}
-                likesLength={likesLength}
                 deleteHandler={deleteHandler}
                 openWriter={() => setShowWriter(true)}
-                liked={viewerLiked}
+                likeRoute={"/reply/like/" + reply._id}
+                likeArray={reply.Likes}
               />
             </Grid>
           </Grid>
