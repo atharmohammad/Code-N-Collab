@@ -19,6 +19,7 @@ const WriterModal = (props) => {
     try {
       setSpinner(true);
       await axios.post(`${props.Api}${parentId}`, { Body: body });
+      throw new Error();
       fetchData();
     } catch (e) {
       alert("error Posting!");
@@ -27,6 +28,7 @@ const WriterModal = (props) => {
       setSpinner(false);
       cancelHandler();
     }
+
   };
 
   return (

@@ -74,11 +74,14 @@ function HomePage() {
   };
 
   const contestHandler = () => {
-    const room = uuidv1();
-    history.push({
-      pathname: "/newContest",
-      search: "?room=" + room,
-    });
+    if (auth.token) {
+      const room = uuidv1();
+      history.push({
+        pathname: "/newContest",
+        search: "?room=" + room,
+      });
+    }
+    setError('Login Required !');
   };
 
   return (
