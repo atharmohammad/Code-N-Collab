@@ -24,7 +24,7 @@ It provides users with :-
 We would love for you to contribute to the Code-N-Collab! To contribute to this project, please read:
 
 - The <a href="CODE_OF_CONDUCT.md" >Code of Conduct</a>
-- The <a href="" >Contribution Guidelines</a>
+- The <a href="CONTRIBUTING.md">Contribution Guidelines</a>
 - The <a href="" >Documentation Style Guide</a>
 
 ## 🔥 Getting Started 
