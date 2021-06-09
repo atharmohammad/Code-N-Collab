@@ -6,29 +6,12 @@ import Spinner from "../Spinner/BlogSpinner";
 import ReactMarkdown from "react-markdown";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import HelperIcons from "./HelperIcons";
-import { AuthContext } from "../../context/auth-context";
 
 export default function SingleBlog(props) {
   const blog = props.blog;
   const history = useHistory();
   const [spinner, setSpinner] = useState(false);
   const [deleted, setDeleted] = useState(false);
-  const [viewerLiked, setViewerLiked] = useState(false);
-  const [likesLength, setlikesLength] = useState(blog.Likes.length);
-  const [disableLikeBtn, setDisableLikeBtn] = useState(true);
-  const auth = useContext(AuthContext);
-
-  useEffect(() => {
-    if (auth.user) {
-      setDisableLikeBtn(false);
-      const isUserLiked = blog.Likes.find(
-        (like) => like.toString().trim() == auth.user._id.toString().trim()
-      );
-      if (isUserLiked) {
-        setViewerLiked(true);
-      }
-    }
-  }, []);
 
   const onClickHandler = () => {
     return history.push("/blog/" + blog._id);
@@ -45,24 +28,6 @@ export default function SingleBlog(props) {
       }
       setSpinner(false);
     }
-  };
-
-  const likeHandler = async () => {
-    if (disableLikeBtn === true) {
-      return;
-    }
-    setDisableLikeBtn(true);
-    setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
-    setViewerLiked((state) => !state);
-
-    try {
-      await axios.post("/blogs/like/" + blog._id);
-    } catch (e) {
-      setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
-      setViewerLiked((state) => !state);
-      alert("error liking");
-    }
-    setDisableLikeBtn(false);
   };
 
   if (spinner) {
@@ -107,11 +72,10 @@ export default function SingleBlog(props) {
             allBlogPage={true}
             admin={{ User: blog.User }}
             deleteHandler={deleteHandler}
-            likeHandler={likeHandler}
-            likesLength={likesLength}
-            toggleCommentHandler = {onClickHandler}
+            toggleCommentHandler={onClickHandler}
             commentsLength={blog.Comments.length}
-            liked={viewerLiked}
+            likeRoute={"/blogs/like/" + blog._id}
+            likeArray={blog.Likes}
           />
         </Grid>
       </Grid>

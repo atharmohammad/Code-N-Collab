@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { Grid, Tooltip, IconButton, Button } from "@material-ui/core";
-import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import ReactMarkdown from "react-markdown";
 import HelperIcons from "./HelperIcons";
@@ -11,27 +10,17 @@ import BlogSpinner from "../Spinner/BlogSpinner";
 import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import Comment from "./Comment";
-import { AuthContext } from "../../context/auth-context";
-
-import * as TYPES from "../../store/Action/action";
 
 const CurrentBlog = (props) => {
-  const auth = useContext(AuthContext);
-
   const [editBlog, setEditBlog] = useState(false);
   const [showWriter, setShowWriter] = useState(false);
-  const [initialBlog, setInitialBlog] = useState(null);
+  const [blog, setBlog] = useState(null);
   const [showComment, setShowComment] = useState(false);
   const [commentLoading, setCommentLoading] = useState(false);
   const [blogLoading, setBlogLoading] = useState(true);
+  const [totalCommentLength, setTotalCommentLength] = useState(0);
   const [comments, setComments] = useState([]);
   const [dummy, setDummy] = useState(uuidv4());
-  const [user, setUser] = useState("NA");
-
-  const [likesLength, setlikesLength] = useState(0);
-  const [viewerLiked, setViewerLiked] = useState(false);
-  const [disableLikeBtn, setDisableLikeBtn] = useState(true);
-  const [commentsLength, setCommentsLength] = useState(0);
 
   const id = window.location.pathname.split("/")[2];
 
@@ -41,19 +30,12 @@ const CurrentBlog = (props) => {
     setBlogLoading(true);
     try {
       const currBlog = await axios.get(`blogs/currentBlog/${id}`);
-      setInitialBlog(currBlog.data.Body);
-      setUser(currBlog.data.User);
-      setlikesLength(currBlog.data.Likes.length);
-      setCommentsLength(currBlog.data.Comments.length);
-      if (auth.user) {
-        setDisableLikeBtn(false);
-        const isUserLiked = currBlog.data.Likes.find(
-          (like) => like.toString().trim() == auth.user._id.toString().trim()
-        );
-        if (isUserLiked) {
-          setViewerLiked(true);
-        }
+      if (!currBlog.data.Body || !currBlog.data.User) {
+        throw new Error("bad request");
       }
+      setBlog(currBlog.data);
+      setTotalCommentLength(currBlog.data.Comments.length);
+      console.log("current blog data", currBlog.data);
     } catch (e) {
       console.log(e);
     }
@@ -79,7 +61,10 @@ const CurrentBlog = (props) => {
     setBlogLoading(true);
     try {
       const currBlog = await axios.get(`blogs/currentBlog/${id}`);
-      setInitialBlog(currBlog.data.Body);
+      if (!currBlog.data.Body || !currBlog.data.User) {
+        throw new Error("bad request");
+      }
+      setBlog(currBlog.data);
     } catch (e) {
       console.log(e);
     }
@@ -111,25 +96,6 @@ const CurrentBlog = (props) => {
     }
   };
 
-  const likeHandler = async () => {
-    if (disableLikeBtn === true) {
-      return;
-    }
-    setDisableLikeBtn(true);
-    setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
-    setViewerLiked((state) => !state);
-
-    try {
-      const blog = await axios.post("/blogs/like/" + id);
-      setInitialBlog(blog.data.Body);
-    } catch (e) {
-      setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
-      setViewerLiked((state) => !state);
-      alert("problem liking");
-    }
-    setDisableLikeBtn(false);
-  };
-
   if (blogLoading) {
     return <BlogSpinner />;
   }
@@ -153,13 +119,13 @@ const CurrentBlog = (props) => {
       >
         {editBlog === false ? (
           <>
-            <UserBlogDescription admin={{ User: user }} />
-            <ReactMarkdown>{initialBlog}</ReactMarkdown>
+            <UserBlogDescription admin={{ User: blog.User }} />
+            <ReactMarkdown>{blog.Body}</ReactMarkdown>
           </>
         ) : (
           <>
             <TextEditor
-              initialValue={initialBlog}
+              initialValue={blog.Body}
               Api={"/blogs/currBlog/" + id}
               method="patch"
               closeTextEditor={() => setEditBlog(false)}
@@ -182,14 +148,13 @@ const CurrentBlog = (props) => {
               type="blog"
               toggleCommentHandler={toggleCommentHandler}
               showEditBtn={!editBlog}
-              admin={{ User: user }}
+              admin={{ User: blog.User }}
               editHandler={() => setEditBlog(true)}
               deleteHandler={deleteHandler}
               openWriter={() => setShowWriter(true)}
-              likeHandler={likeHandler}
-              likesLength={likesLength}
-              commentsLength={commentsLength}
-              liked={viewerLiked}
+              commentsLength={totalCommentLength}
+              likeArray={blog.Likes}
+              likeRoute={"/blogs/like/" + id}
             />
           </Grid>
         </div>
@@ -243,7 +208,10 @@ const CurrentBlog = (props) => {
         <WriterModal
           Api="/comment/createComment/"
           parentId={id}
-          fetchData={fetchComment}
+          fetchData={() => {
+            setTotalCommentLength((state) => state + 1);
+            fetchComment();
+          }}
           cancelHandler={() => setShowWriter(false)}
         />
       ) : null}

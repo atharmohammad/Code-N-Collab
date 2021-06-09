@@ -27,16 +27,16 @@ export default function LockoutWrapper(props) {
     }
 
     if (!auth.token ){
-      alert('Login required !')
       return history.push({
         pathname: "/homepage",
+        state:{error:'Login required !'},
       });
     }
 
     if(auth.user.CodeforcesHandle == null){
-      alert('codeforces handle required')
-      history.push({
+      return history.push({
         pathname: "/homepage",
+        state:{error:'codeforces handle required (Update Profile) !'},
       });
     }
 
