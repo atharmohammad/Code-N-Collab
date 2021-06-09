@@ -7,7 +7,6 @@ const CollabPageWrapper = () => {
   useEffect(() => {
 
     return () => {
-      console.log("socket disconnect");
       socket.disconnect();
     };
   }, []);

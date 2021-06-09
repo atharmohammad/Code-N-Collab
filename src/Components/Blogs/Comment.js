@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useRef, useContext, useCallback } from "react";
 import { Grid, Button, Tooltip, IconButton } from "@material-ui/core";
 import Reply from "./Reply";
 import ReactMarkdown from "react-markdown";
@@ -22,6 +22,7 @@ const Comment = (props) => {
 
   const [likesLength, setlikesLength] = useState(props.comment.Likes.length);
   const [viewerLiked, setViewerLiked] = useState(false);
+  const [disableLikeBtn, setDisableLikeBtn] = useState(true);
 
   const [replies, setReplies] = useState([]);
   const [showWriter, setShowWriter] = useState(false);
@@ -32,6 +33,7 @@ const Comment = (props) => {
 
   useEffect(() => {
     if (auth.user) {
+      setDisableLikeBtn(false);
       const isUserLiked = props.comment.Likes.find(
         (like) => like.toString().trim() == auth.user._id.toString().trim()
       );
@@ -59,21 +61,27 @@ const Comment = (props) => {
     setCommentLoading(false);
   };
 
-  const toggleReplyHandler = async () => {
+  const fetchReply = useCallback(async () => {
+    if (replySpinner) {
+      return;
+    }
+
+    try {
+      setShowReply(true);
+      setReplySpinner(true);
+      const data = await axios.get("/reply/getReply/" + id);
+      setReplies(data.data.Replies);
+    } catch (e) {
+      console.log(e);
+    }
+    setReplySpinner(false);
+  }, []);
+
+  const toggleReplyHandler = () => {
     if (!showReply) {
-      try {
-        setShowReply((prev) => !prev);
-        setReplySpinner(true);
-        const data = await axios.get("/reply/getReply/" + id);
-        setReplies(data.data.Replies);
-        console.log(data.data.Replies);
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setReplySpinner(false);
-      }
+      fetchReply();
     } else {
-      setShowReply((prev) => !prev);
+      setShowReply(false);
     }
   };
 
@@ -91,23 +99,21 @@ const Comment = (props) => {
   };
 
   const likeHandler = async () => {
-    if (!viewerLiked) {
-      setlikesLength((state) => state + 1);
-    } else {
-      setlikesLength((state) => state - 1);
+    if (disableLikeBtn === true) {
+      return;
     }
+    setDisableLikeBtn(true);
+    setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
+    setViewerLiked((state) => !state);
 
     try {
       await axios.post("/comment/like/" + id);
-      setViewerLiked((state) => !state);
     } catch (e) {
+      setlikesLength((state) => (viewerLiked ? state - 1 : state + 1));
+      setViewerLiked((state) => !state);
       alert("error liking");
-      if (!viewerLiked) {
-        setlikesLength((state) => state - 1);
-      } else {
-        setlikesLength((state) => state + 1);
-      }
     }
+    setDisableLikeBtn(false);
   };
 
   if (deleted) {
@@ -145,12 +151,12 @@ const Comment = (props) => {
               background: "#fff",
               fontSize: "18px",
               padding: "15px",
+              boxSizing: "border-box",
               overflow: "auto",
+              wordWrap: "break-word",
             }}
           >
-            <pre>
-              <ReactMarkdown>{initialComment}</ReactMarkdown>
-            </pre>
+            <ReactMarkdown>{initialComment}</ReactMarkdown>
           </div>
         ) : (
           <div style={{ margin: "2px" }}>
@@ -164,6 +170,7 @@ const Comment = (props) => {
                 padding: "5px",
                 boxSizing: "border-box",
               }}
+              placeHolder="write your comment..."
             >
               {initialComment}
             </textarea>
@@ -199,7 +206,7 @@ const Comment = (props) => {
             openWriter={() => setShowWriter(true)}
             likeHandler={likeHandler}
             likesLength={likesLength}
-            viewerLiked={viewerLiked}
+            liked={viewerLiked}
           />
         </Grid>
       </Grid>
@@ -225,7 +232,9 @@ const Comment = (props) => {
                   <BlogSpinner />
                 </div>
               ) : (
-                replies.map((reply) => <Reply replyData={reply} />)
+                replies.map((reply) => (
+                  <Reply replyData={reply} fetchRepliesAgain={fetchReply} />
+                ))
               )}
             </div>
             <div
@@ -242,7 +251,10 @@ const Comment = (props) => {
         <WriterModal
           Api="/reply/newReply/"
           parentId={id}
-          cancelHandler={() => setShowWriter(false)}
+          fetchData={fetchReply}
+          cancelHandler={() => {
+            setShowWriter(false);
+          }}
         />
       ) : null}
     </div>
