@@ -69,7 +69,7 @@ const HelperIcons = (props) => {
     } catch (e) {
       setLikesCount((state) => (viewerLiked ? state - 1 : state + 1));
       setViewerLiked((state) => !state);
-      alert("problem liking");
+      setError('Oops something went wrong');
     }
     setDisableLikeBtn(false);
   };
