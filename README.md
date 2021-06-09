@@ -56,4 +56,5 @@ C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/conver
 - <a href="https://socket.io/docs/v4" >Socket.Io Documentation </a>
 - <a href="https://convergence.io/documentation/" > Convergence Docs </a>
 - <a href="https://docs.docker.com/docker-for-windows/install/">Docker for Windows</a> (For windows user)
+- <a href="https://microsoft.github.io/monaco-editor/api/modules/monaco.editor.html">Monaco Editor Docs</a>
 
