@@ -23,9 +23,10 @@ const WriterModal = (props) => {
     } catch (e) {
       alert("error Posting!");
       console.log(e);
+    }finally{
+      setSpinner(false);
+      cancelHandler();
     }
-    setSpinner(false);
-    cancelHandler();
   };
 
   return (
