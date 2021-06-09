@@ -86,7 +86,7 @@ const BlogPage = (props) => {
                 showUpdateBtn={true}
                 Api="/blogs/write"
                 postBtnClick={() => setShowEditor(false)}
-                fetchBlog = {fetchBlogs} 
+                fetchBlog = {fetchBlogs}
                 initialValue=""
                 method="post"
               />

@@ -57,7 +57,10 @@ export default function SingleBlog(props) {
           borderRadius: "20px",
         }}
       >
-        <UserBlogDescription admin={{ User: blog.User }} />
+        <UserBlogDescription
+          admin={{ User: blog.User }}
+          date = {blog.createdAt}
+        />
         <Grid
           style={{ marginTop: "1vh", cursor: "pointer" }}
           onClick={onClickHandler}

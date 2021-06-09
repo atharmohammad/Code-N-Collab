@@ -75,7 +75,10 @@ const Reply = (props) => {
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", background: "#fff" }}>
-            <UserBlogDescription admin={{ User: reply.User }} />
+            <UserBlogDescription
+              admin={{ User: reply.User }}
+              dated={{ created: reply.createdAt, updated: reply.updatedAt }}
+            />
           </div>
           {editReply === false ? (
             <div

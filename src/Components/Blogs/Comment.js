@@ -108,7 +108,10 @@ const Comment = (props) => {
         }}
       >
         <div style={{ display: "flex" }}>
-          <UserBlogDescription admin={{ User: props.comment.User }} />
+          <UserBlogDescription
+            admin={{ User: props.comment.User }}
+            date = {props.comment.createdAt}
+          />
         </div>
         {editComment === false ? (
           <div
@@ -169,8 +172,8 @@ const Comment = (props) => {
             toggleReplyHandler={toggleReplyHandler}
             deleteHandler={deleteHandler}
             openWriter={() => setShowWriter(true)}
-            likeArray = {props.comment.Likes}
-            likeRoute = {"/comment/like/" + id} 
+            likeArray={props.comment.Likes}
+            likeRoute={"/comment/like/" + id}
           />
         </Grid>
       </Grid>

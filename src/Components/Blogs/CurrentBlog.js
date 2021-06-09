@@ -119,7 +119,10 @@ const CurrentBlog = (props) => {
       >
         {editBlog === false ? (
           <>
-            <UserBlogDescription admin={{ User: blog.User }} />
+            <UserBlogDescription
+              admin={{ User: blog.User }}
+              date = {blog.createdAt}
+            />
             <ReactMarkdown>{blog.Body}</ReactMarkdown>
           </>
         ) : (
