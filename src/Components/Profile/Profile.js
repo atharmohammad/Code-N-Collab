@@ -1,6 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import { Grid, Tooltip, IconButton } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
+
 import { AuthContext } from "../../context/auth-context";
 
 import SelectAvatar from "../SelectAvatars/SelectAvatars";
@@ -15,10 +18,15 @@ import GithubIcon from "../../Assets/images/Github.png";
 import CodechefIcon from "../../Assets/images/codechef.png";
 import AtcoderIcon from "../../Assets/images/atcoder.png";
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 const Profile = (props) => {
   const history = useHistory();
   const user = props.user;
   const auth = useContext(AuthContext);
+  const [msg, setMsg] = useState(null);
 
   return (
     <>
@@ -88,21 +96,22 @@ const Profile = (props) => {
                 display: "flex",
                 alignItems: "flex-end",
               }}
-            >{(auth.user && user._id === auth.user._id
-              ?(<Tooltip
-                title="update profile"
-                onClick={() => history.push("/updateUser")}
-              >
-                <IconButton>
-                  <EditIcon style={{ cursor: "pointer" }} />
-                    </IconButton>
+            >
+              {auth.user && user._id === auth.user._id ? (
+                <Tooltip
+                  title="update profile"
+                  onClick={() => history.push("/updateUser")}
+                >
+                  <IconButton>
+                    <EditIcon style={{ cursor: "pointer" }} />
+                  </IconButton>
                 </Tooltip>
-                ):null)}
+              ) : null}
               <Tooltip
                 title="share"
                 onClick={() => {
                   navigator.clipboard.writeText(window.location.href);
-                  return alert("copied to clipboard");
+                  return setMsg('copied to clipboard');
                 }}
               >
                 <IconButton>
@@ -242,6 +251,16 @@ const Profile = (props) => {
           </div>
         </div>
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        open={msg}
+        autoHideDuration={3000}
+        onClose={()=>setMsg(null)}
+      >
+        <Alert onClose={()=>setMsg(null)} severity="success">
+          {msg}
+        </Alert>
+      </Snackbar>
     </>
   );
 };
