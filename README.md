@@ -58,3 +58,6 @@ C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/conver
 - <a href="https://docs.docker.com/docker-for-windows/install/">Docker for Windows</a> (For windows user)
 - <a href="https://microsoft.github.io/monaco-editor/api/modules/monaco.editor.html">Monaco Editor Docs</a>
 
+## License
+<a href="LICENSE">Apache License 2.0</a>
+
