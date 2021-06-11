@@ -5,12 +5,7 @@
 </p>
 <br/>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![MIT License][license-shield]][license-url]
-[![Issues][issues-shield]][issues-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/30ec72b0-446f-44c8-b683-6f975f131898/deploy-status)](https://app.netlify.com/sites/code-n-collab/deploys)
 
 # 🔖 About 
@@ -69,18 +64,3 @@ C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/conver
 
 ## License
 <a href="LICENSE">Apache License 2.0</a>
-
-[contributors-shield]: https://img.shields.io/github/contributors/atharmohammad/Code-N-Collab.svg?style=for-the-badge
-[contributors-url]: https://github.com/atharmohammad/Code-N-Collab/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/atharmohammad/Code-N-Collab.svg?style=for-the-badge
-[forks-url]: https://github.com/atharmohammad/Code-N-Collab/network/members
-[stars-shield]: https://img.shields.io/github/stars/atharmohammad/Code-N-Collab.svg?style=for-the-badge
-[stars-url]: https://github.com/atharmohammad/Code-N-Collab/stargazers
-[issues-shield]: https://img.shields.io/github/issues/atharmohammad/Code-N-Collab.svg?style=for-the-badge
-[issues-url]: https://github.com/atharmohammad/Code-N-Collab/issues
-[license-shield]: https://img.shields.io/github/license/atharmohammad/Code-N-Collab.svg?style=for-the-badge
-[license-url]: https://github.com/atharmohammad/Code-N-Collab/blob/master/LICENSE
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/athar-mohammad-34068a157/
-[product-screenshot]: images/screenshot.png
-
