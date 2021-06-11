@@ -21,12 +21,12 @@ export default function BlogHead(props) {
         backgroundColor: "black",
         width: "100%",
         textAlign: "center",
-        border:"2px solid black"
+        border: "2px solid black",
       }}
     >
-    <div>
-      <Back clicked={backHandler} />
-    </div>
+      <div>
+        <Back clicked={backHandler} />
+      </div>
       <Grid
         container
         direction="column"
@@ -38,7 +38,14 @@ export default function BlogHead(props) {
           style={{ height: "10vh", width: "60vh" }}
           alt="CodeNCollab"
         />
-        <Typography style={{ color:'#fff', marginTop: "5vh", width: "60vh" , fontWeight:"bold" }}>
+        <Typography
+          style={{
+            color: "#fff",
+            marginTop: "5vh",
+            width: "60vh",
+            fontWeight: "bold",
+          }}
+        >
           {" "}
           Official Page for Community Interaction and Announcements
         </Typography>

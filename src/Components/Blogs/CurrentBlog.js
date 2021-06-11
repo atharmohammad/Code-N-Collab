@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { Grid, Tooltip, IconButton, Button } from "@material-ui/core";
-import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import ReactMarkdown from "react-markdown";
 import HelperIcons from "./HelperIcons";
@@ -12,47 +11,37 @@ import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import Comment from "./Comment";
 
-import * as TYPES from "../../store/Action/action";
-
 const CurrentBlog = (props) => {
   const [editBlog, setEditBlog] = useState(false);
   const [showWriter, setShowWriter] = useState(false);
-  const [initialBlog, setInitialBlog] = useState(null);
+  const [blog, setBlog] = useState(null);
   const [showComment, setShowComment] = useState(false);
   const [commentLoading, setCommentLoading] = useState(false);
   const [blogLoading, setBlogLoading] = useState(true);
+  const [totalCommentLength, setTotalCommentLength] = useState(0);
   const [comments, setComments] = useState([]);
   const [dummy, setDummy] = useState(uuidv4());
-  const [user, setUser] = useState("NA");
-
-  const [likesLength, setlikesLength] = useState(null);
-  const [viewerLiked, setViewerLiked] = useState(null);
 
   const id = window.location.pathname.split("/")[2];
 
   const history = useHistory();
 
   useEffect(async () => {
-    if (props.blogPosted) {
-      setBlogLoading(true);
-      try {
-        const currBlog = await axios.get(`blogs/currentBlog/${id}`);
-        setInitialBlog(currBlog.data.Body);
-        setUser(currBlog.data.User);
-        setlikesLength(currBlog.data.Likes.length);
-        setViewerLiked(
-          currBlog.data.Likes.findIndex(
-            (like, i) => like === currBlog.data.User._id
-          ) !== -1
-        );
-      } catch (e) {
-        console.log(e);
+    setBlogLoading(true);
+    try {
+      const currBlog = await axios.get(`blogs/currentBlog/${id}`);
+      if (!currBlog.data.Body || !currBlog.data.User) {
+        throw new Error("bad request");
       }
-      props.blogPostedOff(false);
-      setEditBlog(false);
-      setBlogLoading(false);
+      setBlog(currBlog.data);
+      setTotalCommentLength(currBlog.data.Comments.length);
+      console.log("current blog data", currBlog.data);
+    } catch (e) {
+      console.log(e);
     }
-  }, [props.blogPosted]);
+    setEditBlog(false);
+    setBlogLoading(false);
+  }, []);
 
   const deleteHandler = async () => {
     if (window.confirm("Are you sure you want to delete this Blog ?")) {
@@ -65,26 +54,46 @@ const CurrentBlog = (props) => {
     }
   };
 
-  const showCommentHandler = async () => {
-    if (!showComment) {
-      setCommentLoading(true);
-      try {
-        setShowComment(true);
-        const data = await axios.get(`/comment/getComments/${id}`);
-        setComments(data.data.Comments);
-        setDummy(uuidv4());
-      } catch (e) {
-        console.log(e);
+  const fetchBlog = async () => {
+    if (blogLoading) {
+      return;
+    }
+    setBlogLoading(true);
+    try {
+      const currBlog = await axios.get(`blogs/currentBlog/${id}`);
+      if (!currBlog.data.Body || !currBlog.data.User) {
+        throw new Error("bad request");
       }
-      setCommentLoading(false);
+      setBlog(currBlog.data);
+    } catch (e) {
+      console.log(e);
+    }
+    setEditBlog(false);
+    setBlogLoading(false);
+  };
+
+  const fetchComment = async () => {
+    if (commentLoading) {
+      return;
+    }
+    setCommentLoading(true);
+    try {
+      setShowComment(true);
+      const data = await axios.get(`/comment/getComments/${id}`);
+      setComments(data.data.Comments);
+      setDummy(uuidv4());
+    } catch (e) {
+      console.log(e);
+    }
+    setCommentLoading(false);
+  };
+
+  const toggleCommentHandler = async () => {
+    if (!showComment) {
+      fetchComment();
     } else {
       setShowComment(false);
     }
-  };
-
-  const moreCommentClickHandler = () => {
-    setCommentLoading(true);
-    setTimeout(() => setCommentLoading(false), 2000);
   };
 
   if (blogLoading) {
@@ -105,22 +114,26 @@ const CurrentBlog = (props) => {
           fontFamily: ["Baloo Tammudu 2", "cursive"].join(" "),
           lineHeight: "170%",
           fontSize: "20px",
-          borderRadius:'20px'
+          borderRadius: "20px",
         }}
       >
         {editBlog === false ? (
           <>
-            <UserBlogDescription admin={{ User: user }} />
-            <ReactMarkdown>{initialBlog}</ReactMarkdown>
+            <UserBlogDescription
+              admin={{ User: blog.User }}
+              date = {blog.createdAt}
+            />
+            <ReactMarkdown>{blog.Body}</ReactMarkdown>
           </>
         ) : (
           <>
             <TextEditor
-              initialValue={initialBlog}
+              initialValue={blog.Body}
               Api={"/blogs/currBlog/" + id}
               method="patch"
               closeTextEditor={() => setEditBlog(false)}
-              updateBtnClick={() => setBlogLoading(true)}
+              postBtnClick={() => setBlogLoading(true)}
+              fetchBlog={fetchBlog}
             ></TextEditor>
           </>
         )}
@@ -136,22 +149,22 @@ const CurrentBlog = (props) => {
           >
             <HelperIcons
               type="blog"
-              showCommentHandler={showCommentHandler}
+              toggleCommentHandler={toggleCommentHandler}
               showEditBtn={!editBlog}
-              admin={{ User: user }}
+              admin={{ User: blog.User }}
               editHandler={() => setEditBlog(true)}
               deleteHandler={deleteHandler}
               openWriter={() => setShowWriter(true)}
-              likeChangeHandler={() => {}}
-              likesLength={likesLength}
-              viewerLiked={false}
+              commentsLength={totalCommentLength}
+              likeArray={blog.Likes}
+              likeRoute={"/blogs/like/" + id}
             />
           </Grid>
         </div>
       </div>
       <div
         style={{
-          marginTop: "10px",
+          margin: "10px 0 100px 0",
           background: "grey",
           boxShadow: "5px 5px 20px black",
           borderRadius: "10px",
@@ -178,7 +191,7 @@ const CurrentBlog = (props) => {
 
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button
-                  onClick={moreCommentClickHandler}
+                  onClick={fetchComment}
                   style={{
                     background: "#3e2cd4",
                     color: "#fff",
@@ -187,7 +200,7 @@ const CurrentBlog = (props) => {
                     margin: "0px 10px 10px 2px",
                   }}
                 >
-                  More...
+                  Reload...
                 </Button>
               </div>
             </>
@@ -195,24 +208,18 @@ const CurrentBlog = (props) => {
         ) : null}
       </div>
       {showWriter ? (
-        <WriterModal parentId={id} cancelHandler={() => setShowWriter(false)} />
+        <WriterModal
+          Api="/comment/createComment/"
+          parentId={id}
+          fetchData={() => {
+            setTotalCommentLength((state) => state + 1);
+            fetchComment();
+          }}
+          cancelHandler={() => setShowWriter(false)}
+        />
       ) : null}
     </>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    blogPosted: state.tools.blogPosted,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    blogPostedOff: (action) => {
-      dispatch({ type: TYPES.BLOGPOSTED, value: action });
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentBlog);
+export default CurrentBlog;

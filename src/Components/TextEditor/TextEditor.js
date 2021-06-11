@@ -2,23 +2,23 @@ import React, { useEffect, useState } from "react";
 import Editor from "@uiw/react-md-editor";
 import { Grid, Box } from "@material-ui/core";
 import axios from "../../Axios/axios";
-import { connect } from "react-redux";
-import * as TYPES from "../../store/Action/action";
 
 function TextEditor(props) {
   const [value, setValue] = useState(props.initialValue);
 
   const { closeTextEditor, showUpdateBtn } = { ...props };
   const postHandler = async () => {
-    try{
-    props.updateBtnClick();
-    }catch(e){
-      console.log('no update btn')
-    }
-    try{
-      await axios({ method: props.method, url: props.Api, data: { Body: value } })
-      props.blogPosted(true);
-    }catch(e){
+    try {
+      
+      props.postBtnClick();
+      
+      await axios({
+        method: props.method,
+        url: props.Api,
+        data: { Body: value },
+      });
+      props.fetchBlog();
+    } catch (e) {
       console.log(e);
     }
   };
@@ -104,12 +104,5 @@ function TextEditor(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    blogPosted: (action) => {
-      dispatch({ type: TYPES.BLOGPOSTED, value: action });
-    },
-  };
-};
 
-export default connect(null, mapDispatchToProps)(TextEditor);
+export default TextEditor

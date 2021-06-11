@@ -8,9 +8,7 @@ import Stars from "../Components/Stars/Stars";
 import BlogHead from "../Components/Blogs/BlogHead";
 
 const ParticularBlog = (props) => {
-  useEffect(() => {
-    props.blogPosted(true);
-  }, []);
+  
   return (
     <>
       <div className={classes.wrap}>
@@ -35,12 +33,5 @@ const ParticularBlog = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    blogPosted: (action) => {
-      dispatch({ type: TYPES.BLOGPOSTED, value: action });
-    },
-  };
-};
 
-export default connect(null, mapDispatchToProps)(ParticularBlog);
+export default ParticularBlog;

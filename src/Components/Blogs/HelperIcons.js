@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext,useCallback } from "react";
 import { Grid, Tooltip, IconButton, Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -8,40 +8,91 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import CommentIcon from "@material-ui/icons/Comment";
 import Fade from "@material-ui/core/Fade";
 import { AuthContext } from "../../context/auth-context";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import axios from '../../Axios/axios'
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const HelperIcons = (props) => {
   const auth = useContext(AuthContext);
-
-  const { type, showEditBtn, editHandler, deleteHandler, openWriter } = {
+  const [error, setError] = useState(null);
+  const [disableLikeBtn,setDisableLikeBtn] = useState(true);
+   
+  const {
+    type,
+    showEditBtn,
+    editHandler,
+    deleteHandler,
+    openWriter,
+    commentsLength,
+    admin,
+    likeRoute,
+    likeArray,
+  } = {
     ...props,
   }; //for all
-  const { showCommentHandler } = { ...props }; //particular blogs
+  const { toggleCommentHandler } = { ...props }; //particular blogs
   const { toggleReplyHandler } = { ...props }; //comment
   const { allBlogPage } = { ...props }; //allblogPage blog
-
+  
+  const [viewerLiked, setViewerLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(likeArray.length);
+  
   let addIconTitle = "reply";
   let forumIcon = null;
   let blogIcons = null;
+  
+  useEffect(()=>{
+    if(auth.user){
+      setDisableLikeBtn(false);
+      const isUserLiked = likeArray.find(
+        (like) => like.toString().trim() == auth.user._id.toString().trim()
+      );
+      if (isUserLiked) {
+        setViewerLiked(true);
+      }
+    }
+  },[])
+  
+  const likeHandler = async () => {
+    if (disableLikeBtn === true) {
+      return;
+    }
+    setDisableLikeBtn(true);
+    setLikesCount((state) => (viewerLiked ? state - 1 : state + 1));
+    setViewerLiked((state) => !state);
+    try {
+      const blog = await axios.post(likeRoute);
+    } catch (e) {
+      setLikesCount((state) => (viewerLiked ? state - 1 : state + 1));
+      setViewerLiked((state) => !state);
+      setError('Oops something went wrong');
+    }
+    setDisableLikeBtn(false);
+  };
 
-  if (props.type.toLowerCase() == "blog") {
+  if (type.toLowerCase() == "blog") {
     addIconTitle = "comment";
     blogIcons = (
       <>
         <Tooltip
           title="View Comment"
           style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
-          onClick={showCommentHandler}
+          onClick={toggleCommentHandler}
         >
           <Button>
             <CommentIcon
               style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
             />
-            93
+            {commentsLength}
           </Button>
         </Tooltip>
       </>
     );
-  } else if (props.type.toLowerCase() == "comment") {
+  } else if (type.toLowerCase() == "comment") {
     forumIcon = (
       <Tooltip
         TransitionComponent={Fade}
@@ -65,13 +116,23 @@ const HelperIcons = (props) => {
         TransitionComponent={Fade}
         TransitionProps={{ timeout: 600 }}
         title="Like"
-        style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
+        style={{ height: "40px", width: "80px", margin: "10px 5px 0" }}
+        onClick={() => {
+          if (auth.user) {
+            return likeHandler();
+          }
+          return setError("Login Required !");
+        }}
       >
         <Button>
           <ThumbUpAltIcon
-            style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
+            style={{
+              cursor: "pointer",
+              color: viewerLiked ? "#353af3" : "#bec4c3",
+              marginRight: "5px",
+            }}
           />
-          {props.likesLength !== undefined ? props.likesLength : "NA"}
+          {likesCount}
         </Button>
       </Tooltip>
 
@@ -83,7 +144,12 @@ const HelperIcons = (props) => {
             TransitionComponent={Fade}
             TransitionProps={{ timeout: 600 }}
             title={`write ${addIconTitle}`}
-            onClick={openWriter}
+            onClick={() => {
+              if (auth.user) {
+                return openWriter();
+              }
+              return setError("Login Required !");
+            }}
             style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
           >
             <Button>
@@ -93,9 +159,9 @@ const HelperIcons = (props) => {
               />
             </Button>
           </Tooltip>
-          {auth.token &&
-          props.admin &&
-          props.admin.User._id === auth.user._id ? (
+          {auth.user &&
+          admin.User._id.toString().trim() ===
+            auth.user._id.toString().trim() ? (
             showEditBtn ? (
               <Tooltip
                 TransitionComponent={Fade}
@@ -121,7 +187,8 @@ const HelperIcons = (props) => {
         </>
       ) : null}
 
-      {auth.token && props.admin && props.admin.User._id === auth.user._id ? (
+      {auth.user &&
+      admin.User._id.toString().trim() === auth.user._id.toString().trim() ? (
         <Tooltip
           TransitionComponent={Fade}
           TransitionProps={{ timeout: 600 }}
@@ -136,6 +203,16 @@ const HelperIcons = (props) => {
           </Button>
         </Tooltip>
       ) : null}
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        open={error !== null}
+        autoHideDuration={6000}
+        onClose={() => setError(null)}
+      >
+        <Alert onClose={() => setError(null)} severity="error">
+          {error}
+        </Alert>
+      </Snackbar>
     </>
   );
 };

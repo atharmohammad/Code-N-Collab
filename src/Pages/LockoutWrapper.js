@@ -5,7 +5,7 @@ import {useHistory , useLocation} from "react-router-dom";
 import {AuthContext} from "../context/auth-context"
 
 export default function LockoutWrapper(props) {
-  const socket = socketio.connect("http://localhost:8080/");
+  const socket = socketio.connect(process.env.REACT_APP_BASE_URL);
   const auth = useContext(AuthContext);
   const history = useHistory();
   const [valid,setValid] = useState(false);
@@ -13,7 +13,6 @@ export default function LockoutWrapper(props) {
 
   useEffect(() => {
     return () => {
-      console.log("disconnect");
       socket.disconnect();
     };
   }, []);
@@ -28,16 +27,16 @@ export default function LockoutWrapper(props) {
     }
 
     if (!auth.token ){
-      alert('Login required !')
       return history.push({
         pathname: "/homepage",
+        state:{error:'Login required !'},
       });
     }
 
     if(auth.user.CodeforcesHandle == null){
-      alert('codeforces handle required')
-      history.push({
+      return history.push({
         pathname: "/homepage",
+        state:{error:'codeforces handle required (Update Profile) !'},
       });
     }
 
