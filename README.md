@@ -11,6 +11,7 @@
 [![MIT License][license-shield]][license-url]
 [![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+[![Netlify Status](https://api.netlify.com/api/v1/badges/30ec72b0-446f-44c8-b683-6f975f131898/deploy-status)](https://app.netlify.com/sites/code-n-collab/deploys)
 
 # 🔖 About 
 Code - N - Collab is a Collaboration website for Software developers , Competitive coders , and every one who loves to code and collaborate with others to learn and grow. It provides users to collaborate with their team , friends and also find people with similar their interests.
