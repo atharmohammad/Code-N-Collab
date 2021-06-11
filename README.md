@@ -3,6 +3,14 @@
      style="border-radius:50%"/>
 <img src="https://user-images.githubusercontent.com/56029409/120934611-a10e1b00-c71c-11eb-8f9a-c22ecfc82652.png" height="70">
 </p>
+<br/>
+
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 # 🔖 About 
 Code - N - Collab is a Collaboration website for Software developers , Competitive coders , and every one who loves to code and collaborate with others to learn and grow. It provides users to collaborate with their team , friends and also find people with similar their interests.
@@ -60,4 +68,18 @@ C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/conver
 
 ## License
 <a href="LICENSE">Apache License 2.0</a>
+
+[contributors-shield]: https://img.shields.io/github/contributors/atharmohammad/Code-N-Collab.svg?style=for-the-badge
+[contributors-url]: https://github.com/atharmohammad/Code-N-Collab/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/atharmohammad/Code-N-Collab.svg?style=for-the-badge
+[forks-url]: https://github.com/atharmohammad/Code-N-Collab/network/members
+[stars-shield]: https://img.shields.io/github/stars/atharmohammad/Code-N-Collab.svg?style=for-the-badge
+[stars-url]: https://github.com/atharmohammad/Code-N-Collab/stargazers
+[issues-shield]: https://img.shields.io/github/issues/atharmohammad/Code-N-Collab.svg?style=for-the-badge
+[issues-url]: https://github.com/atharmohammad/Code-N-Collab/issues
+[license-shield]: https://img.shields.io/github/license/atharmohammad/Code-N-Collab.svg?style=for-the-badge
+[license-url]: https://github.com/atharmohammad/Code-N-Collab/blob/master/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/athar-mohammad-34068a157/
+[product-screenshot]: images/screenshot.png
 
