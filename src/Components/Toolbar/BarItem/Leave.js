@@ -42,6 +42,7 @@ function Leave(props) {
         roomId:searchParams.get("room")
       }));
       history.push("/homepage");
+      window.location.reload();
     }else{
       try {
         props.leaveRoom();
