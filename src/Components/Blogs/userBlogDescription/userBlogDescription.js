@@ -31,7 +31,7 @@ export default function UserBlogDescription(props) {
     <div onClick={fetchUser} className={classes.cover}>
       <img
         className={classes.img}
-        src={SelectAvatars(admin.Avatar.slice(-1))}
+        src={SelectAvatars(admin.Avatar)}
         alt="?"
       />
       <Grid className={classes.textCover}>

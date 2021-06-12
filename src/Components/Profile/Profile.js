@@ -76,7 +76,7 @@ const Profile = (props) => {
           >
             <div style={{ display: "flex" }}>
               <img
-                src={SelectAvatar(parseInt(user.Avatar.slice(-1)))}
+                src={SelectAvatar(user.Avatar)}
                 alt="avatar"
                 style={{ height: "80px", width: "80px", borderRadius: "10px" }}
               />

@@ -32,7 +32,7 @@ const UpdateUser = (props) => {
   const [atcoderLink, setAtcoderLink] = useState(user.AtCoder);
   const [linkedInLink, setLinkedInLink] = useState(user.Linkedin);
   const [amongusChar, setAmongusChar] = useState(
-    parseInt(user.Avatar.slice(-1))
+    parseInt(user.Avatar)
   );
   const [country, setCountry] = useState(user.Country);
   const [startSpinner, setSpinner] = useState(false);
