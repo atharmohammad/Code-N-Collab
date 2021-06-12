@@ -27,11 +27,13 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
       </ul>
+         <ul>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
     </li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#-contribution-guidelines">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#-contact">Contact</a></li>
     <li><a href="#-resources">Resources</a></li>
   </ol>
 </details>
@@ -60,7 +62,7 @@
 # 🔖 About 
 Code - N - Collab is a Collaboration website for Software developers , Competitive coders , and every one who loves to code and collaborate with others to learn and grow. It provides users to collaborate with their team , friends and also find people with similar their interests.
 
-# 🚀 Features
+## 🚀 Features
 It provides users with :-
 - Real-time code editor :
   to share your code and discuss about it with your collegues or solves a competitive coding problem and discuss it , you can also fetch CP problems from popular websites such as codeforces , codechef , atcoder , Cses , geeksforgeeks , etc. It also has a chat section for people to talk about the problem
@@ -73,7 +75,30 @@ It provides users with :-
 
 ## 🔥 Getting Started 
 
-### fork the repo
+### Prerequisites
+
+- <a href="https://reactjs.org/">Reactjs</a>
+- <a href="https://nodejs.org/en/">Nodejs</a>
+
+#### Setup Environment variables 
+```
+     REACT_APP_CONVERGENCE_URL= "http://localhost:8000/api/realtime/convergence/default"
+     REACT_APP_BASE_URL = 'http://localhost:8080/'
+```
+
+#### Setup backend for Code - N - Collab
+<a href="https://github.com/atharmohammad/Code-N-Collab-Server">Code - N - Collab Backend</a>
+
+#### Setup Convergence 
+To setup convergence server you have to download docker, for windows user they can download <a href="https://docs.docker.com/docker-for-windows/install/">Docker for Windows</a>
+
+run the following command in your terminal
+
+```
+C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/convergence-omnibus
+```
+
+### Installation
 
 ```
    $ git clone https://github.com/<your-username>/Code-N-Collab.git
@@ -81,18 +106,6 @@ It provides users with :-
    $ git remote add upstream https://github.com/atharmohammad/Code-N-Collab.git
    $ npm install
    $ npm start
-```
-
-### Setup backend for Code - N - Collab
-<a href="https://github.com/atharmohammad/Code-N-Collab-Server">Code - N - Collab Backend</a>
-
-### Setup Convergence 
-to setup convergence server you have to download docker, for windows user they can download <a href="https://docs.docker.com/docker-for-windows/install/">Docker for Windows</a>
-
-run the following command in your terminal
-
-```
-C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/convergence-omnibus
 ```
 
 ## 💁 Contribution guidelines 
@@ -103,7 +116,13 @@ We would love for you to contribute to the Code-N-Collab! To contribute to this 
 - The <a href="CONTRIBUTING.md">Contribution Guidelines</a>
 - The <a href="" >Documentation Style Guide</a>
 
-### 📚 Resources 
+## 📲 Contact
+
+<a href="https://www.linkedin.com/in/athar-mohammad-34068a157/">Mohd Athar</a> - mohd.rule123@gmail.com
+<br>
+<a href="https://www.linkedin.com/in/adnan-shamsi-5830301b3/">Adnan Shamsi</a> - adnanshamsi023@gmail.com
+
+## 📚 Resources 
 - <a href="https://socket.io/docs/v4" >Socket.Io Documentation </a>
 - <a href="https://convergence.io/documentation/" > Convergence Docs </a>
 - <a href="https://docs.docker.com/docker-for-windows/install/">Docker for Windows</a> (For windows user)
