@@ -36,10 +36,28 @@
   </ol>
 </details>
 
+<a href="https://code-n-collab.netlify.app/" target="_blank" >
+<table >
+   <tr>
+     <td>
+        <img src="Images/homepage.PNG"/>
+     </td>
+     <td >
+       <img src="Images/pofile.PNG"/>
+     </td>
+   </tr>
+   <tr>
+     <td>
+       <img src="Images/championship.PNG" />
+     </td>
+     <td>
+       <img src="Images/Blogs.PNG" />
+     </td>
+   </tr>
+</table>
+ </a>
+
 # 🔖 About 
-
-[![Product Name Screen Shot][product-screenshot]](https://code-n-collab.netlify.app/)
-
 Code - N - Collab is a Collaboration website for Software developers , Competitive coders , and every one who loves to code and collaborate with others to learn and grow. It provides users to collaborate with their team , friends and also find people with similar their interests.
 
 # 🚀 Features
@@ -106,5 +124,5 @@ We would love for you to contribute to the Code-N-Collab! To contribute to this 
 [license-url]: https://github.com/atharmohammad/Code-N-Collab/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/athar-mohammad-34068a157/
-[product-screenshot]: images/homepage.PNG
+[product-screenshot]: Images/homepage.PNG
 
