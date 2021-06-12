@@ -32,9 +32,9 @@
       </ul>
     </li>
     <li><a href="#-contribution-guidelines">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#-contact">Contact</a></li>
     <li><a href="#-resources">Resources</a></li>
+    <li><a href="#license">License</a></li>
   </ol>
 </details>
 
@@ -110,8 +110,9 @@ C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/conver
 
 ## 💁 Contribution guidelines 
 
-We would love for you to contribute to the Code-N-Collab! To contribute to this project, please read:
-
+ we encourage organizations and individuals to contribute requirements, documentation, issues, new templates, and code.
+ For code contributions, read :
+ 
 - The <a href="CODE_OF_CONDUCT.md" >Code of Conduct</a>
 - The <a href="CONTRIBUTING.md">Contribution Guidelines</a>
 - The <a href="" >Documentation Style Guide</a>
