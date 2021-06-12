@@ -1,70 +1,148 @@
-# Getting Started with Create React App
+<p align="center">
+<img src="https://user-images.githubusercontent.com/56029409/120935296-af116b00-c71f-11eb-8a47-9ca6a54832db.png" height="90"
+     style="border-radius:50%"/>
+<img src="https://user-images.githubusercontent.com/56029409/120934611-a10e1b00-c71c-11eb-8f9a-c22ecfc82652.png" height="70">
+</p>
+<br/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![MIT License][license-shield]][license-url]
+[![Issues][issues-shield]][issues-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Netlify Status](https://api.netlify.com/api/v1/badges/30ec72b0-446f-44c8-b683-6f975f131898/deploy-status)](https://app.netlify.com/sites/code-n-collab/deploys)
 
-## Available Scripts
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#-about">About</a>
+      <ul>
+        <li><a href="#-features">Features</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#-getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+      </ul>
+         <ul>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#-contribution-guidelines">Contributing</a></li>
+    <li><a href="#-contact">Contact</a></li>
+    <li><a href="#-resources">Resources</a></li>
+    <li><a href="#license">License</a></li>
+  </ol>
+</details>
 
-In the project directory, you can run:
+<a href="https://code-n-collab.netlify.app/" target="_blank" >
+<table >
+   <tr>
+     <td>
+        <img src="Images/homepage.PNG"/>
+     </td>
+     <td >
+       <img src="Images/pofile.PNG"/>
+     </td>
+   </tr>
+   <tr>
+     <td>
+       <img src="Images/championship.PNG" />
+     </td>
+     <td>
+       <img src="Images/Blogs.PNG" />
+     </td>
+   </tr>
+</table>
+ </a>
 
-### `npm start`
+# 🔖 About 
+Code - N - Collab is a Collaboration website for Software developers , Competitive coders , and every one who loves to code and collaborate with others to learn and grow. It provides users to collaborate with their team , friends and also find people with similar their interests.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🚀 Features
+It provides users with :-
+- Real-time code editor :
+  to share your code and discuss about it with your collegues or solves a competitive coding problem and discuss it , you can also fetch CP problems from popular websites such as codeforces , codechef , atcoder , Cses , geeksforgeeks , etc. It also has a chat section for people to talk about the problem
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Lockout Championship :
+  for people who are looking to compete on codeforces problemset , they can set their codeforces handle in profile section and enjoy competing with their friends and challenging on interesting problems which will be filter on user's choice and then randomly selects 5 problems in a problem rating range , To challenge your friend you just need to share your Url before starting the contest
+  
+- Blogs : 
+  People can share their knowledge , learn and ask any thing in our blogs section 
 
-### `npm test`
+## 🔥 Getting Started 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- <a href="https://reactjs.org/">Reactjs</a>
+- <a href="https://nodejs.org/en/">Nodejs</a>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Setup Environment variables 
+```
+     REACT_APP_CONVERGENCE_URL= "http://localhost:8000/api/realtime/convergence/default"
+     REACT_APP_BASE_URL = 'http://localhost:8080/'
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Setup backend for Code - N - Collab
+<a href="https://github.com/atharmohammad/Code-N-Collab-Server">Code - N - Collab Backend</a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Setup Convergence 
+To setup convergence server you have to download docker, for windows user they can download <a href="https://docs.docker.com/docker-for-windows/install/">Docker for Windows</a>
 
-### `npm run eject`
+run the following command in your terminal
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/convergence-omnibus
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+   $ git clone https://github.com/<your-username>/Code-N-Collab.git
+   $ cd Code-N-Collab
+   $ git remote add upstream https://github.com/atharmohammad/Code-N-Collab.git
+   $ npm install
+   $ npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 💁 Contribution guidelines 
 
-## Learn More
+ we encourage organizations and individuals to contribute requirements, documentation, issues, new templates, and code.
+ For code contributions, read :
+ 
+- The <a href="CODE_OF_CONDUCT.md" >Code of Conduct</a>
+- The <a href="CONTRIBUTING.md">Contribution Guidelines</a>
+- The <a href="" >Documentation Style Guide</a>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📲 Contact
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<a href="https://www.linkedin.com/in/athar-mohammad-34068a157/">Mohd Athar</a> - mohd.rule123@gmail.com
+<br>
+<a href="https://www.linkedin.com/in/adnan-shamsi-5830301b3/">Adnan Shamsi</a> - adnanshamsi023@gmail.com
 
-### Code Splitting
+## 📚 Resources 
+- <a href="https://socket.io/docs/v4" >Socket.Io Documentation </a>
+- <a href="https://convergence.io/documentation/" > Convergence Docs </a>
+- <a href="https://docs.docker.com/docker-for-windows/install/">Docker for Windows</a> (For windows user)
+- <a href="https://microsoft.github.io/monaco-editor/api/modules/monaco.editor.html">Monaco Editor Docs</a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## License
+<a href="LICENSE">Apache License 2.0</a>
 
-### Analyzing the Bundle Size
+[contributors-shield]: https://img.shields.io/github/contributors/atharmohammad/Code-N-Collab.svg?style=for-the-badge
+[contributors-url]: https://github.com/atharmohammad/Code-N-Collab/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/atharmohammad/Code-N-Collab.svg?style=for-the-badge
+[forks-url]: https://github.com/atharmohammad/Code-N-Collab/network/members
+[stars-shield]: https://img.shields.io/github/stars/atharmohammad/Code-N-Collab.svg?style=for-the-badge
+[stars-url]: https://github.com/atharmohammad/Code-N-Collab/stargazers
+[issues-shield]: https://img.shields.io/github/issues/atharmohammad/Code-N-Collab.svg?style=for-the-badge
+[issues-url]: https://github.com/atharmohammad/Code-N-Collab/issues
+[license-shield]: https://img.shields.io/github/license/atharmohammad/Code-N-Collab.svg?style=for-the-badge
+[license-url]: https://github.com/atharmohammad/Code-N-Collab/blob/master/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/athar-mohammad-34068a157/
+[product-screenshot]: Images/homepage.PNG
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
