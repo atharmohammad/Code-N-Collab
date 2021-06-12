@@ -13,7 +13,33 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![Netlify Status](https://api.netlify.com/api/v1/badges/30ec72b0-446f-44c8-b683-6f975f131898/deploy-status)](https://app.netlify.com/sites/code-n-collab/deploys)
 
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#-about">About</a>
+      <ul>
+        <li><a href="#-features">Features</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#-getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+      </ul>
+    </li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#-contribution-guidelines">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#-resources">Resources</a></li>
+  </ol>
+</details>
+
 # 🔖 About 
+
+[![Product Name Screen Shot][product-screenshot]](https://code-n-collab.netlify.app/)
+
 Code - N - Collab is a Collaboration website for Software developers , Competitive coders , and every one who loves to code and collaborate with others to learn and grow. It provides users to collaborate with their team , friends and also find people with similar their interests.
 
 # 🚀 Features
@@ -26,15 +52,6 @@ It provides users with :-
   
 - Blogs : 
   People can share their knowledge , learn and ask any thing in our blogs section 
-
-
-## 💁 Contribution guidelines 
-
-We would love for you to contribute to the Code-N-Collab! To contribute to this project, please read:
-
-- The <a href="CODE_OF_CONDUCT.md" >Code of Conduct</a>
-- The <a href="CONTRIBUTING.md">Contribution Guidelines</a>
-- The <a href="" >Documentation Style Guide</a>
 
 ## 🔥 Getting Started 
 
@@ -60,6 +77,13 @@ run the following command in your terminal
 C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/convergence-omnibus
 ```
 
+## 💁 Contribution guidelines 
+
+We would love for you to contribute to the Code-N-Collab! To contribute to this project, please read:
+
+- The <a href="CODE_OF_CONDUCT.md" >Code of Conduct</a>
+- The <a href="CONTRIBUTING.md">Contribution Guidelines</a>
+- The <a href="" >Documentation Style Guide</a>
 
 ### 📚 Resources 
 - <a href="https://socket.io/docs/v4" >Socket.Io Documentation </a>
@@ -82,5 +106,5 @@ C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/conver
 [license-url]: https://github.com/atharmohammad/Code-N-Collab/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/athar-mohammad-34068a157/
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/homepage.PNG
 
