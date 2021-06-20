@@ -1,5 +1,5 @@
 .wrapperss{
-  padding: 1vh;
+  margin: 10px;
   text-align: center;
   align-items: center;
   cursor:pointer;
@@ -9,7 +9,7 @@
   color:#fff;
   cursor:pointer;
   font-size: 19px;
-  font-family: edgwick Ave Display,cursive
+  font-family: edgwick Ave Display,cursive;
 }
 
 .wrapperss:hover{
@@ -19,8 +19,6 @@
 
 .headerss{
   display: flex;
-  justify-content: space-around;
-  width:15%;
-  float: right;
-  top:0;
+  justify-content: flex-end;
+  width:100%;
 }

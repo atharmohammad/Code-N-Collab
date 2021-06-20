@@ -4,7 +4,7 @@ import GetStartedImg from "../Assets/images/GetStarted.png";
 import { useHistory } from "react-router-dom";
 import Stars from "../Components/Stars/Stars";
 import { Grid, Box } from "@material-ui/core";
-import classes from "../Assets/css/wrapstyle.module.css";
+
 
 function GetStarted() {
   const history = useHistory();
@@ -43,7 +43,7 @@ function GetStarted() {
           }}
           onClick={homeHandler}
         >
-          <img src={GetStartedImg} style={{width:'60%'}} alt="GetStarted" />
+          <img src={GetStartedImg} style={{ width: "60%" }} alt="GetStarted" />
         </Box>
       </Grid>
     </div>

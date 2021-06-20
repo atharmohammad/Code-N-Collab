@@ -6,7 +6,8 @@ export default function Button(props) {
     <Box
       style={{
         minHeight: "8.5vh",
-        width: "40vh",
+        width: "80vw",
+        maxWidth:'300px',
         border: "4px solid #fff",
         borderRadius: "20px",
         textAlign: "center",
