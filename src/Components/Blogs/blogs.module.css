@@ -63,6 +63,10 @@
   gap:8vw;
 }
 
+.helperGrid{
+  display:flex;
+}
+
 @media only screen and (max-width: 800px) {
   .IconsMainGrid{
     gap:10px;
@@ -73,6 +77,10 @@
   .IconsMainGrid{
     gap:1px;
     flex-wrap: wrap;
+  }
+  .helperGrid{
+    flex-wrap: wrap;
+    margin-right:-20px;
   }
 }
 

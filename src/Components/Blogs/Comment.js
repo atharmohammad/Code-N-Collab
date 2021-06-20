@@ -9,6 +9,7 @@ import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import axios from "../../Axios/axios";
 import BlogSpinner from "../Spinner/BlogSpinner";
 import { AuthContext } from "../../context/auth-context";
+import classes from './blogs.module.css'
 
 const Comment = (props) => {
   const auth = useContext(AuthContext);
@@ -163,7 +164,7 @@ const Comment = (props) => {
           ) : null}
         </Grid>
 
-        <Grid container direction="row" justify="flex-end">
+        <Grid className = {classes.helperGrid}>
           <HelperIcons
             type="comment"
             admin={{ User: user }}
