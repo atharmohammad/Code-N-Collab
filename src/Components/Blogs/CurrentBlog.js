@@ -10,6 +10,7 @@ import BlogSpinner from "../Spinner/BlogSpinner";
 import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import Comment from "./Comment";
+import classes from './blogs.module.css'
 
 const CurrentBlog = (props) => {
   const [editBlog, setEditBlog] = useState(false);
@@ -139,13 +140,7 @@ const CurrentBlog = (props) => {
         )}
         <div>
           <Grid
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "3vh",
-              width: "50vw",
-              gap: "100px",
-            }}
+            className = {classes.IconsMainGrid}
           >
             <HelperIcons
               type="blog"
@@ -189,20 +184,6 @@ const CurrentBlog = (props) => {
                 </div>
               </div>
 
-              <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                <Button
-                  onClick={fetchComment}
-                  style={{
-                    background: "#3e2cd4",
-                    color: "#fff",
-                    width: "100px",
-                    boxShadow: "5px 5px 5px #888888",
-                    margin: "0px 10px 10px 2px",
-                  }}
-                >
-                  Reload...
-                </Button>
-              </div>
             </>
           )
         ) : null}

@@ -11,6 +11,7 @@ import { AuthContext } from "../../context/auth-context";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import axios from '../../Axios/axios'
+import classes from './blogs.module.css'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -80,12 +81,12 @@ const HelperIcons = (props) => {
       <>
         <Tooltip
           title="View Comment"
-          style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
+          className = {classes.iconTooltip}
           onClick={toggleCommentHandler}
         >
           <Button>
             <CommentIcon
-              style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
+              style={{ cursor: "pointer", color: "gray", marginRight: "1vw" }}
             />
             {commentsLength}
           </Button>
@@ -98,12 +99,12 @@ const HelperIcons = (props) => {
         TransitionComponent={Fade}
         TransitionProps={{ timeout: 600 }}
         title="toggle Reply"
-        style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
+        className = {classes.iconTooltip}
         onClick={toggleReplyHandler}
       >
         <Button>
           <ForumIcon
-            style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
+            style={{ cursor: "pointer", color: "gray", marginRight: "1vw" }}
           />
         </Button>
       </Tooltip>
@@ -116,7 +117,7 @@ const HelperIcons = (props) => {
         TransitionComponent={Fade}
         TransitionProps={{ timeout: 600 }}
         title="Like"
-        style={{ height: "40px", width: "80px", margin: "10px 5px 0" }}
+        className = {classes.iconTooltip}
         onClick={() => {
           if (auth.user) {
             return likeHandler();
@@ -129,7 +130,7 @@ const HelperIcons = (props) => {
             style={{
               cursor: "pointer",
               color: viewerLiked ? "#353af3" : "#bec4c3",
-              marginRight: "5px",
+              marginRight: "1vw",
             }}
           />
           {likesCount}
@@ -150,7 +151,7 @@ const HelperIcons = (props) => {
               }
               return setError("Login Required !");
             }}
-            style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
+            className = {classes.iconTooltip}
           >
             <Button>
               <AddIcon
@@ -168,7 +169,7 @@ const HelperIcons = (props) => {
                 TransitionProps={{ timeout: 600 }}
                 title={`edit ${type}`}
                 onClick={editHandler}
-                style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
+                className = {classes.iconTooltip}
               >
                 <Button>
                   <EditIcon
@@ -194,7 +195,7 @@ const HelperIcons = (props) => {
           TransitionProps={{ timeout: 600 }}
           title={`delete ${type}`}
           onClick={deleteHandler}
-          style={{ height: "40px", width: "80px", margin: "10px 5px 0 " }}
+          className = {classes.iconTooltip}
         >
           <Button>
             <DeleteIcon

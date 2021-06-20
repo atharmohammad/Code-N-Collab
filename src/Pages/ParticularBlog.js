@@ -19,7 +19,8 @@ const ParticularBlog = (props) => {
         >
           <div
             style={{
-              width: "70vw",
+              width: "95vw",
+              maxWidth:'1000px',
               margin: "auto",
               display: "flex",
               flexDirection: "column",
