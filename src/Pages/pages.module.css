@@ -2,13 +2,19 @@
   display: flex;
   flex-direction: column;
   color: black;
-  padding: 5vw;
+  padding: 1vw;
+  padding-top: 10px;
   border-radius: 20px;
   box-sizing: border-box;
   background: #fff;
   margin: 10px;
 }
 
+.contain{
+  border: 10px double white;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
 .About {
   color: black;
   font-size: 30px;
@@ -21,12 +27,10 @@
 }
 
 .AdminContainer {
-  border: 10px double white;
   display: flex;
   justify-content: space-between;
   border-radius: 20px;
-  margin: 5px;
-  padding: 1vw;
+  margin: 2px;
 }
 
 .admin_div {
@@ -35,7 +39,7 @@
   border-radius: 20px;
   padding: 10px;
   display: flex;
-  margin: 10px;
+  margin: 5px;
   box-sizing: border-box;
   flex-direction: column;
 }
@@ -45,7 +49,13 @@
     flex-direction: column-reverse;
   }
   .admin_div {
-    width: 90%;
+    width: 95%;
+    margin: auto;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  .contain{
+    border:5px solid white;
   }
 }
 
@@ -62,30 +72,29 @@
   min-width: 150px;
 }
 
-
 .upperUpdateBtn {
   height: 30px;
-  width:70px;
-  font-size:20px;
+  width: 70px;
+  font-size: 20px;
   padding: 5px 10px 5px 10px;
   background: #336abc;
   color: #fff;
   border-radius: 5px;
 }
 
-.lowerUpdateNBtn{
-  display:none;
+.lowerUpdateNBtn {
+  display: none;
   height: 30px;
-  width:70px;
-  margin:auto;
-  font-size:20px;
+  width: 70px;
+  margin: auto;
+  font-size: 20px;
   padding: 5px 10px 5px 10px;
   background: #336abc;
   color: #fff;
   border-radius: 5px;
 }
 
-.updateDivContainer{
+.updateDivContainer {
   display: flex;
   justify-content: space-between;
 }
@@ -96,15 +105,15 @@
     align-items: center;
   }
   .upperUpdateBtn {
-    display:none;
+    display: none;
   }
-  .lowerUpdateNBtn{
-    display:block;
+  .lowerUpdateNBtn {
+    display: block;
   }
 }
 
-@media only screen and (max-width: 500px){
-  .updateDivContainer{
-   flex-direction: column;
+@media only screen and (max-width: 500px) {
+  .updateDivContainer {
+    flex-direction: column;
   }
-} 
+}

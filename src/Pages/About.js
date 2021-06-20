@@ -7,7 +7,7 @@ import Title from "../Assets/images/currBlog.png";
 import Github from "../Assets/images/Github.png";
 import Admin from "../Components/About/Admin/Admin";
 import AboutContent from "../Components/About/AboutContent";
-import classes from './pages.module.css'
+import classes from "./pages.module.css";
 
 export default function About(props) {
   const history = useHistory();
@@ -29,16 +29,11 @@ export default function About(props) {
         <Back clicked={backHandler} />
         <Nav />
       </div>
-      <Container component="main" maxWidth="md" style={{ marginTop: "20px" }}>
+      <Container component="main" maxWidth="md" style={{ marginTop: "5px" }}>
         <div
-          style={{
-            border: "10px double white",
-            borderRadius: "20px",
-            padding: "0.5vw",
-            boxSizing: "border-box",
-          }}
+          className = {classes.contain}
         >
-          <div className={classes.paper_about} >
+          <div className={classes.paper_about}>
             <img
               src={Title}
               style={{
@@ -60,7 +55,12 @@ export default function About(props) {
                 <img
                   src={Github}
                   alt="Github"
-                  style={{ width: "20%", height: "10%",minWidth:'50px', margin: "30px 0 0 10%" }}
+                  style={{
+                    width: "20%",
+                    height: "10%",
+                    minWidth: "50px",
+                    margin: "30px 0 0 10%",
+                  }}
                 />
               </a>
             </div>
@@ -69,7 +69,6 @@ export default function About(props) {
               style={{
                 width: "100%",
                 borderRadius: "20px",
-                padding: "5px",
                 background:
                   "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
               }}
@@ -89,27 +88,24 @@ export default function About(props) {
                 Developed By :
               </div>
 
-              <div
-                className = {classes.AdminContainer}
-              >
-                
-                <div className = {classes.admin_div} >
-                <Admin
-                  Name="Mohd Athar"
-                  linkedIn="https://www.linkedin.com/in/athar-mohammad-34068a157/"
-                  github="https://github.com/atharmohammad"
-                  codeForces="https://codeforces.com/profile/KickAss"
-                  portFolio="https://atharmohammad.github.io/Portfolio/"
-                />
+              <div className={classes.AdminContainer}>
+                <div className={classes.admin_div}>
+                  <Admin
+                    Name="Mohd Athar"
+                    linkedIn="https://www.linkedin.com/in/athar-mohammad-34068a157/"
+                    github="https://github.com/atharmohammad"
+                    codeForces="https://codeforces.com/profile/KickAss"
+                    portFolio="https://atharmohammad.github.io/Portfolio/"
+                  />
                 </div>
-                <div className = {classes.admin_div}>
-                <Admin
-                  Name="Adnan Shamsi"
-                  linkedIn="https://www.linkedin.com/in/adnan-shamsi-5830301b3/"
-                  github="https://github.com/Adnan-shamsi"
-                  codeForces="https://codeforces.com/profile/AdnanShamsi"
-                  portFolio={null}
-                />
+                <div className={classes.admin_div}>
+                  <Admin
+                    Name="Adnan Shamsi"
+                    linkedIn="https://www.linkedin.com/in/adnan-shamsi-5830301b3/"
+                    github="https://github.com/Adnan-shamsi"
+                    codeForces="https://codeforces.com/profile/AdnanShamsi"
+                    portFolio={null}
+                  />
                 </div>
               </div>
             </div>
