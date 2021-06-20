@@ -43,7 +43,7 @@ function GetStarted() {
           }}
           onClick={homeHandler}
         >
-          <img src={GetStartedImg} style={{ width: "60%" }} alt="GetStarted" />
+          <img src={GetStartedImg} style={{ width: "55%" }} alt="GetStarted" />
         </Box>
       </Grid>
     </div>

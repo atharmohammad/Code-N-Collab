@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { v1 as uuidv1 } from "uuid";
 import MuiAlert from "@material-ui/lab/Alert";
-import { Grid,Snackbar } from "@material-ui/core";
+import { Grid, Snackbar } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 
 import HomePageImg from "../Assets/images/HomePageImg.png";

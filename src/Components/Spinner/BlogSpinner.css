@@ -5,8 +5,7 @@
   border-right: 1em solid transparent;
   animation: spinnerjing 0.4s linear infinite;
   border-radius: 50%;
-  position: relative;
-  left:45%
+  margin: 25vh auto;
 }
 .headedStone {
   width: 1em;
@@ -14,7 +13,7 @@
   border-radius: 50%;
   margin-left: 8.5em;
   margin-top: 0.5em;
-  background:#d5fff7;
+  background: #d5fff7;
 }
 
 @keyframes spinnerjing {
