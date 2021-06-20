@@ -1,0 +1,51 @@
+.paper_about{
+    display: flex;
+    flex-direction: column;
+    color: black;
+    padding:5vw;
+    border-radius: 20px;
+    box-sizing: border-box;
+    background: #fff;
+    margin: 10px;
+  }
+
+.About{
+    color: black;
+    font-size: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 50%;
+    font-family: edgwick Ave Display, cursive;
+    margin-top: 20px;
+  }
+
+.AdminContainer{
+    border: 10px double white;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 20px;
+    margin: 5px;
+    padding: 1vw;
+} 
+
+.admin_div {
+    background: #fff;   
+    width: 50%;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    margin: 10px;
+    box-sizing: border-box;
+    flex-direction: column;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .AdminContainer{
+      flex-direction: column-reverse;
+    }
+    .admin_div{
+        width:90%;
+    }
+  }
+  
