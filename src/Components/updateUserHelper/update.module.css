@@ -1,0 +1,43 @@
+.Name {
+  width: 25%;
+}
+
+.Institution {
+  width: 50%;
+}
+
+.Designation {
+  width: 48%;
+}
+
+.Moto {
+  width: 48%;
+}
+
+.Codeforces-Handle {
+  width: 30%;
+}
+
+.CodeForces-Profile-Link {
+  width: 67%;
+}
+
+.Codechef-Profile-Link {
+  width: 48%;
+}
+
+.Atcoder-Profile-Link {
+  width: 48%;
+}
+
+.Github-Profile-Link {
+  width: 48%;
+}
+
+.LinkedIn-Profile-Link {
+  width: 48%;
+}
+.Country{
+    width:20%;
+    margin-top:20px;
+}

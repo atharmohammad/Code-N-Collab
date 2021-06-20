@@ -162,7 +162,6 @@ const UpdateUser = (props) => {
                   }}
                 >
                   <UpdateFeild
-                    width="25%"
                     value={name}
                     title="Name"
                     placeHolder="Adnan Shamsi"
@@ -170,14 +169,12 @@ const UpdateUser = (props) => {
                   />
 
                   <UpdateFeild
-                    width="50%"
                     value={institution}
                     title="Institution"
                     placeHolder="IIT"
                     changeHandler={(e) => setInstitution(e)}
                   />
                   <CountryFeild
-                    width="20%"
                     country={country}
                     changeHandler={(e) => setCountry(e)}
                   />
@@ -190,14 +187,14 @@ const UpdateUser = (props) => {
                   }}
                 >
                   <UpdateFeild
-                    width="48%"
+                   
                     value={designation}
                     title="Designation"
                     placeHolder="web developer"
                     changeHandler={(e) => setDesignation(e)}
                   />
                   <UpdateFeild
-                    width="48%"
+                   
                     value={moto}
                     title="Moto"
                     changeHandler={(e) => setMoto(e)}
@@ -211,16 +208,14 @@ const UpdateUser = (props) => {
                   }}
                 >
                   <UpdateFeild
-                    width="30%"
                     value={codeForcesHandle}
-                    title="Codeforces Handle"
+                    title="Codeforces-Handle"
                     placeHolder="Tourist"
                     changeHandler={(e) => setCodeForcesHandle(e)}
                   />
                   <UpdateFeild
-                    width="67%"
                     value={codeForcesLink}
-                    title="CodeForces Profile Link"
+                    title="CodeForces-Profile-Link"
                     placeHolder="https://codeforces.com/profile/tourist"
                     changeHandler={(e) => setCodeForcesLink(e)}
                   />
@@ -233,16 +228,15 @@ const UpdateUser = (props) => {
                   }}
                 >
                   <UpdateFeild
-                    width="48%"
                     value={codechefLink}
-                    title="Codechef Profile Link"
+                    title="Codechef-Profile-Link"
                     placeHolder="https://www.codechef.com/users/gennady.korotkevich"
                     changeHandler={(e) => setCodechefLink(e)}
                   />
                   <UpdateFeild
-                    width="48%"
+                    
                     value={atcoderLink}
-                    title="Atcoder Profile Link"
+                    title="Atcoder-Profile-Link"
                     placeHolder="https://www.codechef.com/users/gennady.korotkevich"
                     changeHandler={(e) => setAtcoderLink(e)}
                   />
@@ -256,16 +250,13 @@ const UpdateUser = (props) => {
                   }}
                 >
                   <UpdateFeild
-                    width="48%"
-                    minWidth="150px"
                     value={githubLink}
-                    title="Github Profile Link"
+                    title="Github-Profile-Link"
                     changeHandler={(e) => setGithubLink(e)}
                   />
                   <UpdateFeild
-                    width="48%"
                     value={linkedInLink}
-                    title="LinkedIn Profile Link"
+                    title="LinkedIn-Profile-Link"
                     changeHandler={(e) => setLinkedInLink(e)}
                   />
                 </div>

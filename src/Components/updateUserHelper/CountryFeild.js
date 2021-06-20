@@ -5,10 +5,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import classes from './update.module.css'
+
 
 const CountrySelect = (props) => {
   return (
-    <FormControl style={{ width: props.width, marginTop: "20px" }}>
+    <FormControl className={classes.Country}>
       <InputLabel>Country</InputLabel>
       <Select
         onChange={(e) => props.changeHandler(e.target.value)}
