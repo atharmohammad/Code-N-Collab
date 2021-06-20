@@ -112,7 +112,7 @@ function HomePage() {
               <img
                 src={HomePageImg}
                 alt="Code-N-Collab"
-                style={{ marginBottom: "5vh", width: "45vw" }}
+                style={{ marginBottom: "5vh", width: "45vw",maxWidth:'400px',minWidth:'150px' }}
               />
               <Button name="Code - Editor" clicked={roomHandler} />
               <Button name="LockOut - Championship" clicked={contestHandler} />

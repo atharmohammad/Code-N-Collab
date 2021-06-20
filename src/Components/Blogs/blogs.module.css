@@ -87,7 +87,6 @@
 
 @media only screen and (max-width: 500px) {
   .IconsMainGrid {
-    gap: 1px;
     flex-wrap: wrap;
   }
   .helperGrid_comment{

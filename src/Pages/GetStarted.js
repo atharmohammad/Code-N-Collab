@@ -28,7 +28,7 @@ function GetStarted() {
         alignItems="center"
         style={{ marginTop: "35vh" }}
       >
-        <img src={Title} style={{ width: "65vw" }} alt="Code-N-Collab" />
+        <img src={Title} style={{ width: "40vw",minWidth:'200px' }} alt="Code-N-Collab" />
 
         <Box
           style={{

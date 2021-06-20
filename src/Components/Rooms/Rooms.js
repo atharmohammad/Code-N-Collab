@@ -62,37 +62,22 @@ function Rooms(props) {
     history.push("/homepage");
   };
   return (
-    <Grid
-      container
-      style={{
-        height: "100vh",
-        background: "radial-gradient(ellipse, #1B2735 0%, #090A0F 100%)",
-        overflow: "hidden",
-      }}
-    >
+    <div className={styles.main}>
       <Stars color="#fff" />
       <Back clicked={backHandler} />
       <Grid container direction="column" justify="center" alignItems="center">
-        <img src={CreateRoom} alt="create-room" />
+        <img
+          className = {styles.img}
+          src={CreateRoom}
+          alt="create-room"
+        />
 
-        <Grid
-          container
-          direction="column"
-          justify="space-around"
-          alignItems="center"
-          style={{
-            backgroundColor: "transparent",
-            minHeight: "75vh",
-            width: "70vh",
-            borderRadius: "20px",
-            padding: "8vh",
-            border: "5px double #fff",
-            margin: "4vh auto",
-          }}
+        <div
+          className = {styles.inputContainer} 
         >
-          <Grid>
+          <div>
             <InputLabel
-              style={{ marginBottom: "2vh", color: "#fff", fontWeight: "bold" }}
+              style={{color:'#fff',fontWeight:'bold'}}
             >
               Username
             </InputLabel>
@@ -100,19 +85,19 @@ function Rooms(props) {
               onChange={(event) => changeHandler("name", event)}
               className={styles.input}
             />
-          </Grid>
+          </div>
 
-          <Grid>
+          <div>
             <input
               value={room}
               type="hidden"
               onChange={(event) => changeHandler("room", event)}
               className={styles.input}
             />
-          </Grid>
+          </div>
 
-          <Grid>
-            <InputLabel style={{ color: "#fff", fontWeight: "bold" }}>
+          <div>
+            <InputLabel style={{color:'#fff',fontWeight:'bold'}}>
               Password
             </InputLabel>
             <input
@@ -120,18 +105,20 @@ function Rooms(props) {
               className={styles.input}
               onChange={(event) => changeHandler("password", event)}
             />
-          </Grid>
+          </div>
 
           <Button
             variant="contained"
             style={{
+              alignSelf:'center',
               border: "3px solid white",
               borderRadius: "5px",
-              background: name == "" || room == "" ? "#7d7574" : "transparent",
+              background: name && room ? "#7d7574" : "transparent",
               color: "#fff",
               marginTop: "2vh",
               padding: "2vh",
-              width: "30vh",
+              width: "12vw",
+              minWidth:'120px',
             }}
             disabled={name == "" || room == ""}
             onClick={createRoomHandler}
@@ -148,9 +135,9 @@ function Rooms(props) {
               {error}
             </Alert>
           </Snackbar>
-        </Grid>
+        </div>
       </Grid>
-    </Grid>
+    </div>
   );
 }
 
