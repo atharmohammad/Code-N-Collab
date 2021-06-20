@@ -54,37 +54,51 @@
   width: 35px;
 }
 
-.IconsMainGrid{
+.IconsMainGrid {
   display: flex;
-  width:50%;
+  width: 50%;
   justify-content: center;
   margin-top: 3vh;
   width: 100%;
-  gap:8vw;
+  gap: 8vw;
 }
 
-.helperGrid{
-  display:flex;
+.particularIcon {
+  cursor: pointer;
+  color: gray;
+}
+
+.helperGrid_comment{
+  display: flex;
+  justify-content: flex-end;
+  
+}
+
+.helperGrid_reply{
+  display: flex;
+  justify-content: flex-end;
 }
 
 @media only screen and (max-width: 800px) {
-  .IconsMainGrid{
-    gap:10px;
+  .IconsMainGrid {
+    gap: 10px;
   }
 }
 
 @media only screen and (max-width: 500px) {
-  .IconsMainGrid{
-    gap:1px;
+  .IconsMainGrid {
+    gap: 1px;
     flex-wrap: wrap;
   }
-  .helperGrid{
+  .helperGrid_comment{
     flex-wrap: wrap;
-    margin-right:-20px;
   }
 }
-
-
+@media only screen and (max-width: 400px) {
+  .helperGrid_reply{
+    flex-wrap: wrap;
+  }
+}
 
 @media only screen and (max-width: 700px) {
   .blogHead_interaction_text {

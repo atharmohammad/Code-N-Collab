@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext,useCallback } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { Grid, Tooltip, IconButton, Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -10,8 +10,8 @@ import Fade from "@material-ui/core/Fade";
 import { AuthContext } from "../../context/auth-context";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import axios from '../../Axios/axios'
-import classes from './blogs.module.css'
+import axios from "../../Axios/axios";
+import classes from "./blogs.module.css";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -20,8 +20,8 @@ function Alert(props) {
 const HelperIcons = (props) => {
   const auth = useContext(AuthContext);
   const [error, setError] = useState(null);
-  const [disableLikeBtn,setDisableLikeBtn] = useState(true);
-   
+  const [disableLikeBtn, setDisableLikeBtn] = useState(true);
+
   const {
     type,
     showEditBtn,
@@ -38,16 +38,16 @@ const HelperIcons = (props) => {
   const { toggleCommentHandler } = { ...props }; //particular blogs
   const { toggleReplyHandler } = { ...props }; //comment
   const { allBlogPage } = { ...props }; //allblogPage blog
-  
+
   const [viewerLiked, setViewerLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(likeArray.length);
-  
+
   let addIconTitle = "reply";
   let forumIcon = null;
   let blogIcons = null;
-  
-  useEffect(()=>{
-    if(auth.user){
+
+  useEffect(() => {
+    if (auth.user) {
       setDisableLikeBtn(false);
       const isUserLiked = likeArray.find(
         (like) => like.toString().trim() == auth.user._id.toString().trim()
@@ -56,8 +56,8 @@ const HelperIcons = (props) => {
         setViewerLiked(true);
       }
     }
-  },[])
-  
+  }, []);
+
   const likeHandler = async () => {
     if (disableLikeBtn === true) {
       return;
@@ -70,7 +70,7 @@ const HelperIcons = (props) => {
     } catch (e) {
       setLikesCount((state) => (viewerLiked ? state - 1 : state + 1));
       setViewerLiked((state) => !state);
-      setError('Oops something went wrong');
+      setError("Oops something went wrong");
     }
     setDisableLikeBtn(false);
   };
@@ -81,13 +81,11 @@ const HelperIcons = (props) => {
       <>
         <Tooltip
           title="View Comment"
-          className = {classes.iconTooltip}
+          className={classes.iconTooltip}
           onClick={toggleCommentHandler}
         >
           <Button>
-            <CommentIcon
-              style={{ cursor: "pointer", color: "gray", marginRight: "1vw" }}
-            />
+            <CommentIcon className={classes.particularIcon} />
             {commentsLength}
           </Button>
         </Tooltip>
@@ -99,13 +97,11 @@ const HelperIcons = (props) => {
         TransitionComponent={Fade}
         TransitionProps={{ timeout: 600 }}
         title="toggle Reply"
-        className = {classes.iconTooltip}
+        className={classes.iconTooltip}
         onClick={toggleReplyHandler}
       >
         <Button>
-          <ForumIcon
-            style={{ cursor: "pointer", color: "gray", marginRight: "1vw" }}
-          />
+          <ForumIcon className={classes.particularIcon} />
         </Button>
       </Tooltip>
     );
@@ -117,7 +113,7 @@ const HelperIcons = (props) => {
         TransitionComponent={Fade}
         TransitionProps={{ timeout: 600 }}
         title="Like"
-        className = {classes.iconTooltip}
+        className={classes.iconTooltip}
         onClick={() => {
           if (auth.user) {
             return likeHandler();
@@ -127,10 +123,9 @@ const HelperIcons = (props) => {
       >
         <Button>
           <ThumbUpAltIcon
+            className={classes.particularIcon}
             style={{
-              cursor: "pointer",
               color: viewerLiked ? "#353af3" : "#bec4c3",
-              marginRight: "1vw",
             }}
           />
           {likesCount}
@@ -151,12 +146,12 @@ const HelperIcons = (props) => {
               }
               return setError("Login Required !");
             }}
-            className = {classes.iconTooltip}
+            className={classes.iconTooltip}
           >
             <Button>
               <AddIcon
                 title={`write ${addIconTitle}`}
-                style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
+                className={classes.particularIcon}
               />
             </Button>
           </Tooltip>
@@ -169,16 +164,10 @@ const HelperIcons = (props) => {
                 TransitionProps={{ timeout: 600 }}
                 title={`edit ${type}`}
                 onClick={editHandler}
-                className = {classes.iconTooltip}
+                className={classes.iconTooltip}
               >
                 <Button>
-                  <EditIcon
-                    style={{
-                      cursor: "pointer",
-                      color: "gray",
-                      marginRight: "5px",
-                    }}
-                  />
+                  <EditIcon className={classes.particularIcon} />
                 </Button>
               </Tooltip>
             ) : null
@@ -195,12 +184,10 @@ const HelperIcons = (props) => {
           TransitionProps={{ timeout: 600 }}
           title={`delete ${type}`}
           onClick={deleteHandler}
-          className = {classes.iconTooltip}
+          className={classes.iconTooltip}
         >
           <Button>
-            <DeleteIcon
-              style={{ cursor: "pointer", color: "gray", marginRight: "5px" }}
-            />
+            <DeleteIcon className={classes.particularIcon} />
           </Button>
         </Tooltip>
       ) : null}

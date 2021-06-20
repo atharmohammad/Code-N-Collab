@@ -164,7 +164,7 @@ const Comment = (props) => {
           ) : null}
         </Grid>
 
-        <Grid className = {classes.helperGrid}>
+        <Grid className = {classes.helperGrid_comment}>
           <HelperIcons
             type="comment"
             admin={{ User: user }}

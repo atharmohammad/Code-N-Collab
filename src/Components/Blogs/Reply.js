@@ -8,6 +8,7 @@ import HelperIcons from "./HelperIcons";
 import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import Spinner from "../Spinner/BlogSpinner";
+import classes from './blogs.module.css'
 
 const Reply = (props) => {
   const reply = props.replyData;
@@ -123,7 +124,7 @@ const Reply = (props) => {
               ) : null}
             </Grid>
 
-            <Grid container direction="row" justify="flex-end">
+            <Grid className = {classes.helperGrid_reply}>
               <HelperIcons
                 type="reply"
                 admin={{ User: reply.User }}
