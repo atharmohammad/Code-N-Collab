@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Grid, Tooltip, IconButton, TextField } from "@material-ui/core";
+import classes from './update.module.css'
 
 const ProfileFeild = (props) => {
   return (
@@ -7,7 +8,7 @@ const ProfileFeild = (props) => {
       variant="outlined"
       margin="normal"
       value={props.value}
-      style={{ width: props.width }}
+      style={{ width: props.width}}
       id="Name"
       label={props.title}
       name={props.title}

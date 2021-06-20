@@ -14,6 +14,7 @@ import SelectAvatar from "../Components/SelectAvatars/SelectAvatars";
 
 import UpdateFeild from "../Components/updateUserHelper/UpdateFeilds";
 import CountryFeild from "../Components/updateUserHelper/CountryFeild";
+import classes from "./pages.module.css";
 
 const UpdateUser = (props) => {
   const auth = useContext(AuthContext);
@@ -31,9 +32,7 @@ const UpdateUser = (props) => {
   const [codechefLink, setCodechefLink] = useState(user.Codechef);
   const [atcoderLink, setAtcoderLink] = useState(user.AtCoder);
   const [linkedInLink, setLinkedInLink] = useState(user.Linkedin);
-  const [amongusChar, setAmongusChar] = useState(
-    parseInt(user.Avatar)
-  );
+  const [amongusChar, setAmongusChar] = useState(parseInt(user.Avatar));
   const [country, setCountry] = useState(user.Country);
   const [startSpinner, setSpinner] = useState(false);
 
@@ -85,17 +84,21 @@ const UpdateUser = (props) => {
         }}
       >
         <Stars />
-        <Back clicked={backHandler} />
-        <Nav />
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Back clicked={backHandler} />
+          <Nav />
+        </div>
+
         {startSpinner ? (
           <Spinner />
         ) : (
           <div
             style={{
               margin: "auto",
-              padding: "20px",
+              padding: "1vw",
               minHeight: "70%",
-              width: "70%",
+              width: "90vw",
+              maxWidth:'1000px',
               border: "10px double #fff",
               borderRadius: "20px",
             }}
@@ -109,7 +112,7 @@ const UpdateUser = (props) => {
                 background: "#fff",
               }}
             >
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div className={classes.upperMain}>
                 <div
                   style={{
                     display: "flex",
@@ -142,22 +145,13 @@ const UpdateUser = (props) => {
                 </div>
                 <img
                   src={ProfileUpdate}
-                  style={{ alignSelf: "center" }}
+                  className={classes.updateImg}
                   alt="profile"
                 />
 
-                <Button
-                  style={{
-                    height: "20%",
-                    padding: "5px 10px 5px 10px",
-                    background: "#336abc",
-                    color: "#fff",
-                    top: "0",
-                  }}
-                  onClick={updateProfile}
-                >
+                <div className={classes.upperUpdateBtn} onClick={updateProfile}>
                   Update
-                </Button>
+                </div>
               </div>
               <div>
                 <div
@@ -257,11 +251,13 @@ const UpdateUser = (props) => {
                   style={{
                     display: "flex",
                     flexDirection: "row",
+                    flexWrap: "wrap",
                     justifyContent: "space-between",
                   }}
                 >
                   <UpdateFeild
                     width="48%"
+                    minWidth="150px"
                     value={githubLink}
                     title="Github Profile Link"
                     changeHandler={(e) => setGithubLink(e)}
@@ -273,6 +269,9 @@ const UpdateUser = (props) => {
                     changeHandler={(e) => setLinkedInLink(e)}
                   />
                 </div>
+              </div>
+              <div className={classes.lowerUpdateNBtn} onClick={updateProfile}>
+                Update
               </div>
             </div>
           </div>
