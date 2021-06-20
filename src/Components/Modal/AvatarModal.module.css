@@ -15,11 +15,12 @@
   top: 20%;
   left: 30%;
   width: 40%;
+  min-width:150px;
   background: black;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
-  border:10px double white;
+  border: 10px double white;
   border-radius: 20px;
-  padding: 15px;
+  padding: 1vw;
   height: 60%;
   box-sizing: border-box;
 }
@@ -33,21 +34,21 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  gap:60px;
+  gap: 60px;
   height: 94%;
   padding: 10px;
-  background: #fff
+  background: #fff;
 }
-.avatar{
+.avatar {
   height: 100px;
   border-radius: 10px;
   cursor: pointer;
 }
 
-.background{
-  border-radius: 10px
+.background {
+  border-radius: 10px;
 }
 
-.background:hover{
-  background: black
+.background:hover {
+  background: black;
 }

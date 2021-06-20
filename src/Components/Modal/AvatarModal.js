@@ -12,7 +12,7 @@ const WriterModal = (props) => {
       <Grid className={classes.modal}>
         <Grid className={classes.AvatarGridone}>
           {AllAvatars().map((e, idx) => (
-            <div className={classes.background}>
+            <div className={classes.background} key={idx}>
               <img
                 onClick={() => {
                   props.cancelHandler();

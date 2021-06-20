@@ -85,6 +85,11 @@
   border-radius: 5px;
 }
 
+.updateDivContainer{
+  display: flex;
+  justify-content: space-between;
+}
+
 @media only screen and (max-width: 600px) {
   .upperMain {
     flex-direction: column-reverse;
@@ -97,3 +102,9 @@
     display:block;
   }
 }
+
+@media only screen and (max-width: 500px){
+  .updateDivContainer{
+   flex-direction: column;
+  }
+} 

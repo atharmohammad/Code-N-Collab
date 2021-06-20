@@ -155,11 +155,7 @@ const UpdateUser = (props) => {
               </div>
               <div>
                 <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
+                  className = {classes.updateDivContainer} 
                 >
                   <UpdateFeild
                     value={name}
@@ -180,11 +176,7 @@ const UpdateUser = (props) => {
                   />
                 </div>
                 <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
+                   className = {classes.updateDivContainer} 
                 >
                   <UpdateFeild
                    
@@ -201,11 +193,7 @@ const UpdateUser = (props) => {
                   />
                 </div>
                 <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
+                    className = {classes.updateDivContainer} 
                 >
                   <UpdateFeild
                     value={codeForcesHandle}
@@ -221,11 +209,7 @@ const UpdateUser = (props) => {
                   />
                 </div>
                 <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
+                  className = {classes.updateDivContainer} 
                 >
                   <UpdateFeild
                     value={codechefLink}
@@ -242,12 +226,7 @@ const UpdateUser = (props) => {
                   />
                 </div>
                 <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                    justifyContent: "space-between",
-                  }}
+                   className = {classes.updateDivContainer} 
                 >
                   <UpdateFeild
                     value={githubLink}

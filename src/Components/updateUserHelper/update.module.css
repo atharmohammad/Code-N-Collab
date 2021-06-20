@@ -6,14 +6,6 @@
   width: 50%;
 }
 
-.Designation {
-  width: 48%;
-}
-
-.Moto {
-  width: 48%;
-}
-
 .Codeforces-Handle {
   width: 30%;
 }
@@ -22,22 +14,31 @@
   width: 67%;
 }
 
-.Codechef-Profile-Link {
-  width: 48%;
-}
-
-.Atcoder-Profile-Link {
-  width: 48%;
-}
-
+.Designation,
+.Moto,
+.Codechef-Profile-Link,
+.Atcoder-Profile-Link,
+.LinkedIn-Profile-Link,
 .Github-Profile-Link {
   width: 48%;
 }
 
-.LinkedIn-Profile-Link {
-  width: 48%;
+.Country {
+  width: 20%;
 }
-.Country{
-    width:20%;
-    margin-top:20px;
+
+@media only screen and (max-width: 500px) {
+  .Name,
+  .Institution,
+  .Codeforces-Handle,
+  .CodeForces-Profile-Link,
+  .Designation,
+  .Moto,
+  .Codechef-Profile-Link,
+  .Atcoder-Profile-Link,
+  .LinkedIn-Profile-Link,
+  .Github-Profile-Link,
+  .Country{
+      width:100%;
+  }
 }
