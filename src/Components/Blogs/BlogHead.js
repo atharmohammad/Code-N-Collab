@@ -4,6 +4,8 @@ import { Grid, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import Back from "../Back/Back";
 
+import classes from './blogs.module.css'
+
 export default function BlogHead(props) {
   const history = useHistory();
 
@@ -14,43 +16,46 @@ export default function BlogHead(props) {
   return (
     <Grid
       container
-      justify="space-around"
+      justify="space-between"
       direction="row"
       style={{
-        minHeight: "35vh",
+        minHeight: "3vw",
+        marginTop:'-20px',
         backgroundColor: "black",
-        width: "100%",
+        width: "95vw",
         textAlign: "center",
-        border: "2px solid black",
       }}
     >
       <div>
         <Back clicked={backHandler} />
       </div>
+      
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+      >
       <Grid
         container
         direction="column"
         justify="center"
-        style={{ width: "50%", marginLeft: "15vh" }}
+        style={{ width: "40%", marginLeft: "15vw" }}
       >
         <img
           src={CodeNCollab}
-          style={{ height: "10vh", width: "60vh" }}
+          style={{ height: "10vw", width: "30vw" ,minWidth:'120px',minHeight:'40px'}}
           alt="CodeNCollab"
         />
         <Typography
-          style={{
-            color: "#fff",
-            marginTop: "5vh",
-            width: "60vh",
-            fontWeight: "bold",
-          }}
+        className={classes.blogHead_interaction_text}
+          
         >
-          {" "}
           Official Page for Community Interaction and Announcements
         </Typography>
       </Grid>
-      <img src={Collaboration} alt="Collaboration" style={{ height: "35vh" }} />
+     
+       <img src={Collaboration} alt="Collaboration" style={{width:'35%',height:'15vw',justifySelf:'flex-end'}} />
+    </Grid>
     </Grid>
   );
 }

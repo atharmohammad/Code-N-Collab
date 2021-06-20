@@ -44,6 +44,8 @@ export default function SingleBlog(props) {
         border: "10px double #fff",
         padding: "10px",
         marginTop: "20px",
+        width:'80vw',
+        maxWidth:'800px',
         borderRadius: "20px",
       }}
     >
@@ -52,7 +54,7 @@ export default function SingleBlog(props) {
         style={{
           padding: "1vh",
           minHeight: "16vh",
-          width: "100vh",
+          width: "98%",
           background: "#fff",
           borderRadius: "20px",
         }}
