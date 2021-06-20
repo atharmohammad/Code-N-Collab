@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Grid, Box, Button, Typography, Avatar } from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 import TextEditor from "../Components/TextEditor/TextEditor";

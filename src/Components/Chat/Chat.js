@@ -1,38 +1,39 @@
-import React, { useEffect, useState, useRef,useContext } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { Typography, Grid } from "@material-ui/core";
-import { v4 as uuidv4 } from "uuid";
 import ScrollToBottom from "react-scroll-to-bottom";
-import Message from "./Message";
 import { useLocation } from "react-router-dom";
-import classes from "./Message.module.css";
-import {AuthContext} from '../../context/auth-context'
 
+import Message from "./Message";
+import classes from "./Message.module.css";
+import { AuthContext } from "../../context/auth-context";
 
 const Chat = (props) => {
   const socket = props.socket;
   const inputRef = useRef();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const [name,setName] = useState("");
-  const auth = useContext(AuthContext)
+  const [name, setName] = useState("");
+  const auth = useContext(AuthContext);
 
-  useEffect(()=>{
-    if(location.pathname === "/newContest"){
+  useEffect(() => {
+    if (location.pathname === "/newContest") {
       setName(auth.user.CodeforcesHandle);
-    }else{
+    } else {
       setName(searchParams.get("name"));
     }
-  },[])
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
     const finalValue = inputRef.current.value.trim();
-    if (finalValue){
-      if(location.pathname === "/newContest"){
-        socket.emit("Contest-Msg",{message:finalValue,
-                      room:searchParams.get("room"),
-                      name:auth.user.CodeforcesHandle});
-      }else{
+    if (finalValue) {
+      if (location.pathname === "/newContest") {
+        socket.emit("Contest-Msg", {
+          message: finalValue,
+          room: searchParams.get("room"),
+          name: auth.user.CodeforcesHandle,
+        });
+      } else {
         socket.emit("clientMsg", { message: finalValue });
       }
       inputRef.current.value = "";

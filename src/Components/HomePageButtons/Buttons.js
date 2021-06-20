@@ -1,5 +1,5 @@
-import { Box } from "@material-ui/core";
 import classes from "./Buttons.module.css";
+import { Box } from "@material-ui/core";
 
 export default function Button(props) {
   return (

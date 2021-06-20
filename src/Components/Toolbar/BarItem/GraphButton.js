@@ -1,8 +1,10 @@
 import React from "react";
-import { Box, Button } from "@material-ui/core";
 import { connect } from "react-redux";
+
+import { Box } from "@material-ui/core";
 import { SHOW_GRAPH } from "../../../store/Action/action";
 import classes from "./tools.module.css";
+
 const GraphButton = (props) => {
   return (
     <Box

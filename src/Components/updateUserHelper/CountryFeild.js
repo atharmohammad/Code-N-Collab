@@ -1,23 +1,20 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import { makeStyles } from "@material-ui/core/styles";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import classes from './update.module.css'
+import { InputLabel, MenuItem, FormControl, Select } from "@material-ui/core";
 
+import classes from "./update.module.css";
 
 const CountrySelect = (props) => {
   return (
-    <FormControl className={classes.Country} style={{marginTop:'20px'}}>
+    <FormControl className={classes.Country} style={{ marginTop: "20px" }}>
       <InputLabel>Country</InputLabel>
       <Select
         onChange={(e) => props.changeHandler(e.target.value)}
         value={props.country}
       >
         {countries.map((country, idx) => (
-          <MenuItem key={idx} value={country.label}>{country.label}</MenuItem>
+          <MenuItem key={idx} value={country.label}>
+            {country.label}
+          </MenuItem>
         ))}
       </Select>
     </FormControl>

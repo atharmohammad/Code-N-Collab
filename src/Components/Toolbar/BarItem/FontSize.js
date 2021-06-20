@@ -1,13 +1,15 @@
 import React from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { SET_FONT_SIZE } from "../../../store/Action/action";
 import { connect } from "react-redux";
-import Grid from "@material-ui/core/Grid";
+
+import {
+  Grid,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+} from "@material-ui/core";
+import { SET_FONT_SIZE } from "../../../store/Action/action";
 import classes from "./tools.module.css";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 
 const CustomizeFont = (props) => {
   const handleChange = (event) => {
@@ -15,11 +17,9 @@ const CustomizeFont = (props) => {
   };
 
   return (
-    <Grid
-    className ={classes.mainGrid} 
-    >
+    <Grid className={classes.mainGrid}>
       <FormControl>
-        <InputLabel  style={{ color: "#fff",paddingLeft:'50px'}} >
+        <InputLabel style={{ color: "#fff", paddingLeft: "50px" }}>
           Font
         </InputLabel>
         <Select

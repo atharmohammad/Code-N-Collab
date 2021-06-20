@@ -1,16 +1,15 @@
 import React from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-
-import { SET_THEME } from "../../../store/Action/action";
 import { connect } from "react-redux";
 
-import Grid from "@material-ui/core/Grid";
+import {
+  Grid,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+} from "@material-ui/core";
 import classes from "./tools.module.css";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import { SET_THEME } from "../../../store/Action/action";
 
 const ThemePicker = (props) => {
   const handleChange = (event) => {
@@ -18,13 +17,9 @@ const ThemePicker = (props) => {
   };
 
   return (
-    <Grid
-      className ={classes.mainGrid} 
-    >
+    <Grid className={classes.mainGrid}>
       <FormControl>
-        <InputLabel
-          style={{ color: "#fff",paddingLeft:'40px'}}
-        >
+        <InputLabel style={{ color: "#fff", paddingLeft: "40px" }}>
           Theme
         </InputLabel>
         <Select

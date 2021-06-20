@@ -1,11 +1,12 @@
-import { useState, useEffect, useContext } from "react";
-import { Grid, Box, Button, Typography, Avatar } from "@material-ui/core";
-import axios from "../../Axios/axios";
+import { useState } from "react";
+import { Grid, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import Spinner from "../Spinner/BlogSpinner";
 import ReactMarkdown from "react-markdown";
+
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
+import Spinner from "../Spinner/BlogSpinner";
 import HelperIcons from "./HelperIcons";
+import axios from "../../Axios/axios";
 
 export default function SingleBlog(props) {
   const blog = props.blog;
@@ -44,8 +45,8 @@ export default function SingleBlog(props) {
         border: "10px double #fff",
         padding: "10px",
         marginTop: "20px",
-        width:'80vw',
-        maxWidth:'800px',
+        width: "80vw",
+        maxWidth: "800px",
         borderRadius: "20px",
       }}
     >
@@ -61,7 +62,7 @@ export default function SingleBlog(props) {
       >
         <UserBlogDescription
           admin={{ User: blog.User }}
-          date = {blog.createdAt}
+          date={blog.createdAt}
         />
         <Grid
           style={{ marginTop: "1vh", cursor: "pointer" }}

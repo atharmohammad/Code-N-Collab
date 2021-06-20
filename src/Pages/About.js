@@ -1,8 +1,9 @@
+import { Container } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+
 import Stars from "../Components/Stars/Stars";
 import Nav from "../Components/Nav/Nav";
 import Back from "../Components/Back/Back";
-import { Container } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
 import Title from "../Assets/images/currBlog.png";
 import Github from "../Assets/images/Github.png";
 import Admin from "../Components/About/Admin/Admin";
@@ -30,9 +31,7 @@ export default function About(props) {
         <Nav />
       </div>
       <Container component="main" maxWidth="md" style={{ marginTop: "5px" }}>
-        <div
-          className = {classes.contain}
-        >
+        <div className={classes.contain}>
           <div className={classes.paper_about}>
             <img
               src={Title}

@@ -1,21 +1,21 @@
 import { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
 import MuiAlert from "@material-ui/lab/Alert";
 import ShareIcon from "@material-ui/icons/Share";
 import Snackbar from "@material-ui/core/Snackbar";
 import { Tooltip, IconButton } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
 
+import ProfileFeild from "./ProfileFeild";
+import classes from "./profile.module.css";
 import { AuthContext } from "../../context/auth-context";
 import SelectAvatar from "../SelectAvatars/SelectAvatars";
-import ProfileFeild from "./ProfileFeild";
-import ProfileTitle from "../../Assets/images/Profile.png";
-import CodeforcesIcon from "../../Assets/images/Codeforces.png";
-import LinkedInIcon from "../../Assets/images/Linkedin.png";
 import GithubIcon from "../../Assets/images/Github.png";
+import ProfileTitle from "../../Assets/images/Profile.png";
+import LinkedInIcon from "../../Assets/images/Linkedin.png";
 import CodechefIcon from "../../Assets/images/codechef.png";
 import AtcoderIcon from "../../Assets/images/atcoder.png";
-import classes from "./profile.module.css";
+import CodeforcesIcon from "../../Assets/images/Codeforces.png";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

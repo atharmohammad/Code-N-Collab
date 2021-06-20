@@ -4,13 +4,12 @@ import Linkedin from "../../../Assets/images/Linkedin.png";
 import Codeforces from "../../../Assets/images/Codeforces.png";
 import AtharPortfolio from "../../../Assets/images/AtharPortfolio.jpg";
 import Github from "../../../Assets/images/Github.png";
-
 import classes from "./admin.module.css";
 
 export default function Admin(props) {
   return (
     <>
-      <div style={{ display: "flex" ,flexWrap:'wrap'}}>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
         <img
           className={classes.pic}
           src={props.Name === "Mohd Athar" ? Athar : Adnan}
@@ -20,7 +19,7 @@ export default function Admin(props) {
       <div
         style={{
           display: "flex",
-          flexWrap:'wrap',
+          flexWrap: "wrap",
           justifyContent: "space-between",
           flexDirection: "row",
           padding: "1vw",

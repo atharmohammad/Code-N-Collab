@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
+import useSound from "use-sound";
+import { v4 as uuidv4 } from "uuid";
+import { useHistory, useLocation } from "react-router-dom";
 import { Grid, Button, InputLabel } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
-import { useHistory, useLocation } from "react-router-dom";
 import Stars from "../Stars/Stars";
 import styles from "./RoomsInput.module.css";
-import useSound from "use-sound";
 import roundStart from "../../Assets/sound-effects/RoundStart.mp3";
 import CreateRoom from "../../Assets/images/create_room.png";
-import { v4 as uuidv4 } from "uuid";
 import Back from "../Back/Back";
 
 function Alert(props) {
@@ -140,11 +140,11 @@ function Rooms(props) {
           </Button>
           <Snackbar
             anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-            open={error!==null}
+            open={error !== null}
             autoHideDuration={6000}
-            onClose={()=>setError(null)}
+            onClose={() => setError(null)}
           >
-            <Alert  onClose={()=>setError(null)} severity="error">
+            <Alert onClose={() => setError(null)} severity="error">
               {error}
             </Alert>
           </Snackbar>

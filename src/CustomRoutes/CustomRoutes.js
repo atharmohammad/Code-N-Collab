@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+
 import Rooms from "../Components/Rooms/Rooms";
 import CollabPageWrapper from "../Pages/CollabPageWrapper";
 import GetStarted from "../Pages/GetStarted";
@@ -10,8 +11,8 @@ import Logout from "../Pages/Logout";
 import ParticularBlog from "../Pages/ParticularBlog";
 import Me from "../Pages/Me";
 import { AuthContext } from "../context/auth-context";
-import About from "../Pages/About"
-import UpdateUser from '../Pages/UpdateUser'
+import About from "../Pages/About";
+import UpdateUser from "../Pages/UpdateUser";
 
 const CustomRoutes = (props) => {
   const auth = useContext(AuthContext);

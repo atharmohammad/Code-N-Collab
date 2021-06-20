@@ -1,24 +1,24 @@
-.wrapperss{
+.wrapperss {
   margin: 10px;
   text-align: center;
   align-items: center;
-  cursor:pointer;
+  cursor: pointer;
 }
 
-.wrapperss p{
-  color:#fff;
-  cursor:pointer;
+.wrapperss p {
+  color: #fff;
+  cursor: pointer;
   font-size: 19px;
-  font-family: edgwick Ave Display,cursive;
+  font-family: edgwick Ave Display, cursive;
 }
 
-.wrapperss:hover{
+.wrapperss:hover {
   text-decoration: underline wavy #32a86d;
   text-decoration-thickness: 2px;
 }
 
-.headerss{
+.headerss {
   display: flex;
   justify-content: flex-end;
-  width:100%;
+  width: 100%;
 }

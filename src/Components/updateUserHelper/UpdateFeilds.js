@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Grid, Tooltip, IconButton, TextField } from "@material-ui/core";
-import classes from './update.module.css'
+import { TextField } from "@material-ui/core";
+
+import classes from "./update.module.css";
 
 const ProfileFeild = (props) => {
-  
   return (
     <TextField
-      className = {classes[props.title]}
+      className={classes[props.title]}
       variant="outlined"
       margin="normal"
       value={props.value}

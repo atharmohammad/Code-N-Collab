@@ -1,16 +1,17 @@
-import { useState, useEffect, useRef, useContext } from "react";
-import { Grid, Tooltip, IconButton, Button } from "@material-ui/core";
-import { v4 as uuidv4 } from "uuid";
-import ReactMarkdown from "react-markdown";
-import HelperIcons from "./HelperIcons";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import { Grid } from "@material-ui/core";
+import { v4 as uuidv4 } from "uuid";
+
+import HelperIcons from "./HelperIcons";
 import axios from "../../Axios/axios";
 import TextEditor from "../TextEditor/TextEditor";
 import BlogSpinner from "../Spinner/BlogSpinner";
 import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import Comment from "./Comment";
-import classes from './blogs.module.css'
+import classes from "./blogs.module.css";
 
 const CurrentBlog = (props) => {
   const [editBlog, setEditBlog] = useState(false);
@@ -22,9 +23,15 @@ const CurrentBlog = (props) => {
   const [totalCommentLength, setTotalCommentLength] = useState(0);
   const [comments, setComments] = useState([]);
   const [dummy, setDummy] = useState(uuidv4());
-
-  const id = window.location.pathname.split("/")[2];
-
+  
+  let id;
+  
+  try {
+    id = window.location.pathname.split("/")[2];
+  } catch (e) {
+    console.log(e);
+  }
+  
   const history = useHistory();
 
   useEffect(async () => {
@@ -122,7 +129,7 @@ const CurrentBlog = (props) => {
           <>
             <UserBlogDescription
               admin={{ User: blog.User }}
-              date = {blog.createdAt}
+              date={blog.createdAt}
             />
             <ReactMarkdown>{blog.Body}</ReactMarkdown>
           </>
@@ -139,9 +146,7 @@ const CurrentBlog = (props) => {
           </>
         )}
         <div>
-          <Grid
-            className = {classes.IconsMainGrid}
-          >
+          <Grid className={classes.IconsMainGrid}>
             <HelperIcons
               type="blog"
               toggleCommentHandler={toggleCommentHandler}
@@ -183,7 +188,6 @@ const CurrentBlog = (props) => {
                   ))}
                 </div>
               </div>
-
             </>
           )
         ) : null}

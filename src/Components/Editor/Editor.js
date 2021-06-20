@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { connect } from "react-redux";
-import { useLocation } from "react-router-dom";
-
-import Editor from "@monaco-editor/react";
 import "@convergencelabs/monaco-collab-ext/css/monaco-collab-ext.min.css";
+import { useLocation } from "react-router-dom";
+import Editor from "@monaco-editor/react";
+import { connect } from "react-redux";
 
 import Modal from "../Modal/Modal";
 import Graph from "../Graph/Graph";
@@ -12,7 +11,6 @@ import cobaltJSON from "../manaco-Themes/cobalt";
 import merbivoreJSON from "../manaco-Themes/merbivore";
 import githubJSON from "../manaco-Themes/github";
 import MonacoConvergenceAdapter from "./EditorAdaptor";
-
 import {
   SET_LOADING,
   SET_OUTPUT,
@@ -59,7 +57,6 @@ const MonacoEditor = (props) => {
     });
 
     let modelService;
-    const currentPath = location.pathname;
     const searchParams = new URLSearchParams(location.search);
 
     try {

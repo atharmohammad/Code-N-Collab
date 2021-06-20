@@ -1,6 +1,7 @@
-import { useEffect, useState, useContext } from "react";
-import { Grid, Box, Button } from "@material-ui/core";
+import {  useState, useContext } from "react";
+import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+
 import { AuthContext } from "../context/auth-context";
 import AvatarModal from "../Components/Modal/AvatarModal";
 import Back from "../Components/Back/Back";
@@ -9,9 +10,7 @@ import Stars from "../Components/Stars/Stars";
 import ProfileUpdate from "../Assets/images/ProfileUpdate.png";
 import axios from "../Axios/axios";
 import Spinner from "../Components/Spinner/BlogSpinner";
-
 import SelectAvatar from "../Components/SelectAvatars/SelectAvatars";
-
 import UpdateFeild from "../Components/updateUserHelper/UpdateFeilds";
 import CountryFeild from "../Components/updateUserHelper/CountryFeild";
 import classes from "./pages.module.css";
@@ -98,7 +97,7 @@ const UpdateUser = (props) => {
               padding: "1vw",
               minHeight: "70%",
               width: "90vw",
-              maxWidth:'1000px',
+              maxWidth: "1000px",
               border: "10px double #fff",
               borderRadius: "20px",
             }}
@@ -154,9 +153,7 @@ const UpdateUser = (props) => {
                 </div>
               </div>
               <div>
-                <div
-                  className = {classes.updateDivContainer} 
-                >
+                <div className={classes.updateDivContainer}>
                   <UpdateFeild
                     value={name}
                     title="Name"
@@ -175,26 +172,20 @@ const UpdateUser = (props) => {
                     changeHandler={(e) => setCountry(e)}
                   />
                 </div>
-                <div
-                   className = {classes.updateDivContainer} 
-                >
+                <div className={classes.updateDivContainer}>
                   <UpdateFeild
-                   
                     value={designation}
                     title="Designation"
                     placeHolder="web developer"
                     changeHandler={(e) => setDesignation(e)}
                   />
                   <UpdateFeild
-                   
                     value={moto}
                     title="Moto"
                     changeHandler={(e) => setMoto(e)}
                   />
                 </div>
-                <div
-                    className = {classes.updateDivContainer} 
-                >
+                <div className={classes.updateDivContainer}>
                   <UpdateFeild
                     value={codeForcesHandle}
                     title="Codeforces-Handle"
@@ -208,9 +199,7 @@ const UpdateUser = (props) => {
                     changeHandler={(e) => setCodeForcesLink(e)}
                   />
                 </div>
-                <div
-                  className = {classes.updateDivContainer} 
-                >
+                <div className={classes.updateDivContainer}>
                   <UpdateFeild
                     value={codechefLink}
                     title="Codechef-Profile-Link"
@@ -218,16 +207,13 @@ const UpdateUser = (props) => {
                     changeHandler={(e) => setCodechefLink(e)}
                   />
                   <UpdateFeild
-                    
                     value={atcoderLink}
                     title="Atcoder-Profile-Link"
                     placeHolder="https://www.codechef.com/users/gennady.korotkevich"
                     changeHandler={(e) => setAtcoderLink(e)}
                   />
                 </div>
-                <div
-                   className = {classes.updateDivContainer} 
-                >
+                <div className={classes.updateDivContainer}>
                   <UpdateFeild
                     value={githubLink}
                     title="Github-Profile-Link"

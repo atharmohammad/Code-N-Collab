@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
-import Profile from "../Components/Profile/Profile";
 import { useLocation, useHistory } from "react-router-dom";
+
+import Profile from "../Components/Profile/Profile";
 import { AuthContext } from "../context/auth-context";
 import Spinner from "../Components/Spinner/BlogSpinner";
 import Stars from "../Components/Stars/Stars";

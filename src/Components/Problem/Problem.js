@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./Problem.css";
+import { Grid } from "@material-ui/core";
+
 import Spinner from "../Spinner/BlogSpinner";
 
-import {
-  Grid,
-} from "@material-ui/core";
+import "./Problem.css";
 
 export default function App(props) {
   const socket = props.socket;
@@ -104,7 +103,6 @@ export default function App(props) {
                 padding: "1vh 1vh 0 1vh",
                 cursor: "pointer",
                 textAlign: "center",
-                
               }}
               onClick={problemFetchHandler}
             >

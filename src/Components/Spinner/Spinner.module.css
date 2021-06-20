@@ -3,8 +3,8 @@
   height: 150px;
   position: relative;
   perspective: 200px;
-  margin:auto;
-  padding:auto;
+  margin: auto;
+  padding: auto;
 }
 
 .square div {

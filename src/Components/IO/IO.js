@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import { makeStyles, Grid } from "@material-ui/core";
+import { useLocation } from "react-router-dom";
+import { connect } from "react-redux";
 
 import {
   SET_INPUT,
@@ -8,11 +11,6 @@ import {
   NOTIFY_OUTPUT_SUCCESS,
   NOTIFY_OUTPUT_ERROR,
 } from "../../store/Action/action";
-
-import { connect } from "react-redux";
-
-import { makeStyles, Grid } from "@material-ui/core";
-import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   textarea: {

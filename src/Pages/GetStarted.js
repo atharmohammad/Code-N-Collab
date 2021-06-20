@@ -1,10 +1,10 @@
 import React from "react";
-import Title from "../Assets/images/Title.png";
-import GetStartedImg from "../Assets/images/GetStarted.png";
 import { useHistory } from "react-router-dom";
-import Stars from "../Components/Stars/Stars";
 import { Grid, Box } from "@material-ui/core";
 
+import Title from "../Assets/images/Title.png";
+import GetStartedImg from "../Assets/images/GetStarted.png";
+import Stars from "../Components/Stars/Stars";
 
 function GetStarted() {
   const history = useHistory();

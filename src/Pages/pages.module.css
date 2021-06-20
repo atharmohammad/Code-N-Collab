@@ -10,7 +10,7 @@
   margin: 10px;
 }
 
-.contain{
+.contain {
   border: 10px double white;
   border-radius: 20px;
   box-sizing: border-box;
@@ -54,8 +54,8 @@
     margin-bottom: 10px;
     box-sizing: border-box;
   }
-  .contain{
-    border:5px solid white;
+  .contain {
+    border: 5px solid white;
   }
 }
 

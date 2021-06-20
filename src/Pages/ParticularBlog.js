@@ -1,14 +1,10 @@
-import { useEffect, useState } from "react";
-import { Grid, Box, Button, Typography, Avatar } from "@material-ui/core";
+import React from "react";
 import CurrentBlog from "../Components/Blogs/CurrentBlog";
-import { connect } from "react-redux";
-import * as TYPES from "../store/Action/action";
 import classes from "../Assets/css/wrapstyle.module.css";
 import Stars from "../Components/Stars/Stars";
 import BlogHead from "../Components/Blogs/BlogHead";
 
 const ParticularBlog = (props) => {
-  
   return (
     <>
       <div className={classes.wrap}>
@@ -20,7 +16,7 @@ const ParticularBlog = (props) => {
           <div
             style={{
               width: "95vw",
-              maxWidth:'1000px',
+              maxWidth: "1000px",
               margin: "auto",
               display: "flex",
               flexDirection: "column",
@@ -33,6 +29,5 @@ const ParticularBlog = (props) => {
     </>
   );
 };
-
 
 export default ParticularBlog;

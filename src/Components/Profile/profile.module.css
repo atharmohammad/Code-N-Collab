@@ -1,14 +1,13 @@
-.img_div{
-    display: flex;
-    justify-content: center;
-    margin-left: 10%;
-    box-sizing: border-box;
-   
+.img_div {
+  display: flex;
+  justify-content: center;
+  margin-left: 10%;
+  box-sizing: border-box;
 }
 
 .outerBox {
   width: 90%;
-  max-width:1200px;
+  max-width: 1200px;
   margin: auto;
   margin-top: 35px;
   padding: 1vw;
@@ -18,21 +17,20 @@
   border-radius: 20px;
 }
 
-.innerBox{
-    
-    display: flex;
-    flex-direction: column;
-    padding: 5px 1.5vw 5px 1.5vw;
-    background: #fff;
-    box-sizing: border-box;
-    border-radius: 20px;
+.innerBox {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 1.5vw 5px 1.5vw;
+  background: #fff;
+  box-sizing: border-box;
+  border-radius: 20px;
 }
 
 .ProfileField {
   padding: 5px;
   display: flex;
   margin: auto;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   margin-top: 10px;
   border-bottom: 2px solid #b5b0a3;
   box-sizing: border-box;
@@ -49,14 +47,13 @@
 .ProfileField_value {
   font-size: 1em;
   color: #524d3f;
-  
 }
 
 @media only screen and (max-width: 650px) {
-    .ProfileField{
-        flex-direction: column;
-    }
-    .img_div{
-        display:none;
-    }
+  .ProfileField {
+    flex-direction: column;
   }
+  .img_div {
+    display: none;
+  }
+}
