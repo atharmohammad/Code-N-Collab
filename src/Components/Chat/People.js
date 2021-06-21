@@ -51,6 +51,7 @@ const People = (props) => {
               if (!person || !person.username) return <></>;
               return (
                 <div
+                 title={person.username}
                   className={`${classes.messageContainer} ${classes.justifyStart}`}
                 >
                   <div
