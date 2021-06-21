@@ -10,6 +10,7 @@ import Editor from "../Components/Editor/Editor_Wrapper";
 import IO from "../Components/IO/IO";
 import Problem from "../Components/Problem/Problem";
 import Toolbar from "../Components/Toolbar/Toolbar";
+import Spinner from "../Components/Spinner/ContestSpinner/ContestSpinner";
 import * as TYPES from "../store/Action/action";
 
 import "react-reflex/styles.css";
@@ -168,7 +169,7 @@ const CollabPage = (props) => {
       </div>
     </>
   ) : (
-    <></>
+    <Spinner margin={"0px"} />
   );
 };
 
