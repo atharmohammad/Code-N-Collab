@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
@@ -21,6 +21,7 @@ const FilterContest = (props) => {
       problemTags: props.contestProblemsTags,
       minRating: props.minRating,
       maxRating: props.maxRating,
+      maxDuration: props.maxDuration,
     });
     props.setProblemLoading();
   };
@@ -75,6 +76,17 @@ const FilterContest = (props) => {
               type="number"
               onChange={(e) => props.setMaxRating(e.target.value)}
             />
+
+            <TextField
+              id="outlined-basic"
+              label="Max-Duration in minutes"
+              placeholder="(10-120) default is 30m"
+              variant="outlined"
+              value={props.maxDuration}
+              type="number"
+              onChange={(e) => props.setMaxDuration(e.target.value)}
+            />
+
             <TagChips />
           </div>
         </div>
@@ -82,13 +94,17 @@ const FilterContest = (props) => {
           disabled={
             Math.min(props.maxRating, props.minRating) < 500 ||
             Math.max(props.maxRating, props.minRating) > 3000 ||
-            props.maxRating < props.minRating
+            props.maxRating < props.minRating ||
+            props.maxDuration > 120 ||
+            props.maxDuration < 10
           }
           style={{
             background:
               Math.min(props.maxRating, props.minRating) < 500 ||
               Math.max(props.maxRating, props.minRating) > 3000 ||
-              props.maxRating < props.minRating
+              props.maxRating < props.minRating ||
+              props.maxDuration > 120 ||
+              props.maxDuration < 10
                 ? "grey"
                 : "#872e2e",
             color: "#fff",
@@ -116,6 +132,7 @@ const mapStateToProps = (state) => {
     contestProblemsTags: state.contest.ProblemTags,
     minRating: state.contest.minRating,
     maxRating: state.contest.maxRating,
+    maxDuration: state.contest.maxDuration,
   };
 };
 
@@ -126,6 +143,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setMaxRating: (value) => {
       dispatch({ type: TYPE.UPDATE_MAX_RATING, data: value });
+    },
+    setMaxDuration: (value) => {
+      dispatch({ type: TYPE.UPDATE_MAX_DURATION, data: value });
     },
     setProblemLoading: () => {
       dispatch({ type: TYPE.SET_QUESTION_LOADING });
