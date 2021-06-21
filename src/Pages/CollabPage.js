@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-
+import { useLocation, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 import Chat from "../Components/Chat/ChatTabs";
 import Editor from "../Components/Editor/Editor_Wrapper";
 import IO from "../Components/IO/IO";
 import Problem from "../Components/Problem/Problem";
-import { connect } from "react-redux";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import Toolbar from "../Components/Toolbar/Toolbar";
-import "react-reflex/styles.css";
-import { useLocation, useHistory } from "react-router-dom";
-
 import * as TYPES from "../store/Action/action";
+
+import "react-reflex/styles.css";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

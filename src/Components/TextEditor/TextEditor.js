@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Editor from "@uiw/react-md-editor";
 import { Grid, Box } from "@material-ui/core";
+
 import axios from "../../Axios/axios";
 
 function TextEditor(props) {
@@ -9,9 +10,8 @@ function TextEditor(props) {
   const { closeTextEditor, showUpdateBtn } = { ...props };
   const postHandler = async () => {
     try {
-      
       props.postBtnClick();
-      
+
       await axios({
         method: props.method,
         url: props.Api,
@@ -104,5 +104,4 @@ function TextEditor(props) {
   );
 }
 
-
-export default TextEditor
+export default TextEditor;

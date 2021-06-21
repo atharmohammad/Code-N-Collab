@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import * as TYPE from "../../../store/Action/action";
 import { connect } from "react-redux";
-import { useLocation } from "react-router-dom";
-import classes from "./tools.module.css";
+import { useLocation,useHistory } from "react-router-dom";
 import { Box } from "@material-ui/core";
+
 import {AuthContext} from "../../../context/auth-context"
-import { useHistory } from "react-router-dom";
+import * as TYPE from "../../../store/Action/action";
+import classes from "./tools.module.css";
 
 function Leave(props) {
   const history = useHistory();

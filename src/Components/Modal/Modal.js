@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
+
 import Spinner from "../Spinner/Spinner";
 
 const Modal = (props) => {
@@ -16,7 +17,7 @@ const Modal = (props) => {
         background: "rgb(39, 41, 43,0.8)",
         padding: "15vh",
         left: "30%",
-        top:"150px",
+        top: "150px",
         display: "flex",
         justifyContent: "center",
         boxSizing: "border-box",

@@ -1,12 +1,15 @@
 import React from "react";
-import { SET_LANGUAGE } from "../../../store/Action/action";
 import { connect } from "react-redux";
-import Grid from "@material-ui/core/Grid";
+
+import { SET_LANGUAGE } from "../../../store/Action/action";
+import {
+  Grid,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+} from "@material-ui/core";
 import classes from "./tools.module.css";
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 
 const LanguagePicker = (props) => {
   const handleChange = (event) => {
@@ -14,10 +17,9 @@ const LanguagePicker = (props) => {
   };
 
   return (
-    <Grid  className ={classes.mainGrid} >
-    <FormControl>
-        <InputLabel  style={{ color: "#fff",paddingLeft:'35px'}}
-        >
+    <Grid className={classes.mainGrid}>
+      <FormControl>
+        <InputLabel style={{ color: "#fff", paddingLeft: "35px" }}>
           Language
         </InputLabel>
         <Select

@@ -1,16 +1,47 @@
-.input{
-  width: 40vh;
-  height: 5vh;
-  overflow-y:auto;
+.input {
+  width: 95%;
+  min-width: 150px;
+  height: 50px;
+  overflow-y: auto;
   font-size: 20px;
-  padding: 1vh 0 0 1vh;
+  padding: 5px;
   background: transparent;
   color: #fff;
-  border:5px double #fff;
+  border: 5px double #fff;
   border-radius: 10px;
-  margin-top: 2vh
+  margin-top: 10px;
 }
 
 .input:focus {
-    outline:none!important
+  outline: none !important;
 }
+
+.main {
+  height: 100vh;
+  background: radial-gradient(ellipse, #1b2735 0%, #090a0f 100%);
+}
+
+.img {
+  width: 250px;
+  height: 50px;
+  min-width: 150px;
+  min-height: 30px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  padding:35px;
+  justify-content: space-between;
+  background: transparent;
+  min-height: 65vh;
+  width: 90vw;
+  margin: 10px auto;
+  max-width: 550px;
+  margin-top:50px;
+  border-radius: 20px;
+  border: 5px double #fff;
+  box-sizing: border-box;
+}
+
+

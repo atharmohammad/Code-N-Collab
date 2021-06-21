@@ -1,18 +1,17 @@
-import { useState, useEffect, useRef, useContext, useCallback } from "react";
-import { Grid, Button, Tooltip, IconButton } from "@material-ui/core";
-import Reply from "./Reply";
+import { useState, useRef, useContext, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
+import { Grid } from "@material-ui/core";
+
+import Reply from "./Reply";
 import SaveCancel from "./SaveCancel";
 import HelperIcons from "./HelperIcons";
 import WriterModal from "./WriterModal";
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import axios from "../../Axios/axios";
 import BlogSpinner from "../Spinner/BlogSpinner";
-import { AuthContext } from "../../context/auth-context";
+import classes from "./blogs.module.css";
 
 const Comment = (props) => {
-  const auth = useContext(AuthContext);
-
   const divRef = useRef();
   const [showReply, setShowReply] = useState(false);
   const [editComment, setEditComment] = useState(false);
@@ -110,7 +109,7 @@ const Comment = (props) => {
         <div style={{ display: "flex" }}>
           <UserBlogDescription
             admin={{ User: user }}
-            date = {props.comment.createdAt}
+            date={props.comment.createdAt}
           />
         </div>
         {editComment === false ? (
@@ -163,7 +162,7 @@ const Comment = (props) => {
           ) : null}
         </Grid>
 
-        <Grid container direction="row" justify="flex-end">
+        <Grid className={classes.helperGrid_comment}>
           <HelperIcons
             type="comment"
             admin={{ User: user }}

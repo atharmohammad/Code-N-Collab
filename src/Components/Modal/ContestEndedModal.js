@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Button } from "@material-ui/core";
 import { connect } from "react-redux";
+
 import * as TYPES from "../../store/Action/action";
 
 const ContestEndedModal = (props) => {
@@ -24,9 +25,10 @@ const ContestEndedModal = (props) => {
         transition: "all 0.3s ease-out",
       }}
     >
-      {" "}
       <div>
-        <div style={{ display:'flex',color: "#fff", fontSize: "30px" }}>Contest Ended</div>
+        <div style={{ display: "flex", color: "#fff", fontSize: "30px" }}>
+          Contest Ended
+        </div>
         <Button
           onClick={props.hideContestEndModal}
           style={{
@@ -34,7 +36,7 @@ const ContestEndedModal = (props) => {
             color: "white",
             height: "50px",
             width: "200px",
-            marginTop:'20%',
+            marginTop: "20%",
             borderRadius: "5px",
             background: "#c42b2b",
             fontSize: "14px",

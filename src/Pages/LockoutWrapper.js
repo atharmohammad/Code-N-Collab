@@ -1,14 +1,14 @@
-import { useEffect , useContext , useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import socketio from "socket.io-client";
-import LockoutPage from './LockoutPage'
-import {useHistory , useLocation} from "react-router-dom";
-import {AuthContext} from "../context/auth-context"
+import LockoutPage from "./LockoutPage";
+import { useHistory, useLocation } from "react-router-dom";
+import { AuthContext } from "../context/auth-context";
 
 export default function LockoutWrapper(props) {
   const socket = socketio.connect(process.env.REACT_APP_BASE_URL);
   const auth = useContext(AuthContext);
   const history = useHistory();
-  const [valid,setValid] = useState(false);
+  const [valid, setValid] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -17,34 +17,34 @@ export default function LockoutWrapper(props) {
     };
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
 
-    if (!searchParams.get("room") || searchParams.get("room").trim === '') {
+    if (!searchParams.get("room") || searchParams.get("room").trim === "") {
       return history.push({
         pathname: "/homepage",
       });
     }
 
-    if (!auth.token ){
+    if (!auth.token) {
       return history.push({
         pathname: "/homepage",
-        state:{error:'Login required !'},
+        state: { error: "Login required !" },
       });
     }
 
-    if(auth.user.CodeforcesHandle == null){
+    if (auth.user.CodeforcesHandle == null) {
       return history.push({
         pathname: "/homepage",
-        state:{error:'codeforces handle required (Update Profile) !'},
+        state: { error: "codeforces handle required (Update Profile) !" },
       });
     }
 
     setValid(true);
-  },[])
+  }, []);
 
-  if(!valid){
-    return <></>
+  if (!valid) {
+    return <></>;
   }
 
   return <LockoutPage socket={socket} />;

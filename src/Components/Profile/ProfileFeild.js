@@ -1,22 +1,10 @@
-import { useEffect, useState } from "react";
-import { Grid, Tooltip, IconButton } from "@material-ui/core";
+import classes from "./profile.module.css";
 
 const ProfileFeild = (props) => {
   return (
-    <div
-      style={{
-        padding: "5px",
-        display: "flex",
-        margin: "auto",
-        marginTop:'10px',
-        borderBottom: "2px solid #b5b0a3",
-        boxSizing:'boxder-box',
-      }}
-    >
-      <div style={{ fontSize: "25px", width: "45%" }}>{props.title}:</div>
-      <div style={{ fontSize: "20px", color: "#524d3f", marginLeft: "50px" }}>
-        {props.value}
-      </div>
+    <div className={classes.ProfileField}>
+      <div className={classes.ProfileField_label}>{props.title}:</div>
+      <div className={classes.ProfileField_value}>{props.value}</div>
     </div>
   );
 };

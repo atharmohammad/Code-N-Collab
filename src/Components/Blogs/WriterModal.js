@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { Grid, Typography, Tooltip, IconButton } from "@material-ui/core";
+import { useState } from "react";
+import { Grid, Tooltip, IconButton } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import CancelIcon from "@material-ui/icons/Cancel";
+
 import classes from "./blogs.module.css";
 import axios from "../../Axios/axios";
 import Spinner from "../Spinner/BlogSpinner";
@@ -23,11 +24,10 @@ const WriterModal = (props) => {
     } catch (e) {
       alert("error Posting!");
       console.log(e);
-    }finally{
+    } finally {
       setSpinner(false);
       cancelHandler();
     }
-
   };
 
   return (

@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Grid, Box, Button, Typography, Avatar } from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 import TextEditor from "../Components/TextEditor/TextEditor";
@@ -10,7 +10,6 @@ import BlogSpinner from "../Components/Spinner/BlogSpinner";
 import SingleBlog from "../Components/Blogs/SingleBlog";
 import axios from "../Axios/axios";
 import { AuthContext } from "../context/auth-context";
-
 
 const BlogPage = (props) => {
   const [showEditor, setShowEditor] = useState(false);
@@ -38,7 +37,7 @@ const BlogPage = (props) => {
     if (!auth.token) {
       return history.push({
         pathname: "/homepage",
-        state:{error:'Login Required !'},
+        state: { error: "Login Required !" },
       });
     }
     return setShowEditor(true);
@@ -54,13 +53,13 @@ const BlogPage = (props) => {
         alignItems="center"
         style={{
           minHeight: "140vh",
-          padding: "0 0 10vh 0",
-          backgroundColor: "#18191a",
+          padding: "0 0 5vw 0",
+          background: "#18191a",
         }}
       >
         <BlogHead back="/homePage" />
         {showEditor ? (
-          <div style={{ width: "100vh" }}>
+          <div style={{ width: "80vw", maxWidth: "800px" }}>
             <Box
               style={{
                 width: "20px",
@@ -86,34 +85,33 @@ const BlogPage = (props) => {
                 showUpdateBtn={true}
                 Api="/blogs/write"
                 postBtnClick={() => setShowEditor(false)}
-                fetchBlog = {fetchBlogs}
+                fetchBlog={fetchBlogs}
                 initialValue=""
                 method="post"
               />
             </div>
           </div>
         ) : (
-          <div style={{ width: "100vh" }}>
-            <Box
-              style={{
-                width: "120px",
-                height: "40px",
-                backgroundColor: "#4169E1",
-                borderRadius: "5px",
-                padding: "5px 5px 0 5px",
-                textAlign: "center",
-                color: "#fff",
-                marginTop: "1vh",
-                float: "right",
-                cursor: "pointer",
-                textAlign: "center",
-                boxSizing: "border-box",
-              }}
-              onClick={showEditorHandler}
-            >
-              Create Blog|+{" "}
-            </Box>
-          </div>
+          <Box
+            style={{
+              alignSelf: "flex-end",
+              width: "120px",
+              height: "40px",
+              backgroundColor: "#4169E1",
+              borderRadius: "5px",
+              padding: "5px 5px 0 5px",
+              textAlign: "center",
+              color: "#fff",
+              marginTop: "30px",
+              marginRight: "10px",
+              cursor: "pointer",
+              textAlign: "center",
+              boxSizing: "border-box",
+            }}
+            onClick={showEditorHandler}
+          >
+            Create Blog|+{" "}
+          </Box>
         )}
         <div>
           {blogsLoading ? (

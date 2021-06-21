@@ -1,0 +1,59 @@
+.img_div {
+  display: flex;
+  justify-content: center;
+  margin-left: 10%;
+  box-sizing: border-box;
+}
+
+.outerBox {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  margin-top: 35px;
+  padding: 1vw;
+  box-sizing: border-box;
+  font-size: 25px;
+  border: 10px double #fff;
+  border-radius: 20px;
+}
+
+.innerBox {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 1.5vw 5px 1.5vw;
+  background: #fff;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.ProfileField {
+  padding: 5px;
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  border-bottom: 2px solid #b5b0a3;
+  box-sizing: border-box;
+  font-size: 25px;
+}
+
+.ProfileField_label {
+  font-size: 0.8em;
+  width: 45%;
+  font-weight: bold;
+  margin-right: 30px;
+}
+
+.ProfileField_value {
+  font-size: 1em;
+  color: #524d3f;
+}
+
+@media only screen and (max-width: 650px) {
+  .ProfileField {
+    flex-direction: column;
+  }
+  .img_div {
+    display: none;
+  }
+}

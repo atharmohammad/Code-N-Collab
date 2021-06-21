@@ -1,4 +1,3 @@
-import React, { useEffect, useState, useRef } from "react";
 import Amongus1 from "../../Assets/images/amongus1.png";
 import Amongus2 from "../../Assets/images/amongus2.png";
 import Amongus3 from "../../Assets/images/amongus3.png";

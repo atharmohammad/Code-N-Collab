@@ -41,3 +41,66 @@
   height: 15%;
   border: 2px solid grey;
 }
+
+.blogHead_interaction_text {
+  color: #fff;
+  margin-top: 5vw;
+  width: 60%;
+  font-weight: bold;
+}
+
+.iconTooltip {
+  height: 30px;
+  width: 35px;
+}
+
+.IconsMainGrid {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  margin-top: 3vh;
+  width: 100%;
+  gap: 8vw;
+}
+
+.particularIcon {
+  cursor: pointer;
+  color: gray;
+}
+
+.helperGrid_comment{
+  display: flex;
+  justify-content: flex-end;
+  
+}
+
+.helperGrid_reply{
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 800px) {
+  .IconsMainGrid {
+    gap: 10px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .IconsMainGrid {
+    flex-wrap: wrap;
+  }
+  .helperGrid_comment{
+    flex-wrap: wrap;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .helperGrid_reply{
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .blogHead_interaction_text {
+    display: none;
+  }
+}

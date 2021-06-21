@@ -7,7 +7,6 @@ import classes from "./Message.module.css";
 import { Avatar } from "@material-ui/core";
 
 const People = (props) => {
-
   return (
     <Grid
       style={{

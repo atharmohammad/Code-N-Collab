@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import TextField from "@material-ui/core/TextField";
+import { Button } from "@material-ui/core";
+import { connect } from "react-redux";
+
 import TagChips from "../TagChips/TagChips";
 import * as TYPE from "../../../store/Action/action";
-import { connect } from "react-redux";
-import { Button } from "@material-ui/core";
 
 const FilterContest = (props) => {
   const socket = props.socket;
