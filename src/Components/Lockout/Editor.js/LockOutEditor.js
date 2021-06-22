@@ -1,20 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { connect } from "react-redux";
-
 import Editor from "@monaco-editor/react";
-
-import Modal from "../../Modal/Modal";
-import ContestEndedModal from "../../Modal/ContestEndedModal";
-import Graph from "../../Graph/Graph";
-import blackBoardJSON from "../../manaco-Themes/blackBoard";
-import cobaltJSON from "../../manaco-Themes/cobalt";
-import merbivoreJSON from "../../manaco-Themes/merbivore";
-import githubJSON from "../../manaco-Themes/github";
+import { connect } from "react-redux";
 
 import {
   SET_LOADING,
   SET_OUTPUT,
 } from "../../../store/Action/action";
+import Modal from "../../Modal/Modal";
+import Graph from "../../Graph/Graph";
+import githubJSON from "../../manaco-Themes/github";
+import cobaltJSON from "../../manaco-Themes/cobalt";
+import merbivoreJSON from "../../manaco-Themes/merbivore";
+import blackBoardJSON from "../../manaco-Themes/blackBoard";
+import ContestEndedModal from "../../Modal/ContestEndedModal";
 
 const MonacoEditor = (props) => {
   const socket = props.socket;

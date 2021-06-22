@@ -24,3 +24,8 @@ yarn-error.log*
 
 #convergence-configurations
 
+
+# Local Netlify folder
+.netlify
+
+.env

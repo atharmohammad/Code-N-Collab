@@ -1,40 +1,17 @@
+import { Container } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+
 import Stars from "../Components/Stars/Stars";
 import Nav from "../Components/Nav/Nav";
 import Back from "../Components/Back/Back";
-import { Container } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
 import Title from "../Assets/images/currBlog.png";
 import Github from "../Assets/images/Github.png";
 import Admin from "../Components/About/Admin/Admin";
 import AboutContent from "../Components/About/AboutContent";
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    display: "flex",
-    flexDirection: "column",
-    color: "black",
-    padding: "7vh 10vh 4vh 10vh",
-    borderRadius: "20px",
-    boxSizing: "border-box",
-    background: "#fff",
-    margin: "10px",
-  },
-  About: {
-    color: "black",
-    fontSize: "30px",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    width: "50%",
-    fontFamily: ["edgwick Ave Display", "cursive"].join(),
-    marginTop: "20px",
-  },
-}));
+import classes from "./pages.module.css";
 
 export default function About(props) {
   const history = useHistory();
-  const classes = useStyles();
 
   const backHandler = () => {
     history.push("/homepage");
@@ -43,41 +20,46 @@ export default function About(props) {
   return (
     <div
       style={{
-        minHeight: "110vh",
-        paddingBottom: "30px",
+        minHeight: "100vh",
+        paddingBottom: "20px",
         background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
       }}
     >
       <Stars />
-      <Nav />
-      <Back clicked={backHandler} />
-      <Container component="main" maxWidth="md" style={{ marginTop: "30px" }}>
-        <div
-          style={{
-            border: "10px double white",
-            borderRadius: "20px",
-            padding: "10px",
-          }}
-        >
-          <div className={classes.paper}>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <img
-                src={Title}
-                style={{ height: "35%", width: "50%" }}
-                alt="Code-N-Collab"
-              />
-            </div>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Back clicked={backHandler} />
+        <Nav />
+      </div>
+      <Container component="main" maxWidth="md" style={{ marginTop: "5px" }}>
+        <div className={classes.contain}>
+          <div className={classes.paper_about}>
+            <img
+              src={Title}
+              style={{
+                height: "35%",
+                width: "50%",
+                minWidth: "175px",
+                margin: "auto",
+              }}
+              alt="Code-N-Collab"
+            />
             <div className={classes.About}>
               <p>About</p>
               <a
                 title="Code-N-Collab Git Repo"
                 href="https://github.com/atharmohammad/Code-N-Collab/tree/master"
+                target="_blank"
                 style={{ width: "100%", height: "100%" }}
               >
                 <img
                   src={Github}
                   alt="Github"
-                  style={{ width: "20%", height: "10%", margin: "6% 0 0 10%" }}
+                  style={{
+                    width: "20%",
+                    height: "10%",
+                    minWidth: "50px",
+                    margin: "30px 0 0 10%",
+                  }}
                 />
               </a>
             </div>
@@ -86,7 +68,6 @@ export default function About(props) {
               style={{
                 width: "100%",
                 borderRadius: "20px",
-                padding: "5px",
                 background:
                   "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
               }}
@@ -106,30 +87,25 @@ export default function About(props) {
                 Developed By :
               </div>
 
-              <div
-                style={{
-                  border: "10px double white",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  borderRadius: "20px",
-                  margin: "10px",
-                  padding: "10px",
-                }}
-              >
-                <Admin
-                  Name="Mohd Athar"
-                  linkedIn="https://www.linkedin.com/in/athar-mohammad-34068a157/"
-                  github='https://github.com/atharmohammad'
-                  codeForces="https://codeforces.com/profile/KickAss"
-                  portFolio = "https://atharmohammad.github.io/Portfolio/"
+              <div className={classes.AdminContainer}>
+                <div className={classes.admin_div}>
+                  <Admin
+                    Name="Mohd Athar"
+                    linkedIn="https://www.linkedin.com/in/athar-mohammad-34068a157/"
+                    github="https://github.com/atharmohammad"
+                    codeForces="https://codeforces.com/profile/KickAss"
+                    portFolio="https://atharmohammad.github.io/Portfolio/"
                   />
-                <Admin
-                  Name="Adnan Shamsi"
-                  linkedIn="https://www.linkedin.com/in/adnan-shamsi-5830301b3/"
-                  github='https://github.com/Adnan-shamsi'
-                  codeForces='https://codeforces.com/profile/AdnanShamsi'
-                  portFolio ={null}
-                />
+                </div>
+                <div className={classes.admin_div}>
+                  <Admin
+                    Name="Adnan Shamsi"
+                    linkedIn="https://www.linkedin.com/in/adnan-shamsi-5830301b3/"
+                    github="https://github.com/Adnan-shamsi"
+                    codeForces="https://codeforces.com/profile/AdnanShamsi"
+                    portFolio={null}
+                  />
+                </div>
               </div>
             </div>
           </div>

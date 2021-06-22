@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Grid, Button } from "@material-ui/core";
+import { connect } from "react-redux";
 import Graph from "react-graph-vis";
 import { v4 as uuidv4 } from "uuid";
-import { connect } from "react-redux";
+
 import { HIDE_GRAPH } from "../../store/Action/action";
-import { Grid, Button } from "@material-ui/core";
 import classes from "./graph.module.css";
 
 const GraphVis = (props) => {
@@ -70,7 +71,6 @@ const GraphVis = (props) => {
   return (
     <Grid className={classes.main}>
       <Grid className={classes.btnContainer}>
-        
         <Button
           onClick={() => setDirected(false)}
           disabled={!directed}
@@ -81,7 +81,7 @@ const GraphVis = (props) => {
             width: "80px",
             height: "20px",
             fontSize: "10px",
-            margin:"10px",
+            margin: "10px",
           }}
         >
           Undirected
@@ -97,7 +97,7 @@ const GraphVis = (props) => {
             width: "80px",
             height: "20px",
             fontSize: "10px",
-            margin:"10px",
+            margin: "10px",
           }}
         >
           Directed
@@ -105,20 +105,17 @@ const GraphVis = (props) => {
 
         <Button
           onClick={props.onClickGraph}
-         
           style={{
             backgroundColor: "#872e2e",
             color: "#fff",
             width: "5vh",
             height: "3vh",
             fontSize: "10px",
-            margin:"10px",
+            margin: "10px",
           }}
-          
         >
           close
         </Button>
-  
       </Grid>
 
       <Grid className={classes.graphContainer}>
@@ -128,7 +125,7 @@ const GraphVis = (props) => {
             onInput={changeHandler}
             style={{
               width: "100%",
-              height: '50vh',
+              height: "50vh",
               fontSize: 20,
               backgroundColor: "#fff",
             }}
@@ -154,7 +151,7 @@ const GraphVis = (props) => {
           />
         </Grid>
       </Grid>
-      </Grid>
+    </Grid>
   );
 };
 

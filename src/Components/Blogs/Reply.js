@@ -1,13 +1,14 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useRef } from "react";
 import { Grid } from "@material-ui/core";
-
-import axios from "../../Axios/axios";
 import ReactMarkdown from "react-markdown";
-import SaveCancel from "./SaveCancel";
-import HelperIcons from "./HelperIcons";
-import WriterModal from "./WriterModal";
+
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import Spinner from "../Spinner/BlogSpinner";
+import classes from "./blogs.module.css";
+import HelperIcons from "./HelperIcons";
+import WriterModal from "./WriterModal";
+import axios from "../../Axios/axios";
+import SaveCancel from "./SaveCancel";
 
 const Reply = (props) => {
   const reply = props.replyData;
@@ -75,7 +76,10 @@ const Reply = (props) => {
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", background: "#fff" }}>
-            <UserBlogDescription admin={{ User: reply.User }} />
+            <UserBlogDescription
+              admin={{ User: reply.User }}
+              date={reply.createdAt}
+            />
           </div>
           {editReply === false ? (
             <div
@@ -120,7 +124,7 @@ const Reply = (props) => {
               ) : null}
             </Grid>
 
-            <Grid container direction="row" justify="flex-end">
+            <Grid className={classes.helperGrid_reply}>
               <HelperIcons
                 type="reply"
                 admin={{ User: reply.User }}

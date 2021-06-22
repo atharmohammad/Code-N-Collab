@@ -1,16 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
+import { useLocation, useHistory } from "react-router-dom";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import { connect } from "react-redux";
+
 import Chat from "../Components/Chat/ChatTabs";
 import Editor from "../Components/Lockout/Editor.js/LockOutEditor";
 import IO from "../Components/IO/IO";
 import Contest from "../Components/Lockout/Contest";
 import Rules from "../Components/Lockout/LockoutPanel/Rules";
-import { connect } from "react-redux";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import Toolbar from "../Components/Toolbar/Toolbar";
 import * as TYPES from "../store/Action/action";
-import { useLocation, useHistory } from "react-router-dom";
 import Spinner from "../Components/Spinner/ContestSpinner/ContestSpinner";
 import { AuthContext } from "../context/auth-context";
 
@@ -35,7 +36,8 @@ const LockOutPage = (props) => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-
+    props.contestEnded(false)
+    
     const user = {
       Name: auth.user.CodeforcesHandle,
       RoomId: searchParams.get("room"),
@@ -47,10 +49,10 @@ const LockOutPage = (props) => {
         return setJoinErrorMsg(error);
       } else {
         const updatedContest = contest;
-
         props.setContest(updatedContest);
       }
       setJoined(true);
+      
       if (contest.EndTime) {
         const now = new Date().getTime();
         props.contestEnded(contest.EndTime <= now);

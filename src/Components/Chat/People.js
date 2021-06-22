@@ -7,7 +7,6 @@ import classes from "./Message.module.css";
 import { Avatar } from "@material-ui/core";
 
 const People = (props) => {
-
   return (
     <Grid
       style={{
@@ -52,6 +51,7 @@ const People = (props) => {
               if (!person || !person.username) return <></>;
               return (
                 <div
+                 title={person.username}
                   className={`${classes.messageContainer} ${classes.justifyStart}`}
                 >
                   <div

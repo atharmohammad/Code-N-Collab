@@ -29,11 +29,12 @@
 
 .messageText {
   letter-spacing: 0;
-  float: left;
-  font-size: 1.1em;
-  word-wrap: break-word;
+  font-size:15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   width: 100%;
-  min-width: 0vh;
+  min-width: 0px;
 }
 
 .messageText img {
@@ -92,7 +93,8 @@
 
 .backgroundUser {
   background: #367ec9;
-  width: 20vh;
+  width: 15vw;
+  min-width:50px;
 }
 .messages {
   width: 100%;
@@ -109,7 +111,7 @@
 .input {
   height: 6vh;
   width: 95%;
-  margin-left:2px;
+  margin-left: 2px;
   box-sizing: border-box;
   border-radius: 15px;
   outline: none;

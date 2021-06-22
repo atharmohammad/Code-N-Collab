@@ -1,7 +1,8 @@
 @keyframes spinner {
   from {
     transform: rotate(0deg);
-  } to {
+  }
+  to {
     transform: rotate(360deg);
   }
 }
@@ -14,14 +15,13 @@
   align-items: center;
   background-color: black;
   position: absolute;
-  overflow:hidden;
+  overflow: hidden;
 }
-
 
 .spinneer {
   min-width: 100px;
   min-height: 100px;
-  border: 20px solid rgba(255,255,255,.1);
+  border: 20px solid rgba(255, 255, 255, 0.1);
   border-right: 20px solid orange;
   border-radius: 50%;
   animation: spinner 1s linear infinite;

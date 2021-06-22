@@ -4,6 +4,10 @@
   border-bottom: 1px solid gray;
   padding: 2px;
   cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
 }
 
 .cover:hover {
@@ -20,4 +24,13 @@
 
 .textCover {
   margin: 1vh 0 0 3vh;
+  width: 73%;
+}
+
+.date {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
+  width: 20%;
+  font-style: italic;
 }

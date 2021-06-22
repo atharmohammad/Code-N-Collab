@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import FilterContest from "./FilterContest/FilterContest";
-import LockoutPanel from "../Lockout/LockoutPanel/lockoutPanel";
-import * as TYPES from "../../store/Action/action";
+import { useEffect } from "react";
 import { connect } from "react-redux";
+
+import * as TYPES from "../../store/Action/action";
+import FilterContest from "./FilterContest/FilterContest";
 import Spinner from "../Spinner/ContestSpinner/ContestSpinner";
+import LockoutPanel from "../Lockout/LockoutPanel/lockoutPanel";
 
 function Contest(props) {
   const socket = props.socket;
