@@ -20,10 +20,10 @@ export default function BlogHead(props) {
       direction="row"
       style={{
         minHeight: "3vw",
-        marginTop: "-20px",
         backgroundColor: "black",
-        width: "95vw",
+        width: "100%",
         textAlign: "center",
+        paddingBottom:'3%',
       }}
     >
       <div>
@@ -40,8 +40,8 @@ export default function BlogHead(props) {
           <img
             src={CodeNCollab}
             style={{
-              height: "10vw",
-              width: "30vw",
+              height: "8vw",
+              width: "35vw",
               minWidth: "120px",
               minHeight: "40px",
             }}
@@ -55,7 +55,7 @@ export default function BlogHead(props) {
         <img
           src={Collaboration}
           alt="Collaboration"
-          style={{ width: "35%", height: "15vw", justifySelf: "flex-end" }}
+          style={{ width: "26%", height: "13vw",marginRight:'3vw'}}
         />
       </Grid>
     </Grid>

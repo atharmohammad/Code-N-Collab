@@ -44,7 +44,7 @@
 
 .blogHead_interaction_text {
   color: #fff;
-  margin-top: 5vw;
+  padding-top: 3vh;
   width: 60%;
   font-weight: bold;
 }
@@ -71,7 +71,7 @@
 .helperGrid_comment{
   display: flex;
   justify-content: flex-end;
-  
+
 }
 
 .helperGrid_reply{
