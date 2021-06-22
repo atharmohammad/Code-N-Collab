@@ -9,9 +9,10 @@ import {
   Paper,
   Button,
 } from "@material-ui/core";
-import Spinner from "../../Spinner/UpdateSpinner/UpdateSpinner";
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
+
+import Spinner from "../../Spinner/UpdateSpinner/UpdateSpinner";
 
 const DenseTable = (props) => {
   const location = useLocation();

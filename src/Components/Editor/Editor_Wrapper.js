@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Convergence } from "@convergence/convergence";
-import Editor from "./Editor";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 import Spinner from "../Spinner/EditorSpinner/EditorSpinner";
+import Editor from "./Editor";
 
 //Wrapper for connecting editor to convergence
 
@@ -12,7 +13,6 @@ const Wrapper = (props) => {
   const [domain, setDomain] = useState(null);
 
   useEffect(() => {
-    const currentPath = location.pathname;
     const searchParams = new URLSearchParams(location.search);
 
     Convergence.connectAnonymously(

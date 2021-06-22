@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
+
 import { AuthContext } from "./context/auth-context";
 import CustomRoutes from "./CustomRoutes/CustomRoutes";
 import "./App.css";

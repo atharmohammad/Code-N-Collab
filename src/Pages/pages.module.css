@@ -1,0 +1,118 @@
+.paper_about {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  padding: 4vw;
+  padding-top: 20px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  background: #fff;
+  margin: 20px;
+}
+
+.contain {
+  border: 10px double white;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+.About {
+  color: black;
+  font-size: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 50%;
+  font-family: edgwick Ave Display, cursive;
+  margin-top: 20px;
+}
+
+.AdminContainer {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.admin_div {
+  background: #fff;
+  width: 50%;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  margin: 5px;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 600px) {
+  .AdminContainer {
+    flex-direction: column-reverse;
+  }
+  .admin_div {
+    width: 100%;
+    margin: auto;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  .contain {
+    border: 5px solid white;
+  }
+}
+
+/* This is for updateUser */
+.upperMain {
+  display: flex;
+  justify-content: space-between;
+}
+.updateImg {
+  align-self: center;
+  height: 7vw;
+  width: 20vw;
+  min-width: 45%;
+}
+
+.upperUpdateBtn {
+  height: 30px;
+  width: 70px;
+  font-size: 20px;
+  padding: 5px 10px 5px 10px;
+  background: #336abc;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.lowerUpdateNBtn {
+  display: none;
+  height: 30px;
+  width: 70px;
+  margin: auto;
+  font-size: 20px;
+  padding: 5px 10px 5px 10px;
+  background: #336abc;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.updateDivContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+  .upperMain {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .upperUpdateBtn {
+    display: none;
+  }
+  .lowerUpdateNBtn {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .updateDivContainer {
+    flex-direction: column;
+  }
+}

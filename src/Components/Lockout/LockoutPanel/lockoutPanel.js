@@ -5,8 +5,6 @@ import LeaderBoard from "./LeaderBoard";
 import Countdown from '../../Coundown/Coundown'
 import { connect } from "react-redux";
 
-
-
 const LockoutPanel = (props) => {
   const socket = props.socket;
   return (

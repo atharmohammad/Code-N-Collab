@@ -1,11 +1,10 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+import { Grid, Box } from "@material-ui/core";
+
 import Title from "../Assets/images/Title.png";
 import GetStartedImg from "../Assets/images/GetStarted.png";
-import { useHistory } from "react-router-dom";
-import Stars from "../Components/Stars/Stars"
-import { Grid, Box } from "@material-ui/core";
-import classes from "../Assets/css/wrapstyle.module.css";
-
+import Stars from "../Components/Stars/Stars";
 
 function GetStarted() {
   const history = useHistory();
@@ -15,33 +14,46 @@ function GetStarted() {
   };
 
   return (
-    <div style={{height:"100vh",
-        overflow:"hidden",
-        background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)"}}>
-      <Stars color="#fff"/>
+    <div
+      style={{
+        height: "100vh",
+        boxSizing: "border-box",
+        background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
+      }}
+    >
+      <Stars color="#fff" />
       <Grid
         container
         direction="column"
-        justify="center"
         alignItems="center"
-        style={{ minHeight: "100vh" }}
+        style={{ marginTop: "30vh" }}
       >
-        <img src={Title} alt="Code-N-Collab" />
+        <img
+          src={Title}
+          style={{ width: "50%", minWidth: "300px" }}
+          alt="Code-N-Collab"
+        />
 
         <Box
           style={{
-            minHeight: "6vh",
-            width: "25vh",
+            width: "15%",
             color: "#fff",
             margin: "10vh auto",
             border: "2px solid #fff",
             textAlign: "center",
-            paddingTop: "2vh",
             cursor: "pointer",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "20px",
           }}
           onClick={homeHandler}
         >
-          <img src={GetStartedImg} alt="GetStarted" />
+          <img
+            src={GetStartedImg}
+            style={{ width: "45%", alignSelf: "center", minWidth: "70px" }}
+            alt="GetStarted"
+          />
         </Box>
       </Grid>
     </div>

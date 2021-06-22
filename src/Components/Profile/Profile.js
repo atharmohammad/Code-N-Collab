@@ -1,22 +1,21 @@
-import { useEffect, useState, useContext } from "react";
-import { Grid, Tooltip, IconButton } from "@material-ui/core";
+import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import MuiAlert from "@material-ui/lab/Alert";
-import Snackbar from "@material-ui/core/Snackbar";
-
-import { AuthContext } from "../../context/auth-context";
-
-import SelectAvatar from "../SelectAvatars/SelectAvatars";
-import ProfileFeild from "./ProfileFeild";
-import ProfileTitle from "../../Assets/images/Profile.png";
-
 import EditIcon from "@material-ui/icons/Edit";
+import MuiAlert from "@material-ui/lab/Alert";
 import ShareIcon from "@material-ui/icons/Share";
-import CodeforcesIcon from "../../Assets/images/Codeforces.png";
-import LinkedInIcon from "../../Assets/images/Linkedin.png";
+import Snackbar from "@material-ui/core/Snackbar";
+import { Tooltip, IconButton } from "@material-ui/core";
+
+import ProfileFeild from "./ProfileFeild";
+import classes from "./profile.module.css";
+import { AuthContext } from "../../context/auth-context";
+import SelectAvatar from "../SelectAvatars/SelectAvatars";
 import GithubIcon from "../../Assets/images/Github.png";
+import ProfileTitle from "../../Assets/images/Profile.png";
+import LinkedInIcon from "../../Assets/images/Linkedin.png";
 import CodechefIcon from "../../Assets/images/codechef.png";
 import AtcoderIcon from "../../Assets/images/atcoder.png";
+import CodeforcesIcon from "../../Assets/images/Codeforces.png";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -31,12 +30,7 @@ const Profile = (props) => {
   return (
     <>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginLeft: "15%",
-          boxSizing: "border-box",
-        }}
+      className = {classes.img_div}
       >
         <img
           src={ProfileTitle}
@@ -44,31 +38,12 @@ const Profile = (props) => {
           alt="code-n-collab"
         />
       </div>
-      <div
-        style={{
-          width: "80%",
-          margin: "auto",
-          marginTop: "35px",
-          padding: "30px",
-          boxSizing: "border-box",
-          fontSize: "25px",
-          border: "10px double #fff",
-          borderRadius: "20px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "5px 40px 5px 40px",
-            background: "#fff",
-            boxSizing: "border-box",
-            borderRadius: "20px",
-          }}
-        >
+      <div className={classes.outerBox}>
+        <div className={classes.innerBox}>
           <div
             style={{
               display: "flex",
+              flexWrap:'wrap',
               borderBottom: "2px solid grey",
               width: "100%",
               justifyContent: "space-between",
@@ -111,7 +86,7 @@ const Profile = (props) => {
                 title="share"
                 onClick={() => {
                   navigator.clipboard.writeText(window.location.href);
-                  return setMsg('copied to clipboard');
+                  return setMsg("copied to clipboard");
                 }}
               >
                 <IconButton>
@@ -255,9 +230,9 @@ const Profile = (props) => {
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         open={msg}
         autoHideDuration={3000}
-        onClose={()=>setMsg(null)}
+        onClose={() => setMsg(null)}
       >
-        <Alert onClose={()=>setMsg(null)} severity="success">
+        <Alert onClose={() => setMsg(null)} severity="success">
           {msg}
         </Alert>
       </Snackbar>

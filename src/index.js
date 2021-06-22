@@ -1,19 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
-
-import toolsReducer from "./store/Reducer/tools";
-import contestReducer from "./store/Reducer/contest"
-
-import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+
+import App from "./App";
+import toolsReducer from "./store/Reducer/tools";
+import contestReducer from "./store/Reducer/contest";
+import reportWebVitals from "./reportWebVitals";
+
+import "./index.css";
 
 const rootReducer = combineReducers({
   tools: toolsReducer,
-  contest:contestReducer
+  contest: contestReducer,
 });
 
 const composeEnhancers =

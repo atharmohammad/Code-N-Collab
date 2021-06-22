@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Grid } from "@material-ui/core";
+
 import LanguagePicker from "./BarItem/LanguagePicker";
 import ThemePicker from "./BarItem/ThemePicker";
 import Leave from "./BarItem/Leave";
@@ -7,14 +9,9 @@ import GraphButton from "./BarItem/GraphButton";
 import FontSize from "./BarItem/FontSize";
 import RoomTitle from "../../Assets/images/roomTitle.png";
 import classes from "./Toolbar.module.css";
-import { useLocation } from "react-router-dom";
-
-import { Grid } from "@material-ui/core";
 
 export default function Toolbar(props) {
   const socket = props.socket;
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
 
   return (
     <Grid className={classes.main}>

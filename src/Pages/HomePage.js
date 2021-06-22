@@ -1,15 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
-import HomePageImg from "../Assets/images/HomePageImg.png";
-import Snackbar from "@material-ui/core/Snackbar";
-
-import { useHistory, useLocation } from "react-router-dom";
-import classes from "../Assets/css/wrapstyle.module.css";
-import Button from "../Components/HomePageButtons/Buttons";
-import MuiAlert from "@material-ui/lab/Alert";
-
-import { Grid } from "@material-ui/core";
-import Stars from "../Components/Stars/Stars";
 import { v1 as uuidv1 } from "uuid";
+import MuiAlert from "@material-ui/lab/Alert";
+import { Grid, Snackbar } from "@material-ui/core";
+import { useHistory, useLocation } from "react-router-dom";
+
+import HomePageImg from "../Assets/images/HomePageImg.png";
+import Button from "../Components/HomePageButtons/Buttons";
+import Stars from "../Components/Stars/Stars";
 import Nav from "../Components/Nav/Nav";
 import Back from "../Components/Back/Back";
 import axios from "../Axios/axios";
@@ -70,7 +67,7 @@ function HomePage() {
     if (auth.token) {
       return history.push("/me");
     }
-   setError('Login Required !');
+    setError("Login Required !");
   };
 
   const contestHandler = () => {
@@ -81,35 +78,46 @@ function HomePage() {
         search: "?room=" + room,
       });
     }
-    setError('Login Required !');
+    setError("Login Required !");
   };
 
   return (
     <>
       <div
         style={{
-          height: "100vh",
+          minHeight: "100vh",
           background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
         }}
       >
         <Stars color="#fff" />
-        <Back clicked={homePageHandler} />
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Back clicked={homePageHandler} />
+          <Nav />
+        </div>
         {startSpinner ? (
           <Spinner />
         ) : (
           <>
-            <Nav />
             <Grid
               container
               direction="column"
               justify="center"
               alignItems="center"
-              style={{ minHeight: "80vh" }}
+              style={{
+                minHeight: "80vh",
+                marginBottom: "5vh",
+                boxSizing: "border-box",
+              }}
             >
               <img
                 src={HomePageImg}
                 alt="Code-N-Collab"
-                style={{ marginBottom: "5vh" }}
+                style={{
+                  marginBottom: "5vh",
+                  width: "45vw",
+                  maxWidth: "500px",
+                  minWidth: "300px",
+                }}
               />
               <Button name="Code - Editor" clicked={roomHandler} />
               <Button name="LockOut - Championship" clicked={contestHandler} />
