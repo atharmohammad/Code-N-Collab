@@ -30,13 +30,13 @@ function GetStarted() {
       >
         <img
           src={Title}
-          style={{ width: "50%", minWidth: "300px" }}
+          style={{ width: "40%", minWidth: "300px" }}
           alt="Code-N-Collab"
         />
 
         <Box
           style={{
-            width: "15%",
+            width: "10%",
             color: "#fff",
             margin: "10vh auto",
             border: "2px solid #fff",
@@ -51,7 +51,7 @@ function GetStarted() {
         >
           <img
             src={GetStartedImg}
-            style={{ width: "45%", alignSelf: "center", minWidth: "70px" }}
+            style={{ width: "55%", alignSelf: "center", minWidth: "60px" }}
             alt="GetStarted"
           />
         </Box>
