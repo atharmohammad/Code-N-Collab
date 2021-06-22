@@ -19,11 +19,11 @@ export default function BlogHead(props) {
       justify="space-between"
       direction="row"
       style={{
-        minHeight: "3vw",
+        minHeight: "7vh",
         backgroundColor: "black",
         width: "100%",
         textAlign: "center",
-        paddingBottom:'3%',
+        paddingBottom: "3%",
       }}
     >
       <div>
@@ -42,7 +42,7 @@ export default function BlogHead(props) {
             style={{
               height: "8vw",
               width: "35vw",
-              minWidth: "120px",
+              minWidth: "170px",
               minHeight: "40px",
             }}
             alt="CodeNCollab"
@@ -55,7 +55,7 @@ export default function BlogHead(props) {
         <img
           src={Collaboration}
           alt="Collaboration"
-          style={{ width: "26%", height: "13vw",marginRight:'3vw'}}
+          style={{ width: "26%", height: "13vw", marginRight: "3vw" }}
         />
       </Grid>
     </Grid>

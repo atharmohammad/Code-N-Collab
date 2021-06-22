@@ -36,10 +36,10 @@ export default function About(props) {
             <img
               src={Title}
               style={{
-                height: "35%",
+                height: "40%",
                 width: "50%",
-                minWidth: "175px",
-                margin: "auto",
+                minWidth: "205px",
+                alignSelf: "center",
               }}
               alt="Code-N-Collab"
             />

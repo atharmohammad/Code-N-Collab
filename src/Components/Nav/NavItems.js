@@ -3,7 +3,11 @@ import Gmail from "../../Assets/images/Gmail.png";
 
 export default function NavItem(props) {
   return (
-    <div className="wrapperss" onClick={props.clicked}>
+    <div
+      className="wrapperss"
+      onClick={props.clicked}
+      style={{ marginRight: "1%" }}
+    >
       <div style={{ display: "flex" }}>
         {props.Name === "login" ? (
           <img

@@ -85,7 +85,7 @@ function HomePage() {
     <>
       <div
         style={{
-          height: "100vh",
+          minHeight: "100vh",
           background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
         }}
       >
@@ -112,7 +112,12 @@ function HomePage() {
               <img
                 src={HomePageImg}
                 alt="Code-N-Collab"
-                style={{ marginBottom: "5vh", width: "45vw",maxWidth:'400px',minWidth:'150px' }}
+                style={{
+                  marginBottom: "5vh",
+                  width: "45vw",
+                  maxWidth: "500px",
+                  minWidth: "300px",
+                }}
               />
               <Button name="Code - Editor" clicked={roomHandler} />
               <Button name="LockOut - Championship" clicked={contestHandler} />

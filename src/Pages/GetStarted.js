@@ -26,24 +26,34 @@ function GetStarted() {
         container
         direction="column"
         alignItems="center"
-        style={{ marginTop: "35vh" }}
+        style={{ marginTop: "30vh" }}
       >
-        <img src={Title} style={{ width: "40vw",minWidth:'200px' }} alt="Code-N-Collab" />
+        <img
+          src={Title}
+          style={{ width: "50%", minWidth: "300px" }}
+          alt="Code-N-Collab"
+        />
 
         <Box
           style={{
-            minHeight: "50px",
-            width: "25vh",
+            width: "15%",
             color: "#fff",
             margin: "10vh auto",
             border: "2px solid #fff",
             textAlign: "center",
-            paddingTop: "5px",
             cursor: "pointer",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "20px",
           }}
           onClick={homeHandler}
         >
-          <img src={GetStartedImg} style={{ width: "55%" }} alt="GetStarted" />
+          <img
+            src={GetStartedImg}
+            style={{ width: "45%", alignSelf: "center", minWidth: "70px" }}
+            alt="GetStarted"
+          />
         </Box>
       </Grid>
     </div>
