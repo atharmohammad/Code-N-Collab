@@ -105,7 +105,6 @@ function HomePage() {
               alignItems="center"
               style={{
                 minHeight: "80vh",
-                marginBottom: "5vh",
                 boxSizing: "border-box",
               }}
             >
