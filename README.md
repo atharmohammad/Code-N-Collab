@@ -45,7 +45,7 @@
         <img src="Images/homepage.PNG"/>
      </td>
      <td >
-       <img src="Images/pofile.PNG"/>
+       <img src="Images/profile.PNG"/>
      </td>
    </tr>
    <tr>
