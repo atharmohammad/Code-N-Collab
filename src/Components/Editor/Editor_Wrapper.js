@@ -1,48 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { Convergence } from "@convergence/convergence";
-import { useLocation } from "react-router-dom";
-
+import Editor from "./Editor"
 import Spinner from "../Spinner/EditorSpinner/EditorSpinner";
-import Editor from "./Editor";
-
-//Wrapper for connecting editor to convergence
+import * as Y from "yjs";
+import { WebrtcProvider } from "y-webrtc";
+//Wrapper for connecting editor to Yjs WebrtcProvider
 
 const Wrapper = (props) => {
   const socket = props.socket;
-  const location = useLocation();
-  const [domain, setDomain] = useState(null);
+  let provider = null;
+  const [ydoc,setYdoc] = useState(null);
 
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
+  useEffect(()=>{
+    const newYdoc = new Y.Doc();
+    setYdoc(newYdoc);
 
-    Convergence.connectAnonymously(
-      process.env.REACT_APP_CONVERGENCE_URL,
-      searchParams.get("name").trim()
-    )
-      .then((dom) => {
-        setDomain(dom);
-      })
-      .catch((e) => console.log(e));
-  }, []);
+    try {
+      provider = new WebrtcProvider("asddasdfadgadsvadfas", ydoc, {
+        signaling: [
+          "wss://signaling.yjs.dev",
+          "wss://y-webrtc-signaling-eu.herokuapp.com",
+          "wss://y-webrtc-signaling-us.herokuapp.com",
+        ],
+      });
+    } catch (err) {
+      console.log("error in collaborating try again")
+    }
+  },[])
 
   useEffect(() => {
     return () => {
-      if (domain) {
-        domain.dispose();
+      if (provider) {
+        provider.disconnect()
       }
     };
-  }, [domain]);
+  }, [provider]);
 
   return (
     <>
-      {domain ? (
-        <Editor socket={socket} domain={domain} />
-      ) : (
-        <div style={{ background: "black", height: "100%", width: "100%" }}>
-          <Spinner />
-        </div>
-      )}
-    </>
+        <Editor socket={socket} provider={provider} ydoc={ydoc}/>
+   </>
   );
 };
 

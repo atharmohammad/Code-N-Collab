@@ -6,7 +6,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
 import Chat from "../Components/Chat/ChatTabs";
-import Editor from "../Components/Editor/Editor_Wrapper";
+import Editor from "../Components/Editor/Editor";
 import IO from "../Components/IO/IO";
 import Problem from "../Components/Problem/Problem";
 import Toolbar from "../Components/Toolbar/Toolbar";

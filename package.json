@@ -15,9 +15,13 @@
     "@testing-library/user-event": "^12.8.3",
     "@uiw/react-md-editor": "*",
     "axios": "^0.21.1",
+    "codemirror": "^5.62.0",
     "copy-to-clipboard": "^3.3.1",
     "dotenv": "^8.2.0",
+    "invert-color": "^2.0.0",
+    "monaco-editor": "^0.21.3",
     "react": "^17.0.1",
+    "react-codemirror2": "^7.2.1",
     "react-dom": "^17.0.1",
     "react-emoji": "^0.5.0",
     "react-graph-vis": "^1.0.7",
@@ -32,7 +36,9 @@
     "socket.io-client": "^4.0.1",
     "use-sound": "^2.0.1",
     "uuid": "^8.3.2",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^1.1.1",
+    "y-webrtc": "^10.2.0",
+    "yjs": "^13.5.10"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,105 +1,93 @@
-import React, { useEffect, useRef, useState } from "react";
-import "@convergencelabs/monaco-collab-ext/css/monaco-collab-ext.min.css";
+import React, { useEffect, useContext, useRef, useState } from "react";
+import { CodeMirrorBinding } from "./EditorAdaptor";
+import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
+import * as Y from "yjs";
+import { WebrtcProvider } from "y-webrtc";
 import { useLocation } from "react-router-dom";
-import Editor from "@monaco-editor/react";
-import { connect } from "react-redux";
-
 import Modal from "../Modal/Modal";
 import Graph from "../Graph/Graph";
-import blackBoardJSON from "../manaco-Themes/blackBoard";
-import cobaltJSON from "../manaco-Themes/cobalt";
-import merbivoreJSON from "../manaco-Themes/merbivore";
-import githubJSON from "../manaco-Themes/github";
-import MonacoConvergenceAdapter from "./EditorAdaptor";
-import {
-  SET_LOADING,
-  SET_OUTPUT,
-} from "../../store/Action/action";
+import { connect } from "react-redux";
+import { SET_LOADING, SET_OUTPUT } from "../../store/Action/action";
 
-const MonacoEditor = (props) => {
-  const socket = props.socket;
-  const [code, setCode] = useState("");
+import "./EditorAddons";
+
+function Editor(props) {
   const location = useLocation();
-  const domain = props.domain;
-  const MonacoEditorRef = useRef();
-
-  const handleEditorWillMount = (monaco) => {
-    // here is the monaco instance
-    // do something before editor is mounted
-    monaco.editor.defineTheme("blackBoard", blackBoardJSON);
-    monaco.editor.defineTheme("cobalt", cobaltJSON);
-    monaco.editor.defineTheme("merbivore", merbivoreJSON);
-    monaco.editor.defineTheme("github", githubJSON);
-  };
+  const [EditorRef, setEditorRef] = useState(null);
 
   const handleEditorDidMount = (editor) => {
-    MonacoEditorRef.current = editor;
+    setEditorRef(editor);
   };
 
-  //compiling the code
-  useEffect(async () => {
-    if (props.tools.nowCompile === true && props.tools.isLoading === false) {
-      props.setOutput("");
-      props.setLoading();
-      socket.emit("Compile_ON", {
-        language: props.tools.language,
-        code,
-        input: props.tools.input,
-        reason:"code-editor"
-      });
-    }
-  }, [props.tools.nowCompile]);
-
-  //socket and convergence
-  useEffect(async () => {
-    socket.on("Compile_ON", () => {
-      props.setLoading();
-    });
-
-    let modelService;
+  useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
 
-    try {
-      modelService = domain.models();
+    if (EditorRef) {
+      const ydoc = new Y.Doc();
 
-      const model = await modelService.openAutoCreate({
-        collection: "Code-n-Collab`",
-        id: searchParams.get("room").trim(),
-        ephemeral: true, //Deletes model when everyone left
-        data: { text: code },
+      let provider;
+      try {
+        provider = new WebrtcProvider(searchParams.get("room").trim(), ydoc, {
+          signaling: [
+            "wss://signaling.yjs.dev",
+            "wss://y-webrtc-signaling-eu.herokuapp.com",
+            "wss://y-webrtc-signaling-us.herokuapp.com",
+          ],
+        });
+      } catch (err) {
+        console.log("error in collaborating try again");
+      }
+
+      const yText = ydoc.getText("codemirror");
+      const yUndoManager = new Y.UndoManager(yText);
+
+      const awareness = provider?.awareness;
+      const val = "#4287f5";
+      awareness?.setLocalStateField("user", {
+        name: searchParams.get("name").trim(),
+        color: val, // should be a hex color: ;
+      });
+      const getBinding = new CodeMirrorBinding(yText, EditorRef, awareness, {
+        yUndoManager,
       });
 
-      const adapter = new MonacoConvergenceAdapter(
-        MonacoEditorRef.current,
-        model.elementAt("text")
-      );
-
-      adapter.bind();
-    } catch (error) {
-      console.error("Could not open model ", error);
+      return () => {
+        if (provider) {
+          provider.disconnect();
+        }
+      };
     }
-  }, []);
+  }, [EditorRef]);
 
   return (
     <>
-      <Editor
-        ref={MonacoEditorRef}
-        beforeMount={handleEditorWillMount}
-        onMount={(editor) => handleEditorDidMount(editor)}
-        theme={props.tools.theme}
-        language={props.tools.language}
-        onChange={(value) => setCode(value || "")}
+      <CodeMirrorEditor
+        autoScroll
         options={{
-          wordWrap: "on",
-          autoIndent: "advanced",
-          fontSize: props.tools.fontSize,
+          mode: "C++",
+          lineWrapping: true,
+          smartIndent: true,
+          lineNumbers: true,
+          foldGutter: true,
+          tabSize: 2,
+          gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+          autoCloseTags: true,
+          matchBrackets: true,
+          autoCloseBrackets: true,
+          extraKeys: {
+            "Ctrl-Space": "autocomplete",
+          },
+        }}
+        editorDidMount={(editor) => {
+          handleEditorDidMount(editor);
+          editor.setSize("100%", "100%");
         }}
       />
       {props.tools.isLoading === true ? <Modal /> : null}
       {props.tools.showGraph === true ? <Graph /> : null}
     </>
   );
-};
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -114,4 +102,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MonacoEditor);
+export default connect(mapStateToProps, mapDispatchToProps)(Editor);
