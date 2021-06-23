@@ -32,8 +32,11 @@ const ThemePicker = (props) => {
             <em>monokai</em>
           </MenuItem>
           
-          <MenuItem value="light">light</MenuItem>
+          <MenuItem value="eclipse">eclipse</MenuItem>
+          <MenuItem value="material-darker">material-darker</MenuItem>
           <MenuItem value="dracula">dracula</MenuItem>
+          <MenuItem value="ambiance">ambiance</MenuItem>
+          <MenuItem value="mdn-like">mdn-like</MenuItem>
           <MenuItem value="material-palenight">material-palenight</MenuItem>
         </Select>
       </FormControl>
