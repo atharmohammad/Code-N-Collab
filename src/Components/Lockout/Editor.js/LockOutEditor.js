@@ -1,36 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { connect } from "react-redux";
+import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
 
-import {
-  SET_LOADING,
-  SET_OUTPUT,
-} from "../../../store/Action/action";
+import { SET_LOADING, SET_OUTPUT } from "../../../store/Action/action";
 import Modal from "../../Modal/Modal";
 import Graph from "../../Graph/Graph";
-import githubJSON from "../../manaco-Themes/github";
-import cobaltJSON from "../../manaco-Themes/cobalt";
-import merbivoreJSON from "../../manaco-Themes/merbivore";
-import blackBoardJSON from "../../manaco-Themes/blackBoard";
-import ContestEndedModal from "../../Modal/ContestEndedModal";
+import languageMapper from "../../../Function/languageMapper";
+import "../../Editor/EditorAddons";
+import ContestEndedModal from '../../Modal/ContestEndedModal'
 
 const MonacoEditor = (props) => {
   const socket = props.socket;
   const [code, setCode] = useState("");
-  const MonacoEditorRef = useRef();
-
-  const handleEditorWillMount = (monaco) => {
-    // here is the monaco instance
-    // do something before editor is mounted
-    monaco.editor.defineTheme("blackBoard", blackBoardJSON);
-    monaco.editor.defineTheme("cobalt", cobaltJSON);
-    monaco.editor.defineTheme("merbivore", merbivoreJSON);
-    monaco.editor.defineTheme("github", githubJSON);
-  };
-
-  const handleEditorDidMount = (editor) => {
-    MonacoEditorRef.current = editor;
-  };
 
   //compiling the code
 
@@ -42,31 +24,52 @@ const MonacoEditor = (props) => {
         language: props.tools.language,
         code,
         input: props.tools.input,
-        reason:"lockout"
+        reason: "lockout",
       });
     }
   }, [props.tools.nowCompile]);
 
-
   return (
-    <>
-      <Editor
-        ref={MonacoEditorRef}
-        beforeMount={handleEditorWillMount}
-        onMount={(editor) => handleEditorDidMount(editor)}
-        theme={props.tools.theme}
-        language={props.tools.language}
-        onChange={(value) => setCode(value || "")}
+    <div
+      style={{
+        display: "flex",
+        height: "100%",
+        width: "100%",
+        fontSize: `${1.5 * props.tools.fontSize}px`,
+        overflow: "auto",
+      }}
+    >
+      <CodeMirrorEditor
+        onChange={(editor, data, value) => {
+          setCode(value);
+        }}
+        autoScroll
         options={{
-          wordWrap: "on",
-          autoIndent: "advanced",
-          fontSize: props.tools.fontSize,
+          mode: languageMapper(props.tools.language),
+          theme: props.tools.theme,
+          lineWrapping: true,
+          smartIndent: true,
+          lineNumbers: true,
+          foldGutter: true,
+          tabSize: 2,
+          gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+          autoCloseTags: true,
+          matchBrackets: true,
+          autoCloseBrackets: true,
+          extraKeys: {
+            "Ctrl-Space": "autocomplete",
+          },
+        }}
+        editorDidMount={(editor) => {
+          editor.setSize("100vw", "100%");
         }}
       />
       {props.tools.isLoading === true ? <Modal /> : null}
       {props.tools.showGraph === true ? <Graph /> : null}
-      {props.contest.showContestEndedModal == true? <ContestEndedModal/> : null}
-    </>
+      {props.contest.showContestEndedModal == true ? (
+        <ContestEndedModal />
+      ) : null}
+    </div>
   );
 };
 
