@@ -78,7 +78,6 @@ function Editor(props) {
   return (
     <>
       <CodeMirrorEditor
-        value={code}
         onChange={(editor, data, value) => {
           setCode(value);
         }}
