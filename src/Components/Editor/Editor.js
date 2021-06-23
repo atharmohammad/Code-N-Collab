@@ -8,6 +8,8 @@ import Modal from "../Modal/Modal";
 import Graph from "../Graph/Graph";
 import { connect } from "react-redux";
 import { SET_LOADING, SET_OUTPUT } from "../../store/Action/action";
+import languageMapper from '../../Function/languageMapper'
+
 import RandomColor from "randomcolor";
 import "./EditorAddons";
 
@@ -84,7 +86,7 @@ function Editor(props) {
         }}
         autoScroll
         options={{
-          mode: "C++",
+          mode: languageMapper(props.tools.language),
           theme: props.tools.theme,
           lineWrapping: true,
           smartIndent: true,
