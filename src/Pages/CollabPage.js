@@ -40,7 +40,14 @@ const CollabPage = (props) => {
           error: "Username or RoomName can't be empty",
         };
       }
-
+      try{
+      if(!searchParams.get("room").toLowerCase().endsWith("collab")){
+        err = {
+          error: "Invalid room",
+        };
+      }
+    }catch(e){}
+    
       return history.push({
         pathname: "/rooms",
         search:

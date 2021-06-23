@@ -35,7 +35,7 @@ const MonacoEditor = (props) => {
         display: "flex",
         height: "100%",
         width: "100%",
-        fontSize: `${1.5 * props.tools.fontSize}px`,
+        fontSize: `${props.tools.fontSize}px`,
         overflow: "auto",
       }}
     >
