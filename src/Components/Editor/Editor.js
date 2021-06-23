@@ -14,10 +14,26 @@ import "./EditorAddons";
 function Editor(props) {
   const location = useLocation();
   const [EditorRef, setEditorRef] = useState(null);
+  const [code,setCode] = useState("");
+
+  const socket = props.socket;
 
   const handleEditorDidMount = (editor) => {
     setEditorRef(editor);
   };
+
+  useEffect(async () => {
+  if (props.tools.nowCompile === true && props.tools.isLoading === false) {
+      props.setOutput("");
+      props.setLoading();
+      socket.emit("Compile_ON", {
+        language: props.tools.language,
+        code,
+        input: props.tools.input,
+        reason:"code-editor"
+      });
+    }
+  }, [props.tools.nowCompile]);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -62,6 +78,10 @@ function Editor(props) {
   return (
     <>
       <CodeMirrorEditor
+        value={code}
+        onChange={(editor, data, value) => {
+          setCode(value)
+        }}
         autoScroll
         options={{
           mode: "C++",
