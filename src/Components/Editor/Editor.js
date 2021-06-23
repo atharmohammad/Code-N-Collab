@@ -8,7 +8,7 @@ import Modal from "../Modal/Modal";
 import Graph from "../Graph/Graph";
 import { connect } from "react-redux";
 import { SET_LOADING, SET_OUTPUT } from "../../store/Action/action";
-import languageMapper from '../../Function/languageMapper'
+import languageMapper from "../../Function/languageMapper";
 
 import RandomColor from "randomcolor";
 import "./EditorAddons";
@@ -78,8 +78,15 @@ function Editor(props) {
   }, [EditorRef]);
 
   return (
-    <>
-    <div style={{height:'100%',width:'100%' ,fontSize :`${1.5*props.tools.fontSize}px`,overflowY: 'auto'}}>
+    <div
+      style={{
+        display: "flex",
+        height: "100%",
+        width: "100%",
+        fontSize: `${1.5 * props.tools.fontSize}px`,
+        overflowY: "auto",
+      }}
+    >
       <CodeMirrorEditor
         onChange={(editor, data, value) => {
           setCode(value);
@@ -103,12 +110,12 @@ function Editor(props) {
         }}
         editorDidMount={(editor) => {
           handleEditorDidMount(editor);
+          editor.setSize("100vw", "100%");
         }}
       />
-      </div>
       {props.tools.isLoading === true ? <Modal /> : null}
       {props.tools.showGraph === true ? <Graph /> : null}
-    </>
+    </div>
   );
 }
 
