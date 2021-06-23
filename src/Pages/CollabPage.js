@@ -102,7 +102,7 @@ const CollabPage = (props) => {
               <ReflexElement
                 minSize="100"
                 maxSize="1600"
-                style={{ overflow: "hidden" }}
+                style={{display:'flex',}}
               >
                 <Editor socket={socket} />
               </ReflexElement>
