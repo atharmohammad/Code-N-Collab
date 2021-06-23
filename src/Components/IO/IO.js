@@ -80,6 +80,12 @@ const Io = (props) => {
   };
 
   useEffect(() => {
+    props.setInput(null);
+    props.setOutput(null);
+    props.resetLoading();
+  }, []);
+
+  useEffect(() => {
     if (location.pathname === "/newContest") {
       setReason("lockout");
     } else {

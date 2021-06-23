@@ -34,7 +34,7 @@ function Rooms(props) {
     if (
       searchParams.has("room") &&
       searchParams.get("room") &&
-      !searchParams.get("room").toLowerCase().endsWith("collab")
+      searchParams.get("room").toLowerCase().endsWith("collab")
     ) {
       setRoom(searchParams.get("room").trim());
     } else {
