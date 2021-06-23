@@ -2,7 +2,7 @@ import * as TYPE from "../Action/action";
 
 const initialState = {
   language: "cpp",
-  theme: "vs-dark",
+  theme: "monokai",
   nowCompile: false,
   isLoading: false,
   fontSize: 20,

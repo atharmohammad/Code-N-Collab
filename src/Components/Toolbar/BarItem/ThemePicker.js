@@ -28,14 +28,13 @@ const ThemePicker = (props) => {
           className={`${classes.selectEmpty} ${classes.navSelect}`}
           value={props.theme}
         >
-          <MenuItem value="vs-dark" selected>
-            <em>vs-dark</em>
+          <MenuItem value="monokai" selected>
+            <em>monokai</em>
           </MenuItem>
+          
           <MenuItem value="light">light</MenuItem>
-          <MenuItem value="blackBoard">blackBoard</MenuItem>
-          <MenuItem value="cobalt">cobalt</MenuItem>
-          <MenuItem value="merbivore">merbivore</MenuItem>
-          <MenuItem value="github">github</MenuItem>
+          <MenuItem value="dracula">dracula</MenuItem>
+          <MenuItem value="material-palenight">material-palenight</MenuItem>
         </Select>
       </FormControl>
     </Grid>

@@ -77,6 +77,7 @@ function Editor(props) {
 
   return (
     <>
+    <div style={{height:'100%',width:'100%' ,fontSize :`${1.5*props.tools.fontSize}px`,overflowY: 'auto'}}>
       <CodeMirrorEditor
         onChange={(editor, data, value) => {
           setCode(value);
@@ -84,7 +85,7 @@ function Editor(props) {
         autoScroll
         options={{
           mode: "C++",
-          theme: "material",
+          theme: props.tools.theme,
           lineWrapping: true,
           smartIndent: true,
           lineNumbers: true,
@@ -100,9 +101,9 @@ function Editor(props) {
         }}
         editorDidMount={(editor) => {
           handleEditorDidMount(editor);
-          editor.setSize("100%", "100%");
         }}
       />
+      </div>
       {props.tools.isLoading === true ? <Modal /> : null}
       {props.tools.showGraph === true ? <Graph /> : null}
     </>
