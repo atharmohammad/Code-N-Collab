@@ -8,7 +8,7 @@ import Modal from "../Modal/Modal";
 import Graph from "../Graph/Graph";
 import { connect } from "react-redux";
 import { SET_LOADING, SET_OUTPUT } from "../../store/Action/action";
-
+import RandomColor from "randomcolor"
 import "./EditorAddons";
 
 function Editor(props) {
@@ -58,10 +58,10 @@ function Editor(props) {
       const yUndoManager = new Y.UndoManager(yText);
 
       const awareness = provider?.awareness;
-      const val = "#4287f5";
+      const color = RandomColor();
       awareness?.setLocalStateField("user", {
         name: searchParams.get("name").trim(),
-        color: val, // should be a hex color: ;
+        color: color,
       });
       const getBinding = new CodeMirrorBinding(yText, EditorRef, awareness, {
         yUndoManager,
@@ -85,6 +85,7 @@ function Editor(props) {
         autoScroll
         options={{
           mode: "C++",
+          theme: 'material',
           lineWrapping: true,
           smartIndent: true,
           lineNumbers: true,
