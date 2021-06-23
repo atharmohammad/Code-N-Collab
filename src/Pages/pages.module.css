@@ -79,6 +79,7 @@
   background: #336abc;
   color: #fff;
   border-radius: 5px;
+  cursor:pointer;
 }
 
 .lowerUpdateNBtn {
