@@ -31,10 +31,14 @@ function Rooms(props) {
     }
 
     const searchParams = new URLSearchParams(location.search);
-    if (searchParams.has("room") && searchParams.get("room")) {
+    if (
+      searchParams.has("room") &&
+      searchParams.get("room") &&
+      searchParams.get("room").toLowerCase().endsWith("collab")
+    ) {
       setRoom(searchParams.get("room").trim());
     } else {
-      const roomId = uuidv4();
+      const roomId = uuidv4() + "collab";
       setRoom(roomId);
     }
   }, [location]);
@@ -66,19 +70,11 @@ function Rooms(props) {
       <Stars color="#fff" />
       <Back clicked={backHandler} />
       <Grid container direction="column" justify="center" alignItems="center">
-        <img
-          className = {styles.img}
-          src={CreateRoom}
-          alt="create-room"
-        />
+        <img className={styles.img} src={CreateRoom} alt="create-room" />
 
-        <div
-          className = {styles.inputContainer} 
-        >
+        <div className={styles.inputContainer}>
           <div>
-            <InputLabel
-              style={{color:'#fff',fontWeight:'bold'}}
-            >
+            <InputLabel style={{ color: "#fff", fontWeight: "bold" }}>
               Username
             </InputLabel>
             <input
@@ -97,7 +93,7 @@ function Rooms(props) {
           </div>
 
           <div>
-            <InputLabel style={{color:'#fff',fontWeight:'bold'}}>
+            <InputLabel style={{ color: "#fff", fontWeight: "bold" }}>
               Password
             </InputLabel>
             <input
@@ -110,7 +106,7 @@ function Rooms(props) {
           <Button
             variant="contained"
             style={{
-              alignSelf:'center',
+              alignSelf: "center",
               border: "3px solid white",
               borderRadius: "5px",
               background: name && room ? "#7d7574" : "transparent",
@@ -118,7 +114,7 @@ function Rooms(props) {
               marginTop: "2vh",
               padding: "2vh",
               width: "12vw",
-              minWidth:'120px',
+              minWidth: "120px",
             }}
             disabled={name == "" || room == ""}
             onClick={createRoomHandler}

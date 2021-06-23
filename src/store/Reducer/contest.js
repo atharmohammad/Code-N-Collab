@@ -3,15 +3,20 @@ import * as TYPE from "../Action/action";
 const initialState = {
   minRating: 500,
   maxRating: 3000,
+  maxDuration:30,
   contest: null,
   ProblemTags: [],
   questionLoading: false,
   showContestEndedModal: false,
   contestEnded: false,
+
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case TYPE.UPDATE_MAX_DURATION:
+      return { ...state, maxDuration: action.data };
+
     case TYPE.CONTEST_ENDED:
       return { ...state, contestEnded: action.data };
 

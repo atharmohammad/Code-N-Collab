@@ -33,12 +33,28 @@ export default function LockoutWrapper(props) {
       });
     }
 
+    if (!auth.token) {
+      return history.push({
+        pathname: "/homepage",
+        state: { error: "Login required !" },
+      });
+    }
+
     if (auth.user.CodeforcesHandle == null) {
       return history.push({
         pathname: "/homepage",
         state: { error: "codeforces handle required (Update Profile) !" },
       });
     }
+
+    try {
+      if (!searchParams.get("room").toLowerCase().endsWith("contest")) {
+        return history.push({
+          pathname: "/homepage",
+          state: { error: "Invalid room" },
+        });
+      }
+    } catch (e) {}
 
     setValid(true);
   }, []);

@@ -8,6 +8,8 @@ import Modal from "../Modal/Modal";
 import Graph from "../Graph/Graph";
 import { connect } from "react-redux";
 import { SET_LOADING, SET_OUTPUT } from "../../store/Action/action";
+import languageMapper from "../../Function/languageMapper";
+
 import RandomColor from "randomcolor";
 import "./EditorAddons";
 
@@ -76,15 +78,23 @@ function Editor(props) {
   }, [EditorRef]);
 
   return (
-    <div style={{height:'100%',width:'100%',display:'flex'}}>
+    <div
+      style={{
+        display: "flex",
+        height: "100%",
+        width: "100%",
+        fontSize: `${props.tools.fontSize}px`,
+        overflowY: "auto",
+      }}
+    >
       <CodeMirrorEditor
         onChange={(editor, data, value) => {
           setCode(value);
         }}
         autoScroll
         options={{
-          mode: "C++",
-          theme: "monokai",
+          mode: languageMapper(props.tools.language),
+          theme: props.tools.theme,
           lineWrapping: true,
           smartIndent: true,
           lineNumbers: true,

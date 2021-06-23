@@ -2,9 +2,18 @@ import "codemirror/mode/clike/clike";
 import "codemirror/mode/python/python";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/go/go";
+import "codemirror/mode/pascal/pascal";
+import "codemirror/mode/lua/lua";
 import "codemirror/mode/rust/rust";
+import "codemirror/mode/perl/perl";
 import "codemirror/mode/ruby/ruby";
 import "codemirror/mode/php/php";
+import "codemirror/mode/r/r";
+import "codemirror/mode/ruby/ruby";
+import "codemirror/mode/sql/sql";
+import "codemirror/mode/swift/swift";
+import "codemirror/mode/shell/shell";
+import "codemirror/mode/rust/rust";
 import "codemirror/mode/haskell/haskell";
 
 // Addons
@@ -21,17 +30,12 @@ import "codemirror/addon/fold/brace-fold";
 import "codemirror/addon/fold/comment-fold";
 import "codemirror/addon/fold/foldgutter.css";
 
-// Keybinds
-import "codemirror/keymap/sublime";
-import "codemirror/keymap/vim";
-import "codemirror/keymap/emacs";
-
 // Themes
 import "codemirror/lib/codemirror.css";
-import "codemirror/theme/3024-night.css";
 import "codemirror/theme/dracula.css";
 import "codemirror/theme/monokai.css";
+import "codemirror/theme/ambiance.css";
 import "codemirror/theme/material-palenight.css";
-import "codemirror/theme/material-darker.css";
-import "codemirror/theme/neat.css";
+import "codemirror/theme/material-palenight.css";
+import "codemirror/theme/mdn-like.css";
 import "codemirror/theme/eclipse.css";
