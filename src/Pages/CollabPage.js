@@ -70,7 +70,6 @@ const CollabPage = (props) => {
           });
         }
         setJoined(true);
-
       }
     );
   }, []);

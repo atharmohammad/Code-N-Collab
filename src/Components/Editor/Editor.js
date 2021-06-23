@@ -8,13 +8,13 @@ import Modal from "../Modal/Modal";
 import Graph from "../Graph/Graph";
 import { connect } from "react-redux";
 import { SET_LOADING, SET_OUTPUT } from "../../store/Action/action";
-import RandomColor from "randomcolor"
+import RandomColor from "randomcolor";
 import "./EditorAddons";
 
 function Editor(props) {
   const location = useLocation();
   const [EditorRef, setEditorRef] = useState(null);
-  const [code,setCode] = useState("");
+  const [code, setCode] = useState("");
 
   const socket = props.socket;
 
@@ -23,14 +23,14 @@ function Editor(props) {
   };
 
   useEffect(async () => {
-  if (props.tools.nowCompile === true && props.tools.isLoading === false) {
+    if (props.tools.nowCompile === true && props.tools.isLoading === false) {
       props.setOutput("");
       props.setLoading();
       socket.emit("Compile_ON", {
         language: props.tools.language,
         code,
         input: props.tools.input,
-        reason:"code-editor"
+        reason: "code-editor",
       });
     }
   }, [props.tools.nowCompile]);
@@ -46,8 +46,8 @@ function Editor(props) {
         provider = new WebrtcProvider(searchParams.get("room").trim(), ydoc, {
           signaling: [
             "wss://signaling.yjs.dev",
-            "wss://y-webrtc-signaling-eu.herokuapp.com",
-            "wss://y-webrtc-signaling-us.herokuapp.com",
+            process.env.REACT_APP_SIGNALLING_URL1,
+            process.env.REACT_APP_SIGNALLING_URL2,
           ],
         });
       } catch (err) {
@@ -80,12 +80,12 @@ function Editor(props) {
       <CodeMirrorEditor
         value={code}
         onChange={(editor, data, value) => {
-          setCode(value)
+          setCode(value);
         }}
         autoScroll
         options={{
           mode: "C++",
-          theme: 'material',
+          theme: "material",
           lineWrapping: true,
           smartIndent: true,
           lineNumbers: true,
