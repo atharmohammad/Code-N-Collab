@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Editor from "@monaco-editor/react";
 import { connect } from "react-redux";
 import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
 
