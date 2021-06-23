@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { Grid, Box } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import TextEditor from "../Components/TextEditor/TextEditor";
 import Stars from "../Components/Stars/Stars";
@@ -12,25 +12,43 @@ import axios from "../Axios/axios";
 import { AuthContext } from "../context/auth-context";
 
 const BlogPage = (props) => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
   const [showEditor, setShowEditor] = useState(false);
   const auth = useContext(AuthContext);
   const history = useHistory();
   const [blogs, setBlogs] = useState([]);
   const [blogsLoading, setBlogsLoading] = useState(true);
+  const [skip, setSkip] = useState(
+    searchParams.has("skip") ? parseInt(searchParams.get("skip")) : 0
+  );
 
   useEffect(() => {
     fetchBlogs();
-  }, []);
+  }, [skip]);
 
   const fetchBlogs = async () => {
     setBlogsLoading(true);
     try {
-      const res = await axios.get("blogs/Allblogs");
+      const res = await axios.get(`blogs/Allblogs?skip=${skip}`);
       setBlogs(res.data);
     } catch (e) {
       alert("error", e);
     }
     setBlogsLoading(false);
+  };
+
+  const showMoreBlogs = () => {
+    history.push(`/blogs?skip=${skip + 5}`);
+    setSkip(state=>state+5)
+  };
+
+  const showLessBlogs = async () => {
+    if (skip > 0) {
+      history.push(`/blogs?skip=${skip - 5}`);
+      setSkip(state=>state-5)
+    }
   };
 
   const showEditorHandler = () => {
@@ -119,6 +137,55 @@ const BlogPage = (props) => {
           ) : (
             blogs.map((item) => <SingleBlog blog={item} />)
           )}
+        </div>
+        <div style={{ display: "flex" }}>
+          {skip > 0 ? (
+            <Box
+              style={{
+                width: "120px",
+                height: "40px",
+                backgroundColor: "#4169E1",
+                borderRadius: "5px",
+                padding: "5px 5px 0 5px",
+                textAlign: "center",
+                color: "#fff",
+                marginTop: "30px",
+                marginRight: "10px",
+                cursor: "pointer",
+                textAlign: "center",
+                boxSizing: "border-box",
+              }}
+              onClick={showLessBlogs}
+            >
+              Prev
+            </Box>
+          ) : null}
+
+          {
+            blogs.length > 0 ? (
+              <Box
+                style={{
+                  width: "120px",
+                  height: "40px",
+                  backgroundColor: "#4169E1",
+                  borderRadius: "5px",
+                  padding: "5px 5px 0 5px",
+                  textAlign: "center",
+                  color: "#fff",
+                  marginTop: "30px",
+                  marginRight: "10px",
+                  cursor: "pointer",
+                  textAlign: "center",
+                  boxSizing: "border-box",
+                }}
+                onClick={showMoreBlogs}
+              >
+                Next
+              </Box>
+            )
+            : null
+          }
+
         </div>
       </Grid>
     </div>
