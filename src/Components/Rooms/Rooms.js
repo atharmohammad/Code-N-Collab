@@ -45,11 +45,15 @@ function Rooms(props) {
 
   const changeHandler = (type, event) => {
     if (type == "room") setRoom(event.target.value);
-    if (type == "name") setName(event.target.value);
+    if (type == "name") setName(event.target.value.trim());
     if (type == "password") setPassword(event.target.value);
   };
 
   const createRoomHandler = async (e) => {
+    if(!name || !name.trim()){
+      return setError('Invalid name');
+    }
+
     try {
       play();
       history.push({
@@ -109,7 +113,7 @@ function Rooms(props) {
               alignSelf: "center",
               border: "3px solid white",
               borderRadius: "5px",
-              background: name && room ? "#7d7574" : "transparent",
+              background: name && room ?"transparent" : "#7d7574" ,
               color: "#fff",
               marginTop: "2vh",
               padding: "2vh",
