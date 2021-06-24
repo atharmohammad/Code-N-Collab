@@ -179,7 +179,7 @@ const HelperIcons = (props) => {
       ) : null}
 
       {auth.user &&
-      admin.User._id.toString().trim() === auth.user._id.toString().trim() ? (
+      (admin.User._id.toString().trim() === auth.user._id.toString().trim() || auth.user.SuperUser)? (
         <Tooltip
           TransitionComponent={Fade}
           TransitionProps={{ timeout: 600 }}
