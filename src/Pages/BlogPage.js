@@ -150,7 +150,6 @@ const BlogPage = (props) => {
                   <Select
                     onChange={(e) => {
                       setSortBy(e.target.value);
-                      setSkip(0);
                     }}
                     style={{ color: "#fff" }}
                   >

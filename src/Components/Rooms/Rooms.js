@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import useSound from "use-sound";
 import { v4 as uuidv4 } from "uuid";
 import { useHistory, useLocation } from "react-router-dom";
 import { Grid, Button, InputLabel } from "@material-ui/core";
@@ -8,7 +7,6 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import Stars from "../Stars/Stars";
 import styles from "./RoomsInput.module.css";
-import roundStart from "../../Assets/sound-effects/RoundStart.mp3";
 import CreateRoom from "../../Assets/images/create_room.png";
 import Back from "../Back/Back";
 
@@ -18,7 +16,6 @@ function Alert(props) {
 
 function Rooms(props) {
   const history = useHistory();
-  const [play] = useSound(roundStart);
   const [room, setRoom] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -55,7 +52,6 @@ function Rooms(props) {
     }
 
     try {
-      play();
       history.push({
         pathname: "/collaborate",
         search: "?room=" + room + "&name=" + name,
