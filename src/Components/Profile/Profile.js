@@ -59,7 +59,7 @@ const Profile = (props) => {
                   display: "flex",
                   alignItems: "flex-end",
                   margin: "10px",
-                  fontFamily: ["edgwick Ave Display", "cursive"].join(),
+                  fontFamily: ["Fira Sans", "sans-serif"].join(),
                 }}
               >
                 <div>{user.Name}</div>

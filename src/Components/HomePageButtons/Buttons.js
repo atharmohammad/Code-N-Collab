@@ -20,7 +20,7 @@ export default function Button(props) {
         alignItems:'center',
         display:'flex',
         justifyContent:'center',
-        fontFamily: ["edgwick Ave Display", "cursive"].join(),
+        fontFamily: ["Fira Sans", "sans-serif"].join(),
       }}
       className={classes.scale}
       onClick={props.clicked}

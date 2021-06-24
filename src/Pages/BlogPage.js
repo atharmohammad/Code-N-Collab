@@ -33,13 +33,13 @@ const BlogPage = (props) => {
   const [skip, setSkip] = useState(
     searchParams.has("skip") ? parseInt(searchParams.get("skip")) : 0
   );
+  const [posted,setPosted] = useState(false);
 
-  useEffect(() => {
-    fetchBlogs();
-  }, [skip, sortBy]);
+  useEffect(async() => {
+     fetchBlogs();
+  }, [skip, sortBy,posted]);
 
   const fetchBlogs = async () => {
-    console.log("felthing");
     setBlogsLoading(true);
     try {
       const res = await axios.get(
@@ -126,6 +126,7 @@ const BlogPage = (props) => {
                   history.push(`/blogs?sortBy=creationTime&skip=0`);
                   setSkip(0);
                   setSortBy("creationTime");
+                  setPosted(prev=>!prev);
                 }}
                 initialValue=""
                 method="post"
