@@ -25,6 +25,14 @@ const Comment = (props) => {
   const user = props.comment.User;
   const id = props.comment._id;
 
+  function resizeImageForMarkdown(props) {
+    return (
+      <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+        <img {...props} style={{ maxWidth: "80%" }} />
+      </div>
+    );
+  }
+
   const saveHandler = async () => {
     const data = divRef.current.value.trim();
     if (!data) {
@@ -123,7 +131,10 @@ const Comment = (props) => {
               wordWrap: "break-word",
             }}
           >
-            <ReactMarkdown>{initialComment}</ReactMarkdown>
+            <ReactMarkdown
+              renderers={{ image: resizeImageForMarkdown }}
+              children={initialComment}
+            />
           </div>
         ) : (
           <div style={{ margin: "2px" }}>

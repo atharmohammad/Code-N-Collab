@@ -20,6 +20,14 @@ const Reply = (props) => {
 
   const divRef = useRef();
 
+  function resizeImageForMarkdown(props) {
+    return (
+      <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+        <img {...props} style={{ maxWidth: "80%" }} />
+      </div>
+    );
+  }
+
   const deleteHandler = async () => {
     if (window.confirm("Are you sure you want to delete this comment")) {
       setSpinner(true);
@@ -91,7 +99,10 @@ const Reply = (props) => {
                 overflow: "auto",
               }}
             >
-              <ReactMarkdown>{initialReply}</ReactMarkdown>
+            <ReactMarkdown
+              renderers={{ image: resizeImageForMarkdown }}
+              children={initialReply}
+            />
             </div>
           ) : (
             <div style={{ margin: "2px" }}>

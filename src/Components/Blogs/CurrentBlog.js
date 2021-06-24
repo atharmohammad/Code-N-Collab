@@ -23,15 +23,15 @@ const CurrentBlog = (props) => {
   const [totalCommentLength, setTotalCommentLength] = useState(0);
   const [comments, setComments] = useState([]);
   const [dummy, setDummy] = useState(uuidv4());
-  
+
   let id;
-  
+
   try {
     id = window.location.pathname.split("/")[2];
   } catch (e) {
     console.log(e);
   }
-  
+
   const history = useHistory();
 
   useEffect(async () => {
@@ -50,6 +50,14 @@ const CurrentBlog = (props) => {
     setEditBlog(false);
     setBlogLoading(false);
   }, []);
+
+  function resizeImageForMarkdown(props) {
+    return (
+      <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+        <img {...props} style={{ maxWidth: "80%" }} />
+      </div>
+    );
+  }
 
   const deleteHandler = async () => {
     if (window.confirm("Are you sure you want to delete this Blog ?")) {
@@ -131,7 +139,7 @@ const CurrentBlog = (props) => {
               admin={{ User: blog.User }}
               date={blog.createdAt}
             />
-            <ReactMarkdown>{blog.Body}</ReactMarkdown>
+              <ReactMarkdown renderers={{ image: resizeImageForMarkdown }} children={blog.Body} />
           </>
         ) : (
           <>
