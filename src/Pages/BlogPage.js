@@ -64,10 +64,10 @@ const BlogPage = (props) => {
     }
   };
 
-  const setSortValue = (val)=>{
-    history.push(`/blogs?sortBy=${val}&skip=0`);
+  const setSortValue = (val) => {
+    history.push(`/blogs?sortBy=${val}&skip=${skip}`);
     setSortBy(val);
-  }
+  };
 
   const showEditorHandler = () => {
     if (!auth.token) {
@@ -125,7 +125,7 @@ const BlogPage = (props) => {
                 fetchBlog={() => {
                   history.push(`/blogs?sortBy=creationTime&skip=0`);
                   setSkip(0);
-                  setSortBy("creationTime")
+                  setSortBy("creationTime");
                 }}
                 initialValue=""
                 method="post"
@@ -171,7 +171,7 @@ const BlogPage = (props) => {
                 Recent
               </option>
               <option value="popularity" selected={sortBy == "popularity"}>
-                Top
+                Popularity
               </option>
             </select>
           </>
@@ -187,28 +187,33 @@ const BlogPage = (props) => {
             </p>
           )}
         </div>
-        <div style={{ display: "flex" }}>
-          {skip > 0 ? (
-            <Box
-              style={{
-                width: "120px",
-                height: "40px",
-                backgroundColor: "#4169E1",
-                borderRadius: "5px",
-                padding: "5px 5px 0 5px",
-                textAlign: "center",
-                color: "#fff",
-                marginTop: "30px",
-                marginRight: "10px",
-                cursor: "pointer",
-                textAlign: "center",
-                boxSizing: "border-box",
-              }}
-              onClick={showLessBlogs}
-            >
-              Prev
-            </Box>
-          ) : null}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: (skip && blogs.length > 0 ) ? "space-between" : "center",
+            width: "80vw",
+            maxWidth: "800px",
+          }}
+        >
+        {skip ? (<Box
+          style={{
+            width: "120px",
+            height: "40px",
+            backgroundColor: "#4169E1",
+            borderRadius: "5px",
+            padding: "5px 5px 0 5px",
+            textAlign: "center",
+            color: "#fff",
+            marginTop: "30px",
+            cursor: "pointer",
+            textAlign: "center",
+            boxSizing: "border-box",
+          }}
+          onClick={showLessBlogs}
+        >
+          Prev
+        </Box>)
+        : null}
 
           {blogs.length > 0 ? (
             <Box
@@ -221,7 +226,6 @@ const BlogPage = (props) => {
                 textAlign: "center",
                 color: "#fff",
                 marginTop: "30px",
-                marginRight: "10px",
                 cursor: "pointer",
                 textAlign: "center",
                 boxSizing: "border-box",
