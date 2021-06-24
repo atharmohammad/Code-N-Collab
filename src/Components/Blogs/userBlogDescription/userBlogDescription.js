@@ -25,11 +25,26 @@ export default function UserBlogDescription(props) {
   const fetchUser = () => {
     history.push(`/profile/?user=${admin._id}`);
   };
+ 
   return (
     <div onClick={fetchUser} className={classes.cover}>
       <img className={classes.img} src={SelectAvatars(admin.Avatar)} alt="?" />
       <Grid className={classes.textCover}>
-        <Typography>{admin ? admin.Name : "User"}</Typography>
+        <Typography style={{ display: "flex" }}>
+          {admin ? admin.Name : "User"}
+          {admin && admin.SuperUser ? (
+            <div
+              style={{
+                fontWeight: "bold",
+                paddingLeft: "20px",
+                marginTop: "-10px",
+                fontSize: "15px",
+              }}
+            >
+              ADMIN
+            </div>
+          ) : null}
+        </Typography>
         <Typography>{admin ? admin.Designation : null}</Typography>
         <Typography>{admin ? admin.Institution : null}</Typography>
       </Grid>

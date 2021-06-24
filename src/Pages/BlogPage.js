@@ -1,6 +1,13 @@
 import { useEffect, useState, useContext } from "react";
-import { Grid, Box } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
+import {
+  Grid,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  Box,
+} from "@material-ui/core";
 
 import TextEditor from "../Components/TextEditor/TextEditor";
 import Stars from "../Components/Stars/Stars";
@@ -20,18 +27,23 @@ const BlogPage = (props) => {
   const history = useHistory();
   const [blogs, setBlogs] = useState([]);
   const [blogsLoading, setBlogsLoading] = useState(true);
+  const [sortBy, setSortBy] = useState("creationTime");
   const [skip, setSkip] = useState(
     searchParams.has("skip") ? parseInt(searchParams.get("skip")) : 0
   );
 
   useEffect(() => {
+    history.push(`/blogs?sortBy=${sortBy}&skip=${skip}`);
     fetchBlogs();
-  }, [skip]);
+  }, [skip, sortBy]);
 
   const fetchBlogs = async () => {
+    console.log("felthing");
     setBlogsLoading(true);
     try {
-      const res = await axios.get(`blogs/Allblogs?skip=${skip}`);
+      const res = await axios.get(
+        `blogs/Allblogs?sortBy=${sortBy}&skip=${skip}`
+      );
       setBlogs(res.data);
     } catch (e) {
       alert("error", e);
@@ -40,14 +52,14 @@ const BlogPage = (props) => {
   };
 
   const showMoreBlogs = () => {
-    history.push(`/blogs?skip=${skip + 5}`);
-    setSkip(state=>state+5)
+    history.push(`/blogs?sortBy=${sortBy}&skip=${skip + 5}`);
+    setSkip((prev) => prev + 5);
   };
 
   const showLessBlogs = async () => {
-    if (skip > 0) {
+    if (skip >= 5) {
       history.push(`/blogs?skip=${skip - 5}`);
-      setSkip(state=>state-5)
+      setSkip((prev) => prev - 5);
     }
   };
 
@@ -76,6 +88,7 @@ const BlogPage = (props) => {
         }}
       >
         <BlogHead back="/homePage" />
+
         {showEditor ? (
           <div style={{ width: "80vw", maxWidth: "800px" }}>
             <Box
@@ -110,32 +123,76 @@ const BlogPage = (props) => {
             </div>
           </div>
         ) : (
-          <Box
-            style={{
-              alignSelf: "flex-end",
-              width: "120px",
-              height: "40px",
-              backgroundColor: "#4169E1",
-              borderRadius: "5px",
-              padding: "5px 5px 0 5px",
-              textAlign: "center",
-              color: "#fff",
-              marginTop: "30px",
-              marginRight: "10px",
-              cursor: "pointer",
-              textAlign: "center",
-              boxSizing: "border-box",
-            }}
-            onClick={showEditorHandler}
-          >
-            Create Blog|+{" "}
-          </Box>
+          <>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                width: "80vw",
+                maxWidth: "800px",
+              }}
+            >
+              <Grid>
+                <FormControl
+                  style={{
+                    color: "#fff",
+                    fontSize: "20px",
+                  }}
+                >
+                  <InputLabel
+                    style={{
+                      color: "#fff",
+                      fontSize: "20px",
+                    }}
+                  >
+                    SortBy
+                  </InputLabel>
+                  <Select
+                    onChange={(e) => {
+                      setSortBy(e.target.value);
+                      setSkip(0);
+                    }}
+                    style={{ color: "#fff" }}
+                  >
+                    <MenuItem value="creationTime" selected>
+                      <em>creationTime</em>
+                    </MenuItem>
+                    <MenuItem value="popularity">popularity</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+            </div>
+            <Box
+              style={{
+                alignSelf: "flex-end",
+                width: "120px",
+                height: "40px",
+                backgroundColor: "#4169E1",
+                borderRadius: "5px",
+                padding: "5px 5px 0 5px",
+                textAlign: "center",
+                color: "#fff",
+                marginTop: "30px",
+                marginRight: "10px",
+                cursor: "pointer",
+                textAlign: "center",
+                boxSizing: "border-box",
+              }}
+              onClick={showEditorHandler}
+            >
+              Create Blog|+{" "}
+            </Box>
+          </>
         )}
         <div>
           {blogsLoading ? (
             <BlogSpinner />
+          ) : blogs.length ? (
+            blogs.map((item) => <SingleBlog blog={item} key={item._id} />)
           ) : (
-            blogs.map((item) => <SingleBlog blog={item} />)
+            <p style={{ fontSize: "25px", color: "#fff" }}>
+              Oops No result found !
+            </p>
           )}
         </div>
         <div style={{ display: "flex" }}>
@@ -161,31 +218,27 @@ const BlogPage = (props) => {
             </Box>
           ) : null}
 
-          {
-            blogs.length > 0 ? (
-              <Box
-                style={{
-                  width: "120px",
-                  height: "40px",
-                  backgroundColor: "#4169E1",
-                  borderRadius: "5px",
-                  padding: "5px 5px 0 5px",
-                  textAlign: "center",
-                  color: "#fff",
-                  marginTop: "30px",
-                  marginRight: "10px",
-                  cursor: "pointer",
-                  textAlign: "center",
-                  boxSizing: "border-box",
-                }}
-                onClick={showMoreBlogs}
-              >
-                Next
-              </Box>
-            )
-            : null
-          }
-
+          {blogs.length > 0 ? (
+            <Box
+              style={{
+                width: "120px",
+                height: "40px",
+                backgroundColor: "#4169E1",
+                borderRadius: "5px",
+                padding: "5px 5px 0 5px",
+                textAlign: "center",
+                color: "#fff",
+                marginTop: "30px",
+                marginRight: "10px",
+                cursor: "pointer",
+                textAlign: "center",
+                boxSizing: "border-box",
+              }}
+              onClick={showMoreBlogs}
+            >
+              Next
+            </Box>
+          ) : null}
         </div>
       </Grid>
     </div>
