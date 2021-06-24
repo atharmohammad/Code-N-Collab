@@ -27,13 +27,14 @@ const BlogPage = (props) => {
   const history = useHistory();
   const [blogs, setBlogs] = useState([]);
   const [blogsLoading, setBlogsLoading] = useState(true);
-  const [sortBy, setSortBy] = useState("creationTime");
+  const [sortBy, setSortBy] = useState(
+    searchParams.has("sortBy") ? searchParams.get("sortBy") : "creationTime"
+  );
   const [skip, setSkip] = useState(
     searchParams.has("skip") ? parseInt(searchParams.get("skip")) : 0
   );
 
   useEffect(() => {
-    history.push(`/blogs?sortBy=${sortBy}&skip=${skip}`);
     fetchBlogs();
   }, [skip, sortBy]);
 
@@ -58,10 +59,15 @@ const BlogPage = (props) => {
 
   const showLessBlogs = async () => {
     if (skip >= 5) {
-      history.push(`/blogs?skip=${skip - 5}`);
+      history.push(`/blogs?sortBy=${sortBy}&skip=${skip - 5}`);
       setSkip((prev) => prev - 5);
     }
   };
+
+  const setSortValue = (val)=>{
+    history.push(`/blogs?sortBy=${val}&skip=0`);
+    setSortBy(val);
+  }
 
   const showEditorHandler = () => {
     if (!auth.token) {
@@ -116,7 +122,11 @@ const BlogPage = (props) => {
                 showUpdateBtn={true}
                 Api="/blogs/write"
                 postBtnClick={() => setShowEditor(false)}
-                fetchBlog={fetchBlogs}
+                fetchBlog={() => {
+                  history.push(`/blogs?sortBy=creationTime&skip=0`);
+                  setSkip(0);
+                  setSortBy("creationTime")
+                }}
                 initialValue=""
                 method="post"
               />
@@ -124,43 +134,6 @@ const BlogPage = (props) => {
           </div>
         ) : (
           <>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                width: "80vw",
-                maxWidth: "800px",
-              }}
-            >
-              <Grid>
-                <FormControl
-                  style={{
-                    color: "#fff",
-                    fontSize: "20px",
-                  }}
-                >
-                  <InputLabel
-                    style={{
-                      color: "#fff",
-                      fontSize: "20px",
-                    }}
-                  >
-                    SortBy
-                  </InputLabel>
-                  <Select
-                    onChange={(e) => {
-                      setSortBy(e.target.value);
-                    }}
-                    style={{ color: "#fff" }}
-                  >
-                    <MenuItem value="creationTime" selected>
-                      <em>creationTime</em>
-                    </MenuItem>
-                    <MenuItem value="popularity">popularity</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-            </div>
             <Box
               style={{
                 alignSelf: "flex-end",
@@ -171,8 +144,7 @@ const BlogPage = (props) => {
                 padding: "5px 5px 0 5px",
                 textAlign: "center",
                 color: "#fff",
-                marginTop: "30px",
-                marginRight: "10px",
+                margin: "10px",
                 cursor: "pointer",
                 textAlign: "center",
                 boxSizing: "border-box",
@@ -181,6 +153,27 @@ const BlogPage = (props) => {
             >
               Create Blog|+{" "}
             </Box>
+            <select
+              style={{
+                alignSelf: "flex-end",
+                fontSize: "18px",
+                fontStyle: "italic",
+                cursor: "pointer",
+                padding: "5px",
+                borderRadius: "10px",
+                outline: "none",
+                border: "5px solid blue",
+                margin: "10px",
+              }}
+              onChange={(e) => setSortValue(e.target.value)}
+            >
+              <option value="creationTime" selected={sortBy == "creationTime"}>
+                Recent
+              </option>
+              <option value="popularity" selected={sortBy == "popularity"}>
+                Top
+              </option>
+            </select>
           </>
         )}
         <div>
