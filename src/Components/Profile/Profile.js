@@ -5,6 +5,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import ShareIcon from "@material-ui/icons/Share";
 import Snackbar from "@material-ui/core/Snackbar";
 import { Tooltip, IconButton } from "@material-ui/core";
+import AdminStar from "../../Assets/images/star.png";
 
 import ProfileFeild from "./ProfileFeild";
 import classes from "./profile.module.css";
@@ -71,6 +72,7 @@ const Profile = (props) => {
                     }}
                   >
                     Admin
+                    <img style={{height:'20px',marginLeft:"2px"}} src={AdminStar} alt="" />
                   </div>
                 ) : null}
               </div>
