@@ -29,9 +29,7 @@ const Profile = (props) => {
 
   return (
     <>
-      <div
-      className = {classes.img_div}
-      >
+      <div className={classes.img_div}>
         <img
           src={ProfileTitle}
           style={{ height: "70px", width: "200px" }}
@@ -43,7 +41,7 @@ const Profile = (props) => {
           <div
             style={{
               display: "flex",
-              flexWrap:'wrap',
+              flexWrap: "wrap",
               borderBottom: "2px solid grey",
               width: "100%",
               justifyContent: "space-between",
@@ -64,6 +62,17 @@ const Profile = (props) => {
                 }}
               >
                 <div>{user.Name}</div>
+                {user.SuperUser ? (
+                  <div
+                    style={{
+                      marginLeft: "8px",
+                      fontWeight: "bold",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Admin
+                  </div>
+                ) : null}
               </div>
             </div>
             <div
