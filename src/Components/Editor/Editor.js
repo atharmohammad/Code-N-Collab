@@ -9,7 +9,7 @@ import Graph from "../Graph/Graph";
 import { connect } from "react-redux";
 import { SET_LOADING, SET_OUTPUT } from "../../store/Action/action";
 import languageMapper from "../../Function/languageMapper";
-
+import "./Editor.css"
 import RandomColor from "randomcolor";
 import "./EditorAddons";
 
@@ -72,6 +72,7 @@ function Editor(props) {
       return () => {
         if (provider) {
           provider.disconnect();
+          getBinding.destroy();
         }
       };
     }
