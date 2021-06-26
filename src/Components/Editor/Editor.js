@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useRef, useState } from "react";
-import { CodemirrorBinding } from 'y-codemirror';
+import { CodemirrorBinding } from "y-codemirror";
 import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
@@ -9,7 +9,7 @@ import Graph from "../Graph/Graph";
 import { connect } from "react-redux";
 import { SET_LOADING, SET_OUTPUT } from "../../store/Action/action";
 import languageMapper from "../../Function/languageMapper";
-import "./Editor.css"
+import "./Editor.css";
 import RandomColor from "randomcolor";
 import "./EditorAddons";
 
@@ -43,7 +43,7 @@ function Editor(props) {
     if (EditorRef) {
       const ydoc = new Y.Doc();
 
-      let provider;
+      let provider = null;
       try {
         provider = new WebrtcProvider(searchParams.get("room").trim(), ydoc, {
           signaling: [
@@ -52,23 +52,22 @@ function Editor(props) {
             process.env.REACT_APP_SIGNALLING_URL2,
           ],
         });
+
+        const yText = ydoc.getText("codemirror");
+        const yUndoManager = new Y.UndoManager(yText);
+
+        const awareness = provider.awareness;
+        const color = RandomColor();
+        awareness.setLocalStateField("user", {
+          name: searchParams.get("name").trim(),
+          color: color,
+        });
+        const getBinding = new CodemirrorBinding(yText, EditorRef, awareness, {
+          yUndoManager,
+        });
       } catch (err) {
-        console.log("error in collaborating try again");
+        alert("error in collaborating try refreshing or come back later !");
       }
-
-      const yText = ydoc.getText("codemirror");
-      const yUndoManager = new Y.UndoManager(yText);
-
-      const awareness = provider?.awareness;
-      const color = RandomColor();
-      awareness?.setLocalStateField("user", {
-        name: searchParams.get("name").trim(),
-        color: color,
-      });
-      const getBinding = new CodemirrorBinding(yText, EditorRef, awareness, {
-        yUndoManager,
-      });
-
       return () => {
         if (provider) {
           provider.disconnect();
