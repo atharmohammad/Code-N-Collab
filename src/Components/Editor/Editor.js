@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useRef, useState } from "react";
-import { CodeMirrorBinding } from "./EditorAdaptor";
+import { CodemirrorBinding } from 'y-codemirror';
 import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
@@ -65,7 +65,7 @@ function Editor(props) {
         name: searchParams.get("name").trim(),
         color: color,
       });
-      const getBinding = new CodeMirrorBinding(yText, EditorRef, awareness, {
+      const getBinding = new CodemirrorBinding(yText, EditorRef, awareness, {
         yUndoManager,
       });
 

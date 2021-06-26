@@ -1,3 +1,5 @@
+//CodeMirror Editor Addons
+
 import "codemirror/mode/clike/clike";
 import "codemirror/mode/python/python";
 import "codemirror/mode/javascript/javascript";
@@ -16,7 +18,7 @@ import "codemirror/mode/shell/shell";
 import "codemirror/mode/rust/rust";
 import "codemirror/mode/haskell/haskell";
 
-// Addons
+
 import "codemirror/addon/edit/closebrackets";
 import "codemirror/addon/edit/closetag";
 import "codemirror/addon/hint/show-hint";
@@ -30,7 +32,6 @@ import "codemirror/addon/fold/brace-fold";
 import "codemirror/addon/fold/comment-fold";
 import "codemirror/addon/fold/foldgutter.css";
 
-// Themes
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/dracula.css";
 import "codemirror/theme/monokai.css";
