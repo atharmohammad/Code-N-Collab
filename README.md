@@ -113,9 +113,10 @@ C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/conver
  we encourage organizations and individuals to contribute requirements, documentation, issues, new templates, and code.
  For code contributions, read :
  
+ * Every pull request should be generated on yjs branch.
+
 - The <a href="CODE_OF_CONDUCT.md" >Code of Conduct</a>
 - The <a href="CONTRIBUTING.md">Contribution Guidelines</a>
-- The <a href="" >Documentation Style Guide</a>
 
 ## 📲 Contact
 
