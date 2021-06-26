@@ -92,6 +92,8 @@ It provides users with :-
 
 ### Installation
 
+- Fork the Repository
+
 ```
    $ git clone https://github.com/<your-username>/Code-N-Collab.git
    $ cd Code-N-Collab
