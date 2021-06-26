@@ -1,5 +1,7 @@
 # Contributing Guidelines
 
+* Every Pull Request should be created on yjs branch
+
 * Remember that this is an inclusive community, committed to creating a safe, positive environment.  See the full [Code of Conduct](https://github.com/atharmohammad/Code-N-Collab/blob/master/CODE_OF_CONDUCT.md).
 * Follow our [Commit Message Style Guide]() when you commit your changes.
 * Please consider raising an issue before submitting a pull request (PR) to solve a problem that is not present in our [issue tracker](https://github.com/atharmohammad/Code-N-Collab/issues). This allows maintainers to first validate the issue you are trying to solve and also reference the PR to a specific issue.
