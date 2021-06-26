@@ -82,23 +82,17 @@ It provides users with :-
 
 #### Setup Environment variables 
 ```
-     REACT_APP_CONVERGENCE_URL= "http://localhost:8000/api/realtime/convergence/default"
+     REACT_APP_SIGNALLING_URL1 = wss://y-webrtc-signaling-eu.herokuapp.com
+     REACT_APP_SIGNALLING_URL2 = wss://y-webrtc-signaling-us.herokuapp.com
      REACT_APP_BASE_URL = 'http://localhost:8080/'
 ```
 
 #### Setup backend for Code - N - Collab
 <a href="https://github.com/atharmohammad/Code-N-Collab-Server">Code - N - Collab Backend</a>
 
-#### Setup Convergence 
-To setup convergence server you have to download docker, for windows user they can download <a href="https://docs.docker.com/docker-for-windows/install/">Docker for Windows</a>
-
-run the following command in your terminal
-
-```
-C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/convergence-omnibus
-```
-
 ### Installation
+
+- Fork the Repository
 
 ```
    $ git clone https://github.com/<your-username>/Code-N-Collab.git
@@ -115,7 +109,8 @@ C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/conver
  
 - The <a href="CODE_OF_CONDUCT.md" >Code of Conduct</a>
 - The <a href="CONTRIBUTING.md">Contribution Guidelines</a>
-- The <a href="" >Documentation Style Guide</a>
+- The <a href="https://drive.google.com/drive/folders/1SB2dGPe3Avzsj0VXJ3sclTTdpjC1FbpV?usp=sharing">Documentation</a>
+
 
 ## 📲 Contact
 
@@ -125,9 +120,8 @@ C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/conver
 
 ## 📚 Resources 
 - <a href="https://socket.io/docs/v4" >Socket.Io Documentation </a>
-- <a href="https://convergence.io/documentation/" > Convergence Docs </a>
-- <a href="https://docs.docker.com/docker-for-windows/install/">Docker for Windows</a> (For windows user)
-- <a href="https://microsoft.github.io/monaco-editor/api/modules/monaco.editor.html">Monaco Editor Docs</a>
+- <a href="https://github.com/yjs/yjs/blob/master/README.md" > Yjs Docs </a>
+- <a href="https://github.com/scniro/react-codemirror2">React-Codemirror Editor Docs</a>
 
 ## License
 <a href="LICENSE">Apache License 2.0</a>
