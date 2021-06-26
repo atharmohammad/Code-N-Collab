@@ -72,7 +72,7 @@ function Editor(props) {
       return () => {
         if (provider) {
           provider.disconnect();
-          getBinding.destroy();
+          ydoc.destroy();
         }
       };
     }
