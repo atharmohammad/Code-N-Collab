@@ -41,6 +41,7 @@ function HomePage() {
           history.push("/homepage");
         }
       } catch (e) {
+        alert("there is some error related to Outh post! try again!")
       }
       setSpinner(false);
     }

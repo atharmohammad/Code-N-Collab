@@ -58,6 +58,7 @@ function Rooms(props) {
         state: { password },
       });
     } catch (err) {
+      alert("History push error!  try again!")
     }
   };
 

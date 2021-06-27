@@ -34,6 +34,7 @@ const Reply = (props) => {
       try {
         await axios.delete("/reply/deleteReply/" + reply._id);
       } catch (e) {
+        alert("Delete reply error!  try again!")
       }
       setSpinner(false);
       setDeleted(true);
@@ -53,6 +54,7 @@ const Reply = (props) => {
       setEditReply(false);
       setInitialReply(res.data.Body);
     } catch (e) {
+      alert("Update reply error! try again!")
     }
     setSpinner(false);
   };

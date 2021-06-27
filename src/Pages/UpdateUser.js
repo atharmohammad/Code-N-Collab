@@ -59,6 +59,7 @@ const UpdateUser = (props) => {
       setSpinner(false);
       history.push("/me");
     } catch (e) {
+      alert("There is some error related to updateProfile! try again!")
     }
   };
 
