@@ -29,7 +29,6 @@ const CurrentBlog = (props) => {
   try {
     id = window.location.pathname.split("/")[2];
   } catch (e) {
-    console.log(e);
   }
 
   const history = useHistory();
@@ -43,9 +42,7 @@ const CurrentBlog = (props) => {
       }
       setBlog(currBlog.data);
       setTotalCommentLength(currBlog.data.Comments.length);
-      console.log("current blog data", currBlog.data);
     } catch (e) {
-      console.log(e);
     }
     setEditBlog(false);
     setBlogLoading(false);
@@ -65,7 +62,6 @@ const CurrentBlog = (props) => {
         await axios.delete(`/blogs/delete/${id}`);
         history.push("/blogs");
       } catch (e) {
-        console.log(e);
       }
     }
   };
@@ -82,7 +78,6 @@ const CurrentBlog = (props) => {
       }
       setBlog(currBlog.data);
     } catch (e) {
-      console.log(e);
     }
     setEditBlog(false);
     setBlogLoading(false);
@@ -99,7 +94,6 @@ const CurrentBlog = (props) => {
       setComments(data.data.Comments);
       setDummy(uuidv4());
     } catch (e) {
-      console.log(e);
     }
     setCommentLoading(false);
   };

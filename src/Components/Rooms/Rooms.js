@@ -58,7 +58,6 @@ function Rooms(props) {
         state: { password },
       });
     } catch (err) {
-      console.log(err);
     }
   };
 

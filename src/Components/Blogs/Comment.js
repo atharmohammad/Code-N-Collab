@@ -46,7 +46,6 @@ const Comment = (props) => {
       setInitialComment(res.data);
       setEditComment(false);
     } catch (e) {
-      console.log(e);
     }
     setCommentLoading(false);
   };
@@ -62,7 +61,6 @@ const Comment = (props) => {
       const data = await axios.get("/reply/getReply/" + id);
       setReplies(data.data.Replies);
     } catch (e) {
-      console.log(e);
     }
     setReplySpinner(false);
   }, []);
@@ -82,7 +80,6 @@ const Comment = (props) => {
         await axios.delete("/comment/deleteComment/" + id);
         setDeleted(true);
       } catch (e) {
-        console.log(e);
       }
     }
     setCommentLoading(false);

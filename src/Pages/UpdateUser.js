@@ -59,7 +59,6 @@ const UpdateUser = (props) => {
       setSpinner(false);
       history.push("/me");
     } catch (e) {
-      console.log(e);
     }
   };
 

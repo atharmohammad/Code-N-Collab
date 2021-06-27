@@ -25,7 +25,6 @@ const Me = (props) => {
         setUser(data.data);
         setSpinner(false);
       } catch (e) {
-        console.log(e);
         history.push("/homepage");
       }
     } else {

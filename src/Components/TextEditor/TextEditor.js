@@ -19,7 +19,6 @@ function TextEditor(props) {
       });
       props.fetchBlog();
     } catch (e) {
-      console.log(e);
     }
   };
 

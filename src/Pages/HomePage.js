@@ -41,7 +41,6 @@ function HomePage() {
           history.push("/homepage");
         }
       } catch (e) {
-        console.log("error", e);
       }
       setSpinner(false);
     }

@@ -13,7 +13,6 @@ const Logout = (props) => {
     try {
       await axios.get("/user/logout");
     } catch (e) {
-      console.log(e);
     } finally {
       auth.logout();
       history.push("/homepage");
