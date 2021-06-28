@@ -14,7 +14,7 @@ export default function () {
       const req = await axios.get("/Oauth/googleOauth");
       window.location.href = req.data;
     } catch (e) {
-      console.log(e);
+      alert("there is some error related to Oauth! try again!")
     }
   };
   const logoutHandler = () => {

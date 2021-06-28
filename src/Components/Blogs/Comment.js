@@ -46,7 +46,7 @@ const Comment = (props) => {
       setInitialComment(res.data);
       setEditComment(false);
     } catch (e) {
-      console.log(e);
+      alert("Update comment error! try again!")
     }
     setCommentLoading(false);
   };
@@ -62,7 +62,7 @@ const Comment = (props) => {
       const data = await axios.get("/reply/getReply/" + id);
       setReplies(data.data.Replies);
     } catch (e) {
-      console.log(e);
+      alert("Get reply error!  try again!")
     }
     setReplySpinner(false);
   }, []);
@@ -82,7 +82,7 @@ const Comment = (props) => {
         await axios.delete("/comment/deleteComment/" + id);
         setDeleted(true);
       } catch (e) {
-        console.log(e);
+        alert("Delete comment error!  try again!")
       }
     }
     setCommentLoading(false);
