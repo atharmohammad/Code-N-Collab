@@ -36,7 +36,7 @@ const WriterModal = (props) => {
         {spinner ? (
           <Spinner
             headedStyle={{ background: "black" }}
-            spinneredStyle={{ borderTop: "1em solid black" }}
+            spinneredStyle={{ borderTop: "1em solid black",position:'relative',top:'-100px' }}
           />
         ) : (
           <div style={{ height: "100%", width: "100%" }}>

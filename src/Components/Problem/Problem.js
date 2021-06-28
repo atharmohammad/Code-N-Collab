@@ -7,7 +7,7 @@ import "./Problem.css";
 
 export default function App(props) {
   const socket = props.socket;
-  const [link, setLink] = useState(null);
+  const [link, setLink] = useState('https://codeforces.com/problemset/problem/4/A');
   const [loader, setLoader] = useState(false);
   const ProblemRef = useRef();
 
@@ -76,6 +76,7 @@ export default function App(props) {
               fontWeight: "bold",
             }}
           ></Grid>
+         
           <Grid
             style={{
               display: "flex",
@@ -86,6 +87,7 @@ export default function App(props) {
               boxSizing: "border-box",
             }}
           >
+           
             <input
               placeholder="Problem Link"
               className="place"
