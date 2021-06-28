@@ -75,8 +75,6 @@ It provides users with :-
 
 ## 🔥 Getting Started 
 
-- Every pull request should be generated on yjs branch,and please setup your project as per README in yjs
-
 ### Prerequisites
 
 - <a href="https://reactjs.org/">Reactjs</a>
