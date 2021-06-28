@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useRef, useState } from "react";
-import { CodemirrorBinding } from "y-codemirror";
-import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
+import { MonacoBinding } from 'y-monaco'
+import Editor from "@monaco-editor/react";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
 import { useLocation } from "react-router-dom";
@@ -9,11 +9,10 @@ import Graph from "../Graph/Graph";
 import { connect } from "react-redux";
 import { SET_LOADING, SET_OUTPUT } from "../../store/Action/action";
 import languageMapper from "../../Function/languageMapper";
-import "./Editor.css";
 import RandomColor from "randomcolor";
-import "./EditorAddons";
+import "./EditorAddons"
 
-function Editor(props) {
+function EditorC(props) {
   const location = useLocation();
   const [EditorRef, setEditorRef] = useState(null);
   const [code, setCode] = useState("");
@@ -23,6 +22,17 @@ function Editor(props) {
   const handleEditorDidMount = (editor) => {
     setEditorRef(editor);
   };
+
+  const handleEditorWillMount = (monaco) => {
+      // here is the monaco instance
+        // do something before editor is mounted
+        monaco.editor.defineTheme("blackBoard", blackBoardJSON);
+        monaco.editor.defineTheme("cobalt", cobaltJSON);
+        monaco.editor.defineTheme("merbivore", merbivoreJSON);
+        monaco.editor.defineTheme("github", githubJSON);
+
+    };
+
 
   useEffect(async () => {
     if (props.tools.nowCompile === true && props.tools.isLoading === false) {
@@ -54,7 +64,7 @@ function Editor(props) {
           password: location.state ? location.state.password : null
         });
 
-        const yText = ydoc.getText("codemirror");
+        const yText = ydoc.getText("monaco");
         const yUndoManager = new Y.UndoManager(yText);
 
         const awareness = provider.awareness;
@@ -63,7 +73,7 @@ function Editor(props) {
           name: searchParams.get("name").trim(),
           color: color,
         });
-        const getBinding = new CodemirrorBinding(yText, EditorRef, awareness, {
+        const getBinding = new MonacoBinding(yText, EditorRef.getModel(),new Set([EditorRef]),awareness, {
           yUndoManager,
         });
       } catch (err) {
@@ -79,44 +89,22 @@ function Editor(props) {
   }, [EditorRef]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100%",
-        width: "100%",
-        fontSize: `${props.tools.fontSize}px`,
-        overflowY: "auto",
-      }}
-    >
-      <CodeMirrorEditor
-        onChange={(editor, data, value) => {
-          setCode(value);
-        }}
-        autoScroll
+    <>
+      <Editor
+        beforeMount={handleEditorWillMount}
+        onMount={(editor) => handleEditorDidMount(editor)}
+        theme={props.tools.theme}
+        language={"cpp"}
+        onChange={(value) => setCode(value || "")}
         options={{
-          mode: languageMapper(props.tools.language),
-          theme: props.tools.theme,
-          lineWrapping: true,
-          smartIndent: true,
-          lineNumbers: true,
-          foldGutter: true,
-          tabSize: 2,
-          gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-          autoCloseTags: true,
-          matchBrackets: true,
-          autoCloseBrackets: true,
-          extraKeys: {
-            "Ctrl-Space": "autocomplete",
-          },
-        }}
-        editorDidMount={(editor) => {
-          handleEditorDidMount(editor);
-          editor.setSize("100vw", "100%");
+          wordWrap: "on",
+          autoIndent: "advanced",
+          fontSize: props.tools.fontSize,
         }}
       />
       {props.tools.isLoading === true ? <Modal /> : null}
       {props.tools.showGraph === true ? <Graph /> : null}
-    </div>
+    </>
   );
 }
 
@@ -133,4 +121,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Editor);
+export default connect(mapStateToProps, mapDispatchToProps)(EditorC);
