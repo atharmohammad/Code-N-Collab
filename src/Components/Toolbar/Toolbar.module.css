@@ -6,6 +6,7 @@
   flex-direction: row;
   padding-left:50px;
   box-sizing: border-box;
+  overflow:hidden;
 }
 
 .toolWrap {
