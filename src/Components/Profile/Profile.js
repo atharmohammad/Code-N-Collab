@@ -1,12 +1,11 @@
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
-import MuiAlert from "@material-ui/lab/Alert";
 import ShareIcon from "@material-ui/icons/Share";
-import Snackbar from "@material-ui/core/Snackbar";
 import { Tooltip, IconButton } from "@material-ui/core";
 import AdminStar from "../../Assets/images/star.png";
 
+import Snacker from "../Snacker/Snaker";
 import ProfileFeild from "./ProfileFeild";
 import classes from "./profile.module.css";
 import { AuthContext } from "../../context/auth-context";
@@ -17,10 +16,6 @@ import LinkedInIcon from "../../Assets/images/Linkedin.png";
 import CodechefIcon from "../../Assets/images/codechef.png";
 import AtcoderIcon from "../../Assets/images/atcoder.png";
 import CodeforcesIcon from "../../Assets/images/Codeforces.png";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 const Profile = (props) => {
   const history = useHistory();
@@ -72,7 +67,11 @@ const Profile = (props) => {
                     }}
                   >
                     Admin
-                    <img style={{height:'20px',marginLeft:"2px"}} src={AdminStar} alt="" />
+                    <img
+                      style={{ height: "20px", marginLeft: "2px" }}
+                      src={AdminStar}
+                      alt=""
+                    />
                   </div>
                 ) : null}
               </div>
@@ -237,16 +236,12 @@ const Profile = (props) => {
           </div>
         </div>
       </div>
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      <Snacker
         open={msg}
         autoHideDuration={3000}
+        message={msg}
         onClose={() => setMsg(null)}
-      >
-        <Alert onClose={() => setMsg(null)} severity="success">
-          {msg}
-        </Alert>
-      </Snackbar>
+      />
     </>
   );
 };
