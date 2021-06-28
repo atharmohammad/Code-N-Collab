@@ -4,6 +4,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  padding-left:50px;
 }
 
 .toolWrap {
@@ -45,6 +46,7 @@
 @media only screen and (max-width: 840px) {
   .main {
     height: 150px;
+    padding:0;
   }
   .toolWrap {
     flex-direction: column-reverse;
