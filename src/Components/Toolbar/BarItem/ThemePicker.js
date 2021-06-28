@@ -1,16 +1,13 @@
-import React from "react";
+import { SET_THEME } from "../../../store/Action/action";
 import { connect } from "react-redux";
 
-import {
-  Grid,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-} from "@material-ui/core";
-
+import Grid from "@material-ui/core/Grid";
 import classes from "./tools.module.css";
-import { SET_THEME } from "../../../store/Action/action";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 const ThemePicker = (props) => {
   const handleChange = (event) => {
@@ -18,9 +15,13 @@ const ThemePicker = (props) => {
   };
 
   return (
-    <Grid className={classes.mainGrid}>
+    <Grid
+      className ={classes.mainGrid}
+    >
       <FormControl>
-        <InputLabel style={{ color: "#fff", paddingLeft: "40px" }}>
+        <InputLabel
+          style={{ color: "#fff",paddingLeft:'40px'}}
+        >
           Theme
         </InputLabel>
         <Select
@@ -29,16 +30,14 @@ const ThemePicker = (props) => {
           className={`${classes.selectEmpty} ${classes.navSelect}`}
           value={props.theme}
         >
-          <MenuItem value="monokai" selected>
-            <em>monokai</em>
+          <MenuItem value="vs-dark" selected>
+            <em>vs-dark</em>
           </MenuItem>
-          
-          <MenuItem value="eclipse">eclipse</MenuItem>
-          <MenuItem value="material-darker">material-darker</MenuItem>
-          <MenuItem value="dracula">dracula</MenuItem>
-          <MenuItem value="ambiance">ambiance</MenuItem>
-          <MenuItem value="mdn-like">mdn-like</MenuItem>
-          <MenuItem value="material-palenight">material-palenight</MenuItem>
+          <MenuItem value="light">light</MenuItem>
+          <MenuItem value="blackBoard">blackBoard</MenuItem>
+          <MenuItem value="cobalt">cobalt</MenuItem>
+          <MenuItem value="merbivore">merbivore</MenuItem>
+          <MenuItem value="github">github</MenuItem>
         </Select>
       </FormControl>
     </Grid>
