@@ -95,7 +95,18 @@ const Profile = (props) => {
               <Tooltip
                 title="share"
                 onClick={() => {
-                  navigator.clipboard.writeText(window.location.href);
+                  if (
+                    window.location.pathname === "/me" &&
+                    localStorage.getItem("userData")
+                  ) {
+                    const user_id = JSON.parse(localStorage.getItem("userData"))
+                      .user._id;
+                    navigator.clipboard.writeText(
+                      `${window.location.origin}/profile/?user=${user_id}`
+                    );
+                  } else {
+                    navigator.clipboard.writeText(window.location.href);
+                  }
                   return setMsg("copied to clipboard");
                 }}
               >
@@ -237,7 +248,7 @@ const Profile = (props) => {
         </div>
       </div>
       <Snacker
-        open={msg}
+        open={msg != null}
         autoHideDuration={3000}
         message={msg}
         onClose={() => setMsg(null)}
