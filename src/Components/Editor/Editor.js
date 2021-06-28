@@ -10,7 +10,10 @@ import { connect } from "react-redux";
 import { SET_LOADING, SET_OUTPUT } from "../../store/Action/action";
 import languageMapper from "../../Function/languageMapper";
 import RandomColor from "randomcolor";
-import "./EditorAddons"
+import blackBoardJSON from "../manaco-Themes/blackBoard";
+import cobaltJSON from "../manaco-Themes/cobalt";
+import merbivoreJSON from "../manaco-Themes/merbivore";
+import githubJSON from "../manaco-Themes/github";
 
 function EditorC(props) {
   const location = useLocation();
