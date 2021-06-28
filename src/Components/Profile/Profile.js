@@ -249,7 +249,6 @@ const Profile = (props) => {
       </div>
       <Snacker
         open={msg != null}
-        autoHideDuration={3000}
         message={msg}
         onClose={() => setMsg(null)}
       />
