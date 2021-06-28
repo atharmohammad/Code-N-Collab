@@ -93,7 +93,7 @@ const BlogPage = (props) => {
           background: "#18191a",
         }}
       >
-        <BlogHead back="/homePage" />
+        <BlogHead />
 
         {showEditor ? (
           <div style={{ width: "80vw", maxWidth: "800px" }}>

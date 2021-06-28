@@ -34,10 +34,6 @@ const Me = (props) => {
     }
   }, []);
 
-  const backHandler = () => {
-    history.push("/blogs");
-  };
-
   return (
     <div
       style={{
@@ -49,7 +45,7 @@ const Me = (props) => {
     >
       <Stars />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Back clicked={backHandler} />
+        <Back/>
         <Nav />
       </div>
       {startSpinner ? <Spinner /> : <Profile user={user} />}

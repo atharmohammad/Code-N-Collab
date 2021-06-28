@@ -62,13 +62,10 @@ function Rooms(props) {
     }
   };
 
-  const backHandler = () => {
-    history.push("/homepage");
-  };
   return (
     <div className={styles.main}>
       <Stars color="#fff" />
-      <Back clicked={backHandler} />
+      <Back/>
       <Grid container direction="column" justify="center" alignItems="center">
         <img className={styles.img} src={CreateRoom} alt="create-room" />
 

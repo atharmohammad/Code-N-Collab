@@ -91,7 +91,7 @@ function HomePage() {
       >
         <Stars color="#fff" />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Back clicked={homePageHandler} />
+          <Back/>
           <Nav />
         </div>
         {startSpinner ? (

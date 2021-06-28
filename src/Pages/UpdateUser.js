@@ -63,10 +63,6 @@ const UpdateUser = (props) => {
     }
   };
 
-  const backHandler = () => {
-    history.push("/me");
-  };
-
   return (
     <>
       {showAvatarModal ? (
@@ -84,7 +80,7 @@ const UpdateUser = (props) => {
       >
         <Stars />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Back clicked={backHandler} />
+          <Back/>
           <Nav />
         </div>
 
