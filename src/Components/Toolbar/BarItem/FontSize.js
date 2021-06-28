@@ -33,7 +33,7 @@ const CustomizeFont = (props) => {
           <MenuItem value={25} selected>
             <em>Medium</em>
           </MenuItem>
-          <MenuItem value={35}>Large</MenuItem>
+          <MenuItem value={30}>Large</MenuItem>
         </Select>
       </FormControl>
     </Grid>
