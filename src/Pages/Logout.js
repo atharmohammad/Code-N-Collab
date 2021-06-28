@@ -9,16 +9,19 @@ const Logout = (props) => {
   const history = useHistory();
   const auth = useContext(AuthContext);
   
-  useEffect(async () => {
-    try {
-      await axios.get("/user/logout");
-    } catch (e) {
-      alert("There is some error related to logout! try again!")
-    } finally {
-      auth.logout();
-      history.push("/homepage");
+  useEffect(() => {
+    const fn = async () =>{
+      try {
+        await axios.get("/user/logout");
+      } catch (e) {
+        alert("There is some error related to logout! try again!")
+      } finally {
+        auth.logout();
+        history.push("/homepage");
+      }
     }
-  }, []);
+    fn();
+  }, [auth,history]);
 
   return (
     <div

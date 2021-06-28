@@ -2,10 +2,6 @@ import { useEffect, useState, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import {
   Grid,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
   Box,
 } from "@material-ui/core";
 

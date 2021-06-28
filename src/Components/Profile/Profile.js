@@ -148,6 +148,7 @@ const Profile = (props) => {
               }}
               href={user.Codeforces}
               target="_blank"
+              rel="noreferrer"
             >
               <img
                 src={CodeforcesIcon}
@@ -169,6 +170,7 @@ const Profile = (props) => {
               }}
               href={user.Codechef}
               target="_blank"
+              rel="noreferrer"
             >
               <img
                 src={CodechefIcon}
@@ -190,6 +192,7 @@ const Profile = (props) => {
               }}
               href={user.AtCoder}
               target="_blank"
+              rel="noreferrer"
             >
               <img
                 src={AtcoderIcon}
@@ -210,6 +213,7 @@ const Profile = (props) => {
                 boxSizing: "border-box",
               }}
               target="_blank"
+              rel="noreferrer"
               href={user.Linkedin}
             >
               <img
@@ -232,6 +236,7 @@ const Profile = (props) => {
               }}
               href={user.Github}
               target="_blank"
+              rel="noreferrer"
             >
               <img
                 src={GithubIcon}
