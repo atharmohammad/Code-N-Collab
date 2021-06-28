@@ -4,7 +4,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { Grid, Snackbar } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 
-import HomePageImg from "../Assets/images/HomePageImg.png";
+import HomePageImg from "../Components/HomePageImage/HomePageImg";
 import Button from "../Components/HomePageButtons/Buttons";
 import Stars from "../Components/Stars/Stars";
 import Nav from "../Components/Nav/Nav";
@@ -108,16 +108,13 @@ function HomePage() {
                 boxSizing: "border-box",
               }}
             >
-              <img
-                src={HomePageImg}
-                alt="Code-N-Collab"
-                style={{
+              <HomePageImg styleImg={{
                   marginBottom: "5vh",
                   width: "45vw",
                   maxWidth: "500px",
                   minWidth: "300px",
-                }}
-              />
+                }}/>
+              
               <Button name="Code - Editor" clicked={roomHandler} />
               <Button name="LockOut - Championship" clicked={contestHandler} />
               <Button name="Blogs" clicked={blogHandler} />

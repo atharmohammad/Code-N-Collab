@@ -7,7 +7,7 @@ import Leave from "./BarItem/Leave";
 import Compile from "./BarItem/Compile";
 import GraphButton from "./BarItem/GraphButton";
 import FontSize from "./BarItem/FontSize";
-import RoomTitle from "../../Assets/images/roomTitle.png";
+import HomePageImg from "../HomePageImage/HomePageImg";
 import classes from "./Toolbar.module.css";
 
 export default function Toolbar(props) {
@@ -16,7 +16,9 @@ export default function Toolbar(props) {
   return (
     <Grid className={classes.main}>
       <Grid className={classes.imgGrid}>
-        <img src={RoomTitle} alt="code-n-collab" />
+        <HomePageImg
+          styleImg={{ width: "40vw", maxWidth: "210px", maxHeight: "38px" }}
+        />
       </Grid>
       <Grid className={classes.toolWrap}>
         <Grid className={classes.toolsGrid}>
