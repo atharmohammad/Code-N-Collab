@@ -1,7 +1,8 @@
-import {  useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
+import Snacker from "../Components/Snacker/Snaker";
 import { AuthContext } from "../context/auth-context";
 import AvatarModal from "../Components/Modal/AvatarModal";
 import Back from "../Components/Back/Back";
@@ -34,10 +35,13 @@ const UpdateUser = (props) => {
   const [amongusChar, setAmongusChar] = useState(parseInt(user.Avatar));
   const [country, setCountry] = useState(user.Country);
   const [startSpinner, setSpinner] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const history = useHistory();
 
   const updateProfile = async () => {
+    if (!name && !name.trim()) return setErrorMsg("Name cant be empty");
+
     const data = {
       Name: name,
       Moto: moto,
@@ -59,8 +63,9 @@ const UpdateUser = (props) => {
       setSpinner(false);
       history.push("/me");
     } catch (e) {
-      alert("There is some error related to updateProfile! try again!")
+      setErrorMsg("Oops something went wrong");
     }
+    setSpinner(false);
   };
 
   return (
@@ -80,7 +85,7 @@ const UpdateUser = (props) => {
       >
         <Stars />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Back/>
+          <Back />
           <Nav />
         </div>
 
@@ -229,6 +234,12 @@ const UpdateUser = (props) => {
           </div>
         )}
       </div>
+      <Snacker
+        open={errorMsg != null}
+        message={errorMsg}
+        severity='error'
+        onClose={() => setErrorMsg(null)}
+      />
     </>
   );
 };

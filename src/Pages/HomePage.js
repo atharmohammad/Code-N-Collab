@@ -4,7 +4,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { Grid, Snackbar } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 
-import HomePageImg from "../Assets/images/HomePageImg.png";
+import HomePageImg from "../Components/HomePageImage/HomePageImg";
 import Button from "../Components/HomePageButtons/Buttons";
 import Stars from "../Components/Stars/Stars";
 import Nav from "../Components/Nav/Nav";
@@ -25,38 +25,37 @@ function HomePage() {
   const [startSpinner, setSpinner] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(async () => {
-    if (searchParams.get("code")) {
-      const code = searchParams.get("code");
-
-      let data;
-
-      try {
-        setSpinner(true);
-        data = await axios.post("/Oauth/authenticated", { code: code });
-        auth.login(data.data.user, data.data.token);
-        if (data.data.Way === "signup") {
-          history.push("/updateUser");
-        } else {
-          history.push("/homepage");
+  useEffect(() => {
+    const fn = async()=>{
+      if (searchParams.get("code")) {
+        const code = searchParams.get("code");
+  
+        let data;
+  
+        try {
+          setSpinner(true);
+          data = await axios.post("/Oauth/authenticated", { code: code });
+          auth.login(data.data.user, data.data.token);
+          if (data.data.Way === "signup") {
+            history.push("/updateUser");
+          } else {
+            history.push("/homepage");
+          }
+        } catch (e) {
+          alert("there is some error related to Outh post! try again!")
         }
-      } catch (e) {
-        alert("there is some error related to Outh post! try again!")
+        setSpinner(false);
       }
-      setSpinner(false);
+  
+      if (location.state && location.state.error) {
+        setError(location.state.error);
+      }
     }
-
-    if (location.state && location.state.error) {
-      setError(location.state.error);
-    }
+    fn();
   }, []);
 
   const roomHandler = () => {
     history.push("/rooms");
-  };
-
-  const homePageHandler = () => {
-    history.push("/");
   };
 
   const blogHandler = () => {
@@ -108,16 +107,13 @@ function HomePage() {
                 boxSizing: "border-box",
               }}
             >
-              <img
-                src={HomePageImg}
-                alt="Code-N-Collab"
-                style={{
+              <HomePageImg styleImg={{
                   marginBottom: "5vh",
                   width: "45vw",
                   maxWidth: "500px",
                   minWidth: "300px",
-                }}
-              />
+                }}/>
+              
               <Button name="Code - Editor" clicked={roomHandler} />
               <Button name="LockOut - Championship" clicked={contestHandler} />
               <Button name="Blogs" clicked={blogHandler} />

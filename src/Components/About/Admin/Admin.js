@@ -30,6 +30,7 @@ export default function Admin(props) {
         <a
           title="linkedIn"
           target="_blank"
+          rel="noreferrer"
           href={props.linkedIn}
           className={classes.iconImg}
         >
@@ -39,6 +40,7 @@ export default function Admin(props) {
           title="Github"
           href={props.github}
           className={classes.iconImg}
+          rel="noreferrer"
           target="_blank"
         >
           <img style={{ width: "100%" }} src={Github} alt="Github" />
@@ -47,6 +49,7 @@ export default function Admin(props) {
           title="Codeforces"
           href={props.codeForces}
           className={classes.iconImg}
+          rel="noreferrer"
           target="_blank"
         >
           <img style={{ width: "80%" }} src={Codeforces} alt="Codeforces" />
@@ -56,6 +59,7 @@ export default function Admin(props) {
           href={props.portFolio}
           className={classes.iconImg}
           target="_blank"
+          rel="noreferrer"
         >
           <img
             style={{ width: "85%" }}

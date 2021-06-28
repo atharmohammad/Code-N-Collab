@@ -8,6 +8,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import Stars from "../Stars/Stars";
 import styles from "./RoomsInput.module.css";
 import CreateRoom from "../../Assets/images/create_room.png";
+import JoinRoom from "../../Assets/images/JoinRoom.png";
 import Back from "../Back/Back";
 
 function Alert(props) {
@@ -15,12 +16,14 @@ function Alert(props) {
 }
 
 function Rooms(props) {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
   const history = useHistory();
   const [room, setRoom] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const location = useLocation();
   const [error, setError] = useState(null);
+  const [roomHeadingType, setRoomHeadingType] = useState(1);
 
   useEffect(() => {
     if (location.state && location.state.error) {
@@ -34,6 +37,7 @@ function Rooms(props) {
       searchParams.get("room").toLowerCase().endsWith("collab")
     ) {
       setRoom(searchParams.get("room").trim());
+      setRoomHeadingType(2);
     } else {
       const roomId = uuidv4() + "collab";
       setRoom(roomId);
@@ -47,8 +51,8 @@ function Rooms(props) {
   };
 
   const createRoomHandler = async (e) => {
-    if(!name || !name.trim()){
-      return setError('Invalid name');
+    if (!name || !name.trim()) {
+      return setError("Invalid name");
     }
 
     try {
@@ -58,21 +62,24 @@ function Rooms(props) {
         state: { password },
       });
     } catch (err) {
-      alert("History push error!  try again!")
+      alert("History push error!  try again!");
     }
   };
 
   return (
     <div className={styles.main}>
       <Stars color="#fff" />
-      <Back/>
+      <Back />
       <Grid container direction="column" justify="center" alignItems="center">
-        <img className={styles.img} src={CreateRoom} alt="create-room" />
-
+        {roomHeadingType === 1 ? (
+          <img className={styles.img} src={CreateRoom} alt="create-room" />
+        ) : (
+          <img className={styles.img} src={JoinRoom} alt="join-room" />
+        )}
         <div className={styles.inputContainer}>
           <div>
             <InputLabel style={{ color: "#fff", fontWeight: "bold" }}>
-              Username
+              Choose a Username *
             </InputLabel>
             <input
               onChange={(event) => changeHandler("name", event)}
@@ -91,7 +98,7 @@ function Rooms(props) {
 
           <div>
             <InputLabel style={{ color: "#fff", fontWeight: "bold" }}>
-              Password
+              Password {roomHeadingType == 1?'(Optional)':null}
             </InputLabel>
             <input
               type="password"
@@ -106,7 +113,7 @@ function Rooms(props) {
               alignSelf: "center",
               border: "3px solid white",
               borderRadius: "5px",
-              background: name && room ?"transparent" : "#7d7574" ,
+              background: name && room ? "transparent" : "#7d7574",
               color: "#fff",
               marginTop: "2vh",
               padding: "2vh",

@@ -42,6 +42,7 @@ export default function About(props) {
                 title="Code-N-Collab Git Repo"
                 href="https://github.com/atharmohammad/Code-N-Collab/tree/master"
                 target="_blank"
+                rel="noreferrer"
                 style={{ width: "100%", height: "100%" }}
               >
                 <img
