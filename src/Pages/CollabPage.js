@@ -24,6 +24,7 @@ const CollabPage = (props) => {
   const location = useLocation();
   const history = useHistory();
   const [joined, setJoined] = useState(false);
+  const [startMsgSnackbar, setStartMsgSnackbar] = useState(true);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -40,16 +41,16 @@ const CollabPage = (props) => {
           error: "Username or RoomName can't be empty",
         };
       }
-      try{
-      if(!searchParams.get("room").toLowerCase().endsWith("collab")){
-        err = {
-          error: "Invalid room",
-        };
+      try {
+        if (!searchParams.get("room").toLowerCase().endsWith("collab")) {
+          err = {
+            error: "Invalid room",
+          };
+        }
+      } catch (e) {
+        alert("There is some error related to serachParams! try again!");
       }
-    }catch(e){
-      alert("There is some error related to serachParams! try again!")
-    }
-    
+
       return history.push({
         pathname: "/rooms",
         search:
@@ -112,7 +113,7 @@ const CollabPage = (props) => {
               <ReflexElement
                 minSize="100"
                 maxSize="1600"
-                style={{display:'flex',}}
+                style={{ display: "flex" }}
               >
                 <Editor socket={socket} />
               </ReflexElement>
@@ -172,6 +173,23 @@ const CollabPage = (props) => {
         >
           <Alert onClose={props.notify_output_error} severity="error">
             Something Went Wrong!
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          open={startMsgSnackbar}
+          autoHideDuration={6000}
+          onClose={() => {
+            setStartMsgSnackbar(false);
+          }}
+        >
+          <Alert
+            onClose={() => {
+              setStartMsgSnackbar(false);
+            }}
+            severity="info"
+          >
+            Share url to collaborate with others!
           </Alert>
         </Snackbar>
       </div>
