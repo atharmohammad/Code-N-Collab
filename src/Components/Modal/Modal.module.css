@@ -1,0 +1,22 @@
+.modal {
+  position: fixed;
+  z-index: 500;
+  height: 45vh;
+  width: 40%;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px black;
+  background: rgb(39, 41, 43, 0.8);
+  padding: 15vh;
+  left: 30%;
+  top: 150px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+}
+
+@media screen and (max-width: 330px) {
+  .modal {
+    left: 5%;
+  }
+}
