@@ -14,6 +14,7 @@ import blackBoardJSON from "../manaco-Themes/blackBoard";
 import cobaltJSON from "../manaco-Themes/cobalt";
 import merbivoreJSON from "../manaco-Themes/merbivore";
 import githubJSON from "../manaco-Themes/github";
+import "./Editor.css"
 
 function EditorC(props) {
   const location = useLocation();
@@ -97,7 +98,7 @@ function EditorC(props) {
         beforeMount={handleEditorWillMount}
         onMount={(editor) => handleEditorDidMount(editor)}
         theme={props.tools.theme}
-        language={"cpp"}
+        language={props.tools.language}
         onChange={(value) => setCode(value || "")}
         options={{
           wordWrap: "on",

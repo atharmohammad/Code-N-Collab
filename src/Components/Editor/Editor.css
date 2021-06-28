@@ -1,23 +1,24 @@
-.remote-caret {
-  position: absolute;
-  border-left: black;
-  border-left-style: solid;
-  border-left-width: 2px;
-  height: 1em;
-}
-.remote-caret > div {
-  position: relative;
-  top: -0.4em;
-  font-size: 13px;
-  background-color: rgb(250, 129, 0);
-  font-family: serif;
-  font-style: normal;
-  font-weight: normal;
-  line-height: normal;
-  user-select: none;
-  color: white;
-  padding-left: 2px;
-  padding-right: 2px;
-  z-index: 3;
-  border-radius: 20%;
-}
+#monaco-editor {
+           width:100%;
+           height:600px;
+           border:1px solid #ccc;
+       }
+       .yRemoteSelection {
+           background-color: rgb(250, 129, 0, .5)
+       }
+       .yRemoteSelectionHead {
+           position: absolute;
+           border-left: orange solid 2px;
+           border-top: orange solid 2px;
+           border-bottom: orange solid 2px;
+           height: 100%;
+           box-sizing: border-box;
+       }
+       .yRemoteSelectionHead::after {
+           position: absolute;
+           content: ' ';
+           border: 3px solid orange;
+           border-radius: 4px;
+           left: -4px;
+           top: -5px;
+       }
