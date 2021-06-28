@@ -110,7 +110,10 @@ It provides users with :-
 - The <a href="CODE_OF_CONDUCT.md" >Code of Conduct</a>
 - The <a href="CONTRIBUTING.md">Contribution Guidelines</a>
 - The <a href="https://drive.google.com/drive/folders/1SB2dGPe3Avzsj0VXJ3sclTTdpjC1FbpV?usp=sharing">Documentation</a>
+<<<<<<< HEAD
 
+=======
+>>>>>>> f76016aa5714e79a360f7415697d68c858f6abeb
 
 ## 📲 Contact
 
