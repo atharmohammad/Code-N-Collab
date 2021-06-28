@@ -25,7 +25,7 @@ const Me = (props) => {
         setUser(data.data);
         setSpinner(false);
       } catch (e) {
-        console.log(e);
+        alert("there is some error related to searchParams ! try again!")
         history.push("/homepage");
       }
     } else {

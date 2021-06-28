@@ -72,6 +72,7 @@ const HelperIcons = (props) => {
       setLikesCount((state) => (viewerLiked ? state - 1 : state + 1));
       setViewerLiked((state) => !state);
       setError("Oops something went wrong");
+      alert("Post blog error!  try again!")
     }
     setDisableLikeBtn(false);
   };

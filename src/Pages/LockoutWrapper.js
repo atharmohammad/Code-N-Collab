@@ -54,7 +54,9 @@ export default function LockoutWrapper(props) {
           state: { error: "Invalid room" },
         });
       }
-    } catch (e) {}
+    } catch (e) {
+      alert("There is some error related to searchParams! try again!")
+    }
 
     setValid(true);
   }, []);
