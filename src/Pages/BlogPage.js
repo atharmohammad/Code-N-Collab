@@ -33,11 +33,11 @@ const BlogPage = (props) => {
   const [skip, setSkip] = useState(
     searchParams.has("skip") ? parseInt(searchParams.get("skip")) : 0
   );
-  const [posted,setPosted] = useState(false);
+  const [posted, setPosted] = useState(false);
 
-  useEffect(async() => {
-     fetchBlogs();
-  }, [skip, sortBy,posted]);
+  useEffect(async () => {
+    fetchBlogs();
+  }, [skip, sortBy, posted]);
 
   const fetchBlogs = async () => {
     setBlogsLoading(true);
@@ -53,13 +53,13 @@ const BlogPage = (props) => {
   };
 
   const showMoreBlogs = () => {
-    history.push(`/blogs?sortBy=${sortBy}&skip=${skip + 5}`);
+    history.push(`/blogs?sortBy=${sortBy}&skip=${skip + 10}`);
     setSkip((prev) => prev + 5);
   };
 
   const showLessBlogs = async () => {
     if (skip >= 5) {
-      history.push(`/blogs?sortBy=${sortBy}&skip=${skip - 5}`);
+      history.push(`/blogs?sortBy=${sortBy}&skip=${skip - 10}`);
       setSkip((prev) => prev - 5);
     }
   };
@@ -126,7 +126,7 @@ const BlogPage = (props) => {
                   history.push(`/blogs?sortBy=creationTime&skip=0`);
                   setSkip(0);
                   setSortBy("creationTime");
-                  setPosted(prev=>!prev);
+                  setPosted((prev) => !prev);
                 }}
                 initialValue=""
                 method="post"
@@ -191,30 +191,32 @@ const BlogPage = (props) => {
         <div
           style={{
             display: "flex",
-            justifyContent: (skip && blogs.length > 0 ) ? "space-between" : "center",
+            justifyContent:
+              skip && blogs.length > 0 ? "space-between" : "center",
             width: "80vw",
             maxWidth: "800px",
           }}
         >
-        {skip ? (<Box
-          style={{
-            width: "120px",
-            height: "40px",
-            backgroundColor: "#4169E1",
-            borderRadius: "5px",
-            padding: "5px 5px 0 5px",
-            textAlign: "center",
-            color: "#fff",
-            marginTop: "30px",
-            cursor: "pointer",
-            textAlign: "center",
-            boxSizing: "border-box",
-          }}
-          onClick={showLessBlogs}
-        >
-          Prev
-        </Box>)
-        : null}
+          {skip ? (
+            <Box
+              style={{
+                width: "120px",
+                height: "40px",
+                backgroundColor: "#4169E1",
+                borderRadius: "5px",
+                padding: "5px 5px 0 5px",
+                textAlign: "center",
+                color: "#fff",
+                marginTop: "30px",
+                cursor: "pointer",
+                textAlign: "center",
+                boxSizing: "border-box",
+              }}
+              onClick={showLessBlogs}
+            >
+              Prev
+            </Box>
+          ) : null}
 
           {blogs.length > 0 ? (
             <Box
