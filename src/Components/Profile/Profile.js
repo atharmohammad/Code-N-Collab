@@ -5,6 +5,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import ShareIcon from "@material-ui/icons/Share";
 import Snackbar from "@material-ui/core/Snackbar";
 import { Tooltip, IconButton } from "@material-ui/core";
+import AdminStar from "../../Assets/images/star.png";
 
 import ProfileFeild from "./ProfileFeild";
 import classes from "./profile.module.css";
@@ -29,9 +30,7 @@ const Profile = (props) => {
 
   return (
     <>
-      <div
-      className = {classes.img_div}
-      >
+      <div className={classes.img_div}>
         <img
           src={ProfileTitle}
           style={{ height: "70px", width: "200px" }}
@@ -43,7 +42,7 @@ const Profile = (props) => {
           <div
             style={{
               display: "flex",
-              flexWrap:'wrap',
+              flexWrap: "wrap",
               borderBottom: "2px solid grey",
               width: "100%",
               justifyContent: "space-between",
@@ -60,10 +59,22 @@ const Profile = (props) => {
                   display: "flex",
                   alignItems: "flex-end",
                   margin: "10px",
-                  fontFamily: ["edgwick Ave Display", "cursive"].join(),
+                  fontFamily: ["Fira Sans", "sans-serif"].join(),
                 }}
               >
                 <div>{user.Name}</div>
+                {user.SuperUser ? (
+                  <div
+                    style={{
+                      marginLeft: "8px",
+                      fontWeight: "bold",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Admin
+                    <img style={{height:'20px',marginLeft:"2px"}} src={AdminStar} alt="" />
+                  </div>
+                ) : null}
               </div>
             </div>
             <div

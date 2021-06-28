@@ -45,7 +45,7 @@
         <img src="Images/homepage.PNG"/>
      </td>
      <td >
-       <img src="Images/pofile.PNG"/>
+       <img src="Images/profile.PNG"/>
      </td>
    </tr>
    <tr>
@@ -59,7 +59,7 @@
 </table>
  </a>
 
-# 🔖 About 
+# 🔖 About
 Code - N - Collab is a Collaboration website for Software developers , Competitive coders , and every one who loves to code and collaborate with others to learn and grow. It provides users to collaborate with their team , friends and also find people with similar their interests.
 
 ## 🚀 Features
@@ -69,36 +69,30 @@ It provides users with :-
 
 - Lockout Championship :
   for people who are looking to compete on codeforces problemset , they can set their codeforces handle in profile section and enjoy competing with their friends and challenging on interesting problems which will be filter on user's choice and then randomly selects 5 problems in a problem rating range , To challenge your friend you just need to share your Url before starting the contest
-  
-- Blogs : 
-  People can share their knowledge , learn and ask any thing in our blogs section 
 
-## 🔥 Getting Started 
+- Blogs :
+  People can share their knowledge , learn and ask any thing in our blogs section
+
+## 🔥 Getting Started
 
 ### Prerequisites
 
 - <a href="https://reactjs.org/">Reactjs</a>
 - <a href="https://nodejs.org/en/">Nodejs</a>
 
-#### Setup Environment variables 
+#### Setup Environment variables
 ```
-     REACT_APP_CONVERGENCE_URL= "http://localhost:8000/api/realtime/convergence/default"
+     REACT_APP_SIGNALLING_URL1 = wss://y-webrtc-signaling-eu.herokuapp.com
+     REACT_APP_SIGNALLING_URL2 = wss://y-webrtc-signaling-us.herokuapp.com
      REACT_APP_BASE_URL = 'http://localhost:8080/'
 ```
 
 #### Setup backend for Code - N - Collab
 <a href="https://github.com/atharmohammad/Code-N-Collab-Server">Code - N - Collab Backend</a>
 
-#### Setup Convergence 
-To setup convergence server you have to download docker, for windows user they can download <a href="https://docs.docker.com/docker-for-windows/install/">Docker for Windows</a>
-
-run the following command in your terminal
-
-```
-C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/convergence-omnibus
-```
-
 ### Installation
+
+- Fork the Repository
 
 ```
    $ git clone https://github.com/<your-username>/Code-N-Collab.git
@@ -108,14 +102,15 @@ C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/conver
    $ npm start
 ```
 
-## 💁 Contribution guidelines 
+## 💁 Contribution guidelines
 
  we encourage organizations and individuals to contribute requirements, documentation, issues, new templates, and code.
  For code contributions, read :
- 
+
 - The <a href="CODE_OF_CONDUCT.md" >Code of Conduct</a>
 - The <a href="CONTRIBUTING.md">Contribution Guidelines</a>
-- The <a href="" >Documentation Style Guide</a>
+- The <a href="https://drive.google.com/drive/folders/1SB2dGPe3Avzsj0VXJ3sclTTdpjC1FbpV?usp=sharing">Documentation</a>
+
 
 ## 📲 Contact
 
@@ -123,11 +118,10 @@ C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/conver
 <br>
 <a href="https://www.linkedin.com/in/adnan-shamsi-5830301b3/">Adnan Shamsi</a> - adnanshamsi023@gmail.com
 
-## 📚 Resources 
+## 📚 Resources
 - <a href="https://socket.io/docs/v4" >Socket.Io Documentation </a>
-- <a href="https://convergence.io/documentation/" > Convergence Docs </a>
-- <a href="https://docs.docker.com/docker-for-windows/install/">Docker for Windows</a> (For windows user)
-- <a href="https://microsoft.github.io/monaco-editor/api/modules/monaco.editor.html">Monaco Editor Docs</a>
+- <a href="https://github.com/yjs/yjs/blob/master/README.md" > Yjs Docs </a>
+- <a href="https://github.com/scniro/react-codemirror2">React-Codemirror Editor Docs</a>
 
 ## License
 <a href="LICENSE">Apache License 2.0</a>
@@ -145,4 +139,3 @@ C:\Users\mohdr>docker run -p "8000:80" --name convergence convergencelabs/conver
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/athar-mohammad-34068a157/
 [product-screenshot]: Images/homepage.PNG
-

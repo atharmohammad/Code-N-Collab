@@ -13,7 +13,7 @@ const Logout = (props) => {
     try {
       await axios.get("/user/logout");
     } catch (e) {
-      console.log(e);
+      alert("There is some error related to logout! try again!")
     } finally {
       auth.logout();
       history.push("/homepage");

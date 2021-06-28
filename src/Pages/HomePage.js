@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { v1 as uuidv1 } from "uuid";
+import { v4 as uuid } from "uuid";
 import MuiAlert from "@material-ui/lab/Alert";
 import { Grid, Snackbar } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
@@ -41,7 +41,7 @@ function HomePage() {
           history.push("/homepage");
         }
       } catch (e) {
-        console.log("error", e);
+        alert("there is some error related to Outh post! try again!")
       }
       setSpinner(false);
     }
@@ -72,7 +72,7 @@ function HomePage() {
 
   const contestHandler = () => {
     if (auth.token) {
-      const room = uuidv1();
+      const room = uuid()+'contest';
       history.push({
         pathname: "/newContest",
         search: "?room=" + room,
@@ -91,7 +91,7 @@ function HomePage() {
       >
         <Stars color="#fff" />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Back clicked={homePageHandler} />
+          <Back/>
           <Nav />
         </div>
         {startSpinner ? (

@@ -20,13 +20,21 @@ const Reply = (props) => {
 
   const divRef = useRef();
 
+  function resizeImageForMarkdown(props) {
+    return (
+      <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+        <img {...props} style={{ maxWidth: "80%" }} />
+      </div>
+    );
+  }
+
   const deleteHandler = async () => {
     if (window.confirm("Are you sure you want to delete this comment")) {
       setSpinner(true);
       try {
         await axios.delete("/reply/deleteReply/" + reply._id);
       } catch (e) {
-        console.log(e);
+        alert("Delete reply error!  try again!")
       }
       setSpinner(false);
       setDeleted(true);
@@ -46,7 +54,7 @@ const Reply = (props) => {
       setEditReply(false);
       setInitialReply(res.data.Body);
     } catch (e) {
-      console.log(e);
+      alert("Update reply error! try again!")
     }
     setSpinner(false);
   };
@@ -91,7 +99,10 @@ const Reply = (props) => {
                 overflow: "auto",
               }}
             >
-              <ReactMarkdown>{initialReply}</ReactMarkdown>
+            <ReactMarkdown
+              renderers={{ image: resizeImageForMarkdown }}
+              children={initialReply}
+            />
             </div>
           ) : (
             <div style={{ margin: "2px" }}>

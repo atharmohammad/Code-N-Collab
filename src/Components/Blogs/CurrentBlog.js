@@ -23,15 +23,15 @@ const CurrentBlog = (props) => {
   const [totalCommentLength, setTotalCommentLength] = useState(0);
   const [comments, setComments] = useState([]);
   const [dummy, setDummy] = useState(uuidv4());
-  
+
   let id;
-  
+
   try {
     id = window.location.pathname.split("/")[2];
   } catch (e) {
-    console.log(e);
+    alert("Window location pathname error!  try again!");
   }
-  
+
   const history = useHistory();
 
   useEffect(async () => {
@@ -43,13 +43,20 @@ const CurrentBlog = (props) => {
       }
       setBlog(currBlog.data);
       setTotalCommentLength(currBlog.data.Comments.length);
-      console.log("current blog data", currBlog.data);
     } catch (e) {
-      console.log(e);
+      alert("Get currrentBlog error!  try again!");
     }
     setEditBlog(false);
     setBlogLoading(false);
   }, []);
+
+  function resizeImageForMarkdown(props) {
+    return (
+      <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+        <img {...props} style={{ maxWidth: "80%" }} />
+      </div>
+    );
+  }
 
   const deleteHandler = async () => {
     if (window.confirm("Are you sure you want to delete this Blog ?")) {
@@ -57,7 +64,7 @@ const CurrentBlog = (props) => {
         await axios.delete(`/blogs/delete/${id}`);
         history.push("/blogs");
       } catch (e) {
-        console.log(e);
+        alert("Delete blog error!  try again!");
       }
     }
   };
@@ -74,7 +81,7 @@ const CurrentBlog = (props) => {
       }
       setBlog(currBlog.data);
     } catch (e) {
-      console.log(e);
+      alert("Get blog error! try again!");
     }
     setEditBlog(false);
     setBlogLoading(false);
@@ -91,7 +98,7 @@ const CurrentBlog = (props) => {
       setComments(data.data.Comments);
       setDummy(uuidv4());
     } catch (e) {
-      console.log(e);
+      alert("Get comment error!  try again!");
     }
     setCommentLoading(false);
   };
@@ -131,7 +138,10 @@ const CurrentBlog = (props) => {
               admin={{ User: blog.User }}
               date={blog.createdAt}
             />
-            <ReactMarkdown>{blog.Body}</ReactMarkdown>
+            <ReactMarkdown
+              renderers={{ image: resizeImageForMarkdown }}
+              children={blog.Body}
+            />
           </>
         ) : (
           <>

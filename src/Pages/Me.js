@@ -25,7 +25,7 @@ const Me = (props) => {
         setUser(data.data);
         setSpinner(false);
       } catch (e) {
-        console.log(e);
+        alert("there is some error related to searchParams ! try again!")
         history.push("/homepage");
       }
     } else {
@@ -33,10 +33,6 @@ const Me = (props) => {
       setSpinner(false);
     }
   }, []);
-
-  const backHandler = () => {
-    history.push("/blogs");
-  };
 
   return (
     <div
@@ -49,7 +45,7 @@ const Me = (props) => {
     >
       <Stars />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Back clicked={backHandler} />
+        <Back/>
         <Nav />
       </div>
       {startSpinner ? <Spinner /> : <Profile user={user} />}

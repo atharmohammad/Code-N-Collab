@@ -14,7 +14,7 @@
   width: 20%;
   font-weight: bold;
   text-align: right;
-  margin: 2vh 0 0 3vh;
+  margin: 2vh 0 0 0;
   box-sizing: border-box;
 }
 
@@ -23,7 +23,7 @@
   width: 2vh;
   border-radius: 50%;
   background-color: green;
-  margin: 3vh 0 0 6vh;
+  margin: 3vh 0 0 2vh;
   box-sizing: border-box;
 }
 
@@ -131,4 +131,10 @@
   border: 2px solid black;
   color: black;
   font-weight: bold;
+}
+
+.username{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

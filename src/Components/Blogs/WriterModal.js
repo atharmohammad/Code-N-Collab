@@ -23,7 +23,6 @@ const WriterModal = (props) => {
       fetchData();
     } catch (e) {
       alert("error Posting!");
-      console.log(e);
     } finally {
       setSpinner(false);
       cancelHandler();

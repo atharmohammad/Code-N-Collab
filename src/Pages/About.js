@@ -1,6 +1,4 @@
 import { Container } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
-
 import Stars from "../Components/Stars/Stars";
 import Nav from "../Components/Nav/Nav";
 import Back from "../Components/Back/Back";
@@ -11,11 +9,6 @@ import AboutContent from "../Components/About/AboutContent";
 import classes from "./pages.module.css";
 
 export default function About(props) {
-  const history = useHistory();
-
-  const backHandler = () => {
-    history.push("/homepage");
-  };
 
   return (
     <div
@@ -27,7 +20,7 @@ export default function About(props) {
     >
       <Stars />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Back clicked={backHandler} />
+        <Back/>
         <Nav />
       </div>
       <Container component="main" maxWidth="md" style={{ marginTop: "5px" }}>

@@ -18,6 +18,14 @@ export default function SingleBlog(props) {
     return history.push("/blog/" + blog._id);
   };
 
+  function resizeImageForMarkdown(props) {
+    return (
+      <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+        <img {...props} style={{ maxWidth: "80%" }} />
+      </div>
+    );
+  }
+
   const deleteHandler = async () => {
     if (window.confirm("Are you sure you want to delete this Blog")) {
       setSpinner(true);
@@ -69,7 +77,7 @@ export default function SingleBlog(props) {
           onClick={onClickHandler}
         >
           <Typography>
-            <ReactMarkdown>{blog.Body}</ReactMarkdown>
+            <ReactMarkdown renderers={{ image: resizeImageForMarkdown }} children={blog.Body} />
           </Typography>
         </Grid>
         <Grid container direction="row" justify="flex-end">

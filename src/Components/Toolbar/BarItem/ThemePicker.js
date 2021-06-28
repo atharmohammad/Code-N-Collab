@@ -8,6 +8,7 @@ import {
   FormControl,
   Select,
 } from "@material-ui/core";
+
 import classes from "./tools.module.css";
 import { SET_THEME } from "../../../store/Action/action";
 
@@ -28,14 +29,16 @@ const ThemePicker = (props) => {
           className={`${classes.selectEmpty} ${classes.navSelect}`}
           value={props.theme}
         >
-          <MenuItem value="vs-dark" selected>
-            <em>vs-dark</em>
+          <MenuItem value="monokai" selected>
+            <em>monokai</em>
           </MenuItem>
-          <MenuItem value="light">light</MenuItem>
-          <MenuItem value="blackBoard">blackBoard</MenuItem>
-          <MenuItem value="cobalt">cobalt</MenuItem>
-          <MenuItem value="merbivore">merbivore</MenuItem>
-          <MenuItem value="github">github</MenuItem>
+          
+          <MenuItem value="eclipse">eclipse</MenuItem>
+          <MenuItem value="material-darker">material-darker</MenuItem>
+          <MenuItem value="dracula">dracula</MenuItem>
+          <MenuItem value="ambiance">ambiance</MenuItem>
+          <MenuItem value="mdn-like">mdn-like</MenuItem>
+          <MenuItem value="material-palenight">material-palenight</MenuItem>
         </Select>
       </FormControl>
     </Grid>

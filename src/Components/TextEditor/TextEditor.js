@@ -19,7 +19,7 @@ function TextEditor(props) {
       });
       props.fetchBlog();
     } catch (e) {
-      console.log(e);
+      alert("Fetch blog error! try again!")
     }
   };
 

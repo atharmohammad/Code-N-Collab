@@ -51,7 +51,9 @@ const People = (props) => {
               if (!person || !person.username) return <></>;
               return (
                 <div
+                  title={person.username}
                   className={`${classes.messageContainer} ${classes.justifyStart}`}
+                  style={{ width: "270px" }}
                 >
                   <div
                     className={`${classes.messageBox} ${classes.backgroundUser}`}
@@ -60,7 +62,7 @@ const People = (props) => {
                       {person.username[0].toUpperCase()}
                     </Avatar>
                     <p
-                      className={`${classes.messageText} ${classes.colorLight}`}
+                      className={`${classes.messageText} ${classes.colorLight} ${classes.username}`}
                     >
                       {person.username}
                     </p>

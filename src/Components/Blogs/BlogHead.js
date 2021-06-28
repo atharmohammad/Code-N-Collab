@@ -7,11 +7,6 @@ import classes from "./blogs.module.css";
 import Back from "../Back/Back";
 
 export default function BlogHead(props) {
-  const history = useHistory();
-
-  const backHandler = () => {
-    history.push(props.back);
-  };
 
   return (
     <Grid
@@ -27,7 +22,7 @@ export default function BlogHead(props) {
       }}
     >
       <div>
-        <Back clicked={backHandler} />
+        <Back/>
       </div>
 
       <Grid container direction="row" justify="space-between">

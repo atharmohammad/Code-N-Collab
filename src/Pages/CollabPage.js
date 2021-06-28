@@ -6,10 +6,11 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
 import Chat from "../Components/Chat/ChatTabs";
-import Editor from "../Components/Editor/Editor_Wrapper";
+import Editor from "../Components/Editor/Editor";
 import IO from "../Components/IO/IO";
 import Problem from "../Components/Problem/Problem";
 import Toolbar from "../Components/Toolbar/Toolbar";
+import Spinner from "../Components/Spinner/ContestSpinner/ContestSpinner";
 import * as TYPES from "../store/Action/action";
 
 import "react-reflex/styles.css";
@@ -39,7 +40,16 @@ const CollabPage = (props) => {
           error: "Username or RoomName can't be empty",
         };
       }
-
+      try{
+      if(!searchParams.get("room").toLowerCase().endsWith("collab")){
+        err = {
+          error: "Invalid room",
+        };
+      }
+    }catch(e){
+      alert("There is some error related to serachParams! try again!")
+    }
+    
       return history.push({
         pathname: "/rooms",
         search:
@@ -70,7 +80,6 @@ const CollabPage = (props) => {
           });
         }
         setJoined(true);
-
       }
     );
   }, []);
@@ -103,7 +112,7 @@ const CollabPage = (props) => {
               <ReflexElement
                 minSize="100"
                 maxSize="1600"
-                style={{ overflow: "hidden" }}
+                style={{display:'flex',}}
               >
                 <Editor socket={socket} />
               </ReflexElement>
@@ -168,7 +177,7 @@ const CollabPage = (props) => {
       </div>
     </>
   ) : (
-    <></>
+    <Spinner margin={"0px"} />
   );
 };
 

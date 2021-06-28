@@ -59,12 +59,8 @@ const UpdateUser = (props) => {
       setSpinner(false);
       history.push("/me");
     } catch (e) {
-      console.log(e);
+      alert("There is some error related to updateProfile! try again!")
     }
-  };
-
-  const backHandler = () => {
-    history.push("/me");
   };
 
   return (
@@ -84,7 +80,7 @@ const UpdateUser = (props) => {
       >
         <Stars />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Back clicked={backHandler} />
+          <Back/>
           <Nav />
         </div>
 
