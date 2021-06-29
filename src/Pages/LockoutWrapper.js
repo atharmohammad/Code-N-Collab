@@ -54,8 +54,12 @@ export default function LockoutWrapper(props) {
           state: { error: "Invalid room" },
         });
       }
+    
     } catch (e) {
-      alert("There is some error related to searchParams! try again!")
+      return history.push({
+        pathname: "/homepage",
+        state: { error: "Invalid request" },
+      });
     }
 
     setValid(true);

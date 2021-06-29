@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { v4 as uuid } from "uuid";
-import MuiAlert from "@material-ui/lab/Alert";
-import { Grid, Snackbar } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 
 import HomePageImg from "../Components/HomePageImage/HomePageImg";
@@ -12,10 +11,7 @@ import Back from "../Components/Back/Back";
 import axios from "../Axios/axios";
 import Spinner from "../Components/Spinner/BlogSpinner";
 import { AuthContext } from "../context/auth-context";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import Snacker from "../Components/Snacker/Snaker";
 
 function HomePage() {
   const history = useHistory();
@@ -26,12 +22,12 @@ function HomePage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fn = async()=>{
+    const fn = async () => {
       if (searchParams.get("code")) {
         const code = searchParams.get("code");
-  
+
         let data;
-  
+
         try {
           setSpinner(true);
           data = await axios.post("/Oauth/authenticated", { code: code });
@@ -42,15 +38,15 @@ function HomePage() {
             history.push("/homepage");
           }
         } catch (e) {
-          alert("there is some error related to Outh post! try again!")
+          setError("Oops something went wrong try again later!");
         }
         setSpinner(false);
       }
-  
+
       if (location.state && location.state.error) {
         setError(location.state.error);
       }
-    }
+    };
     fn();
   }, []);
 
@@ -71,7 +67,7 @@ function HomePage() {
 
   const contestHandler = () => {
     if (auth.token) {
-      const room = uuid()+'contest';
+      const room = uuid() + "contest";
       history.push({
         pathname: "/newContest",
         search: "?room=" + room,
@@ -90,7 +86,7 @@ function HomePage() {
       >
         <Stars color="#fff" />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Back/>
+          <Back />
           <Nav />
         </div>
         {startSpinner ? (
@@ -107,13 +103,15 @@ function HomePage() {
                 boxSizing: "border-box",
               }}
             >
-              <HomePageImg styleImg={{
+              <HomePageImg
+                styleImg={{
                   marginBottom: "5vh",
                   width: "45vw",
                   maxWidth: "500px",
                   minWidth: "300px",
-                }}/>
-              
+                }}
+              />
+
               <Button name="Code - Editor" clicked={roomHandler} />
               <Button name="LockOut - Championship" clicked={contestHandler} />
               <Button name="Blogs" clicked={blogHandler} />
@@ -122,16 +120,13 @@ function HomePage() {
           </>
         )}
       </div>
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      <Snacker
         open={error !== null}
-        autoHideDuration={6000}
+        severity="error"
+        timer={6000}
+        message={error}
         onClose={() => setError(null)}
-      >
-        <Alert onClose={() => setError(null)} severity="error">
-          {error}
-        </Alert>
-      </Snackbar>
+      />
     </>
   );
 }

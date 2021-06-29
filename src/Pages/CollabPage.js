@@ -42,9 +42,7 @@ const CollabPage = (props) => {
             error: "Invalid room",
           };
         }
-      } catch (e) {
-        alert("There is some error related to serachParams! try again!");
-      }
+      } catch (e){}
 
       return history.push({
         pathname: "/rooms",

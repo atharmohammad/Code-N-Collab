@@ -26,7 +26,7 @@ const Me = (props) => {
           setUser(data.data);
           setSpinner(false);
         } catch (e) {
-          alert("there is some error related to searchParams ! try again!");
+          alert("Invalid url");
           history.push("/homepage");
         }
       } else {

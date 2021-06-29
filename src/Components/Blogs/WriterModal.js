@@ -6,27 +6,28 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import classes from "./blogs.module.css";
 import axios from "../../Axios/axios";
 import Spinner from "../Spinner/BlogSpinner";
+import Snacker from '../Snacker/Snaker'
 
 const WriterModal = (props) => {
   const { cancelHandler, parentId, fetchData } = { ...props };
   const [body, setBody] = useState("");
   const [spinner, setSpinner] = useState(false);
+  const [error, setError] = useState(null)
 
   const submitHandler = async () => {
-    if (!body.trim()) {
-      return alert("cant be empty");
+    if (!body || !body.trim()) {
+      return setError("cant be empty");
     }
 
     try {
       setSpinner(true);
       await axios.post(`${props.Api}${parentId}`, { Body: body });
       fetchData();
-    } catch (e) {
-      alert("error Posting!");
-    } finally {
-      setSpinner(false);
       cancelHandler();
+    } catch (e) {
+      setError("error Posting!");
     }
+    setSpinner(false);
   };
 
   return (
@@ -61,6 +62,13 @@ const WriterModal = (props) => {
           </div>
         )}
       </Grid>
+      <Snacker
+        open={error !== null}
+        severity="error"
+        timer={6000}
+        message={error}
+        onClose={() => setError(null)}
+      />
     </>
   );
 };
