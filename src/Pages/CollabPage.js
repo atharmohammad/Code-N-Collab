@@ -166,7 +166,7 @@ const CollabPage = (props) => {
         <Snacker
           open={startMsgSnackbar}
           timer={6000}
-          message="Share URL of this page with your friends to collaborate"
+          message="Share URL of this page to collaborate"
           severity="info"
           onClose={() => {
             setStartMsgSnackbar(false);

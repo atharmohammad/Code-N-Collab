@@ -10,6 +10,7 @@ import styles from "./RoomsInput.module.css";
 import CreateRoom from "../../Assets/images/create_room.png";
 import JoinRoom from "../../Assets/images/JoinRoom.png";
 import Back from "../Back/Back";
+import HomeIcon from "../Home/Home"
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -69,7 +70,10 @@ function Rooms(props) {
   return (
     <div className={styles.main}>
       <Stars color="#fff" />
-      <Back />
+      <div style={{display:'flex',position:'sticky',marginTop: "20px"}}>
+        <Back />
+        <HomeIcon/>
+      </div>
       <Grid container direction="column" justify="center" alignItems="center">
         {roomHeadingType === 1 ? (
           <img className={styles.img} src={CreateRoom} alt="create-room" />

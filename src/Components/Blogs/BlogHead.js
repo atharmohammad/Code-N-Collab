@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@material-ui/core";
 
 import Collaboration from "../../Assets/images/Collaboration.jpg";
-import HomePageImg from "../HomePageImage/HomePageImg";
+import HomePageImg from "../../Assets/images/HomePageImg.png";
 import classes from "./blogs.module.css";
 import Back from "../Back/Back";
 import HomeIcon from "../Home/Home"
@@ -33,8 +33,8 @@ export default function BlogHead(props) {
           justify="center"
           style={{ width: "40%", marginLeft: "15vw" }}
         >
-          <HomePageImg
-            styleImg={{
+          <img src={HomePageImg}
+            style={{
               height: "8vw",
               width: "35vw",
               minWidth: "170px",
