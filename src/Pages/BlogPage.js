@@ -30,6 +30,7 @@ const BlogPage = (props) => {
     searchParams.has("skip") ? parseInt(searchParams.get("skip")) : 0
   );
   const [posted, setPosted] = useState(false);
+  const skipLimit = 10; 
 
   useEffect(async () => {
     fetchBlogs();
@@ -49,14 +50,14 @@ const BlogPage = (props) => {
   };
 
   const showMoreBlogs = () => {
-    history.push(`/blogs?sortBy=${sortBy}&skip=${skip + 10}`);
-    setSkip((prev) => prev + 5);
+    history.push(`/blogs?sortBy=${sortBy}&skip=${skip + skipLimit}`);
+    setSkip((prev) => prev + skipLimit);
   };
 
   const showLessBlogs = async () => {
-    if (skip >= 5) {
-      history.push(`/blogs?sortBy=${sortBy}&skip=${skip - 10}`);
-      setSkip((prev) => prev - 5);
+    if (skip >= skipLimit) {
+      history.push(`/blogs?sortBy=${sortBy}&skip=${skip - skipLimit}`);
+      setSkip((prev) => prev - skipLimit);
     }
   };
 
