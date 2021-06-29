@@ -72,11 +72,17 @@ export default function App(props) {
             style={{
               overflowY: "auto",
               color: "#fff",
-              fontSize: "18px",
-              fontWeight: "bold",
-            }}
-          ></Grid>
-         
+              fontSize: "19px",
+              fontFamily: ["Fira Sans", "sans-serif"].join(),
+              wordWrap: "break-word",
+            }}>
+            copy url of any problem from the following websites:  
+            codeforces ,codechef ,geeksforgeeks ,atcoder ,cses.
+            paste the url in place of Problem Link and click fetch
+            <br/><br/>
+            eg : you can paste this url : <br/> https://codeforces.com/problemset/problem/1528/A
+          </Grid>
+
           <Grid
             style={{
               display: "flex",
@@ -87,12 +93,10 @@ export default function App(props) {
               boxSizing: "border-box",
             }}
           >
-           
             <input
               placeholder="Problem Link"
               className="place"
               onChange={changeHandler}
-              value={link}
             />
             <div
               style={{

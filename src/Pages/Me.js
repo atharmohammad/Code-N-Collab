@@ -8,6 +8,7 @@ import Stars from "../Components/Stars/Stars";
 import Nav from "../Components/Nav/Nav";
 import Back from "../Components/Back/Back";
 import axios from "../Axios/axios";
+import HomeIcon from "../Components/Home/Home"
 
 const Me = (props) => {
   const auth = useContext(AuthContext);
@@ -48,7 +49,11 @@ const Me = (props) => {
     >
       <Stars />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Back />
+        <div style={{ display: "flex", position: "sticky", marginTop: "20px" }}>
+          <Back />
+          <HomeIcon />
+        </div>
+
         <Nav />
       </div>
       {startSpinner ? <Spinner /> : <Profile user={user} />}
