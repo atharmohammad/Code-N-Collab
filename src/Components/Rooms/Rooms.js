@@ -2,19 +2,15 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useHistory, useLocation } from "react-router-dom";
 import { Grid, Button, InputLabel } from "@material-ui/core";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 
+
+import Snacker from '../Snacker/Snaker'
 import Stars from "../Stars/Stars";
 import styles from "./RoomsInput.module.css";
 import CreateRoom from "../../Assets/images/create_room.png";
 import JoinRoom from "../../Assets/images/JoinRoom.png";
 import Back from "../Back/Back";
 import HomeIcon from "../Home/Home"
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 function Rooms(props) {
   const location = useLocation();
@@ -63,7 +59,7 @@ function Rooms(props) {
         state: { password },
       });
     } catch (err) {
-      alert("History push error!  try again!");
+      setError("Oops something went wrong try again later!");
     }
   };
 
@@ -130,18 +126,15 @@ function Rooms(props) {
           >
             Join / Create
           </Button>
-          <Snackbar
-            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-            open={error !== null}
-            autoHideDuration={6000}
-            onClose={() => setError(null)}
-          >
-            <Alert onClose={() => setError(null)} severity="error">
-              {error}
-            </Alert>
-          </Snackbar>
         </div>
       </Grid>
+      <Snacker
+        open={error !== null}
+        severity="error"
+        timer={6000}
+        message ={error} 
+        onClose={() => setError(null)}
+      />
     </div>
   );
 }

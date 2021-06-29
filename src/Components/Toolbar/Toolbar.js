@@ -16,9 +16,10 @@ export default function Toolbar(props) {
 
   return (
     <Grid className={classes.main}>
-      <Grid className={classes.imgGrid} onClick={() => history.push("/homepage")}>
+      <Grid className={classes.imgGrid} title='Go to Home Page' onClick={() => history.push("/homepage")}>
         <img
           src={HomePageImg}
+          
           alt="Code-N-Collab"
           style={{ width: "100%",minHeight:'32px'}}
         />

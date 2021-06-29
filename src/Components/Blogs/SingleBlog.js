@@ -7,12 +7,14 @@ import UserBlogDescription from "./userBlogDescription/userBlogDescription";
 import Spinner from "../Spinner/BlogSpinner";
 import HelperIcons from "./HelperIcons";
 import axios from "../../Axios/axios";
+import Snacker from "../Snacker/Snaker";
 
 export default function SingleBlog(props) {
   const blog = props.blog;
   const history = useHistory();
   const [spinner, setSpinner] = useState(false);
   const [deleted, setDeleted] = useState(false);
+  const [error, setError] = useState(null);
 
   const onClickHandler = () => {
     return history.push("/blog/" + blog._id);
@@ -33,7 +35,7 @@ export default function SingleBlog(props) {
         await axios.delete("/blogs/delete/" + blog._id);
         setDeleted(true);
       } catch (e) {
-        alert("delete error");
+        setError("Oops something went wrong try again later");
       }
       setSpinner(false);
     }
@@ -77,7 +79,10 @@ export default function SingleBlog(props) {
           onClick={onClickHandler}
         >
           <Typography>
-            <ReactMarkdown renderers={{ image: resizeImageForMarkdown }} children={blog.Body} />
+            <ReactMarkdown
+              renderers={{ image: resizeImageForMarkdown }}
+              children={blog.Body}
+            />
           </Typography>
         </Grid>
         <Grid container direction="row" justify="flex-end">
@@ -93,6 +98,13 @@ export default function SingleBlog(props) {
           />
         </Grid>
       </Grid>
+      <Snacker
+        open={error !== null}
+        severity="error"
+        timer={6000}
+        message={error}
+        onClose={() => setError(null)}
+      />
     </div>
   );
 }

@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 import { useLocation, useHistory } from "react-router-dom";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import { connect } from "react-redux";
 
 import Chat from "../Components/Chat/ChatTabs";
@@ -14,18 +12,14 @@ import Toolbar from "../Components/Toolbar/Toolbar";
 import * as TYPES from "../store/Action/action";
 import Spinner from "../Components/Spinner/ContestSpinner/ContestSpinner";
 import { AuthContext } from "../context/auth-context";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import Snacker from '../Components/Snacker/Snaker'
 
 const LockOutPage = (props) => {
   const socket = props.socket;
   const location = useLocation();
   const history = useHistory();
   const [joined, setJoined] = useState(false);
-  const [errorJoin, setErrorJoin] = useState(false);
-  const [joinErrorMsg, setJoinErrorMsg] = useState("");
+  const [error, setError] = useState(null);
   const auth = useContext(AuthContext);
 
   const closeSnackBarHandler = () => {
@@ -45,8 +39,7 @@ const LockOutPage = (props) => {
 
     socket.emit("Contest-Join", user, ({ error, contest }) => {
       if (error) {
-        setErrorJoin(true);
-        return setJoinErrorMsg(error);
+        return setError(error);
       } else {
         const updatedContest = contest;
         props.setContest(updatedContest);
@@ -155,42 +148,33 @@ const LockOutPage = (props) => {
             <Chat socket={socket} />
           </ReflexElement>
         </ReflexContainer>
+        <Snacker
+        open={props.output_success}
+        horizontal='center'
+        message='Code Compiled SuccessFully !' 
+        onClose={props.notify_output_off}
+      />
 
-        <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-          open={props.output_success}
-          autoHideDuration={3000}
-          onClose={props.notify_output_off}
-        >
-          <Alert onClose={props.notify_output_off} severity="success">
-            Code Compiled SuccessFully !
-          </Alert>
-        </Snackbar>
-        <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-          open={props.output_error}
-          autoHideDuration={3000}
-          onClose={props.notify_output_error}
-        >
-          <Alert onClose={props.notify_output_error} severity="error">
-            Something Went Wrong!
-          </Alert>
-        </Snackbar>
+        <Snacker
+        open={props.output_error}
+        horizontal='center'
+        severity="error"
+        message='Something Went Wrong!' 
+        onClose={props.notify_output_error}
+      />
       </div>
     </>
   ) : (
     <>
       <Spinner margin={"0px"} />
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-        open={errorJoin}
-        autoHideDuration={5000}
-        onClose={closeSnackBarHandler}
-      >
-        <Alert onClose={closeSnackBarHandler} severity="error">
-          {joinErrorMsg}
-        </Alert>
-      </Snackbar>
+      <Snacker
+        open={error !== null}
+        severity="error"
+        horizontal='center'
+        timer={5000}
+        message ={error} 
+        onClose={() => {setError(null);closeSnackBarHandler()}}
+      />
     </>
   );
 };

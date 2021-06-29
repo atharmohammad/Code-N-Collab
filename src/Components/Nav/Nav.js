@@ -16,7 +16,7 @@ export default function () {
       localStorage.setItem("loginUrl",location.pathname);
       window.location.href = req.data;
     } catch (e) {
-      alert("there is some error related to Oauth! try again!");
+      alert("Oops something went wrong try again later")
     }
   };
   const logoutHandler = () => {

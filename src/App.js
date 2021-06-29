@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 
+import { SnackbarProvider } from "notistack";
+
 import { AuthContext } from "./context/auth-context";
 import CustomRoutes from "./CustomRoutes/CustomRoutes";
 import "./App.css";
@@ -38,7 +40,9 @@ const App = (props) => {
       value={{ isLoggedIn: !!token, login, logout, user, token, loaded }}
     >
       <BrowserRouter>
-        <CustomRoutes />
+        <SnackbarProvider>
+          <CustomRoutes />
+        </SnackbarProvider>
       </BrowserRouter>
     </AuthContext.Provider>
   );
