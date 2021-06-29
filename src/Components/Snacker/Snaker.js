@@ -4,9 +4,11 @@ import MuiAlert from "@material-ui/lab/Alert";
 function Alert(props) {
   return <MuiAlert variant="filled" {...props} />;
 }
+
+
 const Snacker = (props) => {
   const {
-    position = { vertical: "bottom", horizontal: "left" },
+    position = { vertical: "bottom", horizontal: "center" },
     timer = 3000,
     message,
     severity,
@@ -20,7 +22,10 @@ const Snacker = (props) => {
       autoHideDuration={timer}
       onClose={props.onClose}
     >
-      <Alert onClose={props.onClose} severity={severity} elevate={props.elevate||6} >
+      <Alert
+        onClose={props.onClose}
+        severity={severity}
+      >
         {message}
       </Alert>
     </Snackbar>

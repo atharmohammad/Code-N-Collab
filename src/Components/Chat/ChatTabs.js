@@ -58,14 +58,12 @@ export default function ChatPanel(props) {
   useEffect(() => {
     socket.on("peopleInRoom", (data) => {
       if(data.userJoin){
-        if(data.useJoin !== name.trim().toLowerCase())
+        if(data.userJoin !== name.trim().toLowerCase())
         enqueueSnackbar(`${data.userJoin} joined this room`, {
-          preventDuplicate: true,
           variant:'info',
         });
       }else if(data.userLeft){
         enqueueSnackbar(`${data.userLeft} left this room`, {
-          preventDuplicate: true,
           variant:'warning',
         });
       }
