@@ -2,7 +2,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert variant="filled" {...props} />;
 }
 const Snacker = (props) => {
   const {
@@ -20,7 +20,7 @@ const Snacker = (props) => {
       autoHideDuration={timer}
       onClose={props.onClose}
     >
-      <Alert onClose={props.onClose} severity={severity}>
+      <Alert onClose={props.onClose} severity={severity} elevate={props.elevate||6} >
         {message}
       </Alert>
     </Snackbar>

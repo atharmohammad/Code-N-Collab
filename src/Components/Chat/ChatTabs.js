@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AppBar, Tabs, Tab, Typography, Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
+import { useSnackbar } from 'notistack';
 
 import { AuthContext } from "../../context/auth-context";
 import Chat from "./Chat";
@@ -33,6 +34,7 @@ export default function ChatPanel(props) {
   const searchParams = new URLSearchParams(location.search);
   const socket = props.socket;
   const auth = useContext(AuthContext);
+  const { enqueueSnackbar,closeSnackbar} = useSnackbar();
 
   useEffect(() => {
     if (location.pathname === "/newContest") {
@@ -54,13 +56,25 @@ export default function ChatPanel(props) {
   }, [messages]);
 
   useEffect(() => {
-    socket.on("peopleInRoom", (people) => {
-      setPersons(people);
+    socket.on("peopleInRoom", (data) => {
+      if(data.userJoin){
+        if(data.useJoin !== name.trim().toLowerCase())
+        enqueueSnackbar(`${data.userJoin} joined this room`, {
+          preventDuplicate: true,
+          variant:'info',
+        });
+      }else if(data.userLeft){
+        enqueueSnackbar(`${data.userLeft} left this room`, {
+          preventDuplicate: true,
+          variant:'warning',
+        });
+      }
+      setPersons(data.teamMembers);
     });
     return () => {
       socket.off("peopleInRoom");
     };
-  }, [persons]);
+  }, [persons,name]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -85,6 +99,7 @@ export default function ChatPanel(props) {
       <TabPanel value={value} index={1}>
         <People persons={persons} you={name} />
       </TabPanel>
+    
     </div>
   );
 }

@@ -156,6 +156,9 @@ const BlogPage = (props) => {
               <option value="popularity" selected={sortBy == "popularity"}>
                 Popularity
               </option>
+              <option value="oldest-first" selected={sortBy == "oldest-first"}>
+                Oldest-first
+              </option>
             </select>
           </>
         )}
