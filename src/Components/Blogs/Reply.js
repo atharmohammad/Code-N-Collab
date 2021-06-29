@@ -3,6 +3,7 @@ import { Grid } from "@material-ui/core";
 import ReactMarkdown from "react-markdown";
 
 import UserBlogDescription from "./userBlogDescription/userBlogDescription";
+import Snacker from "../Snacker/Snaker";
 import Spinner from "../Spinner/BlogSpinner";
 import classes from "./blogs.module.css";
 import HelperIcons from "./HelperIcons";
@@ -17,6 +18,7 @@ const Reply = (props) => {
   const [deleted, setDeleted] = useState(false);
   const [showWriter, setShowWriter] = useState(false);
   const [spinner, setSpinner] = useState(false);
+  const [error, setError] = useState(null);
 
   const divRef = useRef();
 
@@ -33,18 +35,18 @@ const Reply = (props) => {
       setSpinner(true);
       try {
         await axios.delete("/reply/deleteReply/" + reply._id);
+        setDeleted(true);
       } catch (e) {
-        alert("Delete reply error!  try again!")
+        setError("Oops something went wrong try again later!");
       }
       setSpinner(false);
-      setDeleted(true);
     }
   };
 
   const saveHandler = async () => {
     const data = divRef.current.value.trim();
-    if (!data) {
-      return alert("cant be empty");
+    if (!data || !data.trim()) {
+      return setError("Reply can't be empty");
     }
     setSpinner(true);
     try {
@@ -54,7 +56,7 @@ const Reply = (props) => {
       setEditReply(false);
       setInitialReply(res.data.Body);
     } catch (e) {
-      alert("Update reply error! try again!")
+      setError("Oops something went wrong try again later!");
     }
     setSpinner(false);
   };
@@ -99,10 +101,10 @@ const Reply = (props) => {
                 overflow: "auto",
               }}
             >
-            <ReactMarkdown
-              renderers={{ image: resizeImageForMarkdown }}
-              children={initialReply}
-            />
+              <ReactMarkdown
+                renderers={{ image: resizeImageForMarkdown }}
+                children={initialReply}
+              />
             </div>
           ) : (
             <div style={{ margin: "2px" }}>
@@ -159,6 +161,13 @@ const Reply = (props) => {
             cancelHandler={() => setShowWriter(false)}
           />
         ) : null}
+        <Snacker
+          open={error !== null}
+          severity="error"
+          timer={6000}
+          message={error}
+          onClose={() => setError(null)}
+        />
       </div>
     </>
   );
