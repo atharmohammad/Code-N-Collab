@@ -8,19 +8,17 @@ import Stars from "../Components/Stars/Stars";
 const Logout = (props) => {
   const history = useHistory();
   const auth = useContext(AuthContext);
-
-  useEffect(() => {
-    const fn = async () => {
+  
+  useEffect(async() => {
       try {
         await axios.get("/user/logout");
       } catch (e) {
+        
       } finally {
         auth.logout();
         history.push("/homepage");
       }
-    };
-    fn();
-  }, [auth, history]);
+  }, []);
 
   return (
     <div

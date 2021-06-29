@@ -35,7 +35,12 @@ function HomePage() {
           if (data.data.Way === "signup") {
             history.push("/updateUser");
           } else {
-            history.push("/homepage");
+              history.push(
+                localStorage.getItem("loginUrl")
+                  ? localStorage.getItem("loginUrl")
+                  : "/homepage"
+              );
+              localStorage.removeItem("loginUrl");
           }
         } catch (e) {
           setError("Oops something went wrong try again later!");
