@@ -11,7 +11,7 @@ import Problem from "../Components/Problem/Problem";
 import Toolbar from "../Components/Toolbar/Toolbar";
 import Spinner from "../Components/Spinner/ContestSpinner/ContestSpinner";
 import * as TYPES from "../store/Action/action";
-
+import { useSnackbar } from 'notistack';
 import "react-reflex/styles.css";
 
 const CollabPage = (props) => {
@@ -20,6 +20,7 @@ const CollabPage = (props) => {
   const history = useHistory();
   const [joined, setJoined] = useState(false);
   const [startMsgSnackbar, setStartMsgSnackbar] = useState(true);
+  const { enqueueSnackbar,closeSnackbar} = useSnackbar();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -77,6 +78,15 @@ const CollabPage = (props) => {
       }
     );
   }, []);
+
+  useEffect(()=>{
+    if(props.output_success){
+      enqueueSnackbar("Code Compiled Succesfully !", {
+        variant:'success',
+      });
+      props.notify_output_off();
+    }
+  },[props.output_success])
 
   return joined ? (
     <>
@@ -149,15 +159,9 @@ const CollabPage = (props) => {
         </ReflexContainer>
 
         <Snacker
-          open={props.output_success}
-          horizontal="center"
-          onClose={props.notify_output_off}
-          message="Code Compiled SuccessFully !"
-        />
-
-        <Snacker
           open={props.output_error}
-          horizontal="center"
+          vertical= 'top'
+          horizontal= 'center' 
           onClose={props.notify_output_error}
           message="Something Went Wrong!"
           severity="error"
@@ -166,7 +170,8 @@ const CollabPage = (props) => {
         <Snacker
           open={startMsgSnackbar}
           timer={6000}
-          horizontal="center"
+          vertical= 'top'
+          horizontal= 'center' 
           message="Share URL of this page to collaborate"
           severity="info"
           onClose={() => {

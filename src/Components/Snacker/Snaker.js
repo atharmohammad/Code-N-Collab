@@ -8,7 +8,10 @@ function Alert(props) {
 
 const Snacker = (props) => {
   const {
-    position = { vertical: props.vertical||"bottom", horizontal: props.horizontal||"left" },
+    position = {
+      vertical: (props.vertical ? props.vertical : "bottom"),
+      horizontal: (props.horizontal ? props.horizontal : "left"),
+    },
     timer = 3000,
     message,
     severity,
