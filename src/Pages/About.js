@@ -41,7 +41,7 @@ export default function About(props) {
               alt="Code-N-Collab"
             />
             <div className={classes.About}>
-              <p>About</p>
+              About
               <a
                 title="Code-N-Collab Git Repo"
                 href="https://github.com/atharmohammad/Code-N-Collab/tree/master"
@@ -56,7 +56,7 @@ export default function About(props) {
                     width: "20%",
                     height: "10%",
                     minWidth: "50px",
-                    margin: "30px 0 0 10%",
+                    margin: "-10px 0 0 10%",
                   }}
                 />
               </a>
@@ -79,7 +79,7 @@ export default function About(props) {
                   fontSize: "25px",
                   fontWeight: "bold",
                   border: "2px solid gray",
-                  fontFamily: ["edgwick Ave Display", "cursive"].join(),
+                  fontFamily: ["Fira Sans", "sans-serif"].join(),
                 }}
               >
                 Developed By :

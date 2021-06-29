@@ -22,7 +22,8 @@
   flex-direction: row;
   justify-content: flex-start;
   width: 50%;
-  font-family: edgwick Ave Display, cursive;
+  font-family: Fira Sans, sans-serif;
+  font-weight: bold;
   margin-top: 20px;
 }
 

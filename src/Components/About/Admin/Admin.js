@@ -62,7 +62,7 @@ export default function Admin(props) {
           rel="noreferrer"
         >
           <img
-            style={{ width: "85%" }}
+            style={{ width: "85%", }}
             src={AtharPortfolio}
             alt="My Portfolio"
           />
