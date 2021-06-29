@@ -15,6 +15,8 @@ import SelectAvatar from "../Components/SelectAvatars/SelectAvatars";
 import UpdateFeild from "../Components/updateUserHelper/UpdateFeilds";
 import CountryFeild from "../Components/updateUserHelper/CountryFeild";
 import classes from "./pages.module.css";
+import HomeIcon from "../Components/Home/Home"
+
 
 const UpdateUser = (props) => {
   const auth = useContext(AuthContext);
@@ -85,7 +87,13 @@ const UpdateUser = (props) => {
       >
         <Stars />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Back />
+          <div
+            style={{ display: "flex", position: "sticky", marginTop: "20px" }}
+          >
+            <Back />
+            <HomeIcon />
+          </div>
+
           <Nav />
         </div>
 
@@ -237,7 +245,7 @@ const UpdateUser = (props) => {
       <Snacker
         open={errorMsg != null}
         message={errorMsg}
-        severity='error'
+        severity="error"
         onClose={() => setErrorMsg(null)}
       />
     </>

@@ -4,6 +4,8 @@ import Collaboration from "../../Assets/images/Collaboration.jpg";
 import HomePageImg from "../HomePageImage/HomePageImg";
 import classes from "./blogs.module.css";
 import Back from "../Back/Back";
+import HomeIcon from "../Home/Home"
+
 
 export default function BlogHead(props) {
   return (
@@ -19,8 +21,9 @@ export default function BlogHead(props) {
         paddingBottom: "3%",
       }}
     >
-      <div>
+      <div style={{display:'flex',position:'sticky',marginTop: "20px"}}>
         <Back />
+        <HomeIcon/>
       </div>
 
       <Grid container direction="row" justify="space-between">
