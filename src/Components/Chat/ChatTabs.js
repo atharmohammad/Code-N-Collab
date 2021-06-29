@@ -38,7 +38,7 @@ export default function ChatPanel(props) {
 
   useEffect(() => {
     if (location.pathname === "/newContest") {
-      setName(auth.user.CodeForcesHandle);
+      setName(auth.user.CodeforcesHandle);
     } else {
       if (searchParams.get("name")) {
         setName(searchParams.get("name").trim().toLowerCase());
@@ -57,8 +57,9 @@ export default function ChatPanel(props) {
 
   useEffect(() => {
     socket.on("peopleInRoom", (data) => {
+      setPersons(data.teamMembers);
       if(data.userJoin){
-        if(data.userJoin !== name.trim().toLowerCase())
+        if(name && data.userJoin.trim().toLowerCase() !== name.trim().toLowerCase())
         enqueueSnackbar(`${data.userJoin} joined this room`, {
           variant:'info',
         });
@@ -67,12 +68,12 @@ export default function ChatPanel(props) {
           variant:'warning',
         });
       }
-      setPersons(data.teamMembers);
+      
     });
     return () => {
       socket.off("peopleInRoom");
     };
-  }, [persons,name]);
+  }, [persons, name]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

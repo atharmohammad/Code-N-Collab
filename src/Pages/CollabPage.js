@@ -150,12 +150,14 @@ const CollabPage = (props) => {
 
         <Snacker
           open={props.output_success}
+          horizontal='center'
           onClose={props.notify_output_off}
           message="Code Compiled SuccessFully !"
         />
 
         <Snacker
           open={props.output_error}
+          horizontal='center'
           onClose={props.notify_output_error}
           message="Something Went Wrong!"
           severity="error"
@@ -164,6 +166,7 @@ const CollabPage = (props) => {
         <Snacker
           open={startMsgSnackbar}
           timer={6000}
+          horizontal='center'
           message="Share URL to collaborate"
           severity="info"
           onClose={() => {

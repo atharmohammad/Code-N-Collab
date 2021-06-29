@@ -150,13 +150,14 @@ const LockOutPage = (props) => {
         </ReflexContainer>
         <Snacker
         open={props.output_success}
-        
+        horizontal='center'
         message='Code Compiled SuccessFully !' 
         onClose={props.notify_output_off}
       />
 
         <Snacker
         open={props.output_error}
+        horizontal='center'
         severity="error"
         message='Something Went Wrong!' 
         onClose={props.notify_output_error}
@@ -169,6 +170,7 @@ const LockOutPage = (props) => {
       <Snacker
         open={error !== null}
         severity="error"
+        horizontal='center'
         timer={5000}
         message ={error} 
         onClose={() => {setError(null);closeSnackBarHandler()}}
