@@ -7,6 +7,7 @@ import Github from "../Assets/images/Github.png";
 import Admin from "../Components/About/Admin/Admin";
 import AboutContent from "../Components/About/AboutContent";
 import classes from "./pages.module.css";
+import HomeIcon from "../Components/Home/Home"
 
 export default function About(props) {
 
@@ -20,7 +21,10 @@ export default function About(props) {
     >
       <Stars />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Back/>
+      <div style={{ display: "flex", position: "sticky", marginTop: "20px" }}>
+          <Back />
+          <HomeIcon />
+        </div>
         <Nav />
       </div>
       <Container component="main" maxWidth="md" style={{ marginTop: "5px" }}>
