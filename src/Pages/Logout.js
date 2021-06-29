@@ -9,8 +9,7 @@ const Logout = (props) => {
   const history = useHistory();
   const auth = useContext(AuthContext);
   
-  useEffect(() => {
-    const fn = async () =>{
+  useEffect(async() => {
       try {
         await axios.get("/user/logout");
       } catch (e) {
@@ -19,9 +18,7 @@ const Logout = (props) => {
         auth.logout();
         history.push("/homepage");
       }
-    }
-    fn();
-  }, [auth,history]);
+  }, []);
 
   return (
     <div
