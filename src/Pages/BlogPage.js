@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import {
   Grid,
@@ -49,24 +49,24 @@ const BlogPage = (props) => {
     setBlogsLoading(false);
   };
 
-  const showMoreBlogs = () => {
+  const showMoreBlogs = useCallback(() => {
     history.push(`/blogs?sortBy=${sortBy}&skip=${skip + skipLimit}`);
     setSkip((prev) => prev + skipLimit);
-  };
+  },[history,sortBy,skip]);
 
-  const showLessBlogs = async () => {
+  const showLessBlogs = useCallback(async () => {
     if (skip >= skipLimit) {
       history.push(`/blogs?sortBy=${sortBy}&skip=${skip - skipLimit}`);
       setSkip((prev) => prev - skipLimit);
     }
-  };
+  },[history,sortBy,skip]);
 
-  const setSortValue = (val) => {
+  const setSortValue = useCallback((val) => {
     history.push(`/blogs?sortBy=${val}&skip=${skip}`);
     setSortBy(val);
-  };
+  },[skip]);
 
-  const showEditorHandler = () => {
+  const showEditorHandler = useCallback(() => {
     if (!auth.token) {
       return history.push({
         pathname: "/homepage",
@@ -74,7 +74,7 @@ const BlogPage = (props) => {
       });
     }
     return setShowEditor(true);
-  };
+  },[]);
 
   return (
     <div className={classes.wrap}>
