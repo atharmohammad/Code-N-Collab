@@ -5,6 +5,8 @@ import HomePageImg from "../../Assets/images/HomePageImg.png";
 import classes from "./blogs.module.css";
 import Back from "../Back/Back";
 import HomeIcon from "../Home/Home"
+import Nav from "../Nav/Nav"
+
 
 
 export default function BlogHead(props) {
@@ -21,9 +23,12 @@ export default function BlogHead(props) {
         paddingBottom: "3%",
       }}
     >
-      <div style={{display:'flex',position:'sticky',marginTop: "20px"}}>
-        <Back />
-        <HomeIcon/>
+      <div style={{ display: "flex", justifyContent: "space-between",width:'100%' }}>
+        <div style={{display:'flex',position:'sticky',marginTop: "20px"}}>
+          <Back />
+          <HomeIcon/>
+        </div>
+        <Nav/>
       </div>
 
       <Grid container direction="row" justify="space-between">

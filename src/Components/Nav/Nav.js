@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory,useLocation } from "react-router-dom";
 
 import { AuthContext } from "../../context/auth-context";
 import axios from "../../Axios/axios";
@@ -8,13 +8,15 @@ import "./NavItem.css";
 
 export default function () {
   const history = useHistory();
+  const location = useLocation();
   const auth = useContext(AuthContext);
   const loginHandler = async () => {
     try {
       const req = await axios.get("/Oauth/googleOauth");
+      localStorage.setItem("loginUrl",location.pathname);
       window.location.href = req.data;
     } catch (e) {
-      alert("there is some error related to Oauth! try again!")
+      alert("there is some error related to Oauth! try again!");
     }
   };
   const logoutHandler = () => {
@@ -29,7 +31,7 @@ export default function () {
     <div className="headerss">
       {auth.isLoggedIn === false ? (
         <>
-          <NavItem Name="login" clicked={loginHandler} />
+          <NavItem Name="login" clicked={loginHandler} loginUrl={location.pathname} />
         </>
       ) : (
         <>

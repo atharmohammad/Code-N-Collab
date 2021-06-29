@@ -39,7 +39,12 @@ function HomePage() {
           if (data.data.Way === "signup") {
             history.push("/updateUser");
           } else {
-            history.push("/homepage");
+              history.push(
+                localStorage.getItem("loginUrl")
+                  ? localStorage.getItem("loginUrl")
+                  : "/homepage"
+              );
+              localStorage.removeItem("loginUrl");
           }
         } catch (e) {
           alert("there is some error related to Outh post! try again!")
