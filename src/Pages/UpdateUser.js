@@ -168,6 +168,7 @@ const UpdateUser = (props) => {
                     title="Name"
                     placeHolder="Adnan Shamsi"
                     changeHandler={(e) => setName(e)}
+                    autoFocus={true}
                   />
 
                   <UpdateFeild

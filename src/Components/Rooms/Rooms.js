@@ -79,12 +79,13 @@ function Rooms(props) {
         <div className={styles.inputContainer}>
           <div>
             <InputLabel style={{ color: "#fff", fontWeight: "bold" }}>
-              Choose a Username *
+              * Choose a Unique Name
             </InputLabel>
             <input
               onChange={(event) => changeHandler("name", event)}
               className={styles.input}
             />
+            
           </div>
 
           <div>
