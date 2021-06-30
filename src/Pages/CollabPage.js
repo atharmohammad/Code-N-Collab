@@ -194,8 +194,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    notify_output_off: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_SUCCESS }),
-    notify_output_error: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_ERROR }),
+    notify_output_off: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_SUCCESS,value:false }),
+    notify_output_error: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_ERROR,value:false }),
   };
 };
 

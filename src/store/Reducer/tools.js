@@ -43,10 +43,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, output: action.value };
 
     case TYPE.NOTIFY_OUTPUT_SUCCESS:
-      return { ...state, output_success: state.output_success ? false : true };
+      return { ...state, output_success: action.value};
 
     case TYPE.NOTIFY_OUTPUT_ERROR:
-      return { ...state, output_error: state.output_error ? false : true };
+      return { ...state, output_error: action.value };
 
     case TYPE.SHOW_GRAPH:
       return { ...state, showGraph: true };

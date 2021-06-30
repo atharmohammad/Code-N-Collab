@@ -158,7 +158,8 @@ const LockOutPage = (props) => {
 
         <Snacker
         open={props.output_error}
-        horizontal='center'
+        vertical= 'top'
+        horizontal= 'center' 
         severity="error"
         message='Something Went Wrong!' 
         onClose={props.notify_output_error}
@@ -190,8 +191,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    notify_output_off: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_SUCCESS }),
-    notify_output_error: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_ERROR }),
+    notify_output_off: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_SUCCESS,value:false }),
+    notify_output_error: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_ERROR,value:false }),
     setContest: (updatedContest) => {
       dispatch({ type: TYPES.CONTEST_UPDATED, data: updatedContest });
     },
