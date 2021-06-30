@@ -49,7 +49,7 @@ const Me = (props) => {
     >
       <Stars />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", position: "sticky", marginTop: "20px" }}>
+        <div style={{ display: "flex", position: "sticky"}}>
           <Back />
           <HomeIcon />
         </div>

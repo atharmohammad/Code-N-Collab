@@ -11,6 +11,7 @@ import CreateRoom from "../../Assets/images/create_room.png";
 import JoinRoom from "../../Assets/images/JoinRoom.png";
 import Back from "../Back/Back";
 import HomeIcon from "../Home/Home"
+import Nav from "../Nav/Nav"
 
 function Rooms(props) {
   const location = useLocation();
@@ -66,9 +67,12 @@ function Rooms(props) {
   return (
     <div className={styles.main}>
       <Stars color="#fff" />
-      <div style={{display:'flex',position:'sticky',marginTop: "20px"}}>
-        <Back />
-        <HomeIcon/>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", position: "sticky" }}>
+          <Back />
+          <HomeIcon />
+        </div>
+        <Nav />
       </div>
       <Grid container direction="column" justify="center" alignItems="center">
         {roomHeadingType === 1 ? (
@@ -85,7 +89,6 @@ function Rooms(props) {
               onChange={(event) => changeHandler("name", event)}
               className={styles.input}
             />
-            
           </div>
 
           <div>
@@ -99,7 +102,7 @@ function Rooms(props) {
 
           <div>
             <InputLabel style={{ color: "#fff", fontWeight: "bold" }}>
-              Password {roomHeadingType == 1?'(Optional)':null}
+              Password {roomHeadingType == 1 ? "(Optional)" : null}
             </InputLabel>
             <input
               type="password"
@@ -132,7 +135,7 @@ function Rooms(props) {
         open={error !== null}
         severity="error"
         timer={6000}
-        message ={error} 
+        message={error}
         onClose={() => setError(null)}
       />
     </div>

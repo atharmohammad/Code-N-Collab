@@ -24,17 +24,18 @@ const App = (props) => {
     localStorage.removeItem("userData");
   }, []);
 
-  useEffect(() => {
-    axios
-      .get("/")
-      .then((data) => {
-        console.log("Welcome !");
-      })
-      .catch((e) => {
+  useEffect(async() => {
+    try {
+      await axios.get("/");
+    } catch (e) {
+      try {
+        await axios.get("/");
+      } catch (e) {
         alert(
           "There might be some problem 😟!\n Please reload this page\nor Try again after sometimes"
         );
-      });
+      }
+    }
     const storedData = JSON.parse(localStorage.getItem("userData"));
     if (storedData && storedData.token) {
       setUser(storedData.user);
