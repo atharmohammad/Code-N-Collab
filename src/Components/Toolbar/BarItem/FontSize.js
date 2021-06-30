@@ -28,11 +28,12 @@ const CustomizeFont = (props) => {
           className={`${classes.selectEmpty} ${classes.navSelect}`}
           value={props.font}
         >
-          <MenuItem value={20} >
-            Small
+          <MenuItem value={15}>Smallest</MenuItem>
+          <MenuItem value={20}>Small</MenuItem>
+          <MenuItem value={25} selected>
+            <em>Medium</em>
           </MenuItem>
-          <MenuItem value={25} selected><em>Medium</em></MenuItem>
-          <MenuItem value={35}>Large</MenuItem>
+          <MenuItem value={30}>Large</MenuItem>
         </Select>
       </FormControl>
     </Grid>

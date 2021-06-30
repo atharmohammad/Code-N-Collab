@@ -8,6 +8,7 @@ import Stars from "../Components/Stars/Stars";
 import Nav from "../Components/Nav/Nav";
 import Back from "../Components/Back/Back";
 import axios from "../Axios/axios";
+import HomeIcon from "../Components/Home/Home"
 
 const Me = (props) => {
   const auth = useContext(AuthContext);
@@ -16,23 +17,26 @@ const Me = (props) => {
   const location = useLocation();
   const history = useHistory();
 
-  useEffect(async () => {
-    const searchParams = new URLSearchParams(location.search);
-    if (searchParams.get("user") && searchParams.get("user").trim() !== "") {
-      try {
-        const id = searchParams.get("user");
-        const data = await axios.get("user/userProfile/" + id);
-        setUser(data.data);
+  useEffect(() => {
+    const fn = async () => {
+      const searchParams = new URLSearchParams(location.search);
+      if (searchParams.get("user") && searchParams.get("user").trim() !== "") {
+        try {
+          const id = searchParams.get("user");
+          const data = await axios.get("user/userProfile/" + id);
+          setUser(data.data);
+          setSpinner(false);
+        } catch (e) {
+          alert("Invalid url");
+          history.push("/homepage");
+        }
+      } else {
+        setUser(auth.user);
         setSpinner(false);
-      } catch (e) {
-        alert("there is some error related to searchParams ! try again!")
-        history.push("/homepage");
       }
-    } else {
-      setUser(auth.user);
-      setSpinner(false);
-    }
-  }, []);
+    };
+    fn();
+  }, [location.search, auth.user, history]);
 
   return (
     <div
@@ -45,7 +49,11 @@ const Me = (props) => {
     >
       <Stars />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Back/>
+        <div style={{ display: "flex", position: "sticky"}}>
+          <Back />
+          <HomeIcon />
+        </div>
+
         <Nav />
       </div>
       {startSpinner ? <Spinner /> : <Profile user={user} />}

@@ -1,13 +1,6 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import {
-  Grid,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-  Box,
-} from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
 
 import TextEditor from "../Components/TextEditor/TextEditor";
 import Stars from "../Components/Stars/Stars";
@@ -16,6 +9,7 @@ import classes from "../Assets/css/wrapstyle.module.css";
 import BlogSpinner from "../Components/Spinner/BlogSpinner";
 import SingleBlog from "../Components/Blogs/SingleBlog";
 import axios from "../Axios/axios";
+import Snacker from '../Components/Snacker/Snaker'
 import { AuthContext } from "../context/auth-context";
 
 const BlogPage = (props) => {
@@ -33,11 +27,14 @@ const BlogPage = (props) => {
   const [skip, setSkip] = useState(
     searchParams.has("skip") ? parseInt(searchParams.get("skip")) : 0
   );
-  const [posted,setPosted] = useState(false);
+  const [posted, setPosted] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(async() => {
-     fetchBlogs();
-  }, [skip, sortBy,posted]);
+  const skipLimit = 10;
+
+  useEffect(async () => {
+    fetchBlogs();
+  }, [skip, sortBy, posted]);
 
   const fetchBlogs = async () => {
     setBlogsLoading(true);
@@ -47,29 +44,32 @@ const BlogPage = (props) => {
       );
       setBlogs(res.data);
     } catch (e) {
-      alert("error", e);
+      setError("Oops something Went Wrong trry again later!");
     }
     setBlogsLoading(false);
   };
 
-  const showMoreBlogs = () => {
-    history.push(`/blogs?sortBy=${sortBy}&skip=${skip + 5}`);
-    setSkip((prev) => prev + 5);
-  };
+  const showMoreBlogs = useCallback(() => {
+    history.push(`/blogs?sortBy=${sortBy}&skip=${skip + skipLimit}`);
+    setSkip((prev) => prev + skipLimit);
+  }, [history, sortBy, skip]);
 
-  const showLessBlogs = async () => {
-    if (skip >= 5) {
-      history.push(`/blogs?sortBy=${sortBy}&skip=${skip - 5}`);
-      setSkip((prev) => prev - 5);
+  const showLessBlogs = useCallback(async () => {
+    if (skip >= skipLimit) {
+      history.push(`/blogs?sortBy=${sortBy}&skip=${skip - skipLimit}`);
+      setSkip((prev) => prev - skipLimit);
     }
-  };
+  }, [history, sortBy, skip]);
 
-  const setSortValue = (val) => {
-    history.push(`/blogs?sortBy=${val}&skip=${skip}`);
-    setSortBy(val);
-  };
+  const setSortValue = useCallback(
+    (val) => {
+      history.push(`/blogs?sortBy=${val}&skip=${skip}`);
+      setSortBy(val);
+    },
+    [skip]
+  );
 
-  const showEditorHandler = () => {
+  const showEditorHandler = useCallback(() => {
     if (!auth.token) {
       return history.push({
         pathname: "/homepage",
@@ -77,7 +77,7 @@ const BlogPage = (props) => {
       });
     }
     return setShowEditor(true);
-  };
+  }, []);
 
   return (
     <div className={classes.wrap}>
@@ -97,36 +97,18 @@ const BlogPage = (props) => {
 
         {showEditor ? (
           <div style={{ width: "80vw", maxWidth: "800px" }}>
-            <Box
-              style={{
-                width: "20px",
-                height: "20px",
-                background: "#d82828",
-                borderRadius: "5px",
-                padding: "0 5px 0 5px",
-                textAlign: "center",
-                color: "#fff",
-                marginTop: "1vh",
-                float: "right",
-                cursor: "pointer",
-                textAlign: "center",
-                fontSize: "15px",
-                border: "2px solid #fff",
-              }}
-              onClick={() => setShowEditor(false)}
-            >
-              X
-            </Box>
-            <div style={{ marginTop: "40px" }}>
+            
+            <div style={{ marginTop: "20px" }}>
               <TextEditor
                 showUpdateBtn={true}
+                clickingX = {() => setShowEditor(false)}
                 Api="/blogs/write"
                 postBtnClick={() => setShowEditor(false)}
                 fetchBlog={() => {
                   history.push(`/blogs?sortBy=creationTime&skip=0`);
                   setSkip(0);
                   setSortBy("creationTime");
-                  setPosted(prev=>!prev);
+                  setPosted((prev) => !prev);
                 }}
                 initialValue=""
                 method="post"
@@ -174,6 +156,9 @@ const BlogPage = (props) => {
               <option value="popularity" selected={sortBy == "popularity"}>
                 Popularity
               </option>
+              <option value="oldest-first" selected={sortBy == "oldest-first"}>
+                Oldest-first
+              </option>
             </select>
           </>
         )}
@@ -191,30 +176,32 @@ const BlogPage = (props) => {
         <div
           style={{
             display: "flex",
-            justifyContent: (skip && blogs.length > 0 ) ? "space-between" : "center",
+            justifyContent:
+              skip && blogs.length > 0 ? "space-between" : "center",
             width: "80vw",
             maxWidth: "800px",
           }}
         >
-        {skip ? (<Box
-          style={{
-            width: "120px",
-            height: "40px",
-            backgroundColor: "#4169E1",
-            borderRadius: "5px",
-            padding: "5px 5px 0 5px",
-            textAlign: "center",
-            color: "#fff",
-            marginTop: "30px",
-            cursor: "pointer",
-            textAlign: "center",
-            boxSizing: "border-box",
-          }}
-          onClick={showLessBlogs}
-        >
-          Prev
-        </Box>)
-        : null}
+          {skip ? (
+            <Box
+              style={{
+                width: "120px",
+                height: "40px",
+                backgroundColor: "#4169E1",
+                borderRadius: "5px",
+                padding: "5px 5px 0 5px",
+                textAlign: "center",
+                color: "#fff",
+                marginTop: "30px",
+                cursor: "pointer",
+                textAlign: "center",
+                boxSizing: "border-box",
+              }}
+              onClick={showLessBlogs}
+            >
+              Prev
+            </Box>
+          ) : null}
 
           {blogs.length > 0 ? (
             <Box
@@ -238,6 +225,13 @@ const BlogPage = (props) => {
           ) : null}
         </div>
       </Grid>
+      <Snacker
+        open={error !== null}
+        severity="error"
+        timer={6000}
+        message={error}
+        onClose={() => setError(null)}
+      />
     </div>
   );
 };

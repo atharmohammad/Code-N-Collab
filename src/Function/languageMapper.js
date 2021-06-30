@@ -15,7 +15,6 @@ const setMode = (lang)=>{
      case 'rust' : return 'text/x-rustsrc'
      case 'shell' : return 'text/x-sh'
      case 'sql' : return 'text/x-sql'
-     case 'my-sql' : return 'text/x-mysql'
      case 'swift' : return 'text/x-swift'
      default : return ''
  } 

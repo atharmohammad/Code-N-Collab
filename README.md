@@ -38,7 +38,7 @@
   </ol>
 </details>
 
-<a href="https://code-n-collab.netlify.app/" target="_blank" >
+<a href="https://code-n-collab.netlify.app/" target="_blank"  rel="noreferrer">
 <table >
    <tr>
      <td>

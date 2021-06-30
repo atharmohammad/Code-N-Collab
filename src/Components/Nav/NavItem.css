@@ -3,6 +3,7 @@
   text-align: center;
   align-items: center;
   cursor: pointer;
+  width: auto;
 }
 
 .wrapperss p {
@@ -12,13 +13,55 @@
   font-family: Fira Sans, sans-serif
 }
 
-.wrapperss:hover {
-  text-decoration: underline wavy #32a86d;
-  text-decoration-thickness: 2px;
-}
-
 .headerss {
   display: flex;
   justify-content: flex-end;
   width: 100%;
 }
+
+.button{
+  background:black;
+  border-radius: 10px;
+  color:white;
+  border:3px solid white;
+  display:flex;
+  flex-direction:row;
+  justify-content: center;
+  padding: 10px;
+  font-size: 17px;
+  font-family: Fira Sans, sans-serif;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+.button:hover{
+  background-color: teal;
+  transform: scale(0.8);
+}
+
+.login{
+  width:160px;
+}
+
+.about{
+  width:auto
+}
+
+.Img{
+  height: 20px;
+  margin: 0 10% 0 0;
+}
+
+@media only screen and (max-width: 500px) {
+  .login {
+    width:80px;
+  }
+  .button{
+    font-size: 11px;
+    padding: 5px;
+  }
+  .Img{
+    display: none;
+  }
+}
+

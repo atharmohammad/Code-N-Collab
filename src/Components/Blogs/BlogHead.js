@@ -1,13 +1,15 @@
 import { Grid, Typography } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
 
 import Collaboration from "../../Assets/images/Collaboration.jpg";
-import CodeNCollab from "../../Assets/images/HomePageImg.png";
+import HomePageImg from "../../Assets/images/HomePageImg.png";
 import classes from "./blogs.module.css";
 import Back from "../Back/Back";
+import HomeIcon from "../Home/Home"
+import Nav from "../Nav/Nav"
+
+
 
 export default function BlogHead(props) {
-
   return (
     <Grid
       container
@@ -21,8 +23,12 @@ export default function BlogHead(props) {
         paddingBottom: "3%",
       }}
     >
-      <div>
-        <Back/>
+      <div style={{ display: "flex", justifyContent: "space-between",width:'100%' }}>
+        <div style={{display:'flex',position:'sticky'}}>
+          <Back />
+          <HomeIcon/>
+        </div>
+        <Nav/>
       </div>
 
       <Grid container direction="row" justify="space-between">
@@ -32,15 +38,13 @@ export default function BlogHead(props) {
           justify="center"
           style={{ width: "40%", marginLeft: "15vw" }}
         >
-          <img
-            src={CodeNCollab}
+          <img src={HomePageImg}
             style={{
               height: "8vw",
               width: "35vw",
               minWidth: "170px",
               minHeight: "40px",
             }}
-            alt="CodeNCollab"
           />
           <Typography className={classes.blogHead_interaction_text}>
             Official Page for Community Interaction and Announcements

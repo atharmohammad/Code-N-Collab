@@ -7,6 +7,7 @@ import Github from "../Assets/images/Github.png";
 import Admin from "../Components/About/Admin/Admin";
 import AboutContent from "../Components/About/AboutContent";
 import classes from "./pages.module.css";
+import HomeIcon from "../Components/Home/Home"
 
 export default function About(props) {
 
@@ -20,7 +21,10 @@ export default function About(props) {
     >
       <Stars />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Back/>
+      <div style={{ display: "flex", position: "sticky"}}>
+          <Back />
+          <HomeIcon />
+        </div>
         <Nav />
       </div>
       <Container component="main" maxWidth="md" style={{ marginTop: "5px" }}>
@@ -37,11 +41,12 @@ export default function About(props) {
               alt="Code-N-Collab"
             />
             <div className={classes.About}>
-              <p>About</p>
+              About
               <a
                 title="Code-N-Collab Git Repo"
                 href="https://github.com/atharmohammad/Code-N-Collab/tree/master"
                 target="_blank"
+                rel="noreferrer"
                 style={{ width: "100%", height: "100%" }}
               >
                 <img
@@ -51,7 +56,7 @@ export default function About(props) {
                     width: "20%",
                     height: "10%",
                     minWidth: "50px",
-                    margin: "30px 0 0 10%",
+                    margin: "-10px 0 0 10%",
                   }}
                 />
               </a>
@@ -74,7 +79,7 @@ export default function About(props) {
                   fontSize: "25px",
                   fontWeight: "bold",
                   border: "2px solid gray",
-                  fontFamily: ["edgwick Ave Display", "cursive"].join(),
+                  fontFamily: ["Fira Sans", "sans-serif"].join(),
                 }}
               >
                 Developed By :
