@@ -30,7 +30,7 @@ const HelperIcons = (props) => {
     likeArray,
   } = props //for all
   const { toggleCommentHandler } = { ...props }; //particular blogs
-  const { toggleReplyHandler } = { ...props }; //comment
+  const { toggleReplyHandler , repliesLength} = { ...props }; //comment
   const { allBlogPage } = { ...props }; //allblogPage blog
 
   const [viewerLiked, setViewerLiked] = useState(false);
@@ -96,6 +96,7 @@ const HelperIcons = (props) => {
       >
         <Button>
           <ForumIcon className={classes.particularIcon} />
+          {repliesLength}
         </Button>
       </Tooltip>
     );

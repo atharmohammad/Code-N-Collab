@@ -46,7 +46,7 @@ const LanguagePicker = (props) => {
           <MenuItem value="shell">Shell</MenuItem>
           <MenuItem value="sql">SQL</MenuItem> 
           <MenuItem value="swift">Swift</MenuItem>
-          <MenuItem value="">Text</MenuItem>
+          <MenuItem value="text">Text</MenuItem>
         </Select>
       </FormControl>
     </Grid>

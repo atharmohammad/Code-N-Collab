@@ -186,6 +186,7 @@ const Comment = (props) => {
             openWriter={() => setShowWriter(true)}
             likeArray={props.comment.Likes}
             likeRoute={"/comment/like/" + id}
+            repliesLength={props.comment.Replies.length}
           />
         </Grid>
       </Grid>
