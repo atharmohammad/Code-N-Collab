@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { SnackbarProvider } from "notistack";
-
+import axios from "./Axios/axios";
 import { AuthContext } from "./context/auth-context";
 import CustomRoutes from "./CustomRoutes/CustomRoutes";
 import "./App.css";
@@ -25,6 +25,14 @@ const App = (props) => {
   }, []);
 
   useEffect(() => {
+    axios
+      .get("/")
+      .then((data) => {})
+      .catch((e) =>
+        alert(
+          "Currently our server is down 😟!\nReload this page\nor Try after sometimes"
+        )
+      );
     const storedData = JSON.parse(localStorage.getItem("userData"));
     if (storedData && storedData.token) {
       setUser(storedData.user);

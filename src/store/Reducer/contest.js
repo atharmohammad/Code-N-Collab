@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, maxDuration: action.data };
 
     case TYPE.CONTEST_ENDED:
-      return { ...state, contestEnded: action.data };
+      return { ...state, contestEnded: action.data,showContestEndedModal: false, };
 
     case TYPE.SHOW_CONTEST_ENDED_MODAL:
       return { ...state, showContestEndedModal: true };
