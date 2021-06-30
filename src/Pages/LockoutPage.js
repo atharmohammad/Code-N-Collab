@@ -31,19 +31,20 @@ const LockOutPage = (props) => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     props.contestEnded(false)
-    
     const user = {
       Name: auth.user.CodeforcesHandle,
       RoomId: searchParams.get("room"),
     };
 
     socket.emit("Contest-Join", user, ({ error, contest }) => {
+      
       if (error) {
         return setError(error);
       } else {
         const updatedContest = contest;
         props.setContest(updatedContest);
       }
+      
       setJoined(true);
       
       if (contest.EndTime) {

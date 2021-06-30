@@ -7,7 +7,7 @@ import "./Problem.css";
 
 export default function App(props) {
   const socket = props.socket;
-  const [link, setLink] = useState('https://codeforces.com/problemset/problem/4/A');
+  const [link, setLink] = useState('');
   const [loader, setLoader] = useState(false);
   const ProblemRef = useRef();
 
@@ -23,6 +23,7 @@ export default function App(props) {
   };
 
   const problemFetchHandler = () => {
+    if(!link || !link.trim()) return;
     setLoader(true);
     socket.emit("codeforces-problem", link);
     setLink("");
@@ -94,6 +95,7 @@ export default function App(props) {
             }}
           >
             <input
+              value={link}
               placeholder="Problem Link"
               className="place"
               onChange={changeHandler}
