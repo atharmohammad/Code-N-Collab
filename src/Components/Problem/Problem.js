@@ -76,12 +76,16 @@ export default function App(props) {
               fontSize: "19px",
               fontFamily: ["Fira Sans", "sans-serif"].join(),
               wordWrap: "break-word",
-            }}>
-            copy url of any problem from the following websites:  
-            codeforces ,codechef ,geeksforgeeks ,atcoder ,cses.
-            paste the url in place of Problem Link and click fetch
-            <br/><br/>
-            eg : you can paste this url : <br/> https://codeforces.com/problemset/problem/1528/A
+            }}
+          >
+            copy url of any problem from the following websites: <br />
+            codeforces ,codechef , geeksforgeeks , atcoder , cses. paste the url
+            in place of Problem Link and click fetch. same problem will also be
+            fetched on your collaborator's problem section
+            <br />
+            <br />
+            eg : you can paste this url : <br />{" "}
+            https://codeforces.com/problemset/problem/1528/A
           </Grid>
 
           <Grid

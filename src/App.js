@@ -27,12 +27,14 @@ const App = (props) => {
   useEffect(() => {
     axios
       .get("/")
-      .then((data) => {console.log("Welcome !")})
-      .catch((e) =>{
+      .then((data) => {
+        console.log("Welcome !");
+      })
+      .catch((e) => {
         alert(
-          "Currently our server is down 😟!\nReload this page\nor Try after sometimes"
-        )}
-      );
+          "There might be some problem 😟!\n Please reload this page\nor Try again after sometimes"
+        );
+      });
     const storedData = JSON.parse(localStorage.getItem("userData"));
     if (storedData && storedData.token) {
       setUser(storedData.user);
