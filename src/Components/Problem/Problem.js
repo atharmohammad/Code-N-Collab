@@ -7,7 +7,7 @@ import "./Problem.css";
 
 export default function App(props) {
   const socket = props.socket;
-  const [link, setLink] = useState(null);
+  const [link, setLink] = useState('');
   const [loader, setLoader] = useState(false);
   const ProblemRef = useRef();
 
@@ -23,6 +23,7 @@ export default function App(props) {
   };
 
   const problemFetchHandler = () => {
+    if(!link || !link.trim()) return;
     setLoader(true);
     socket.emit("codeforces-problem", link);
     setLink("");
@@ -72,10 +73,17 @@ export default function App(props) {
             style={{
               overflowY: "auto",
               color: "#fff",
-              fontSize: "18px",
-              fontWeight: "bold",
-            }}
-          ></Grid>
+              fontSize: "19px",
+              fontFamily: ["Fira Sans", "sans-serif"].join(),
+              wordWrap: "break-word",
+            }}>
+            copy url of any problem from the following websites:  
+            codeforces ,codechef ,geeksforgeeks ,atcoder ,cses.
+            paste the url in place of Problem Link and click fetch
+            <br/><br/>
+            eg : you can paste this url : <br/> https://codeforces.com/problemset/problem/1528/A
+          </Grid>
+
           <Grid
             style={{
               display: "flex",
@@ -87,10 +95,10 @@ export default function App(props) {
             }}
           >
             <input
+              value={link}
               placeholder="Problem Link"
               className="place"
               onChange={changeHandler}
-              value={link}
             />
             <div
               style={{

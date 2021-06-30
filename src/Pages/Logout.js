@@ -9,15 +9,15 @@ const Logout = (props) => {
   const history = useHistory();
   const auth = useContext(AuthContext);
   
-  useEffect(async () => {
-    try {
-      await axios.get("/user/logout");
-    } catch (e) {
-      console.log(e);
-    } finally {
-      auth.logout();
-      history.push("/homepage");
-    }
+  useEffect(async() => {
+      try {
+        await axios.get("/user/logout");
+      } catch (e) {
+        
+      } finally {
+        auth.logout();
+        history.push("/homepage");
+      }
   }, []);
 
   return (

@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from "react";
-import useSound from "use-sound";
 import { v4 as uuidv4 } from "uuid";
 import { useHistory, useLocation } from "react-router-dom";
 import { Grid, Button, InputLabel } from "@material-ui/core";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 
+
+import Snacker from '../Snacker/Snaker'
 import Stars from "../Stars/Stars";
 import styles from "./RoomsInput.module.css";
-import roundStart from "../../Assets/sound-effects/RoundStart.mp3";
 import CreateRoom from "../../Assets/images/create_room.png";
+import JoinRoom from "../../Assets/images/JoinRoom.png";
 import Back from "../Back/Back";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import HomeIcon from "../Home/Home"
 
 function Rooms(props) {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
   const history = useHistory();
-  const [play] = useSound(roundStart);
   const [room, setRoom] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const location = useLocation();
   const [error, setError] = useState(null);
+  const [roomHeadingType, setRoomHeadingType] = useState(1);
 
   useEffect(() => {
     if (location.state && location.state.error) {
@@ -31,60 +28,64 @@ function Rooms(props) {
     }
 
     const searchParams = new URLSearchParams(location.search);
-    if (searchParams.has("room") && searchParams.get("room")) {
+    if (
+      searchParams.has("room") &&
+      searchParams.get("room") &&
+      searchParams.get("room").toLowerCase().endsWith("collab")
+    ) {
       setRoom(searchParams.get("room").trim());
+      setRoomHeadingType(2);
     } else {
-      const roomId = uuidv4();
+      const roomId = uuidv4() + "collab";
       setRoom(roomId);
     }
   }, [location]);
 
   const changeHandler = (type, event) => {
     if (type == "room") setRoom(event.target.value);
-    if (type == "name") setName(event.target.value);
+    if (type == "name") setName(event.target.value.trim());
     if (type == "password") setPassword(event.target.value);
   };
 
   const createRoomHandler = async (e) => {
+    if (!name || !name.trim()) {
+      return setError("Invalid name");
+    }
+
     try {
-      play();
       history.push({
         pathname: "/collaborate",
         search: "?room=" + room + "&name=" + name,
         state: { password },
       });
     } catch (err) {
-      console.log(err);
+      setError("Oops something went wrong try again later!");
     }
   };
 
-  const backHandler = () => {
-    history.push("/homepage");
-  };
   return (
     <div className={styles.main}>
       <Stars color="#fff" />
-      <Back clicked={backHandler} />
+      <div style={{display:'flex',position:'sticky',marginTop: "20px"}}>
+        <Back />
+        <HomeIcon/>
+      </div>
       <Grid container direction="column" justify="center" alignItems="center">
-        <img
-          className = {styles.img}
-          src={CreateRoom}
-          alt="create-room"
-        />
-
-        <div
-          className = {styles.inputContainer} 
-        >
+        {roomHeadingType === 1 ? (
+          <img className={styles.img} src={CreateRoom} alt="create-room" />
+        ) : (
+          <img className={styles.img} src={JoinRoom} alt="join-room" />
+        )}
+        <div className={styles.inputContainer}>
           <div>
-            <InputLabel
-              style={{color:'#fff',fontWeight:'bold'}}
-            >
-              Username
+            <InputLabel style={{ color: "#fff", fontWeight: "bold" }}>
+              * Choose a Unique Name
             </InputLabel>
             <input
               onChange={(event) => changeHandler("name", event)}
               className={styles.input}
             />
+            
           </div>
 
           <div>
@@ -97,8 +98,8 @@ function Rooms(props) {
           </div>
 
           <div>
-            <InputLabel style={{color:'#fff',fontWeight:'bold'}}>
-              Password
+            <InputLabel style={{ color: "#fff", fontWeight: "bold" }}>
+              Password {roomHeadingType == 1?'(Optional)':null}
             </InputLabel>
             <input
               type="password"
@@ -110,33 +111,30 @@ function Rooms(props) {
           <Button
             variant="contained"
             style={{
-              alignSelf:'center',
+              alignSelf: "center",
               border: "3px solid white",
               borderRadius: "5px",
-              background: name && room ? "#7d7574" : "transparent",
+              background: name && room ? "transparent" : "#7d7574",
               color: "#fff",
               marginTop: "2vh",
               padding: "2vh",
               width: "12vw",
-              minWidth:'120px',
+              minWidth: "120px",
             }}
             disabled={name == "" || room == ""}
             onClick={createRoomHandler}
           >
             Join / Create
           </Button>
-          <Snackbar
-            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-            open={error !== null}
-            autoHideDuration={6000}
-            onClose={() => setError(null)}
-          >
-            <Alert onClose={() => setError(null)} severity="error">
-              {error}
-            </Alert>
-          </Snackbar>
         </div>
       </Grid>
+      <Snacker
+        open={error !== null}
+        severity="error"
+        timer={6000}
+        message ={error} 
+        onClose={() => setError(null)}
+      />
     </div>
   );
 }

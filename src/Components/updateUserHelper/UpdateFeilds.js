@@ -14,8 +14,8 @@ const ProfileFeild = (props) => {
       label={props.title}
       name={props.title}
       placeholder={props.placeHolder}
-      autoFocus
       onChange={(event) => props.changeHandler(event.target.value)}
+      autoFocus={props.autoFocus}
     />
   );
 };

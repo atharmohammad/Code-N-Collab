@@ -12,6 +12,7 @@
   padding: 1vh 2vh 2vh 10vh;
   left: 30%;
   top: 150px;
+  min-width: 200px;
   transition: all 0.3s ease-out;
   border-radius: 20px;
 }
@@ -25,6 +26,7 @@
 
 .graphContainer {
   display: flex;
+  height: 90%;
   flex-direction: row;
   background: red;
   border: 4px solid #fff;
@@ -35,14 +37,23 @@
 }
 .inputEdge {
   width: 100%;
-  height: 56vh;
+  height: 100%;
   font-size: 20px;
   background: #fff;
 }
 .graph {
   width: 100%;
-  height: 56vh;
+  height: 100%;
   resize: none;
   font-size: 20px;
   background: #fff;
+}
+@media only screen and (max-width: 500px) {
+  .main {
+    width: 50%;
+    left: 5%;
+    top: 180px;
+    height: 50vh;
+    padding-left: 50px;
+  }
 }

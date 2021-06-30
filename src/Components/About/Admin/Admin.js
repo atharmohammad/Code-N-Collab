@@ -20,27 +20,51 @@ export default function Admin(props) {
         style={{
           display: "flex",
           flexWrap: "wrap",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           flexDirection: "row",
           padding: "1vw",
           boxSizing: "border-box",
           width: "100%",
         }}
       >
-        <a title="linkedIn" target="_blank" href={props.linkedIn}>
-          <img className={classes.iconImg} src={Linkedin} alt="Linkedin" />
+        <a
+          title="linkedIn"
+          target="_blank"
+          rel="noreferrer"
+          href={props.linkedIn}
+          className={classes.iconImg}
+        >
+          <img style={{ width: "100%" }} src={Linkedin} alt="Linkedin" />
         </a>
-        <a title="Github" href={props.github} target="_blank">
-          <img className={classes.iconImg} src={Github} alt="Github" />
+        <a
+          title="Github"
+          href={props.github}
+          className={classes.iconImg}
+          rel="noreferrer"
+          target="_blank"
+        >
+          <img style={{ width: "100%" }} src={Github} alt="Github" />
         </a>
-        <a title="Codeforces" href={props.codeForces} target="_blank">
-          <img className={classes.iconImg} src={Codeforces} alt="Codeforces" />
+        <a
+          title="Codeforces"
+          href={props.codeForces}
+          className={classes.iconImg}
+          rel="noreferrer"
+          target="_blank"
+        >
+          <img style={{ width: "80%" }} src={Codeforces} alt="Codeforces" />
         </a>
-        <a title="My Portfolio" href={props.portFolio} target="_blank">
+        <a
+          title="My Portfolio"
+          href={props.portFolio}
+          className={classes.iconImg}
+          target="_blank"
+          rel="noreferrer"
+        >
           <img
+            style={{ width: "85%", }}
             src={AtharPortfolio}
             alt="My Portfolio"
-            className={classes.iconImg}
           />
         </a>
       </div>

@@ -17,7 +17,7 @@
 }
 
 .main {
-  height: 100vh;
+  min-height: 100vh;
   background: radial-gradient(ellipse, #1b2735 0%, #090a0f 100%);
 }
 
@@ -43,5 +43,3 @@
   border: 5px double #fff;
   box-sizing: border-box;
 }
-
-

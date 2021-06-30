@@ -2,28 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 
+import Snacker from "../Components/Snacker/Snaker";
 import Chat from "../Components/Chat/ChatTabs";
-import Editor from "../Components/Editor/Editor_Wrapper";
+import Editor from "../Components/Editor/Editor";
 import IO from "../Components/IO/IO";
 import Problem from "../Components/Problem/Problem";
 import Toolbar from "../Components/Toolbar/Toolbar";
 import Spinner from "../Components/Spinner/ContestSpinner/ContestSpinner";
 import * as TYPES from "../store/Action/action";
-
+import { useSnackbar } from 'notistack';
 import "react-reflex/styles.css";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 const CollabPage = (props) => {
   const socket = props.socket;
   const location = useLocation();
   const history = useHistory();
   const [joined, setJoined] = useState(false);
+  const [startMsgSnackbar, setStartMsgSnackbar] = useState(true);
+  const { enqueueSnackbar,closeSnackbar} = useSnackbar();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -40,6 +37,13 @@ const CollabPage = (props) => {
           error: "Username or RoomName can't be empty",
         };
       }
+      try {
+        if (!searchParams.get("room").toLowerCase().endsWith("collab")) {
+          err = {
+            error: "Invalid room",
+          };
+        }
+      } catch (e) {}
 
       return history.push({
         pathname: "/rooms",
@@ -71,10 +75,18 @@ const CollabPage = (props) => {
           });
         }
         setJoined(true);
-
       }
     );
   }, []);
+
+  useEffect(()=>{
+    if(props.output_success){
+      enqueueSnackbar("Code Compiled Succesfully !", {
+        variant:'success',
+      });
+      props.notify_output_off();
+    }
+  },[props.output_success])
 
   return joined ? (
     <>
@@ -104,7 +116,7 @@ const CollabPage = (props) => {
               <ReflexElement
                 minSize="100"
                 maxSize="1600"
-                style={{ overflow: "hidden" }}
+                style={{ display: "flex" }}
               >
                 <Editor socket={socket} />
               </ReflexElement>
@@ -146,26 +158,26 @@ const CollabPage = (props) => {
           </ReflexElement>
         </ReflexContainer>
 
-        <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-          open={props.output_success}
-          autoHideDuration={3000}
-          onClose={props.notify_output_off}
-        >
-          <Alert onClose={props.notify_output_off} severity="success">
-            Code Compiled SuccessFully !
-          </Alert>
-        </Snackbar>
-        <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        <Snacker
           open={props.output_error}
-          autoHideDuration={3000}
+          vertical= 'top'
+          horizontal= 'center' 
           onClose={props.notify_output_error}
-        >
-          <Alert onClose={props.notify_output_error} severity="error">
-            Something Went Wrong!
-          </Alert>
-        </Snackbar>
+          message="Something Went Wrong!"
+          severity="error"
+        />
+
+        <Snacker
+          open={startMsgSnackbar}
+          timer={6000}
+          vertical= 'top'
+          horizontal= 'center' 
+          message="Share URL of this page to collaborate"
+          severity="info"
+          onClose={() => {
+            setStartMsgSnackbar(false);
+          }}
+        />
       </div>
     </>
   ) : (

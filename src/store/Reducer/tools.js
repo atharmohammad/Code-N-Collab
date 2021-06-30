@@ -2,10 +2,10 @@ import * as TYPE from "../Action/action";
 
 const initialState = {
   language: "cpp",
-  theme: "vs-dark",
+  theme: "monokai",
   nowCompile: false,
   isLoading: false,
-  fontSize: 20,
+  fontSize: 25,
   input: "",
   output: "",
   output_success: false,

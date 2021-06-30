@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
-import { v1 as uuidv1 } from "uuid";
-import MuiAlert from "@material-ui/lab/Alert";
-import { Grid, Snackbar } from "@material-ui/core";
+import { v4 as uuid } from "uuid";
+import { Grid } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 
 import HomePageImg from "../Assets/images/HomePageImg.png";
@@ -12,10 +11,7 @@ import Back from "../Components/Back/Back";
 import axios from "../Axios/axios";
 import Spinner from "../Components/Spinner/BlogSpinner";
 import { AuthContext } from "../context/auth-context";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import Snacker from "../Components/Snacker/Snaker";
 
 function HomePage() {
   const history = useHistory();
@@ -25,38 +21,42 @@ function HomePage() {
   const [startSpinner, setSpinner] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(async () => {
-    if (searchParams.get("code")) {
-      const code = searchParams.get("code");
+  useEffect(() => {
+    const fn = async () => {
+      if (searchParams.get("code")) {
+        const code = searchParams.get("code");
 
-      let data;
+        let data;
 
-      try {
-        setSpinner(true);
-        data = await axios.post("/Oauth/authenticated", { code: code });
-        auth.login(data.data.user, data.data.token);
-        if (data.data.Way === "signup") {
-          history.push("/updateUser");
-        } else {
-          history.push("/homepage");
+        try {
+          setSpinner(true);
+          data = await axios.post("/Oauth/authenticated", { code: code });
+          auth.login(data.data.user, data.data.token);
+          if (data.data.Way === "signup") {
+            history.push("/updateUser");
+          } else {
+              history.push(
+                localStorage.getItem("loginUrl")
+                  ? localStorage.getItem("loginUrl")
+                  : "/homepage"
+              );
+              localStorage.removeItem("loginUrl");
+          }
+        } catch (e) {
+          setError("Oops something went wrong try again later!");
         }
-      } catch (e) {
-        console.log("error", e);
+        setSpinner(false);
       }
-      setSpinner(false);
-    }
 
-    if (location.state && location.state.error) {
-      setError(location.state.error);
-    }
+      if (location.state && location.state.error) {
+        setError(location.state.error);
+      }
+    };
+    fn();
   }, []);
 
   const roomHandler = () => {
     history.push("/rooms");
-  };
-
-  const homePageHandler = () => {
-    history.push("/");
   };
 
   const blogHandler = () => {
@@ -72,7 +72,7 @@ function HomePage() {
 
   const contestHandler = () => {
     if (auth.token) {
-      const room = uuidv1();
+      const room = uuid() + "contest";
       history.push({
         pathname: "/newContest",
         search: "?room=" + room,
@@ -85,13 +85,13 @@ function HomePage() {
     <>
       <div
         style={{
-          height: "100vh",
+          minHeight: "100vh",
           background: "radial-gradient(ellipse, #1b2735 0%, #090a0f 100%)",
         }}
       >
         <Stars color="#fff" />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Back clicked={homePageHandler} />
+          <Back />
           <Nav />
         </div>
         {startSpinner ? (
@@ -105,15 +105,19 @@ function HomePage() {
               alignItems="center"
               style={{
                 minHeight: "80vh",
-                marginBottom: "5vh",
                 boxSizing: "border-box",
               }}
             >
               <img
                 src={HomePageImg}
-                alt="Code-N-Collab"
-                style={{ marginBottom: "5vh", width: "45vw",maxWidth:'400px',minWidth:'150px' }}
+                style={{
+                  marginBottom: "5vh",
+                  width: "45vw",
+                  maxWidth: "500px",
+                  minWidth: "300px",
+                }}
               />
+
               <Button name="Code - Editor" clicked={roomHandler} />
               <Button name="LockOut - Championship" clicked={contestHandler} />
               <Button name="Blogs" clicked={blogHandler} />
@@ -122,16 +126,13 @@ function HomePage() {
           </>
         )}
       </div>
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      <Snacker
         open={error !== null}
-        autoHideDuration={6000}
+        severity="error"
+        timer={6000}
+        message={error}
         onClose={() => setError(null)}
-      >
-        <Alert onClose={() => setError(null)} severity="error">
-          {error}
-        </Alert>
-      </Snackbar>
+      />
     </>
   );
 }
