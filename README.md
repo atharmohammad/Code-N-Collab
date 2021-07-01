@@ -58,6 +58,15 @@
    </tr>
 </table>
  </a>
+ 
+ <table align="center">
+     <tr>
+          <td>
+               <img src="https://media.giphy.com/media/JCoNZL6CTqYyDEhb4T/giphy.gif" alt="Collaboration" height="200"/>
+          </td>
+     </tr>
+</table>
+ 
 
 # 🔖 About
 Code - N - Collab is a Collaboration website for Software developers , Competitive coders , and every one who loves to code and collaborate with others to learn and grow. It provides users to collaborate with their team , friends and also find people with similar their interests.
