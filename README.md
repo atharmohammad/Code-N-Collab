@@ -59,13 +59,15 @@
 </table>
  </a>
  
- <table align="center">
-     <tr>
-          <td>
-               <img src="https://media.giphy.com/media/JCoNZL6CTqYyDEhb4T/giphy.gif" alt="Collaboration" height="200"/>
-          </td>
-     </tr>
-</table>
+ <a href="https://code-n-collab.netlify.app/" target="_blank"  rel="noreferrer">
+      <table align="center">
+          <tr>
+               <td>
+                    <img src="https://media.giphy.com/media/JCoNZL6CTqYyDEhb4T/giphy.gif" alt="Collaboration" height="200"/>
+               </td>
+          </tr>
+     </table>
+</a>
  
 
 # 🔖 About
