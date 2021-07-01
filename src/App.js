@@ -24,7 +24,16 @@ const App = (props) => {
     localStorage.removeItem("userData");
   }, []);
 
-  useEffect(async() => {
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("userData"));
+    if (storedData && storedData.token) {
+      setUser(storedData.user);
+      setToken(storedData.token);
+    }
+    setLoaded(true);
+  }, [login]);
+
+  useEffect(async()=>{
     try {
       await axios.get("/");
     } catch (e) {
@@ -36,13 +45,7 @@ const App = (props) => {
         );
       }
     }
-    const storedData = JSON.parse(localStorage.getItem("userData"));
-    if (storedData && storedData.token) {
-      setUser(storedData.user);
-      setToken(storedData.token);
-    }
-    setLoaded(true);
-  }, [login]);
+  },[])
 
   if (!loaded) return <></>;
 
