@@ -63,7 +63,7 @@
       <table align="center">
           <tr>
                <td>
-                    <img src="https://media.giphy.com/media/JCoNZL6CTqYyDEhb4T/giphy.gif" alt="Collaboration" height="200"/>
+                    <img src="gif/codencollab.gif" alt="Collaboration" height="200"/>
                </td>
           </tr>
      </table>
