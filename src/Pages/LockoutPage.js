@@ -21,6 +21,7 @@ const LockOutPage = (props) => {
   const [joined, setJoined] = useState(false);
   const [error, setError] = useState(null);
   const auth = useContext(AuthContext);
+  const [startMsgSnackbar,setStartMsgSnackbar] = useState(true);
 
   const closeSnackBarHandler = () => {
     return history.push({
@@ -120,7 +121,6 @@ const LockOutPage = (props) => {
                 style={{
                   background: "#313332",
                   boxShadow: "0 5px 15px 0px rgba(0,0,0,0.6)",
-                  height: "97%",
                   width: "96%",
                   margin: "auto",
                   borderRadius: "10px",
@@ -149,21 +149,34 @@ const LockOutPage = (props) => {
             <Chat socket={socket} />
           </ReflexElement>
         </ReflexContainer>
-        <Snacker
-        open={props.output_success}
-        horizontal='center'
-        message='Code Compiled SuccessFully !' 
-        onClose={props.notify_output_off}
-      />
 
         <Snacker
-        open={props.output_error}
-        vertical= 'top'
-        horizontal= 'center' 
-        severity="error"
-        message='Something Went Wrong!' 
-        onClose={props.notify_output_error}
-      />
+          open={startMsgSnackbar}
+          timer={6000}
+          vertical="top"
+          horizontal="center"
+          message="Share URL of this page with your friend and wait for them to join before starting contest"
+          severity="info"
+          onClose={() => {
+            setStartMsgSnackbar(false);
+          }}
+        />
+
+        <Snacker
+          open={props.output_success}
+          horizontal="center"
+          message="Code Compiled SuccessFully !"
+          onClose={props.notify_output_off}
+        />
+
+        <Snacker
+          open={props.output_error}
+          vertical="top"
+          horizontal="center"
+          severity="error"
+          message="Something Went Wrong!"
+          onClose={props.notify_output_error}
+        />
       </div>
     </>
   ) : (
@@ -172,10 +185,13 @@ const LockOutPage = (props) => {
       <Snacker
         open={error !== null}
         severity="error"
-        horizontal='center'
+        horizontal="center"
         timer={5000}
-        message ={error} 
-        onClose={() => {setError(null);closeSnackBarHandler()}}
+        message={error}
+        onClose={() => {
+          setError(null);
+          closeSnackBarHandler();
+        }}
       />
     </>
   );
