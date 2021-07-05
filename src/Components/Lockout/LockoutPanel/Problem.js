@@ -12,7 +12,7 @@ const Problem = (props) => {
     let bgcolor = "#3959d4";
 
     if(problem.solved){
-      if(problem.author == auth.user.CodeforcesHandle){
+      if(problem.author === auth.user.CodeforcesHandle){
         bgcolor = "green"
       }else{
         bgcolor = "#f00505"

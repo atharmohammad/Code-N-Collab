@@ -16,7 +16,7 @@ function Contest(props) {
     });
   }, []);
   return !props.questionLoading? (
-    props.contest.Started == false ? (
+    props.contest.Started === false ? (
       <FilterContest socket={socket} roomId={props.contest.Id} />
     ) : (
       <LockoutPanel socket={socket} />

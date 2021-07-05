@@ -25,7 +25,7 @@ function Editor(props) {
   };
 
   useEffect(async () => {
-    if (props.tools.nowCompile == true && props.tools.isLoading == false) {
+    if (props.tools.nowCompile === true && props.tools.isLoading === false) {
       props.setOutput("");
       props.setLoading();
       socket.emit("Compile_ON", {
@@ -114,8 +114,8 @@ function Editor(props) {
           editor.setSize("100vw", "100%");
         }}
       />
-      {props.tools.isLoading == true ? <Modal /> : null}
-      {props.tools.showGraph == true ? <Graph /> : null}
+      {props.tools.isLoading === true ? <Modal /> : null}
+      {props.tools.showGraph === true ? <Graph /> : null}
     </div>
   );
 }

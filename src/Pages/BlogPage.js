@@ -150,13 +150,13 @@ const BlogPage = (props) => {
               }}
               onChange={(e) => setSortValue(e.target.value)}
             >
-              <option value="creationTime" selected={sortBy == "creationTime"}>
+              <option value="creationTime" selected={sortBy === "creationTime"}>
                 Recent
               </option>
-              <option value="popularity" selected={sortBy == "popularity"}>
+              <option value="popularity" selected={sortBy === "popularity"}>
                 Popularity
               </option>
-              <option value="oldest-first" selected={sortBy == "oldest-first"}>
+              <option value="oldest-first" selected={sortBy === "oldest-first"}>
                 Oldest-first
               </option>
             </select>

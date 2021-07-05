@@ -69,7 +69,7 @@ const DenseTable = (props) => {
           ))}
         </TableBody>
       </Table>
-      {props.contestEnded == false ? (
+      {props.contestEnded === false ? (
         <Button
           style={{
             cursor: "pointer",

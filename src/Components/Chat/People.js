@@ -67,7 +67,7 @@ const People = (props) => {
                       {person.username}
                     </p>
                   </div>
-                  {props.you == person.username.trim().toLowerCase() ? (
+                  {props.you === person.username.trim().toLowerCase() ? (
                     <div className={classes.you}>you</div>
                   ) : (
                     <div className={classes.online} />

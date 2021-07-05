@@ -69,7 +69,7 @@ const Io = (props) => {
   const changeHandler = (event) => {
     props.setInput(event.target.value);
     inputRef.current.value = event.target.value;
-    if (recieved == 1 || recieved == 2) {
+    if (recieved === 1 || recieved === 2) {
       setRecieved(2);
       socket.emit("changeIO", {
         inputText: event.target.value,
@@ -86,7 +86,7 @@ const Io = (props) => {
   }, []);
 
   useEffect(() => {
-    if (location.pathname == "/newContest") {
+    if (location.pathname === "/newContest") {
       setReason("lockout");
     } else {
       setReason("code-editor");
@@ -129,7 +129,7 @@ const Io = (props) => {
   }, []);
 
   useEffect(() => {
-    if (recieved == 2 && location.pathname !== "newContest") {
+    if (recieved === 2 && location.pathname !== "newContest") {
       setRecieved(2);
       socket.emit("changeIO", {
         inputText: props.input,

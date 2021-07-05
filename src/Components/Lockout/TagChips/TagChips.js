@@ -74,10 +74,10 @@ const TagChips = (props) => {
     let tagKey = chipData.length;
 
     const chipIndex = chipData.findIndex(
-      (tag, i) => tag.label == event.target.value
+      (tag, i) => tag.label === event.target.value
     );
 
-    if (chipIndex == -1) {
+    if (chipIndex === -1) {
       setChipData([...chipData, { key: tagKey, label: event.target.value }]);
       props.updateProblemTags([
         ...chipData,

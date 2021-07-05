@@ -43,9 +43,9 @@ function Rooms(props) {
   }, [location]);
 
   const changeHandler = (type, event) => {
-    if (type == "room") setRoom(event.target.value);
-    if (type == "name") setName(event.target.value.trim());
-    if (type == "password") setPassword(event.target.value);
+    if (type === "room") setRoom(event.target.value);
+    if (type === "name") setName(event.target.value.trim());
+    if (type === "password") setPassword(event.target.value);
   };
 
   const createRoomHandler = async (e) => {
@@ -102,7 +102,7 @@ function Rooms(props) {
 
           <div>
             <InputLabel style={{ color: "#fff", fontWeight: "bold" }}>
-              Password {roomHeadingType == 1 ? "(Optional)" : null}
+              Password {roomHeadingType === 1 ? "(Optional)" : null}
             </InputLabel>
             <input
               type="password"
@@ -124,7 +124,7 @@ function Rooms(props) {
               width: "12vw",
               minWidth: "120px",
             }}
-            disabled={name == "" || room == ""}
+            disabled={name === "" || room === ""}
             onClick={createRoomHandler}
           >
             Join / Create
