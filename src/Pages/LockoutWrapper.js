@@ -20,7 +20,7 @@ export default function LockoutWrapper(props) {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
 
-    if (!searchParams.get("room") || searchParams.get("room").trim == "") {
+    if (!searchParams.get("room") || searchParams.get("room").trim === "") {
       return history.push({
         pathname: "/homepage",
       });
@@ -54,8 +54,12 @@ export default function LockoutWrapper(props) {
           state: { error: "Invalid room" },
         });
       }
+    
     } catch (e) {
-      alert("There is some error related to searchParams! try again!")
+      return history.push({
+        pathname: "/homepage",
+        state: { error: "Invalid request" },
+      });
     }
 
     setValid(true);

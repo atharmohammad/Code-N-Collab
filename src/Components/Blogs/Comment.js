@@ -2,6 +2,7 @@ import { useState, useRef, useContext, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
 import { Grid } from "@material-ui/core";
 
+import Snacker from '../Snacker/Snaker'
 import Reply from "./Reply";
 import SaveCancel from "./SaveCancel";
 import HelperIcons from "./HelperIcons";
@@ -21,6 +22,7 @@ const Comment = (props) => {
   const [replies, setReplies] = useState([]);
   const [showWriter, setShowWriter] = useState(false);
   const [deleted, setDeleted] = useState(false);
+  const [error, setError] = useState(null);
 
   const user = props.comment.User;
   const id = props.comment._id;
@@ -35,8 +37,8 @@ const Comment = (props) => {
 
   const saveHandler = async () => {
     const data = divRef.current.value.trim();
-    if (!data) {
-      return alert("cant be empty");
+    if (!data || !data.trim()) {
+      return setError("Comment can't be empty");
     }
     setCommentLoading(true);
     try {
@@ -46,7 +48,7 @@ const Comment = (props) => {
       setInitialComment(res.data);
       setEditComment(false);
     } catch (e) {
-      alert("Update comment error! try again!")
+      setError("Oops something went wrong try again later!")
     }
     setCommentLoading(false);
   };
@@ -62,7 +64,7 @@ const Comment = (props) => {
       const data = await axios.get("/reply/getReply/" + id);
       setReplies(data.data.Replies);
     } catch (e) {
-      alert("Get reply error!  try again!")
+      setError("Oops something went wrong try again later!")
     }
     setReplySpinner(false);
   }, []);
@@ -82,7 +84,7 @@ const Comment = (props) => {
         await axios.delete("/comment/deleteComment/" + id);
         setDeleted(true);
       } catch (e) {
-        alert("Delete comment error!  try again!")
+        setError("Oops something went wrong try again later!")
       }
     }
     setCommentLoading(false);
@@ -184,6 +186,7 @@ const Comment = (props) => {
             openWriter={() => setShowWriter(true)}
             likeArray={props.comment.Likes}
             likeRoute={"/comment/like/" + id}
+            repliesLength={props.comment.Replies.length}
           />
         </Grid>
       </Grid>
@@ -210,7 +213,7 @@ const Comment = (props) => {
                 </div>
               ) : (
                 replies.map((reply) => (
-                  <Reply replyData={reply} fetchRepliesAgain={fetchReply} />
+                  <Reply replyData={reply} key={reply._id} fetchRepliesAgain={fetchReply} />
                 ))
               )}
             </div>
@@ -234,6 +237,14 @@ const Comment = (props) => {
           }}
         />
       ) : null}
+        <Snacker
+        open={error !== null}
+        severity="error"
+        timer={6000}
+        message ={error} 
+        onClose={() => setError(null)}
+      />
+
     </div>
   );
 };

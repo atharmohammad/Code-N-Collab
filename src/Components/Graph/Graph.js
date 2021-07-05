@@ -125,7 +125,7 @@ const GraphVis = (props) => {
             onInput={changeHandler}
             style={{
               width: "100%",
-              height: "50vh",
+              height: "100%",
               fontSize: 20,
               backgroundColor: "#fff",
             }}
@@ -143,7 +143,7 @@ const GraphVis = (props) => {
             options={options}
             key={graphKey}
             style={{
-              height: "50vh",
+              height:'100%',
               width: "100%",
               backgroundColor: "#6e7053",
               border: "#fff",

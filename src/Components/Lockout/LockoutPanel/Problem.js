@@ -25,6 +25,7 @@ const Problem = (props) => {
         href={problem.link}
         title={problem.name}
         target="_blank"
+        rel="noreferrer"
         >
         {problem.points}
         </a>

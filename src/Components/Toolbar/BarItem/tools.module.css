@@ -41,4 +41,7 @@
   .mainGrid {
     margin: 10px 0 0 25px;
   }
+  .navSelect{
+    margin: auto 2px;
+  }
 }

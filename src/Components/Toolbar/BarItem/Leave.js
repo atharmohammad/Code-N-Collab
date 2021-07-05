@@ -48,9 +48,7 @@ function Leave(props) {
         props.leaveRoom();
         history.push("/rooms");
         window.location.reload();
-      } catch (err) {
-        alert("Window location reload error! try again!")
-      }
+      } catch (err) {}
     }
   };
 

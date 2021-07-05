@@ -39,3 +39,9 @@
     transform: rotateX(0) rotateY(0);
   }
 }
+
+@media screen and (max-width: 650px) {
+  .square {
+    margin-left:-30px;
+  }
+}

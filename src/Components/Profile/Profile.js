@@ -1,12 +1,11 @@
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
-import MuiAlert from "@material-ui/lab/Alert";
 import ShareIcon from "@material-ui/icons/Share";
-import Snackbar from "@material-ui/core/Snackbar";
 import { Tooltip, IconButton } from "@material-ui/core";
 import AdminStar from "../../Assets/images/star.png";
 
+import Snacker from "../Snacker/Snaker";
 import ProfileFeild from "./ProfileFeild";
 import classes from "./profile.module.css";
 import { AuthContext } from "../../context/auth-context";
@@ -17,10 +16,6 @@ import LinkedInIcon from "../../Assets/images/Linkedin.png";
 import CodechefIcon from "../../Assets/images/codechef.png";
 import AtcoderIcon from "../../Assets/images/atcoder.png";
 import CodeforcesIcon from "../../Assets/images/Codeforces.png";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 const Profile = (props) => {
   const history = useHistory();
@@ -72,7 +67,11 @@ const Profile = (props) => {
                     }}
                   >
                     Admin
-                    <img style={{height:'20px',marginLeft:"2px"}} src={AdminStar} alt="" />
+                    <img
+                      style={{ height: "20px", marginLeft: "2px" }}
+                      src={AdminStar}
+                      alt=""
+                    />
                   </div>
                 ) : null}
               </div>
@@ -96,7 +95,18 @@ const Profile = (props) => {
               <Tooltip
                 title="share"
                 onClick={() => {
-                  navigator.clipboard.writeText(window.location.href);
+                  if (
+                    window.location.pathname === "/me" &&
+                    localStorage.getItem("userData")
+                  ) {
+                    const user_id = JSON.parse(localStorage.getItem("userData"))
+                      .user._id;
+                    navigator.clipboard.writeText(
+                      `${window.location.origin}/profile/?user=${user_id}`
+                    );
+                  } else {
+                    navigator.clipboard.writeText(window.location.href);
+                  }
                   return setMsg("copied to clipboard");
                 }}
               >
@@ -138,6 +148,7 @@ const Profile = (props) => {
               }}
               href={user.Codeforces}
               target="_blank"
+              rel="noreferrer"
             >
               <img
                 src={CodeforcesIcon}
@@ -159,6 +170,7 @@ const Profile = (props) => {
               }}
               href={user.Codechef}
               target="_blank"
+              rel="noreferrer"
             >
               <img
                 src={CodechefIcon}
@@ -180,6 +192,7 @@ const Profile = (props) => {
               }}
               href={user.AtCoder}
               target="_blank"
+              rel="noreferrer"
             >
               <img
                 src={AtcoderIcon}
@@ -200,6 +213,7 @@ const Profile = (props) => {
                 boxSizing: "border-box",
               }}
               target="_blank"
+              rel="noreferrer"
               href={user.Linkedin}
             >
               <img
@@ -222,6 +236,7 @@ const Profile = (props) => {
               }}
               href={user.Github}
               target="_blank"
+              rel="noreferrer"
             >
               <img
                 src={GithubIcon}
@@ -237,16 +252,11 @@ const Profile = (props) => {
           </div>
         </div>
       </div>
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-        open={msg}
-        autoHideDuration={3000}
+      <Snacker
+        open={msg != null}
+        message={msg}
         onClose={() => setMsg(null)}
-      >
-        <Alert onClose={() => setMsg(null)} severity="success">
-          {msg}
-        </Alert>
-      </Snackbar>
+      />
     </>
   );
 };

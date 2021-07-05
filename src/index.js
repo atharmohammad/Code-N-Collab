@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 
+
 import App from "./App";
 import toolsReducer from "./store/Reducer/tools";
 import contestReducer from "./store/Reducer/contest";
@@ -17,7 +18,7 @@ const rootReducer = combineReducers({
 });
 
 const composeEnhancers =
-  process.env.NODE_ENV == "development"
+  process.env.NODE_ENV === "development"
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     : null || compose;
 

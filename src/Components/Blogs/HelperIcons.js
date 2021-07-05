@@ -3,20 +3,15 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import CommentIcon from "@material-ui/icons/Comment";
 import { Tooltip, Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Snackbar from "@material-ui/core/Snackbar";
 import ForumIcon from "@material-ui/icons/Forum";
 import EditIcon from "@material-ui/icons/Edit";
-import MuiAlert from "@material-ui/lab/Alert";
 import AddIcon from "@material-ui/icons/Add";
 import Fade from "@material-ui/core/Fade";
 
 import { AuthContext } from "../../context/auth-context";
 import axios from "../../Axios/axios";
 import classes from "./blogs.module.css";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import Snacker from '../Snacker/Snaker'
 
 const HelperIcons = (props) => {
   const auth = useContext(AuthContext);
@@ -33,11 +28,9 @@ const HelperIcons = (props) => {
     admin,
     likeRoute,
     likeArray,
-  } = {
-    ...props,
-  }; //for all
+  } = props //for all
   const { toggleCommentHandler } = { ...props }; //particular blogs
-  const { toggleReplyHandler } = { ...props }; //comment
+  const { toggleReplyHandler , repliesLength} = { ...props }; //comment
   const { allBlogPage } = { ...props }; //allblogPage blog
 
   const [viewerLiked, setViewerLiked] = useState(false);
@@ -72,7 +65,6 @@ const HelperIcons = (props) => {
       setLikesCount((state) => (viewerLiked ? state - 1 : state + 1));
       setViewerLiked((state) => !state);
       setError("Oops something went wrong");
-      alert("Post blog error!  try again!")
     }
     setDisableLikeBtn(false);
   };
@@ -104,6 +96,7 @@ const HelperIcons = (props) => {
       >
         <Button>
           <ForumIcon className={classes.particularIcon} />
+          {repliesLength}
         </Button>
       </Tooltip>
     );
@@ -193,16 +186,13 @@ const HelperIcons = (props) => {
           </Button>
         </Tooltip>
       ) : null}
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      <Snacker
         open={error !== null}
-        autoHideDuration={6000}
+        severity="error"
+        timer={6000}
+        message ={error} 
         onClose={() => setError(null)}
-      >
-        <Alert onClose={() => setError(null)} severity="error">
-          {error}
-        </Alert>
-      </Snackbar>
+      />
     </>
   );
 };

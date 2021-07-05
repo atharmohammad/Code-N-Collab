@@ -51,6 +51,7 @@ function Editor(props) {
             process.env.REACT_APP_SIGNALLING_URL1,
             process.env.REACT_APP_SIGNALLING_URL2,
           ],
+          password: location.state ? location.state.password : null
         });
 
         const yText = ydoc.getText("codemirror");

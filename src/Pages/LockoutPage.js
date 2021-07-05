@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 import { useLocation, useHistory } from "react-router-dom";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import { connect } from "react-redux";
 
 import Chat from "../Components/Chat/ChatTabs";
@@ -14,19 +12,16 @@ import Toolbar from "../Components/Toolbar/Toolbar";
 import * as TYPES from "../store/Action/action";
 import Spinner from "../Components/Spinner/ContestSpinner/ContestSpinner";
 import { AuthContext } from "../context/auth-context";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import Snacker from '../Components/Snacker/Snaker'
 
 const LockOutPage = (props) => {
   const socket = props.socket;
   const location = useLocation();
   const history = useHistory();
   const [joined, setJoined] = useState(false);
-  const [errorJoin, setErrorJoin] = useState(false);
-  const [joinErrorMsg, setJoinErrorMsg] = useState("");
+  const [error, setError] = useState(null);
   const auth = useContext(AuthContext);
+  const [startMsgSnackbar,setStartMsgSnackbar] = useState(true);
 
   const closeSnackBarHandler = () => {
     return history.push({
@@ -37,20 +32,20 @@ const LockOutPage = (props) => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     props.contestEnded(false)
-    
     const user = {
       Name: auth.user.CodeforcesHandle,
       RoomId: searchParams.get("room"),
     };
 
     socket.emit("Contest-Join", user, ({ error, contest }) => {
+      
       if (error) {
-        setErrorJoin(true);
-        return setJoinErrorMsg(error);
+        return setError(error);
       } else {
         const updatedContest = contest;
         props.setContest(updatedContest);
       }
+      
       setJoined(true);
       
       if (contest.EndTime) {
@@ -126,7 +121,6 @@ const LockOutPage = (props) => {
                 style={{
                   background: "#313332",
                   boxShadow: "0 5px 15px 0px rgba(0,0,0,0.6)",
-                  height: "97%",
                   width: "96%",
                   margin: "auto",
                   borderRadius: "10px",
@@ -156,41 +150,49 @@ const LockOutPage = (props) => {
           </ReflexElement>
         </ReflexContainer>
 
-        <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        <Snacker
+          open={startMsgSnackbar}
+          timer={6000}
+          vertical="top"
+          horizontal="center"
+          message="Share URL of this page with your friend and wait for them to join before starting contest"
+          severity="info"
+          onClose={() => {
+            setStartMsgSnackbar(false);
+          }}
+        />
+
+        <Snacker
           open={props.output_success}
-          autoHideDuration={3000}
+          horizontal="center"
+          message="Code Compiled SuccessFully !"
           onClose={props.notify_output_off}
-        >
-          <Alert onClose={props.notify_output_off} severity="success">
-            Code Compiled SuccessFully !
-          </Alert>
-        </Snackbar>
-        <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        />
+
+        <Snacker
           open={props.output_error}
-          autoHideDuration={3000}
+          vertical="top"
+          horizontal="center"
+          severity="error"
+          message="Something Went Wrong!"
           onClose={props.notify_output_error}
-        >
-          <Alert onClose={props.notify_output_error} severity="error">
-            Something Went Wrong!
-          </Alert>
-        </Snackbar>
+        />
       </div>
     </>
   ) : (
     <>
       <Spinner margin={"0px"} />
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-        open={errorJoin}
-        autoHideDuration={5000}
-        onClose={closeSnackBarHandler}
-      >
-        <Alert onClose={closeSnackBarHandler} severity="error">
-          {joinErrorMsg}
-        </Alert>
-      </Snackbar>
+      <Snacker
+        open={error !== null}
+        severity="error"
+        horizontal="center"
+        timer={5000}
+        message={error}
+        onClose={() => {
+          setError(null);
+          closeSnackBarHandler();
+        }}
+      />
     </>
   );
 };
@@ -205,8 +207,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    notify_output_off: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_SUCCESS }),
-    notify_output_error: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_ERROR }),
+    notify_output_off: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_SUCCESS,value:false }),
+    notify_output_error: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_ERROR,value:false }),
     setContest: (updatedContest) => {
       dispatch({ type: TYPES.CONTEST_UPDATED, data: updatedContest });
     },
