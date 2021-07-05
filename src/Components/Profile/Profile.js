@@ -83,7 +83,7 @@ const Profile = (props) => {
                 alignItems: "flex-end",
               }}
             >
-              {auth.user && user._id === auth.user._id ? (
+              {auth.user && user._id == auth.user._id ? (
                 <Tooltip
                   title="update profile"
                   onClick={() => history.push("/updateUser")}

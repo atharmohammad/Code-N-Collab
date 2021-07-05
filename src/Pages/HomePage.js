@@ -35,7 +35,7 @@ function HomePage() {
         setSpinner(true);
         data = await axios.post("/Oauth/authenticated", { code: code });
         auth.login(data.data.user, data.data.token);
-        if (data.data.Way === "signup") {
+        if (data.data.Way == "signup") {
           history.push("/updateUser");
         } else {
           history.push("/homepage");

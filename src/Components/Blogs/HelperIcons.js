@@ -51,7 +51,7 @@ const HelperIcons = (props) => {
     if (auth.user) {
       setDisableLikeBtn(false);
       const isUserLiked = likeArray.find(
-        (like) => like.toString().trim() == auth.user._id.toString().trim()
+        (like) => like.toString().trim() === auth.user._id.toString().trim()
       );
       if (isUserLiked) {
         setViewerLiked(true);
@@ -77,7 +77,7 @@ const HelperIcons = (props) => {
     setDisableLikeBtn(false);
   };
 
-  if (type.toLowerCase() == "blog") {
+  if (type.toLowerCase() === "blog") {
     addIconTitle = "comment";
     blogIcons = (
       <>
@@ -93,7 +93,7 @@ const HelperIcons = (props) => {
         </Tooltip>
       </>
     );
-  } else if (type.toLowerCase() == "comment") {
+  } else if (type.toLowerCase() === "comment") {
     forumIcon = (
       <Tooltip
         TransitionComponent={Fade}

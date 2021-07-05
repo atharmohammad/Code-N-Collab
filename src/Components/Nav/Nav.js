@@ -27,7 +27,7 @@ export default function () {
 
   return (
     <div className="headerss">
-      {auth.isLoggedIn === false ? (
+      {auth.isLoggedIn == false ? (
         <>
           <NavItem Name="login" clicked={loginHandler} />
         </>

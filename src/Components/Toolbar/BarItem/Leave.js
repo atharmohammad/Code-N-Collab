@@ -35,7 +35,7 @@ function Leave(props) {
 
   const leaveRoomHandler = () => {
     const currentPath = location.pathname;
-    if(currentPath === "/newContest"){
+    if(currentPath == "/newContest"){
       socket.emit("Contest-Update",({roomId:searchParams.get("room")}))
       socket.emit("Leave-Contest",({
         name:auth.user.CodeforcesHandle,

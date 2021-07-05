@@ -9,7 +9,7 @@ export default function NavItem(props) {
       style={{ marginRight: "1%" }}
     >
       <div style={{ display: "flex" }}>
-        {props.Name === "login" ? (
+        {props.Name == "login" ? (
           <img
             src={Gmail}
             style={{ height: "20px", margin: "35% 10% 0 0" }}

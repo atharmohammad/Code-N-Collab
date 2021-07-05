@@ -86,7 +86,7 @@ const Io = (props) => {
   }, []);
 
   useEffect(() => {
-    if (location.pathname === "/newContest") {
+    if (location.pathname == "/newContest") {
       setReason("lockout");
     } else {
       setReason("code-editor");
