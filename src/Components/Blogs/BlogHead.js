@@ -45,6 +45,7 @@ export default function BlogHead(props) {
               minWidth: "170px",
               minHeight: "40px",
             }}
+            alt={"HomePage"}
           />
           <Typography className={classes.blogHead_interaction_text}>
             Official Page for Community Interaction and Announcements

@@ -30,7 +30,7 @@ const Comment = (props) => {
   function resizeImageForMarkdown(props) {
     return (
       <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-        <img {...props} style={{ maxWidth: "80%" }} />
+        <img {...props} style={{ maxWidth: "80%" }} alt={"props"}/>
       </div>
     );
   }

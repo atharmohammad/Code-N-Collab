@@ -116,6 +116,7 @@ function HomePage() {
                   maxWidth: "500px",
                   minWidth: "300px",
                 }}
+                alt="HomePage"
               />
 
               <Button name="Code - Editor" clicked={roomHandler} />

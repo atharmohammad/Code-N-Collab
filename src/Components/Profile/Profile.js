@@ -70,7 +70,7 @@ const Profile = (props) => {
                     <img
                       style={{ height: "20px", marginLeft: "2px" }}
                       src={AdminStar}
-                      alt=""
+                      alt="AdminStar"
                     />
                   </div>
                 ) : null}

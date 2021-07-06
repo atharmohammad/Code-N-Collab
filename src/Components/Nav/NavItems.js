@@ -9,7 +9,7 @@ export default function NavItem(props) {
             <img
               src={Gmail}
               className="Img"
-              alt=""
+              alt="Gmail"
             />
             {props.Name}
           </div>

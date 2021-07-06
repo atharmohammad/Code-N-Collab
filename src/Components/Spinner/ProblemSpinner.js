@@ -10,6 +10,7 @@ export default function Spinner() {
       }}
     >
       <img
+        alt="dancing among us"
         style={{ width: "100%", height: "60%", marginLeft: "40%" }}
         src="https://cdn2.scratch.mit.edu/get_image/gallery/27930827_200x130.png"
       />

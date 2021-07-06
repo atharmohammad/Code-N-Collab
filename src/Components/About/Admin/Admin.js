@@ -11,6 +11,7 @@ export default function Admin(props) {
     <>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         <img
+          alt={"Mohd Athar"}
           className={classes.pic}
           src={props.Name === "Mohd Athar" ? Athar : Adnan}
         />
