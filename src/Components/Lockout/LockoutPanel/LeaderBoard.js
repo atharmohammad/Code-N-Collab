@@ -30,7 +30,7 @@ const DenseTable = (props) => {
   }, [props.contest]);
 
   const rows = [];
-  props.contest.Users.map((user) => {
+  props.contest.Users.forEach((user) => {
     rows.push({ Name: user.Name, Score: user.Score });
   });
 
