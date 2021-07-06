@@ -129,7 +129,6 @@ const BlogPage = (props) => {
                 color: "#fff",
                 margin: "10px",
                 cursor: "pointer",
-                textAlign: "center",
                 boxSizing: "border-box",
               }}
               onClick={showEditorHandler}
@@ -194,7 +193,6 @@ const BlogPage = (props) => {
                 color: "#fff",
                 marginTop: "30px",
                 cursor: "pointer",
-                textAlign: "center",
                 boxSizing: "border-box",
               }}
               onClick={showLessBlogs}
@@ -215,7 +213,6 @@ const BlogPage = (props) => {
                 color: "#fff",
                 marginTop: "30px",
                 cursor: "pointer",
-                textAlign: "center",
                 boxSizing: "border-box",
               }}
               onClick={showMoreBlogs}
