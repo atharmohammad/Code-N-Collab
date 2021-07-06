@@ -84,7 +84,6 @@ function TextEditor(props) {
               background: "#d82828",
               borderRadius: "5px",
               padding: "0 5px 0 5px",
-              textAlign: "center",
               color: "#fff",
               float: "right",
               cursor: "pointer",
