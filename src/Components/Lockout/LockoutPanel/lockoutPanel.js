@@ -1,5 +1,5 @@
 import { Grid } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Problem from "./Problem.js";
 import LeaderBoard from "./LeaderBoard";
 import Countdown from '../../Coundown/Coundown'

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useHistory, useLocation } from "react-router-dom";
 import { Grid, Button, InputLabel } from "@material-ui/core";
@@ -15,7 +15,7 @@ import Nav from "../Nav/Nav"
 
 function Rooms(props) {
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useMemo(() => new URLSearchParams(location.search),[location.search]);
   const history = useHistory();
   const [room, setRoom] = useState("");
   const [name, setName] = useState("");
@@ -27,8 +27,6 @@ function Rooms(props) {
     if (location.state && location.state.error) {
       setError(location.state.error);
     }
-
-    const searchParams = new URLSearchParams(location.search);
     if (
       searchParams.has("room") &&
       searchParams.get("room") &&
@@ -40,7 +38,7 @@ function Rooms(props) {
       const roomId = uuidv4() + "collab";
       setRoom(roomId);
     }
-  }, [location]);
+  }, [location,searchParams]);
 
   const changeHandler = (type, event) => {
     if (type === "room") setRoom(event.target.value);

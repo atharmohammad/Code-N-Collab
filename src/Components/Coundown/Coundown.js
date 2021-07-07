@@ -32,7 +32,7 @@ const Timer = (props) => {
       setMinutes(m);
       setSeconds(s);
     }, 1000);
-  }, [location]);
+  }, [location, props, socket]);
 
   return (
     <div style={{ color: "#fff", width: "100%", textAlign: "center" }}>

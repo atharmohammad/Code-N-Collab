@@ -14,7 +14,7 @@ function Contest(props) {
       props.setContest(updatedContest);
       props.resetProblemLoading();
     });
-  }, []);
+  }, [props,socket]);
   return !props.questionLoading? (
     props.contest.Started === false ? (
       <FilterContest socket={socket} roomId={props.contest.Id} />

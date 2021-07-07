@@ -13,7 +13,7 @@ const FilterContest = (props) => {
     socket.on("Contest-Starting", () => {
       props.setProblemLoading();
     });
-  }, []);
+  }, [props,socket]);
 
   const startContestHandler = () => {
     socket.emit("Start-Contest", {
@@ -110,7 +110,7 @@ const FilterContest = (props) => {
             color: "#fff",
             border: "2px solid white",
             borderRadius: "5px",
-            padding: "10px",
+            //padding: "10px", duplicate error
             width: "140px",
             alignText: "center",
             padding: "auto",

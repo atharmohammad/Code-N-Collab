@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useEffect, useState, useRef, useContext, useMemo } from "react";
 import { Typography, Grid } from "@material-ui/core";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { useLocation } from "react-router-dom";
@@ -11,7 +11,7 @@ const Chat = (props) => {
   const socket = props.socket;
   const inputRef = useRef();
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useMemo(() => new URLSearchParams(location.search),[location.search]);
   const [name, setName] = useState("");
   const auth = useContext(AuthContext);
 
@@ -21,7 +21,7 @@ const Chat = (props) => {
     } else {
       setName(searchParams.get("name"));
     }
-  }, []);
+  }, [auth.user.CodeforcesHandle, location.pathname, searchParams]);
 
   const submitHandler = (e) => {
     e.preventDefault();

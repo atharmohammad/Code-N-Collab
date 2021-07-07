@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
 
@@ -26,7 +26,7 @@ const MonacoEditor = (props) => {
         reason: "lockout",
       });
     }
-  }, [props.tools.nowCompile]);
+  }, [props.tools.nowCompile,code,props,socket]);
 
   return (
     <div

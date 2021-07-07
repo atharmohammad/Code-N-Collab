@@ -15,7 +15,7 @@ export default function LockoutWrapper(props) {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [socket]);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -63,7 +63,7 @@ export default function LockoutWrapper(props) {
     }
 
     setValid(true);
-  }, []);
+  }, [auth.token, auth.user.CodeforcesHandle, history, location.search]);
 
   if (!valid) {
     return <></>;

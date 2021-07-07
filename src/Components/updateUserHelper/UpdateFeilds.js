@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { TextField } from "@material-ui/core";
 
 import classes from "./update.module.css";
