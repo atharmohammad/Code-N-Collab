@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext,useMemo } from "react";
 import { AppBar, Tabs, Tab, Typography, Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import { useSnackbar } from 'notistack';
@@ -31,10 +31,10 @@ export default function ChatPanel(props) {
   const [messages, setMessages] = useState([]);
   const [persons, setPersons] = useState([]);
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useMemo(() => new URLSearchParams(location.search),[location.search]);
   const socket = props.socket;
   const auth = useContext(AuthContext);
-  const { enqueueSnackbar,closeSnackbar} = useSnackbar();
+  const { enqueueSnackbar} = useSnackbar();
 
   useEffect(() => {
     if (location.pathname === "/newContest") {
@@ -44,7 +44,7 @@ export default function ChatPanel(props) {
         setName(searchParams.get("name").trim().toLowerCase());
       }
     }
-  }, [location]);
+  }, [location,auth.user.CodeforcesHandle,searchParams]);
 
   useEffect(() => {
     socket.on("serverMsg", (msg) => {
@@ -53,7 +53,7 @@ export default function ChatPanel(props) {
     return () => {
       socket.off("serverMsg");
     };
-  }, [messages]);
+  }, [messages,socket]);
 
   useEffect(() => {
     socket.on("peopleInRoom", (data) => {
@@ -73,7 +73,7 @@ export default function ChatPanel(props) {
     return () => {
       socket.off("peopleInRoom");
     };
-  }, [persons, name]);
+  }, [persons, name,enqueueSnackbar,socket]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

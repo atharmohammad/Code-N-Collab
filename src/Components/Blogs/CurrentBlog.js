@@ -50,7 +50,7 @@ const CurrentBlog = (props) => {
     }
     setEditBlog(false);
     setBlogLoading(false);
-  }, []);
+  }, [id]);
 
   function resizeImageForMarkdown(props) {
     return (

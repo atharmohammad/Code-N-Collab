@@ -6,7 +6,7 @@ import axios from "../../Axios/axios";
 import NavItem from "./NavItems";
 import "./NavItem.css";
 
-export default function () {
+const Send = ()=> {
   const history = useHistory();
   const location = useLocation();
   const auth = useContext(AuthContext);
@@ -41,4 +41,5 @@ export default function () {
       <NavItem Name="about" clicked={aboutHandler} />
     </div>
   );
-}
+};
+export default Send

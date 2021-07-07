@@ -20,7 +20,7 @@ const CollabPage = (props) => {
   const history = useHistory();
   const [joined, setJoined] = useState(false);
   const [startMsgSnackbar, setStartMsgSnackbar] = useState(true);
-  const { enqueueSnackbar,closeSnackbar} = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const [resizeEditorNotify,setResizeEditorNotify] = useState(1);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const CollabPage = (props) => {
         setJoined(true);
       }
     );
-  }, []);
+  }, [history, location.search, location.state, socket]);
 
   useEffect(()=>{
     if(props.output_success){
@@ -87,7 +87,7 @@ const CollabPage = (props) => {
       });
       props.notify_output_off();
     }
-  },[props.output_success])
+  },[props.output_success,enqueueSnackbar,props])
 
   return joined ? (
     <>

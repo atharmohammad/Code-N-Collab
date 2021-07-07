@@ -83,7 +83,7 @@ const Io = (props) => {
     props.setInput(null);
     props.setOutput(null);
     props.resetLoading();
-  }, []);
+  }, [props]);
 
   useEffect(() => {
     if (location.pathname === "/newContest") {
@@ -100,10 +100,11 @@ const Io = (props) => {
         props.notify_output_on();
       } else {
         props.setOutput(response.e || "Oops something went wrong");
+        props.setOutput("Oops something went wrong");
         props.notify_output_error_on();
       }
     });
-  }, [location]);
+  }, [location,props,socket]);
 
   useEffect(() => {
     socket.on("IO_recieved", (data) => {
@@ -126,7 +127,7 @@ const Io = (props) => {
         reason: "code-editor",
       });
     });
-  }, []);
+  }, [props,socket]);
 
   useEffect(() => {
     if (recieved === 2 && location.pathname !== "newContest") {
@@ -138,7 +139,7 @@ const Io = (props) => {
       });
     }
     outputRef.current.value = props.output;
-  }, [props.output]);
+  }, [props.output,location.pathname, props.input, reason, recieved, socket]);
 
   return (
     <Grid className={classes.IoContainer} lg={12}>

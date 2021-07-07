@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import { Typography, Grid } from "@material-ui/core";
 import ScrollToBottom from "react-scroll-to-bottom";
-import Message from "./Message";
-import { useLocation } from "react-router-dom";
 import classes from "./Message.module.css";
 import { Avatar } from "@material-ui/core";
 

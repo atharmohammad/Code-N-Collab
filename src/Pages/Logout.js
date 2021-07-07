@@ -18,7 +18,7 @@ const Logout = (props) => {
         auth.logout();
         history.push("/homepage");
       }
-  }, []);
+  }, [auth,history]);
 
   return (
     <div

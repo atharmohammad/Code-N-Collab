@@ -1,4 +1,4 @@
-import { useState, useRef, useContext, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
 import { Grid } from "@material-ui/core";
 
@@ -67,7 +67,7 @@ const Comment = (props) => {
       setError("Oops something went wrong try again later!")
     }
     setReplySpinner(false);
-  }, []);
+  }, [replySpinner,id]);
 
   const toggleReplyHandler = () => {
     if (!showReply) {

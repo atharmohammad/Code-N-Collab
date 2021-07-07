@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useMemo } from "react";
 import { connect } from "react-redux";
 import { useLocation,useHistory } from "react-router-dom";
 import { Box } from "@material-ui/core";
@@ -10,13 +10,14 @@ import classes from "./tools.module.css";
 function Leave(props) {
   const history = useHistory();
   const location = useLocation();
-  const [room, setRoom] = useState("");
-  const [name, setName] = useState("");
   const [title,setTitle] = useState("");
+  const setRoom = setTitle;
+  const setName = setTitle;
+
   const auth = useContext(AuthContext);
 
   const socket = props.socket;
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useMemo(() => new URLSearchParams(location.search),[location.search]);
 
   useEffect(() => {
     const currentPath = location.pathname;
@@ -31,7 +32,7 @@ function Leave(props) {
         setName(searchParams.get("name"));
       }
     }
-  }, [location]);
+  }, [location,searchParams, setName, setRoom]);
 
   const leaveRoomHandler = () => {
     const currentPath = location.pathname;

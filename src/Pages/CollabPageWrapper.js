@@ -8,7 +8,7 @@ const CollabPageWrapper = () => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [socket]);
   return <CollabPage socket={socket} />;
 };
 

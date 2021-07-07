@@ -50,7 +50,7 @@ const HelperIcons = (props) => {
         setViewerLiked(true);
       }
     }
-  }, []);
+  }, [auth.user, likeArray]);
 
   const likeHandler = async () => {
     if (disableLikeBtn === true) {
@@ -60,7 +60,7 @@ const HelperIcons = (props) => {
     setLikesCount((state) => (viewerLiked ? state - 1 : state + 1));
     setViewerLiked((state) => !state);
     try {
-      const blog = await axios.post(likeRoute);
+      await axios.post(likeRoute);
     } catch (e) {
       setLikesCount((state) => (viewerLiked ? state - 1 : state + 1));
       setViewerLiked((state) => !state);

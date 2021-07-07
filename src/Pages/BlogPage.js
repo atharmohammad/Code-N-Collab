@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useCallback } from "react";
+import { useEffect, useState, useContext, useCallback, useMemo } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { Grid, Box } from "@material-ui/core";
 
@@ -14,7 +14,7 @@ import { AuthContext } from "../context/auth-context";
 
 const BlogPage = (props) => {
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useMemo(() => new URLSearchParams(location.search),[location.search]);
 
   const [showEditor, setShowEditor] = useState(false);
   const auth = useContext(AuthContext);
@@ -33,10 +33,7 @@ const BlogPage = (props) => {
   const skipLimit = 10;
 
   useEffect(async () => {
-    fetchBlogs();
-  }, [skip, sortBy, posted]);
-
-  const fetchBlogs = async () => {
+    //fetchBlogs removed to avoid a warning, it was replaced by its function
     setBlogsLoading(true);
     try {
       const res = await axios.get(
@@ -47,7 +44,7 @@ const BlogPage = (props) => {
       setError("Oops something Went Wrong trry again later!");
     }
     setBlogsLoading(false);
-  };
+  }, [skip, sortBy, posted]);
 
   const showMoreBlogs = useCallback(() => {
     history.push(`/blogs?sortBy=${sortBy}&skip=${skip + skipLimit}`);
@@ -66,7 +63,7 @@ const BlogPage = (props) => {
       history.push(`/blogs?sortBy=${val}&skip=${skip}`);
       setSortBy(val);
     },
-    [skip]
+    [skip,history]
   );
 
   const showEditorHandler = useCallback(() => {
@@ -77,7 +74,7 @@ const BlogPage = (props) => {
       });
     }
     return setShowEditor(true);
-  }, []);
+  }, [auth.token,history]);
 
   return (
     <div className={classes.wrap}>
