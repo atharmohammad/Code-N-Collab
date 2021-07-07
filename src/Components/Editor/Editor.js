@@ -35,7 +35,7 @@ function Editor(props) {
         reason: "code-editor",
       });
     }
-  }, [props.tools.nowCompile,code, props, socket]);
+  }, [props.tools.nowCompile]);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -76,7 +76,7 @@ function Editor(props) {
         }
       };
     }
-  }, [EditorRef,location.search,location.state]);
+  }, [EditorRef]);
 
   return (
     <div

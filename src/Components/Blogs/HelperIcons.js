@@ -50,7 +50,7 @@ const HelperIcons = (props) => {
         setViewerLiked(true);
       }
     }
-  }, [auth.user, likeArray]);
+  }, []);
 
   const likeHandler = async () => {
     if (disableLikeBtn === true) {

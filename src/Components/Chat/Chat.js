@@ -21,7 +21,7 @@ const Chat = (props) => {
     } else {
       setName(searchParams.get("name"));
     }
-  }, [auth.user.CodeforcesHandle, location.pathname, searchParams]);
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();

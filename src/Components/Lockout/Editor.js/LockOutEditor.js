@@ -26,7 +26,7 @@ const MonacoEditor = (props) => {
         reason: "lockout",
       });
     }
-  }, [props.tools.nowCompile,code,props,socket]);
+  }, [props.tools.nowCompile]);
 
   return (
     <div

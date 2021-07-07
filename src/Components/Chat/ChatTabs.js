@@ -34,7 +34,7 @@ export default function ChatPanel(props) {
   const searchParams = useMemo(() => new URLSearchParams(location.search),[location.search]);
   const socket = props.socket;
   const auth = useContext(AuthContext);
-  const { enqueueSnackbar} = useSnackbar();
+  const { enqueueSnackbar,closeSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (location.pathname === "/newContest") {
@@ -44,7 +44,7 @@ export default function ChatPanel(props) {
         setName(searchParams.get("name").trim().toLowerCase());
       }
     }
-  }, [location,auth.user.CodeforcesHandle,searchParams]);
+  }, [location]);
 
   useEffect(() => {
     socket.on("serverMsg", (msg) => {
@@ -53,7 +53,7 @@ export default function ChatPanel(props) {
     return () => {
       socket.off("serverMsg");
     };
-  }, [messages,socket]);
+  }, [messages]);
 
   useEffect(() => {
     socket.on("peopleInRoom", (data) => {
@@ -73,7 +73,7 @@ export default function ChatPanel(props) {
     return () => {
       socket.off("peopleInRoom");
     };
-  }, [persons, name,enqueueSnackbar,socket]);
+  }, [persons, name]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

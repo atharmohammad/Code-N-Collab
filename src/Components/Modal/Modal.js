@@ -1,5 +1,4 @@
 import React from "react";
-
 import Spinner from "../Spinner/Spinner";
 import classes from './Modal.module.css'
 

@@ -10,9 +10,9 @@ import classes from "./tools.module.css";
 function Leave(props) {
   const history = useHistory();
   const location = useLocation();
+  const [room, setRoom] = useState("");
+  const [name, setName] = useState("");
   const [title,setTitle] = useState("");
-  const setRoom = setTitle;
-  const setName = setTitle;
 
   const auth = useContext(AuthContext);
 
@@ -32,7 +32,7 @@ function Leave(props) {
         setName(searchParams.get("name"));
       }
     }
-  }, [location,searchParams, setName, setRoom]);
+  }, [location]);
 
   const leaveRoomHandler = () => {
     const currentPath = location.pathname;

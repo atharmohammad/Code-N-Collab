@@ -38,7 +38,7 @@ function Rooms(props) {
       const roomId = uuidv4() + "collab";
       setRoom(roomId);
     }
-  }, [location,searchParams]);
+  }, [location]);
 
   const changeHandler = (type, event) => {
     if (type === "room") setRoom(event.target.value);

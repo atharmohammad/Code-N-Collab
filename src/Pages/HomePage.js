@@ -53,7 +53,7 @@ function HomePage() {
       }
     };
     fn();
-  }, [auth,history,location.state,searchParams]);
+  }, []);
 
   const roomHandler = () => {
     history.push("/rooms");

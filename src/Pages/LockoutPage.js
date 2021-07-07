@@ -53,7 +53,7 @@ const LockOutPage = (props) => {
         props.contestEnded(contest.EndTime <= now);
       }
     });
-  }, [auth.user.CodeforcesHandle, location.search, props, socket]);
+  }, []);
 
   return joined ? (
     <>

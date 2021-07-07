@@ -16,7 +16,7 @@ export default function App(props) {
       ProblemRef.current.innerHTML = problem;
       setLoader(false);
     });
-  }, [socket]);
+  }, []);
 
   const changeHandler = (e) => {
     setLink(e.target.value);

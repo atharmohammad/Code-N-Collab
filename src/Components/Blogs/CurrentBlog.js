@@ -50,12 +50,12 @@ const CurrentBlog = (props) => {
     }
     setEditBlog(false);
     setBlogLoading(false);
-  }, [id]);
+  }, []);
 
   function resizeImageForMarkdown(props) {
     return (
       <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-        <img {...props} style={{ maxWidth: "80%" }} alt={"props"}/>
+	<img {...props} style={{ maxWidth: "80%" }} alt={"Markdown"}/>
       </div>
     );
   }

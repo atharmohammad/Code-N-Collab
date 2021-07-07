@@ -33,7 +33,10 @@ const BlogPage = (props) => {
   const skipLimit = 10;
 
   useEffect(async () => {
-    //fetchBlogs removed to avoid a warning, it was replaced by its function
+    fetchBlogs();
+  }, [skip, sortBy, posted]);
+
+  const fetchBlogs = async () => {
     setBlogsLoading(true);
     try {
       const res = await axios.get(
@@ -44,7 +47,7 @@ const BlogPage = (props) => {
       setError("Oops something Went Wrong trry again later!");
     }
     setBlogsLoading(false);
-  }, [skip, sortBy, posted]);
+  };
 
   const showMoreBlogs = useCallback(() => {
     history.push(`/blogs?sortBy=${sortBy}&skip=${skip + skipLimit}`);
@@ -63,7 +66,7 @@ const BlogPage = (props) => {
       history.push(`/blogs?sortBy=${val}&skip=${skip}`);
       setSortBy(val);
     },
-    [skip,history]
+    [skip]
   );
 
   const showEditorHandler = useCallback(() => {
@@ -74,7 +77,7 @@ const BlogPage = (props) => {
       });
     }
     return setShowEditor(true);
-  }, [auth.token,history]);
+  }, []);
 
   return (
     <div className={classes.wrap}>

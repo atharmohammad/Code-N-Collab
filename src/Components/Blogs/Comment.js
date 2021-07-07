@@ -30,7 +30,7 @@ const Comment = (props) => {
   function resizeImageForMarkdown(props) {
     return (
       <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-        <img {...props} style={{ maxWidth: "80%" }} alt={"props"}/>
+        <img {...props} style={{ maxWidth: "80%" }} alt={"Markdown"}/>
       </div>
     );
   }
@@ -67,7 +67,7 @@ const Comment = (props) => {
       setError("Oops something went wrong try again later!")
     }
     setReplySpinner(false);
-  }, [replySpinner,id]);
+  }, []);
 
   const toggleReplyHandler = () => {
     if (!showReply) {
