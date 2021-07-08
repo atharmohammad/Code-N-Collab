@@ -39,7 +39,7 @@ const GraphVis = (props) => {
 
     const SanitizedText = [];
     for (let i = 0; i < text.length; i++) {
-      if (text[i] != "") {
+      if (text[i] !== "") {
         SanitizedText.push(text[i]);
       }
     }

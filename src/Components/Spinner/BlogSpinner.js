@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "./BlogSpinner.css";
 
 export default function Spinner(props) {

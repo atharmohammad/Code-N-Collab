@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState, useMemo } from "react";
 import { v4 as uuid } from "uuid";
 import { Grid } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
@@ -16,7 +16,7 @@ import Snacker from "../Components/Snacker/Snaker";
 function HomePage() {
   const history = useHistory();
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useMemo(() => new URLSearchParams(location.search),[location.search]);
   const auth = useContext(AuthContext);
   const [startSpinner, setSpinner] = useState(false);
   const [error, setError] = useState(null);
@@ -116,6 +116,7 @@ function HomePage() {
                   maxWidth: "500px",
                   minWidth: "300px",
                 }}
+                alt="HomePage"
               />
 
               <Button name="Code - Editor" clicked={roomHandler} />

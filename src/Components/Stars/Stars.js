@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "../../Assets/css/style.css";
 
 export default function Stars(props) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CodemirrorBinding } from "y-codemirror";
 import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
 import * as Y from "yjs";
@@ -63,7 +63,7 @@ function Editor(props) {
           name: searchParams.get("name").trim(),
           color: color,
         });
-        const getBinding = new CodemirrorBinding(yText, EditorRef, awareness, {
+        new CodemirrorBinding(yText, EditorRef, awareness, {
           yUndoManager,
         });
       } catch (err) {

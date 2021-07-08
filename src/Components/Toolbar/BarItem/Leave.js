@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useMemo } from "react";
 import { connect } from "react-redux";
 import { useLocation,useHistory } from "react-router-dom";
 import { Box } from "@material-ui/core";
@@ -13,14 +13,15 @@ function Leave(props) {
   const [room, setRoom] = useState("");
   const [name, setName] = useState("");
   const [title,setTitle] = useState("");
+
   const auth = useContext(AuthContext);
 
   const socket = props.socket;
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useMemo(() => new URLSearchParams(location.search),[location.search]);
 
   useEffect(() => {
     const currentPath = location.pathname;
-    if(currentPath == "/newContest"){
+    if(currentPath === "/newContest"){
       setTitle("End Contest");
     }else{
       setTitle("Leave Room")

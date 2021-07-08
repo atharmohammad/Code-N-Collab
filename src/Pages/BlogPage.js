@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useCallback } from "react";
+import { useEffect, useState, useContext, useCallback, useMemo } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { Grid, Box } from "@material-ui/core";
 
@@ -14,7 +14,7 @@ import { AuthContext } from "../context/auth-context";
 
 const BlogPage = (props) => {
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useMemo(() => new URLSearchParams(location.search),[location.search]);
 
   const [showEditor, setShowEditor] = useState(false);
   const auth = useContext(AuthContext);
@@ -129,7 +129,6 @@ const BlogPage = (props) => {
                 color: "#fff",
                 margin: "10px",
                 cursor: "pointer",
-                textAlign: "center",
                 boxSizing: "border-box",
               }}
               onClick={showEditorHandler}
@@ -150,13 +149,13 @@ const BlogPage = (props) => {
               }}
               onChange={(e) => setSortValue(e.target.value)}
             >
-              <option value="creationTime" selected={sortBy == "creationTime"}>
+              <option value="creationTime" selected={sortBy === "creationTime"}>
                 Recent
               </option>
-              <option value="popularity" selected={sortBy == "popularity"}>
+              <option value="popularity" selected={sortBy === "popularity"}>
                 Popularity
               </option>
-              <option value="oldest-first" selected={sortBy == "oldest-first"}>
+              <option value="oldest-first" selected={sortBy === "oldest-first"}>
                 Oldest-first
               </option>
             </select>
@@ -194,7 +193,6 @@ const BlogPage = (props) => {
                 color: "#fff",
                 marginTop: "30px",
                 cursor: "pointer",
-                textAlign: "center",
                 boxSizing: "border-box",
               }}
               onClick={showLessBlogs}
@@ -215,7 +213,6 @@ const BlogPage = (props) => {
                 color: "#fff",
                 marginTop: "30px",
                 cursor: "pointer",
-                textAlign: "center",
                 boxSizing: "border-box",
               }}
               onClick={showMoreBlogs}

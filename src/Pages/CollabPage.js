@@ -20,7 +20,7 @@ const CollabPage = (props) => {
   const history = useHistory();
   const [joined, setJoined] = useState(false);
   const [startMsgSnackbar, setStartMsgSnackbar] = useState(true);
-  const { enqueueSnackbar,closeSnackbar} = useSnackbar();
+  const { enqueueSnackbar,closeSnackbar } = useSnackbar();
   const [resizeEditorNotify,setResizeEditorNotify] = useState(1);
 
   useEffect(() => {
@@ -182,7 +182,7 @@ const CollabPage = (props) => {
         />
 
         <Snacker
-          open={(resizeEditorNotify==2)}
+          open={(resizeEditorNotify===2)}
           timer={6000}
           vertical= 'top'
           horizontal= 'center' 

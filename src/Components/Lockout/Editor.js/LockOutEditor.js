@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
 
@@ -65,7 +65,7 @@ const MonacoEditor = (props) => {
       />
       {props.tools.isLoading === true ? <Modal /> : null}
       {props.tools.showGraph === true ? <Graph /> : null}
-      {props.contest.showContestEndedModal == true ? (
+      {props.contest.showContestEndedModal === true ? (
         <ContestEndedModal />
       ) : null}
     </div>

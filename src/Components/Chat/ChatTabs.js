@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext,useMemo } from "react";
 import { AppBar, Tabs, Tab, Typography, Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import { useSnackbar } from 'notistack';
@@ -31,10 +31,10 @@ export default function ChatPanel(props) {
   const [messages, setMessages] = useState([]);
   const [persons, setPersons] = useState([]);
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useMemo(() => new URLSearchParams(location.search),[location.search]);
   const socket = props.socket;
   const auth = useContext(AuthContext);
-  const { enqueueSnackbar,closeSnackbar} = useSnackbar();
+  const { enqueueSnackbar,closeSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (location.pathname === "/newContest") {

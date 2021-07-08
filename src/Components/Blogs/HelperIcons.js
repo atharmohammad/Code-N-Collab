@@ -44,7 +44,7 @@ const HelperIcons = (props) => {
     if (auth.user) {
       setDisableLikeBtn(false);
       const isUserLiked = likeArray.find(
-        (like) => like.toString().trim() == auth.user._id.toString().trim()
+        (like) => like.toString().trim() === auth.user._id.toString().trim()
       );
       if (isUserLiked) {
         setViewerLiked(true);
@@ -60,7 +60,7 @@ const HelperIcons = (props) => {
     setLikesCount((state) => (viewerLiked ? state - 1 : state + 1));
     setViewerLiked((state) => !state);
     try {
-      const blog = await axios.post(likeRoute);
+      await axios.post(likeRoute);
     } catch (e) {
       setLikesCount((state) => (viewerLiked ? state - 1 : state + 1));
       setViewerLiked((state) => !state);
@@ -69,7 +69,7 @@ const HelperIcons = (props) => {
     setDisableLikeBtn(false);
   };
 
-  if (type.toLowerCase() == "blog") {
+  if (type.toLowerCase() === "blog") {
     addIconTitle = "comment";
     blogIcons = (
       <>
@@ -85,7 +85,7 @@ const HelperIcons = (props) => {
         </Tooltip>
       </>
     );
-  } else if (type.toLowerCase() == "comment") {
+  } else if (type.toLowerCase() === "comment") {
     forumIcon = (
       <Tooltip
         TransitionComponent={Fade}
