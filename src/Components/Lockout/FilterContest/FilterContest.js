@@ -13,7 +13,7 @@ const FilterContest = (props) => {
     socket.on("Contest-Starting", () => {
       props.setProblemLoading();
     });
-  }, [props,socket]);
+  }, []);
 
   const startContestHandler = () => {
     socket.emit("Start-Contest", {
