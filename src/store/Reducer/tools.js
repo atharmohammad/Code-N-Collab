@@ -11,6 +11,7 @@ const initialState = {
   output_success: false,
   output_error: false,
   showGraph: false,
+  uploadedCode : ""
 };
 
 const reducer = (state = initialState, action) => {
@@ -53,6 +54,9 @@ const reducer = (state = initialState, action) => {
 
     case TYPE.HIDE_GRAPH:
       return { ...state, showGraph: false };
+    
+    case TYPE.UPLOAD_CODE_FILE:
+      return {...state , uploadedCode:action.value}
 
     default:
       return state;

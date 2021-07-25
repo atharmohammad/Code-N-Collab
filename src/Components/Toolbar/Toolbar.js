@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { Grid } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import LanguagePicker from "./BarItem/LanguagePicker";
@@ -13,6 +13,16 @@ import classes from "./Toolbar.module.css";
 export default function Toolbar(props) {
   const socket = props.socket;
   const history = useHistory();
+
+  const chooseFileHandler = async(event)=>{
+    const reader = new FileReader()
+    reader.onload = async (event) => { 
+      const text = (event.target.result)
+      console.log(text)
+    };
+    reader.readAsText(event.target.files[0])
+  }
+
 
   return (
     <Grid className={classes.main}>
@@ -29,6 +39,7 @@ export default function Toolbar(props) {
           <LanguagePicker />
           <ThemePicker />
           <FontSize />
+          <input type="file" onChange={chooseFileHandler} />
         </Grid>
         <Grid className={classes.toolsGrid}>
           <Compile />
