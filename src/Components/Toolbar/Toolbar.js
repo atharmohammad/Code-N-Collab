@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { Grid } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import LanguagePicker from "./BarItem/LanguagePicker";
@@ -9,6 +9,7 @@ import GraphButton from "./BarItem/GraphButton";
 import FontSize from "./BarItem/FontSize";
 import HomePageImg from "../../Assets/images/HomePageImg.png";
 import classes from "./Toolbar.module.css";
+import FileHandling  from "./BarItem/FileHandling";
 
 export default function Toolbar(props) {
   const socket = props.socket;
@@ -34,6 +35,7 @@ export default function Toolbar(props) {
           <Compile />
           <GraphButton />
           <Leave socket={socket} />
+          <FileHandling/>
         </Grid>
       </Grid>
     </Grid>

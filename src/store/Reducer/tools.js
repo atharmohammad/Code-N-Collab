@@ -5,12 +5,14 @@ const initialState = {
   theme: "monokai",
   nowCompile: false,
   isLoading: false,
-  fontSize: 25,
+  fontSize: 20,
   input: "",
   output: "",
   output_success: false,
   output_error: false,
   showGraph: false,
+  code : "",
+  uploaded_code:""
 };
 
 const reducer = (state = initialState, action) => {
@@ -53,6 +55,12 @@ const reducer = (state = initialState, action) => {
 
     case TYPE.HIDE_GRAPH:
       return { ...state, showGraph: false };
+    
+    case TYPE.SET_CODE:
+      return {...state , code:action.value}
+
+    case TYPE.SET_UPLOADED_CODE:
+      return{...state,uploaded_code:action.value}
 
     default:
       return state;
