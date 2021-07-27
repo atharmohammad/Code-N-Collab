@@ -7,7 +7,12 @@ import { useLocation } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import Graph from "../Graph/Graph";
 import { connect } from "react-redux";
-import { SET_LOADING, SET_OUTPUT, SET_CODE } from "../../store/Action/action";
+import {
+  SET_LOADING,
+  SET_OUTPUT,
+  SET_CODE,
+  SET_UPLOADED_CODE,
+} from "../../store/Action/action";
 import languageMapper from "../../Function/languageMapper";
 import "./Editor.css";
 import RandomColor from "randomcolor";
@@ -17,6 +22,13 @@ function Editor(props) {
   const location = useLocation();
   const [EditorRef, setEditorRef] = useState(null);
   const socket = props.socket;
+
+  useEffect(() => {
+    if (props.tools.uploaded_code && EditorRef) {
+      EditorRef.setValue(props.tools.uploaded_code);
+      props.set_uploaded_code("");
+    }
+  }, [props.tools.uploaded_code]);
 
   const handleEditorDidMount = (editor) => {
     setEditorRef(editor);
@@ -28,7 +40,7 @@ function Editor(props) {
       props.setLoading();
       socket.emit("Compile_ON", {
         language: props.tools.language,
-        code:props.tools.code,
+        code: props.tools.code,
         input: props.tools.input,
         reason: "code-editor",
       });
@@ -49,7 +61,7 @@ function Editor(props) {
             process.env.REACT_APP_SIGNALLING_URL1,
             process.env.REACT_APP_SIGNALLING_URL2,
           ],
-          password: location.state ? location.state.password : null
+          password: location.state ? location.state.password : null,
         });
 
         const yText = ydoc.getText("codemirror");
@@ -87,7 +99,6 @@ function Editor(props) {
       }}
     >
       <CodeMirrorEditor
-        value={props.tools.uploaded_code}
         onChange={(editor, data, value) => {
           props.setCode(value);
         }}
@@ -129,7 +140,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setOutput: (value) => dispatch({ type: SET_OUTPUT, value }),
     setLoading: () => dispatch({ type: SET_LOADING }),
-    setCode : (value)=>dispatch({type:SET_CODE,value})
+    setCode: (value) => dispatch({ type: SET_CODE, value }),
+    set_uploaded_code: (value) => dispatch({ type: SET_UPLOADED_CODE, value }),
   };
 };
 
