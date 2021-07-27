@@ -22,7 +22,7 @@ function FileHandling(props){
         const file = new Blob([props.code], {type: 'text/plain'});
         console.log(props.code)
         element.href = URL.createObjectURL(file);
-        element.download = "myFile.txt";
+        element.download = "codeNcollab.txt";
         document.body.appendChild(element); // Required for this to work in FireFox
         element.click();
       }
