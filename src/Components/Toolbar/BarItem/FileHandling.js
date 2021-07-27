@@ -14,6 +14,7 @@ function FileHandling(props){
           props.setCode(text)
         };
         reader.readAsText(event.target.files[0])
+        event.target.value = ""
       }
 
       const TextFile = () => {
