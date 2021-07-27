@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import Graph from "../Graph/Graph";
 import { connect } from "react-redux";
-import { SET_LOADING, SET_OUTPUT } from "../../store/Action/action";
+import { SET_LOADING, SET_OUTPUT, SET_CODE } from "../../store/Action/action";
 import languageMapper from "../../Function/languageMapper";
 import "./Editor.css";
 import RandomColor from "randomcolor";
@@ -16,8 +16,6 @@ import "./EditorAddons";
 function Editor(props) {
   const location = useLocation();
   const [EditorRef, setEditorRef] = useState(null);
-  const [code, setCode] = useState("");
-
   const socket = props.socket;
 
   const handleEditorDidMount = (editor) => {
@@ -30,7 +28,7 @@ function Editor(props) {
       props.setLoading();
       socket.emit("Compile_ON", {
         language: props.tools.language,
-        code,
+        code:props.tools.code,
         input: props.tools.input,
         reason: "code-editor",
       });
@@ -89,8 +87,9 @@ function Editor(props) {
       }}
     >
       <CodeMirrorEditor
+        value={props.tools.code}
         onChange={(editor, data, value) => {
-          setCode(value);
+          props.setCode(value);
         }}
         autoScroll
         options={{
@@ -130,6 +129,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setOutput: (value) => dispatch({ type: SET_OUTPUT, value }),
     setLoading: () => dispatch({ type: SET_LOADING }),
+    setCode : (value)=>dispatch({type:SET_CODE,value})
   };
 };
 

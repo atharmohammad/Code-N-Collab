@@ -2,33 +2,42 @@ import {useEffect} from 'react'
 import PublishIcon from "@material-ui/icons/Publish";
 import GetAppIcon from '@material-ui/icons/GetApp';
 import Tooltip from '@material-ui/core/Tooltip';
+import {connect} from "react-redux"
+import {SET_CODE} from "../../../store/Action/action"
 
-
-export default function FileHandling(props){
+function FileHandling(props){
 
     const chooseFileHandler = async(event)=>{
         const reader = new FileReader()
         reader.onload = async (event) => { 
           const text = (event.target.result)
-          console.log(text)
+          props.setCode(text)
         };
         reader.readAsText(event.target.files[0])
       }
     
     return(
-        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
+        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around',alignSelf:'flex-end'}}>
             <label for="uploading">
                 <Tooltip title="Upload your Code">
-                    <PublishIcon style={{color:"#fff",height:'100px',cursor:'pointer'}} />                
+                    <PublishIcon style={{color:"#fff",cursor:'pointer'}} />                
                 </Tooltip>
             </label>
             <input id="uploading" type="file" onChange={chooseFileHandler} style={{display:'none'}}/>
             <label for="downloading">
             <Tooltip title="Download the Editor's Code">
-                <GetAppIcon style={{color:"#fff",height:'100px',cursor:'pointer'}} />                
+                <GetAppIcon style={{color:"#fff",cursor:'pointer'}} />                
             </Tooltip>
             </label>
             <input id="downloading" type="file" onChange={chooseFileHandler} style={{display:'none'}}/>
         </div>
     )
 }
+
+const mapDispatchToProps = (dispatch)=>{
+    return{
+        setCode : (value)=>dispatch({type:SET_CODE,value})
+    }
+}
+
+export default connect(null,mapDispatchToProps)(FileHandling)
