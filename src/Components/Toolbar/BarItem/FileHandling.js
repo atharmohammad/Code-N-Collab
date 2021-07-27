@@ -10,8 +10,8 @@ function FileHandling(props){
     const chooseFileHandler = async(event)=>{
         const reader = new FileReader()
         reader.onload = async (event) => { 
-          const text = (event.target.result)
-          props.set_uploaded_code(text)
+         const text = (event.target.result)
+         props.set_uploaded_code(text)
         };
         reader.readAsText(event.target.files[0])
         event.target.value = ""
