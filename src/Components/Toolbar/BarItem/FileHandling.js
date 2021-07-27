@@ -15,6 +15,16 @@ function FileHandling(props){
         };
         reader.readAsText(event.target.files[0])
       }
+
+      const TextFile = () => {
+        const element = document.createElement("a");
+        const file = new Blob([props.code], {type: 'text/plain'});
+        console.log(props.code)
+        element.href = URL.createObjectURL(file);
+        element.download = "myFile.txt";
+        document.body.appendChild(element); // Required for this to work in FireFox
+        element.click();
+      }
     
     return(
         <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around',alignSelf:'flex-end'}}>
@@ -25,13 +35,18 @@ function FileHandling(props){
             </label>
             <input id="uploading" type="file" onChange={chooseFileHandler} style={{display:'none'}}/>
             <label for="downloading">
-            <Tooltip title="Download the Editor's Code">
+            <Tooltip title="Download the Editor's Code" onClick={TextFile}>
                 <GetAppIcon style={{color:"#fff",cursor:'pointer'}} />                
             </Tooltip>
             </label>
-            <input id="downloading" type="file" onChange={chooseFileHandler} style={{display:'none'}}/>
         </div>
     )
+}
+
+const mapStateToProps = state=>{
+    return{
+        code:state.tools.code
+    }
 }
 
 const mapDispatchToProps = (dispatch)=>{
@@ -40,4 +55,4 @@ const mapDispatchToProps = (dispatch)=>{
     }
 }
 
-export default connect(null,mapDispatchToProps)(FileHandling)
+export default connect(mapStateToProps,mapDispatchToProps)(FileHandling)
