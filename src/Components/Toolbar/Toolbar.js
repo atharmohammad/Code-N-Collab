@@ -9,20 +9,11 @@ import GraphButton from "./BarItem/GraphButton";
 import FontSize from "./BarItem/FontSize";
 import HomePageImg from "../../Assets/images/HomePageImg.png";
 import classes from "./Toolbar.module.css";
+import FileHandling  from "./BarItem/FileHandling";
 
 export default function Toolbar(props) {
   const socket = props.socket;
   const history = useHistory();
-
-  const chooseFileHandler = async(event)=>{
-    const reader = new FileReader()
-    reader.onload = async (event) => { 
-      const text = (event.target.result)
-      console.log(text)
-    };
-    reader.readAsText(event.target.files[0])
-  }
-
 
   return (
     <Grid className={classes.main}>
@@ -39,7 +30,7 @@ export default function Toolbar(props) {
           <LanguagePicker />
           <ThemePicker />
           <FontSize />
-          <input type="file" onChange={chooseFileHandler} />
+          <FileHandling/>
         </Grid>
         <Grid className={classes.toolsGrid}>
           <Compile />
