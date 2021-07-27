@@ -33,6 +33,8 @@ import Goku4 from "../../Assets/images/goku (4).png";
 
 import dio from "../../Assets/images/dio_hero.jpeg";
 
+import Saitama from "../../Assets/images/saitama (2).jpeg";
+
 
 const AvatarArray = [
   Amongus1,
@@ -69,6 +71,7 @@ const AvatarArray = [
   Pokemon5,
 
   dio,
+  Saitama,
 ];
 const Avatar = (key) => {
   return AvatarArray[key];
