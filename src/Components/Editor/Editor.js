@@ -87,7 +87,7 @@ function Editor(props) {
       }}
     >
       <CodeMirrorEditor
-        value={props.tools.code}
+        value={props.tools.uploaded_code}
         onChange={(editor, data, value) => {
           props.setCode(value);
         }}

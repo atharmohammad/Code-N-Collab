@@ -3,7 +3,7 @@ import PublishIcon from "@material-ui/icons/Publish";
 import GetAppIcon from '@material-ui/icons/GetApp';
 import Tooltip from '@material-ui/core/Tooltip';
 import {connect} from "react-redux"
-import {SET_CODE} from "../../../store/Action/action"
+import {SET_CODE, SET_UPLOADED_CODE} from "../../../store/Action/action"
 
 function FileHandling(props){
 
@@ -11,7 +11,7 @@ function FileHandling(props){
         const reader = new FileReader()
         reader.onload = async (event) => { 
           const text = (event.target.result)
-          props.setCode(text)
+          props.set_uploaded_code(text)
         };
         reader.readAsText(event.target.files[0])
         event.target.value = ""
@@ -28,7 +28,7 @@ function FileHandling(props){
       }
     
     return(
-        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around',alignSelf:'flex-end'}}>
+        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around',alignSelf:'center'}}>
             <label for="uploading">
                 <Tooltip title="Upload your Code">
                     <PublishIcon style={{color:"#fff",cursor:'pointer'}} />                
@@ -52,7 +52,8 @@ const mapStateToProps = state=>{
 
 const mapDispatchToProps = (dispatch)=>{
     return{
-        setCode : (value)=>dispatch({type:SET_CODE,value})
+        setCode : (value)=>dispatch({type:SET_CODE,value}),
+        set_uploaded_code : (value)=>dispatch({type:SET_UPLOADED_CODE,value})
     }
 }
 

@@ -30,12 +30,12 @@ export default function Toolbar(props) {
           <LanguagePicker />
           <ThemePicker />
           <FontSize />
-          <FileHandling/>
         </Grid>
         <Grid className={classes.toolsGrid}>
           <Compile />
           <GraphButton />
           <Leave socket={socket} />
+          <FileHandling/>
         </Grid>
       </Grid>
     </Grid>
