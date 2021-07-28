@@ -2,18 +2,32 @@ import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
 
-import { SET_LOADING, SET_OUTPUT } from "../../../store/Action/action";
+import {
+  SET_LOADING,
+  SET_OUTPUT,
+  SET_CODE,
+  SET_UPLOADED_CODE,
+} from "../../../store/Action/action";
+
 import Modal from "../../Modal/Modal";
 import Graph from "../../Graph/Graph";
 import languageMapper from "../../../Function/languageMapper";
 import "../../Editor/EditorAddons";
 import ContestEndedModal from '../../Modal/ContestEndedModal'
 
-const MonacoEditor = (props) => {
+const LockoutEditor = (props) => {
   const socket = props.socket;
   const [code, setCode] = useState("");
+  const [EditorRef, setEditorRef] = useState(null);
 
   //compiling the code
+
+  useEffect(() => {
+    if (props.tools.uploaded_code && EditorRef) {
+      EditorRef.setValue(props.tools.uploaded_code);
+      props.set_uploaded_code("");
+    }
+  }, [props.tools.uploaded_code]);
 
   useEffect(async () => {
     if (props.tools.nowCompile === true && props.tools.isLoading === false) {
@@ -21,12 +35,16 @@ const MonacoEditor = (props) => {
       props.setLoading();
       socket.emit("Compile_ON", {
         language: props.tools.language,
-        code,
+        code: props.tools.code,
         input: props.tools.input,
         reason: "lockout",
       });
     }
   }, [props.tools.nowCompile]);
+
+  const handleEditorDidMount = (editor) => {
+    setEditorRef(editor);
+  };
 
   return (
     <div
@@ -40,7 +58,7 @@ const MonacoEditor = (props) => {
     >
       <CodeMirrorEditor
         onChange={(editor, data, value) => {
-          setCode(value);
+          props.setCode(value);
         }}
         autoScroll
         options={{
@@ -60,6 +78,7 @@ const MonacoEditor = (props) => {
           },
         }}
         editorDidMount={(editor) => {
+          handleEditorDidMount(editor);
           editor.setSize("100vw", "100%");
         }}
       />
@@ -82,7 +101,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setOutput: (value) => dispatch({ type: SET_OUTPUT, value }),
     setLoading: () => dispatch({ type: SET_LOADING }),
+    setCode: (value) => dispatch({ type: SET_CODE, value }),
+    set_uploaded_code: (value) => dispatch({ type: SET_UPLOADED_CODE, value }),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MonacoEditor);
+export default connect(mapStateToProps, mapDispatchToProps)(LockoutEditor);
