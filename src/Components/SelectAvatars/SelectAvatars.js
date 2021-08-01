@@ -74,7 +74,13 @@ const AvatarArray = [
   Saitama,
 ];
 const Avatar = (key) => {
-  return AvatarArray[key];
+  let avatar;
+  try{
+    avatar = AvatarArray[key];
+  }catch(e){
+    avatar = AvatarArray[0];
+  }
+  return avatar; 
 };
 
 const AllAvatars = () => {

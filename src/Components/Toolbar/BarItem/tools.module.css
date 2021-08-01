@@ -9,11 +9,12 @@
   font-size: 12px;
   padding-top: 4px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .navButton:hover{
-  background-color: black;
-  border:2px solid white
+  background-color: #d82626;
+  border:1px solid white
 }
 
 .navSelect {
