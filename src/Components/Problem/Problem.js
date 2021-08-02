@@ -79,7 +79,7 @@ export default function App(props) {
             }}
           >
             copy url of any problem from the following websites: <br />
-            codeforces ,codechef , geeksforgeeks , atcoder , cses. paste the url
+            codeforces ,codechef , geeksforgeeks , atcoder , cses, codeDrills paste the url
             in place of Problem Link and click fetch. same problem will also be
             fetched on your collaborator's problem section
             <br />
