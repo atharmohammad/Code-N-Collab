@@ -16,7 +16,7 @@ const Logout = (props) => {
         
       } finally {
         auth.logout();
-        history.push("/homepage");
+        history.push(localStorage.getItem("logoutUrl"))
       }
   }, []);
 

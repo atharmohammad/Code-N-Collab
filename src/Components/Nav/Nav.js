@@ -20,6 +20,7 @@ export default function () {
     }
   };
   const logoutHandler = () => {
+    localStorage.setItem("logoutUrl",location.pathname)
     history.push("/logout");
   };
 
