@@ -71,10 +71,7 @@ const BlogPage = (props) => {
 
   const showEditorHandler = useCallback(() => {
     if (!auth.token) {
-      return history.push({
-        pathname: "/homepage",
-        state: { error: "Login Required !" },
-      });
+     return setError("Login Required !");
     }
     return setShowEditor(true);
   }, []);

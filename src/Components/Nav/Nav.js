@@ -13,14 +13,19 @@ export default function () {
   const loginHandler = async () => {
     try {
       const req = await axios.get("/Oauth/googleOauth");
-      localStorage.setItem("loginUrl",location.pathname);
+      const searchParams = new URLSearchParams(location.search);
+      localStorage.setItem(
+        "loginUrl",
+        location.pathname + "?" + searchParams.toString()
+      );
       window.location.href = req.data;
     } catch (e) {
       alert("Oops something went wrong try again later")
     }
   };
   const logoutHandler = () => {
-    localStorage.setItem("logoutUrl",location.pathname)
+    const searchParams = new URLSearchParams(location.search);
+    localStorage.setItem("logoutUrl",location.pathname + '?' +  searchParams.toString())
     history.push("/logout");
   };
 
