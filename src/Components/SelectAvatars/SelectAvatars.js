@@ -31,9 +31,10 @@ import Goku2 from "../../Assets/images/goku (2).png";
 import Goku3 from "../../Assets/images/goku (3).png";
 import Goku4 from "../../Assets/images/goku (4).png";
 
-import dio from "../../Assets/images/dio_hero.jpeg";
+import dio1 from "../../Assets/images/dio_hero.jpeg";
+import dio2 from "../../Assets/images/dio_hero (2).png";
 
-import Saitama from "../../Assets/images/saitama (2).jpeg";
+import Saitama from "../../Assets/images/saitama (2).png";
 
 
 const AvatarArray = [
@@ -70,7 +71,8 @@ const AvatarArray = [
   Pokemon4,
   Pokemon5,
 
-  dio,
+  dio1,
+  dio2,
   Saitama,
 ];
 const Avatar = (key) => {
