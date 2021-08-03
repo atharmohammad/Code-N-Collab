@@ -21,6 +21,7 @@ const CollabPage = (props) => {
   const [joined, setJoined] = useState(false);
   const [startMsgSnackbar, setStartMsgSnackbar] = useState(true);
   const { enqueueSnackbar,closeSnackbar} = useSnackbar();
+  const [resizeEditorNotify,setResizeEditorNotify] = useState(1);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -176,6 +177,19 @@ const CollabPage = (props) => {
           severity="info"
           onClose={() => {
             setStartMsgSnackbar(false);
+            setResizeEditorNotify(state=>state+1);
+          }}
+        />
+
+        <Snacker
+          open={(resizeEditorNotify==2)}
+          timer={6000}
+          vertical= 'top'
+          horizontal= 'center' 
+          message="You can also resize your editor by dragging the splitter"
+          severity="info"
+          onClose={() => {
+            setResizeEditorNotify(3);
           }}
         />
       </div>
@@ -194,8 +208,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    notify_output_off: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_SUCCESS }),
-    notify_output_error: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_ERROR }),
+    notify_output_off: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_SUCCESS,value:false }),
+    notify_output_error: () => dispatch({ type: TYPES.NOTIFY_OUTPUT_ERROR,value:false }),
   };
 };
 

@@ -13,13 +13,19 @@ export default function () {
   const loginHandler = async () => {
     try {
       const req = await axios.get("/Oauth/googleOauth");
-      localStorage.setItem("loginUrl",location.pathname);
+      const searchParams = new URLSearchParams(location.search);
+      localStorage.setItem(
+        "loginUrl",
+        location.pathname + "?" + searchParams.toString()
+      );
       window.location.href = req.data;
     } catch (e) {
       alert("Oops something went wrong try again later")
     }
   };
   const logoutHandler = () => {
+    const searchParams = new URLSearchParams(location.search);
+    localStorage.setItem("logoutUrl",location.pathname + '?' +  searchParams.toString())
     history.push("/logout");
   };
 
@@ -31,7 +37,7 @@ export default function () {
     <div className="headerss">
       {auth.isLoggedIn === false ? (
         <>
-          <NavItem Name="login" clicked={loginHandler} loginUrl={location.pathname} />
+          <NavItem Name="login / signup" clicked={loginHandler} loginUrl={location.pathname} />
         </>
       ) : (
         <>

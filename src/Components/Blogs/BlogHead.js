@@ -24,7 +24,7 @@ export default function BlogHead(props) {
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between",width:'100%' }}>
-        <div style={{display:'flex',position:'sticky',marginTop: "20px"}}>
+        <div style={{display:'flex',position:'sticky'}}>
           <Back />
           <HomeIcon/>
         </div>

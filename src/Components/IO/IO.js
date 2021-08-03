@@ -177,8 +177,8 @@ const mapDispatchToProps = (dispatch) => {
     setOutput: (value) => dispatch({ type: SET_OUTPUT, value }),
     resetLoading: () => dispatch({ type: RESET_LOADING }),
     resetCompile: () => dispatch({ type: SET_COMPILE_OFF }),
-    notify_output_on: () => dispatch({ type: NOTIFY_OUTPUT_SUCCESS }),
-    notify_output_error_on: () => dispatch({ type: NOTIFY_OUTPUT_ERROR }),
+    notify_output_on: () => dispatch({ type: NOTIFY_OUTPUT_SUCCESS,value:true }),
+    notify_output_error_on: () => dispatch({ type: NOTIFY_OUTPUT_ERROR,value:true }),
   };
 };
 

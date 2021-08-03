@@ -25,14 +25,6 @@ const App = (props) => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get("/")
-      .then((data) => {})
-      .catch((e) =>
-        alert(
-          "Currently our server is down 😟!\nReload this page\nor Try after sometimes"
-        )
-      );
     const storedData = JSON.parse(localStorage.getItem("userData"));
     if (storedData && storedData.token) {
       setUser(storedData.user);
@@ -40,6 +32,20 @@ const App = (props) => {
     }
     setLoaded(true);
   }, [login]);
+
+  useEffect(async()=>{
+    try {
+      await axios.get("/");
+    } catch (e) {
+      try {
+        await axios.get("/");
+      } catch (e) {
+        alert(
+          "There might be some problem 😟!\n Please reload this page\nor Try again after sometimes"
+        );
+      }
+    }
+  },[])
 
   if (!loaded) return <></>;
 

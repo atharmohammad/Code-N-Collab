@@ -1,3 +1,9 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow:/me
+Noindex:/me
+Disallow:/newContest
+Noindex:/newContest
+Disallow:/updateUser
+Noindex:/updateUser
+Sitemap:https://code-n-collab.netlify.app/

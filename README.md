@@ -1,7 +1,7 @@
 <p align="center">
 <img src="https://user-images.githubusercontent.com/56029409/120935296-af116b00-c71f-11eb-8a47-9ca6a54832db.png" height="90"
      style="border-radius:50%"/>
-<img src="https://user-images.githubusercontent.com/56029409/120934611-a10e1b00-c71c-11eb-8f9a-c22ecfc82652.png" height="70">
+<img src="https://user-images.githubusercontent.com/56029409/126859372-6a027582-e8ad-44f3-b7ee-ebeb3f11d440.png" height="100">
 </p>
 <br/>
 
@@ -58,6 +58,17 @@
    </tr>
 </table>
  </a>
+ 
+ <a href="https://code-n-collab.netlify.app/" target="_blank"  rel="noreferrer">
+      <table align="center">
+          <tr>
+               <td>
+                    <img src="gif/codencollab.gif" alt="Collaboration" height="200"/>
+               </td>
+          </tr>
+     </table>
+</a>
+ 
 
 # 🔖 About
 Code - N - Collab is a Collaboration website for Software developers , Competitive coders , and every one who loves to code and collaborate with others to learn and grow. It provides users to collaborate with their team , friends and also find people with similar their interests.
@@ -65,7 +76,7 @@ Code - N - Collab is a Collaboration website for Software developers , Competiti
 ## 🚀 Features
 It provides users with :-
 - Real-time code editor :
-  to share your code and discuss about it with your collegues or solves a competitive coding problem and discuss it , you can also fetch CP problems from popular websites such as codeforces , codechef , atcoder , Cses , geeksforgeeks , etc. It also has a chat section for people to talk about the problem
+  to share your code and discuss about it with your collegues or solves a competitive coding problem and discuss it , you can also fetch CP problems from popular websites such as codeforces , codechef , atcoder , Cses , geeksforgeeks ,codeDrills, etc. It also has a chat section for people to talk about the problem
 
 - Lockout Championship :
   for people who are looking to compete on codeforces problemset , they can set their codeforces handle in profile section and enjoy competing with their friends and challenging on interesting problems which will be filter on user's choice and then randomly selects 5 problems in a problem rating range , To challenge your friend you just need to share your Url before starting the contest

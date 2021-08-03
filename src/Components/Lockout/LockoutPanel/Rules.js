@@ -2,7 +2,6 @@ import React from "react";
 
 const Rules = (props) => {
   return (
-    <>
       <div
         style={{
           margin: "10px",
@@ -10,12 +9,16 @@ const Rules = (props) => {
           flexDirection: "column",
           color: "#fff",
           fontFamily: "verdana",
+          overflow:"auto",
         }}
       >
         <h1 style={{ textAlign: "center", width: "100%", color: "red" }}>
           Rules!
         </h1>
         <ol>
+        <li>
+            <h3>Share this page's URL before clicking start with your friends to compete with them</h3>
+          </li>
           <li>
             <h3>Maximum of 4 People can Join a Contest</h3>
           </li>
@@ -42,10 +45,8 @@ const Rules = (props) => {
           <li>
             <h3>for problem blocks : Blue = unsolved , green = Solved by you , red = already solved by someone else</h3>
           </li>
-
         </ol>
       </div>
-    </>
   );
 };
 

@@ -1,14 +1,20 @@
 .navButton {
   cursor: pointer;
   color: white;
-  height: 30px;
-  width: 90px;
+  height: 25px;
+  width: 80px;
   margin: auto 10px;
   border-radius: 5px;
   background: #872e2e;
-  font-size: 14px;
+  font-size: 12px;
   padding-top: 4px;
   text-align: center;
+  box-sizing: border-box;
+}
+
+.navButton:hover{
+  background-color: #d82626;
+  border:1px solid white
 }
 
 .navSelect {
