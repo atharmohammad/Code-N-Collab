@@ -83,7 +83,7 @@ function Rooms(props) {
         <div className={styles.inputContainer}>
           <div>
             <InputLabel style={{ color: "#fff", fontWeight: "bold" }}>
-              * Choose a Unique Name
+            * What you want to be called ?
             </InputLabel>
             <input
               onChange={(event) => changeHandler("name", event)}
