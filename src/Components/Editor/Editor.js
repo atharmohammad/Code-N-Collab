@@ -55,7 +55,7 @@ function Editor(props) {
 
       let provider = null;
       try {
-        provider = new WebrtcProvider(searchParams.get("room").trim(), ydoc, {
+        provider = new WebrtcProvider(searchParams.get("room").trim().toLowerCase(), ydoc, {
           signaling: [
             "wss://signaling.yjs.dev",
             process.env.REACT_APP_SIGNALLING_URL1,
