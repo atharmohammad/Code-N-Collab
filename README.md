@@ -80,14 +80,11 @@ Code - N - Collab is a Collaboration website for Software developers , Competiti
 
 ## 🚀 Features
 It provides users with :-
-- Real-time code editor :
-  to share your code and discuss about it with your collegues or solves a competitive coding problem and discuss it , you can also fetch CP problems from popular websites such as codeforces , codechef , atcoder , Cses , geeksforgeeks ,codeDrills, etc. It also has a chat section for people to talk about the problem
+- Real-time code editor : Users can collaborate with their team on issues and solve CP problems using a real-time code-editor(like Google Docs) 
 
-- Lockout Championship :
-  for people who are looking to compete on codeforces problemset , they can set their codeforces handle in profile section and enjoy competing with their friends and challenging on interesting problems which will be filter on user's choice and then randomly selects 5 problems in a problem rating range , To challenge your friend you just need to share your Url before starting the contest
+- Lockout Championship : For Cp lovers, they can compete in a lockout championships with their friends to and challenge your friends for championship,filter problems with preferred difficulty and improve you CP skills
 
-- Blogs :
-  People can share their knowledge , learn and ask any thing in our blogs section
+- Blogs : To find new people and share your knowledge , platform provides users blogs to write learn and share
 
 ## 🔥 Getting Started
 
@@ -137,6 +134,15 @@ It provides users with :-
 - <a href="https://socket.io/docs/v4" >Socket.Io Documentation </a>
 - <a href="https://github.com/yjs/yjs/blob/master/README.md" > Yjs Docs </a>
 - <a href="https://github.com/scniro/react-codemirror2">React-Codemirror Editor Docs</a>
+
+## 📌 Credits :
+
+This project exists, thanks to all the people who contribute.
+
+<a href="https://github.com/atharmohammad/Code-N-Collab/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=atharmohammad/Code-N-Collab"/>
+</a>
+
 
 ## License
 <a href="LICENSE">Apache License 2.0</a>
