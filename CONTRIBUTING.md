@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-* Every Pull Request should be created on yjs branch
+* Every Pull Request should be created on develop branch
 
 * Remember that this is an inclusive community, committed to creating a safe, positive environment.  See the full [Code of Conduct](https://github.com/atharmohammad/Code-N-Collab/blob/master/CODE_OF_CONDUCT.md).
 * Follow our [Commit Message Style Guide]() when you commit your changes.
