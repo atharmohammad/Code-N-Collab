@@ -16,6 +16,7 @@ const setMode = (lang)=>{
      case 'shell' : return 'text/x-sh'
      case 'sql' : return 'text/x-sql'
      case 'swift' : return 'text/x-swift'
+     case 'nodejs': return 'text/javascript'
      default : return ''
  } 
 }
