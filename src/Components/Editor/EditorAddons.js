@@ -17,6 +17,7 @@ import "codemirror/mode/swift/swift";
 import "codemirror/mode/shell/shell";
 import "codemirror/mode/rust/rust";
 import "codemirror/mode/haskell/haskell";
+import "codemirror/mode/javascript/javascript";
 
 
 import "codemirror/addon/edit/closebrackets";

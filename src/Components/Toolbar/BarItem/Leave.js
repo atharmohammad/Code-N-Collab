@@ -34,6 +34,7 @@ function Leave(props) {
   }, [location]);
 
   const leaveRoomHandler = () => {
+    if ( ! window.confirm("Are you sure you want to leave this room")) { return; }
     const currentPath = location.pathname;
     if(currentPath === "/newContest"){
       socket.emit("Contest-Update",({roomId:searchParams.get("room")}))
