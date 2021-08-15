@@ -36,6 +36,7 @@ const LanguagePicker = (props) => {
           <MenuItem value="java">Java</MenuItem>
           <MenuItem value="kotlin">Kotlin</MenuItem>
           <MenuItem value="lua">Lua</MenuItem>
+          <MenuItem value="nodejs">NodeJs</MenuItem>
           <MenuItem value="pascal">Pascal</MenuItem>
           <MenuItem value="perl">Perl</MenuItem>
           <MenuItem value="php">Php</MenuItem>
