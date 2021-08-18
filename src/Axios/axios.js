@@ -13,6 +13,7 @@ const fetchClient = () => {
   let instance = axios.create(defaultOptions);
 
   // Set the AUTH token for any request
+  //Intercepting the request to add the auth token 
   instance.interceptors.request.use(function (config) {
     let token = null
     if(localStorage.getItem("userData")){
