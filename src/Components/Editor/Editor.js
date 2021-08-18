@@ -18,11 +18,13 @@ import "./Editor.css";
 import RandomColor from "randomcolor";
 import "./EditorAddons";
 
+
 function Editor(props) {
   const location = useLocation();
   const [EditorRef, setEditorRef] = useState(null);
   const socket = props.socket;
 
+  //Setting the uploaded code
   useEffect(() => {
     if (props.tools.uploaded_code && EditorRef) {
       EditorRef.setValue(props.tools.uploaded_code);
@@ -30,10 +32,13 @@ function Editor(props) {
     }
   }, [props.tools.uploaded_code]);
 
+
+  //Setting the editor reference when editor gets mounted
   const handleEditorDidMount = (editor) => {
     setEditorRef(editor);
   };
 
+  //Emitting the compile event to other users
   useEffect(async () => {
     if (props.tools.nowCompile === true && props.tools.isLoading === false) {
       props.setOutput("");
@@ -47,32 +52,47 @@ function Editor(props) {
     }
   }, [props.tools.nowCompile]);
 
+
+  //Yjs based real-time connection and collaboration 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-
+    //Collboration and connection starts after the editor is mounted
     if (EditorRef) {
+      //Yjs document that holds shared data 
       const ydoc = new Y.Doc();
 
       let provider = null;
       try {
-        provider = new WebrtcProvider(searchParams.get("room").trim().toLowerCase(), ydoc, {
-          signaling: [
-            "wss://signaling.yjs.dev",
-            process.env.REACT_APP_SIGNALLING_URL1,
-            process.env.REACT_APP_SIGNALLING_URL2,
-          ],
-          password: location.state ? location.state.password : null,
-        });
+        //syncs the ydoc throught WebRTC connection
+        provider = new WebrtcProvider(
+          searchParams.get("room").trim().toLowerCase(),
+          ydoc,
+          {
+            signaling: [
+              "wss://signaling.yjs.dev",
+              process.env.REACT_APP_SIGNALLING_URL1,
+              process.env.REACT_APP_SIGNALLING_URL2,
+            ],
+            password: location.state ? location.state.password : null,
+          }
+        );
 
+        //Define a shared text type on the document
         const yText = ydoc.getText("codemirror");
+
+        //Undomanager used for stacking the undo and redo operation for yjs
         const yUndoManager = new Y.UndoManager(yText);
 
         const awareness = provider.awareness;
+
         const color = RandomColor();
+        //Awareness protocol is used to propagate your information (cursor position , name , etc)
         awareness.setLocalStateField("user", {
           name: searchParams.get("name").trim(),
           color: color,
         });
+
+        //Binds the Codemirror editor to Yjs text type
         const getBinding = new CodemirrorBinding(yText, EditorRef, awareness, {
           yUndoManager,
         });
@@ -80,6 +100,7 @@ function Editor(props) {
         alert("error in collaborating try refreshing or come back later !");
       }
       return () => {
+        //Releasing the resources used and destroying the document
         if (provider) {
           provider.disconnect();
           ydoc.destroy();

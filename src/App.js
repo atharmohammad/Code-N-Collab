@@ -12,12 +12,14 @@ const App = (props) => {
   const [user, setUser] = useState(null);
   const [loaded, setLoaded] = useState(false);
 
+  //Login Callback to set token 
   const login = useCallback((user, token) => {
     setUser(user);
     setToken(token);
     localStorage.setItem("userData", JSON.stringify({ user, token }));
   }, []);
 
+  //Logout Callback to remove token
   const logout = useCallback(() => {
     setUser(null);
     setToken(null);
@@ -33,6 +35,7 @@ const App = (props) => {
     setLoaded(true);
   }, [login]);
 
+  //Activate the server as soon as user loads the application
   useEffect(async()=>{
     try {
       await axios.get("/");
