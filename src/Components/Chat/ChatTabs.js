@@ -34,8 +34,9 @@ export default function ChatPanel(props) {
   const searchParams = new URLSearchParams(location.search);
   const socket = props.socket;
   const auth = useContext(AuthContext);
-  const { enqueueSnackbar,closeSnackbar} = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
+  //setting the user name
   useEffect(() => {
     if (location.pathname === "/newContest") {
       setName(auth.user.CodeforcesHandle);
@@ -46,6 +47,7 @@ export default function ChatPanel(props) {
     }
   }, [location]);
 
+  //Listening to the messages from other users
   useEffect(() => {
     socket.on("serverMsg", (msg) => {
       setMessages([...messages, msg]);
@@ -55,20 +57,25 @@ export default function ChatPanel(props) {
     };
   }, [messages]);
 
+  //Listening the other peers information such as names and notifying 
+  //the current user about the entering and leaving
+  
   useEffect(() => {
     socket.on("peopleInRoom", (data) => {
       setPersons(data.teamMembers);
-      if(data.userJoin){
-        if(name && data.userJoin.trim().toLowerCase() !== name.trim().toLowerCase())
-        enqueueSnackbar(`${data.userJoin} joined this room`, {
-          variant:'info',
-        });
-      }else if(data.userLeft){
+      if (data.userJoin) {
+        if (
+          name &&
+          data.userJoin.trim().toLowerCase() !== name.trim().toLowerCase()
+        )
+          enqueueSnackbar(`${data.userJoin} joined this room`, {
+            variant: "info",
+          });
+      } else if (data.userLeft) {
         enqueueSnackbar(`${data.userLeft} left this room`, {
-          variant:'warning',
+          variant: "warning",
         });
       }
-      
     });
     return () => {
       socket.off("peopleInRoom");
@@ -98,7 +105,6 @@ export default function ChatPanel(props) {
       <TabPanel value={value} index={1}>
         <People persons={persons} you={name} />
       </TabPanel>
-    
     </div>
   );
 }

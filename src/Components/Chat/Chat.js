@@ -15,6 +15,7 @@ const Chat = (props) => {
   const [name, setName] = useState("");
   const auth = useContext(AuthContext);
 
+  //setting the names according to the routes 
   useEffect(() => {
     if (location.pathname === "/newContest") {
       setName(auth.user.CodeforcesHandle);
@@ -23,6 +24,7 @@ const Chat = (props) => {
     }
   }, []);
 
+  //Emiting the messages to other users via socket
   const submitHandler = (e) => {
     e.preventDefault();
     const finalValue = inputRef.current.value.trim();
