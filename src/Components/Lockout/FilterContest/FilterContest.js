@@ -8,13 +8,14 @@ import * as TYPE from "../../../store/Action/action";
 
 const FilterContest = (props) => {
   const socket = props.socket;
-
+  //emitting the fetching request to server
   useEffect(() => {
     socket.on("Contest-Starting", () => {
       props.setProblemLoading();
     });
   }, []);
 
+  //Emitting the start of contest with the configuration of the current user
   const startContestHandler = () => {
     socket.emit("Start-Contest", {
       room: props.roomId,

@@ -35,19 +35,23 @@ const GraphVis = (props) => {
 
   useEffect(() => {
     setGraphKey(uuidv4());
+    //Replacing not digits with the spaces
     let text = inputText.replace(/\D/g, " ").split(" ");
 
     const SanitizedText = [];
     for (let i = 0; i < text.length; i++) {
       if (text[i] != "") {
+        //Removing the spaces
         SanitizedText.push(text[i]);
       }
     }
 
+    //set to only take unique digit in the from the input array 
     const nodes = [...new Set(SanitizedText)].map((num, key) => {
       return { id: parseInt(num), key: key, label: num, color: "yellow" };
     });
 
+    //Connecting each node to its neighbour node
     const edges = [];
     for (let i = 0; i < SanitizedText.length; i += 2) {
       if (i + 1 < SanitizedText.length) {
@@ -64,6 +68,7 @@ const GraphVis = (props) => {
     });
   }, [inputText]);
 
+  //to render graph again when graph changed to directed or undirected
   useEffect(() => {
     setGraphKey(uuidv4());
   }, [directed]);

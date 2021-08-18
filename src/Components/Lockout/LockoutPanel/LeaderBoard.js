@@ -34,10 +34,13 @@ const DenseTable = (props) => {
     rows.push({ Name: user.Name, Score: user.Score });
   });
 
+  //Updating the contest for all users
   const updateContest = () => {
     setLoad(true);
     socket.emit("Contest-Update", { roomId: room });
   };
+
+  //Leaderboard table for the contest
   return (
     <TableContainer
       component={Paper}

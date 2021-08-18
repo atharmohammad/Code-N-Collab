@@ -11,6 +11,7 @@ export default function App(props) {
   const [loader, setLoader] = useState(false);
   const ProblemRef = useRef();
 
+  //Listening to the problem event to set the CP problem
   useEffect(() => {
     socket.on("problem", (problem) => {
       ProblemRef.current.innerHTML = problem;
@@ -22,6 +23,7 @@ export default function App(props) {
     setLink(e.target.value);
   };
 
+  //Emititng the fetching request for the problem
   const problemFetchHandler = () => {
     if(!link || !link.trim()) return;
     setLoader(true);
@@ -79,9 +81,9 @@ export default function App(props) {
             }}
           >
             copy url of any problem from the following websites: <br />
-            codeforces ,codechef , geeksforgeeks , atcoder , cses, codeDrills paste the url
-            in place of Problem Link and click fetch. same problem will also be
-            fetched on your collaborator's problem section
+            codeforces ,codechef , geeksforgeeks , atcoder , cses, codeDrills
+            paste the url in place of Problem Link and click fetch. same problem
+            will also be fetched on your collaborator's problem section
             <br />
             <br />
             eg : you can paste this url : <br />{" "}

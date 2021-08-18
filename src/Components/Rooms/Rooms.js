@@ -23,11 +23,13 @@ function Rooms(props) {
   const [error, setError] = useState(null);
   const [roomHeadingType, setRoomHeadingType] = useState(1);
 
+
   useEffect(() => {
     if (location.state && location.state.error) {
       setError(location.state.error);
     }
-
+    //If the Room id is already in search params means user wants to join the room so 
+    //We are setting the 2nd room heading 
     const searchParams = new URLSearchParams(location.search);
     if (
       searchParams.has("room") &&
@@ -37,6 +39,7 @@ function Rooms(props) {
       setRoom(searchParams.get("room").trim());
       setRoomHeadingType(2);
     } else {
+      //Giving a unique roomId to create new room
       const roomId = uuidv4() + "collab";
       setRoom(roomId);
     }
@@ -49,10 +52,12 @@ function Rooms(props) {
   };
 
   const createRoomHandler = async (e) => {
+    //Room name Validation
     if (!name || !name.trim()) {
       return setError("Invalid name");
     }
 
+    //Redirecting to the collaborate page
     try {
       history.push({
         pathname: "/collaborate",

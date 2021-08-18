@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//Contest filtering chip names
 const names = [
   "2-sat",
   "binary search",

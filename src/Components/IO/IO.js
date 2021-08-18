@@ -85,6 +85,7 @@ const Io = (props) => {
     props.resetLoading();
   }, []);
 
+  //Listening to the output response after compilation
   useEffect(() => {
     if (location.pathname === "/newContest") {
       setReason("lockout");
@@ -105,6 +106,7 @@ const Io = (props) => {
     });
   }, [location]);
 
+  //Listening to the IO recieved from other peers
   useEffect(() => {
     socket.on("IO_recieved", (data) => {
       setRecieved(3);
@@ -118,6 +120,8 @@ const Io = (props) => {
       }
       setRecieved(2);
     });
+
+    //Send the initial IO to the new user
     socket.on("sendInitialIO", (obj) => {
       socket.emit("takeInitialIO", {
         id: obj.id,
@@ -128,6 +132,7 @@ const Io = (props) => {
     });
   }, []);
 
+  //Emitting the IO changes to other users
   useEffect(() => {
     if (recieved == 2 && location.pathname !== "newContest") {
       setRecieved(2);

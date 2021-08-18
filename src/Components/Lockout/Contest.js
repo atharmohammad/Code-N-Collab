@@ -9,12 +9,15 @@ import LockoutPanel from "../Lockout/LockoutPanel/lockoutPanel";
 function Contest(props) {
   const socket = props.socket;
 
+  //Updating the contest on the Event Update
   useEffect(() => {
     socket.on("Update", (updatedContest) => {
       props.setContest(updatedContest);
       props.resetProblemLoading();
     });
   }, []);
+
+  //Render LockoutPanel if contest has started and the problems from codeforces are loaded
   return !props.questionLoading? (
     props.contest.Started === false ? (
       <FilterContest socket={socket} roomId={props.contest.Id} />

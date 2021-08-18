@@ -20,8 +20,7 @@ const LockoutEditor = (props) => {
   const [code, setCode] = useState("");
   const [EditorRef, setEditorRef] = useState(null);
 
-  //compiling the code
-
+  //Uploading the code from the file user choose
   useEffect(() => {
     if (props.tools.uploaded_code && EditorRef) {
       EditorRef.setValue(props.tools.uploaded_code);
@@ -29,6 +28,7 @@ const LockoutEditor = (props) => {
     }
   }, [props.tools.uploaded_code]);
 
+  //compiling the code
   useEffect(async () => {
     if (props.tools.nowCompile === true && props.tools.isLoading === false) {
       props.setOutput("");
@@ -42,6 +42,8 @@ const LockoutEditor = (props) => {
     }
   }, [props.tools.nowCompile]);
 
+
+  //Setting the editor reference 
   const handleEditorDidMount = (editor) => {
     setEditorRef(editor);
   };
