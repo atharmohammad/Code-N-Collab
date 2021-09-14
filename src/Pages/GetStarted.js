@@ -4,6 +4,7 @@ import { Grid, Box } from "@material-ui/core";
 import Title from "../Assets/images/Title.png";
 import GetStartedImg from "../Assets/images/GetStarted.png";
 import Stars from "../Components/Stars/Stars";
+import RoomCount from "../Components/RoomCounts/RoomCounts";
 
 function GetStarted() {
   const history = useHistory();
@@ -21,6 +22,7 @@ function GetStarted() {
       }}
     >
       <Stars color="#fff" />
+      <RoomCount/>
       <Grid
         container
         direction="column"
