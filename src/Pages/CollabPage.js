@@ -131,7 +131,7 @@ const CollabPage = (props) => {
               />
               <ReflexElement
                 minSize="0"
-                maxSize="300"
+                maxSize="500"
                 size="200"
                 style={{ overflow: "hidden" }}
               >
