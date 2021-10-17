@@ -63,6 +63,7 @@
     ]
   },
   "devDependencies": {
-    "@convergencelabs/monaco-collab-ext": "^0.3.1"
+    "@convergencelabs/monaco-collab-ext": "^0.3.1",
+    "netlify-cli": "^6.4.0"
   }
 }
