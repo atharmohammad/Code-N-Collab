@@ -22,7 +22,7 @@ const Problem = (props) => {
         <a
         style={{backgroundColor:`${bgcolor}`}}
         className={classes.anchorTag}
-        href={problem.link}
+        href={problem.link.substring(0,problem.link.length-problem.link.endsWith('/'))}
         title={problem.name}
         target="_blank"
         rel="noreferrer"
