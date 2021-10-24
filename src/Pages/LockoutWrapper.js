@@ -32,14 +32,7 @@ export default function LockoutWrapper(props) {
         state: { error: "Login required !" },
       });
     }
-
-    if (!auth.token) {
-      return history.push({
-        pathname: "/homepage",
-        state: { error: "Login required !" },
-      });
-    }
-
+    
     if (auth.user.CodeforcesHandle == null) {
       return history.push({
         pathname: "/homepage",
