@@ -96,8 +96,13 @@ const Io = (props) => {
       const response = data;
       props.resetCompile();
       props.resetLoading();
+      
+      console.log(data)
       if (response && response.output !== undefined) {
         props.setOutput(response.output || "");
+        if(response.memory === null){
+          return props.notify_output_error_on();
+        }
         props.notify_output_on();
       } else {
         props.setOutput(response.e || "Oops something went wrong");

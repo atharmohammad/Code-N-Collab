@@ -64,16 +64,24 @@ export default function ChatPanel(props) {
     socket.on("peopleInRoom", (data) => {
       setPersons(data.teamMembers);
       if (data.userJoin) {
+        let cl
         if (
           name &&
           data.userJoin.trim().toLowerCase() !== name.trim().toLowerCase()
         )
-          enqueueSnackbar(`${data.userJoin} joined this room`, {
+          cl = enqueueSnackbar(`${data.userJoin} joined this room`, {
             variant: "info",
+            onClick: () => {
+              closeSnackbar(cl);
+            },
           });
       } else if (data.userLeft) {
-        enqueueSnackbar(`${data.userLeft} left this room`, {
+         let cl 
+          cl = enqueueSnackbar(`${data.userLeft} left this room`, {
           variant: "warning",
+          onClick: () => {
+            closeSnackbar(cl);
+          },
         });
       }
     });

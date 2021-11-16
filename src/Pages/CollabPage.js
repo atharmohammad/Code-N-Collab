@@ -82,12 +82,26 @@ const CollabPage = (props) => {
 
   useEffect(()=>{
     if(props.output_success){
-      enqueueSnackbar("Code Compiled Succesfully !", {
+      const key = enqueueSnackbar("Code Compiled Succesfully !", {
         variant:'success',
+        onClick: () => {
+          closeSnackbar(key);
+        },
       });
       props.notify_output_off();
     }
-  },[props.output_success])
+    
+    if(props.output_error){
+      const key = enqueueSnackbar("Compilation Error!", {
+        variant:'error',
+        onClick: () => {
+          closeSnackbar(key);
+        },
+      });
+      props.notify_output_error();
+    }
+
+  },[props.output_success, props.output_error])
 
   return joined ? (
     <>
@@ -158,15 +172,6 @@ const CollabPage = (props) => {
             <Chat socket={socket} />
           </ReflexElement>
         </ReflexContainer>
-
-        <Snacker
-          open={props.output_error}
-          vertical= 'top'
-          horizontal= 'center' 
-          onClose={props.notify_output_error}
-          message="Something Went Wrong!"
-          severity="error"
-        />
 
         <Snacker
           open={startMsgSnackbar}
