@@ -97,7 +97,6 @@ const Io = (props) => {
       props.resetCompile();
       props.resetLoading();
       
-      console.log(data)
       if (response && response.output !== undefined) {
         props.setOutput(response.output || "");
         if(response.memory === null){
