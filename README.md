@@ -60,17 +60,8 @@
    </tr>
 </table>
  </a>
- 
- <a href="https://code-n-collab.netlify.app/" target="_blank"  rel="noreferrer">
-      <table align="center">
-          <tr>
-               <td>
-                    <img src="gif/codencollab.gif" alt="Collaboration" height="200"/>
-               </td>
-          </tr>
-     </table>
-</a>
- 
+
+![](https://github.com/atharmohammad/Code-N-Collab/blob/master/gif/codencollab.gif)
 
 # 🔖 About
 Code - N - Collab is a Collaboration website for Software developers , Competitive coders , and every one who loves to code and collaborate with others to learn and grow. It provides users to collaborate with their team , friends and also find people with similar their interests.
